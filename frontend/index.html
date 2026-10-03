@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    async function postData(url = 'http://localhost:3000/api/users/register', data = {username: "trong", password: "33443"}) {
+        const response = await fetch(url, {
+            method: 'POST', // Xác định phương thức là POST
+            headers: {
+                'Content-Type': 'application/json', // Báo cho server biết dữ liệu gửi lên là JSON
+                'Authorization': "BARH hahsudhidasudhiuefeuif"
+            },
+            body: JSON.stringify(data) // Chuyển đổi đối tượng JS thành chuỗi JSON
+        });
+        
+        const re = await response.json();
+        console.log(re);
+
+        return re; // Phân tích phản hồi dạng JSON từ server
+    }
+
+    postData()
+</script>
+
+</html>
