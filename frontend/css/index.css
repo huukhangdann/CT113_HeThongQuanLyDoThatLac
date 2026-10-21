@@ -1,4 +1,6 @@
 /* vietnamese */
+@import "tailwindcss";
+
 @font-face {
   font-family: "Be Vietnam Pro";
   font-style: normal;
