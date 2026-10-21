@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tìm kiếm bài đăng nhặt đồ - CTU Lost & Found</title>
+
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css/index.css" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Be Vietnam Pro"', "sans-serif"],
+            },
+            colors: {
+              brand: {
+                primary: "#35483d",
+                "primary-dark": "#233229",
+                surface: "#fcf9f8",
+                "surface-low": "#f6f3f2",
+                border: "#e7e1df",
+                text: "#1b1c1b",
+                "text-muted": "#727873",
+                danger: "#ba1a1a",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background-color: #fcf9f8;
+        color: #1b1c1b;
+        -webkit-font-smoothing: antialiased;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1edea;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd2cc;
+        border-radius: 4px;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/components.js"></script>
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-[#fcf9f8] text-[#1b1c1b]">
+    <!-- VỊ TRÍ HEADER CHUNG SẼ ĐƯỢC TIÊM VÀO -->
+    <app-header></app-header>
+    <!-- MAIN CONTENT CONTAINER -->
+    <main
+      class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 py-6 flex flex-col gap-6"
+    >
+      <!-- PAGE TITLE -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <h1
+          class="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-[#1b1c1b]"
+        >
+          Tìm kiếm bài đăng nhặt đồ
+        </h1>
+      </div>
+
+      <!-- VIEW 1: SEARCH FILTER FORM -->
+      <section
+        aria-label="Bộ lọc tìm kiếm"
+        class="bg-white rounded-xl border border-[#e7e1df] shadow-sm p-4 md:p-6 space-y-4"
+      >
+        <form id="search-form" onsubmit="handleSearch(event)" class="space-y-4">
+          <!-- Primary Search Bar -->
+          <div class="relative flex items-center">
+            <div
+              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#727873]"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </div>
+            <input
+              id="search-input"
+              type="text"
+              value="Ví da"
+              placeholder="Nhập tên món đồ, mã thẻ SV, màu sắc hoặc đặc điểm nhận dạng..."
+              class="w-full pl-11 pr-24 py-3.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] focus:bg-white text-base text-[#1b1c1b] placeholder-[#727873] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none font-normal"
+            />
+            <button
+              id="btn-clear-search-text"
+              type="button"
+              onclick="clearSearchInput()"
+              title="Xóa nội dung nhập"
+              class="absolute right-3 px-2 py-1 text-xs font-medium text-[#727873] hover:text-[#1b1c1b] hover:bg-[#e7e1df] rounded transition-colors"
+            >
+              Xóa chữ
+            </button>
+          </div>
+
+          <!-- Inline Error Message -->
+          <div
+            id="input-error-msg"
+            class="hidden items-center gap-1.5 text-xs font-medium text-[#ba1a1a]"
+          >
+            <svg
+              class="w-4 h-4 shrink-0"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span id="error-text"
+              >Từ khóa chứa ký tự đặc biệt không hợp lệ. Vui lòng kiểm tra
+              lại.</span
+            >
+          </div>
+
+          <!-- Filters Grid -->
+          <div
+            class="border-t border-[#e7e1df] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4"
+          >
+            <!-- Category -->
+            <div>
+              <label
+                for="filter-category"
+                class="block text-xs font-semibold text-[#1b1c1b] mb-1.5 flex items-center gap-1.5"
+              >
+                <svg
+                  class="w-3.5 h-3.5 text-[#727873]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <span>Loại đồ vật</span>
+              </label>
+              <div class="relative">
+                <select
+                  id="filter-category"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium"
+                >
+                  <option value="all">Tất cả loại đồ vật</option>
+                  <option value="the-sv">Thẻ sinh viên / CCCD / Giấy tờ</option>
+                  <option value="vi" selected>Ví tiền / Bóp da</option>
+                  <option value="dien-tu">
+                    Đồ điện tử (Tai nghe, Sạc, Điện thoại)
+                  </option>
+                  <option value="chia-khoa">Chùm chìa khóa xe / Thẻ từ</option>
+                  <option value="sach-vo">Sách vở / Tài liệu / Balo</option>
+                  <option value="khac">
+                    Vật dụng khác (Ô dù, Bình nước...)
+                  </option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 9l-7 7-7-7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Color -->
+            <div>
+              <label
+                for="filter-color"
+                class="block text-xs font-semibold text-[#1b1c1b] mb-1.5 flex items-center gap-1.5"
+              >
+                <svg
+                  class="w-3.5 h-3.5 text-[#727873]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M7 21a4 4 0 01-4-4 4 4 0 014-4c2 0 2 2 4 2 2.5 0 2.5-3 5-3a6.5 6.5 0 11-9 6z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <span>Màu sắc</span>
+              </label>
+              <div class="relative">
+                <select
+                  id="filter-color"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium"
+                >
+                  <option value="all" selected>Tất cả màu sắc</option>
+                  <option value="den">Đen</option>
+                  <option value="trang">Trắng</option>
+                  <option value="xanh-duong">Xanh dương / Navy</option>
+                  <option value="do-cam">Đỏ / Cam</option>
+                  <option value="vang">Vàng</option>
+                  <option value="xam-bac">Xám / Bạc</option>
+                  <option value="nau">Nâu</option>
+                  <option value="khac">Màu khác</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 9l-7 7-7-7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Time -->
+            <div>
+              <label
+                for="filter-time"
+                class="block text-xs font-semibold text-[#1b1c1b] mb-1.5 flex items-center gap-1.5"
+              >
+                <svg
+                  class="w-3.5 h-3.5 text-[#727873]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <span>Thời gian nhặt</span>
+              </label>
+              <div class="relative">
+                <select
+                  id="filter-time"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium"
+                >
+                  <option value="all">Mọi thời điểm</option>
+                  <option value="today" selected>Hôm nay (24 giờ qua)</option>
+                  <option value="week">Trong tuần này (7 ngày qua)</option>
+                  <option value="month">Trong tháng này</option>
+                  <option value="custom">Chọn khoảng ngày cụ thể...</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 9l-7 7-7-7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div>
+              <label
+                for="filter-location"
+                class="block text-xs font-semibold text-[#1b1c1b] mb-1.5 flex items-center gap-1.5"
+              >
+                <svg
+                  class="w-3.5 h-3.5 text-[#727873]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                  <path
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <span>Địa điểm nhặt</span>
+              </label>
+              <div class="relative">
+                <select
+                  id="filter-location"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium"
+                >
+                  <option value="all">Tất cả khu vực tại CTU</option>
+                  <option value="khu-c1" selected>Khoa CNTT&TT (Nhà C1)</option>
+                  <option value="thu-vien">Thư viện Trung tâm CTU</option>
+                  <option value="khu-b1">Khu giảng đường B1</option>
+                  <option value="hoi-truong-rua">Hội trường Rùa</option>
+                  <option value="bai-xe-khu-2">Bãi xe sinh viên Khu II</option>
+                  <option value="nha-hoc-c2">Nhà học C2</option>
+                  <option value="khu-khoa-hoc-tu-nhien">
+                    Khoa Khoa học Tự nhiên
+                  </option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 9l-7 7-7-7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onclick="resetAllFilters()"
+              class="px-4 py-2.5 rounded-lg border border-[#e7e1df] hover:bg-[#f6f3f2] text-sm font-medium text-[#727873] hover:text-[#1b1c1b] transition-all flex items-center gap-2"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+              <span>Xóa bộ lọc</span>
+            </button>
+
+            <button
+              type="submit"
+              class="px-6 py-2.5 rounded-lg bg-[#35483d] hover:bg-[#233229] active:scale-[0.98] text-white text-sm font-semibold tracking-wide transition-all shadow-sm flex items-center gap-2"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+              <span>Tìm kiếm</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- VIEW 2: SEARCH RESULTS STATE -->
+      <section id="view-results" class="space-y-4">
+        <!-- Results Header -->
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#e7e1df]"
+        >
+          <h2 class="text-lg md:text-xl font-bold text-[#1b1c1b]">
+            Kết quả tìm kiếm
+          </h2>
+
+          <div class="flex items-center gap-3 text-xs text-[#727873]">
+            <span>Sắp xếp theo:</span>
+            <select
+              class="bg-white border border-[#e7e1df] rounded-md px-2.5 py-1 text-xs font-medium text-[#1b1c1b] focus:border-[#35483d] outline-none cursor-pointer"
+            >
+              <option>Mới nhất trước</option>
+              <option>Cũ nhất trước</option>
+              <option>Gần vị trí của tôi</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <article
+            onclick="openItemDetail(1)"
+            class="group bg-white rounded-xl border border-[#e7e1df] overflow-hidden hover:shadow-lg hover:border-[#35483d]/40 transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+          >
+            <div class="relative aspect-4/3 bg-[#f6f3f2] overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y"
+                alt="Ví da màu đen"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3
+                  class="font-bold text-base text-[#1b1c1b] group-hover:text-[#35483d] transition-colors leading-snug mb-2 truncate"
+                >
+                  Ví da màu đen gấp đôi
+                </h3>
+                <div
+                  class="flex items-center gap-1.5 text-xs text-[#727873] mb-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-[#35483d] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                    <path
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span class="truncate">Khoa CNTT&TT, Tầng 2, P.204</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-[#727873]">
+                  <svg
+                    class="w-3.5 h-3.5 text-[#727873] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span>Hôm nay, 09:30</span>
+                </div>
+              </div>
+              <div
+                class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-end"
+              >
+                <span
+                  class="text-xs font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1"
+                  >Xem chi tiết →</span
+                >
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article
+            onclick="openItemDetail(2)"
+            class="group bg-white rounded-xl border border-[#e7e1df] overflow-hidden hover:shadow-lg hover:border-[#35483d]/40 transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+          >
+            <div class="relative aspect-4/3 bg-[#f6f3f2] overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
+                alt="Sổ tay bìa xanh"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3
+                  class="font-bold text-base text-[#1b1c1b] group-hover:text-[#35483d] transition-colors leading-snug mb-2 truncate"
+                >
+                  Sổ tay bìa da xanh kèm móc khóa
+                </h3>
+                <div
+                  class="flex items-center gap-1.5 text-xs text-[#727873] mb-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-[#35483d] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                    <path
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span class="truncate"
+                    >Khu giảng đường B1, Giảng đường 3</span
+                  >
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-[#727873]">
+                  <svg
+                    class="w-3.5 h-3.5 text-[#727873] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span>Hôm nay, 08:45</span>
+                </div>
+              </div>
+              <div
+                class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-end"
+              >
+                <span
+                  class="text-xs font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1"
+                  >Xem chi tiết →</span
+                >
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article
+            onclick="openItemDetail(3)"
+            class="group bg-white rounded-xl border border-[#e7e1df] overflow-hidden hover:shadow-lg hover:border-[#35483d]/40 transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+          >
+            <div class="relative aspect-4/3 bg-[#f6f3f2] overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxMGtnliRKncEmLOccvvngbz0u3tWpMZz8xzNuL-lq6pRKEbyWFj8lip2GytGWIWYq6TFW24N5aNiiSz7I4biZnv-4lWGRpwO-0zonFl84GuTqzskud8V0wG0vWkwWT9QacCpnpPGwG0HSGWPN2x2qhBRxKaE9gGrIJ7-2wYamqq4NAvZuPXmgPf0Fxad1mLGOJhQtffKX0u1uDwPTrGVpSJpGhb8J1hP-zx8Eh0fqW3zb1Dg0QVTw"
+                alt="Hộp tai nghe"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3
+                  class="font-bold text-base text-[#1b1c1b] group-hover:text-[#35483d] transition-colors leading-snug mb-2 truncate"
+                >
+                  Hộp tai nghe không dây trắng
+                </h3>
+                <div
+                  class="flex items-center gap-1.5 text-xs text-[#727873] mb-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-[#35483d] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                    <path
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span class="truncate"
+                    >Thư viện Trung tâm CTU, Bàn học T2</span
+                  >
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-[#727873]">
+                  <svg
+                    class="w-3.5 h-3.5 text-[#727873] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span>Hôm qua, 14:20</span>
+                </div>
+              </div>
+              <div
+                class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-end"
+              >
+                <span
+                  class="text-xs font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1"
+                  >Xem chi tiết →</span
+                >
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article
+            onclick="openItemDetail(4)"
+            class="group bg-white rounded-xl border border-[#e7e1df] overflow-hidden hover:shadow-lg hover:border-[#35483d]/40 transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+          >
+            <div class="relative aspect-4/3 bg-[#f6f3f2] overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpdOuyKsYtvg9mAaVicAmfVTVepKtUBgVUHlvsIx1a6Pl5bcWe5Sy4ZslVX1Ya_XFiHra5FJF1LfhCMblxZgkU9xCtxZh03d_rxMaObOG70tNrNyjQUeOD705F_hW2JRkKd2UAlj32OrS5hwtcXy9JmNKZCqX_MJ8_hlQpEO2VZkfjtuDz3DIfABZFGS5xGQTgqfTxjqw7eBRmyyX3EIFIeO0YyLxmw6d_NkT-V9P2UoEZsKBjr_en"
+                alt="Bình giữ nhiệt"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3
+                  class="font-bold text-base text-[#1b1c1b] group-hover:text-[#35483d] transition-colors leading-snug mb-2 truncate"
+                >
+                  Bình nước giữ nhiệt inox bạc 500ml
+                </h3>
+                <div
+                  class="flex items-center gap-1.5 text-xs text-[#727873] mb-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-[#35483d] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                    <path
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span class="truncate">Hội trường Rùa, Băng ghế chờ</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-[#727873]">
+                  <svg
+                    class="w-3.5 h-3.5 text-[#727873] shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  <span>Hôm qua, 16:45</span>
+                </div>
+              </div>
+              <div
+                class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-end"
+              >
+                <span
+                  class="text-xs font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1"
+                  >Xem chi tiết →</span
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div
+          class="flex items-center justify-between border-t border-[#e7e1df] text-xs text-[#727873] pt-3"
+        >
+          <p>
+            Hiển thị <strong>1 - 4</strong> trong số <strong>4</strong> kết quả
+            tìm kiếm
+          </p>
+          <div class="flex items-center gap-1">
+            <button
+              class="px-3 py-1.5 rounded border border-[#e7e1df] text-[#727873] opacity-50 cursor-not-allowed"
+            >
+              Trước
+            </button>
+            <button
+              class="px-3 py-1.5 rounded bg-[#35483d] text-white font-semibold"
+            >
+              1
+            </button>
+            <button
+              class="px-3 py-1.5 rounded border border-[#e7e1df] text-[#727873] opacity-50 cursor-not-allowed"
+            >
+              Sau
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3A: LOADING STATE -->
+      <section id="view-loading" class="hidden space-y-6">
+        <div
+          class="flex items-center justify-between pb-2 border-b border-[#e7e1df]"
+        >
+          <div class="h-6 w-48 bg-[#e7e1df] rounded animate-pulse"></div>
+          <div class="h-6 w-32 bg-[#e7e1df] rounded animate-pulse"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            class="bg-white rounded-xl border border-[#e7e1df] p-4 space-y-4 animate-pulse"
+          >
+            <div class="aspect-4/3 bg-[#f1edea] rounded-lg"></div>
+            <div class="h-4 bg-[#f1edea] rounded w-3/4"></div>
+            <div class="h-3 bg-[#f1edea] rounded w-1/2"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3B: EMPTY STATE -->
+      <section
+        id="view-empty"
+        class="hidden bg-white rounded-xl border border-[#e7e1df] p-10 md:p-16 text-center shadow-xs"
+      >
+        <div class="max-w-md mx-auto flex flex-col items-center">
+          <div
+            class="w-16 h-16 rounded-full bg-[#f6f3f2] border border-[#e7e1df] flex items-center justify-center text-[#35483d] mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-[#727873]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.75"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-lg md:text-xl font-bold text-[#1b1c1b] mb-2">
+            Không tìm thấy bài đăng nào phù hợp
+          </h3>
+          <p class="text-sm text-[#727873] leading-relaxed mb-6 font-normal">
+            Không tìm thấy kết quả nào phù hợp với điều kiện tìm kiếm hiện tại.
+            Bạn hãy thử giảm bớt các tiêu chí lọc hoặc tìm kiếm bằng từ khóa
+            ngắn gọn hơn.
+          </p>
+          <button
+            onclick="resetAllFilters()"
+            class="px-5 py-2.5 rounded-lg bg-[#35483d] hover:bg-[#233229] text-white text-sm font-semibold transition-all shadow-sm flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            <span>Xóa bộ lọc & Tìm lại</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- VỊ TRÍ FOOTER CHUNG SẼ ĐƯỢC TIÊM VÀO -->
+    <app-footer></app-footer>
+
+    <!-- VIEW 4: MODAL DETAIL ITEM -->
+    <div
+      id="item-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity hidden"
+    >
+      <div
+        class="relative w-full max-w-3xl bg-white rounded-2xl border border-[#e7e1df] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+      >
+        <!-- Modal Header -->
+        <div
+          class="px-6 py-4 border-b border-[#e7e1df] flex items-center justify-between bg-[#fcf9f8]"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="w-3 h-3 rounded-full bg-[#35483d]"></span>
+            <span
+              class="text-xs font-bold uppercase tracking-wider text-[#35483d]"
+              >Chi tiết bài đăng nhặt được đồ</span
+            >
+          </div>
+          <button
+            onclick="closeItemDetail()"
+            title="Đóng modal"
+            class="w-8 h-8 rounded-full hover:bg-[#e7e1df] flex items-center justify-center text-[#727873] hover:text-[#1b1c1b] transition-colors"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M6 18L18 6M6 6l12 12"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-6">
+          <div
+            class="w-full aspect-16/9 rounded-xl overflow-hidden bg-[#f6f3f2] border border-[#e7e1df]"
+          >
+            <img
+              id="modal-image"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y"
+              alt="Ảnh chi tiết đồ vật nhặt được"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span
+                id="modal-category"
+                class="px-2.5 py-1 rounded-md text-xs font-semibold bg-[#e8f0eb] text-[#35483d]"
+                >Ví tiền / Bóp da</span
+              >
+              <span
+                class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800"
+                >Đã tiếp nhận xác minh</span
+              >
+              <span class="text-xs text-[#727873]">Mã lưu trữ: K2-C1-042</span>
+            </div>
+            <h2
+              id="modal-title"
+              class="text-xl md:text-2xl font-bold text-[#1b1c1b]"
+            >
+              Ví da nam màu đen gấp đôi có chứa thẻ sinh viên CTU
+            </h2>
+          </div>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-[#fcf9f8] border border-[#e7e1df] text-sm"
+          >
+            <div>
+              <span class="text-xs text-[#727873] block mb-0.5"
+                >Địa điểm nhặt:</span
+              >
+              <p id="modal-location" class="font-semibold text-[#1b1c1b]">
+                Khoa CNTT&TT, Tầng 2, Phòng 204
+              </p>
+            </div>
+            <div>
+              <span class="text-xs text-[#727873] block mb-0.5"
+                >Thời gian nhặt được:</span
+              >
+              <p id="modal-time" class="font-semibold text-[#1b1c1b]">
+                Hôm nay, 09:30
+              </p>
+            </div>
+            <div class="sm:col-span-2">
+              <span class="text-xs text-[#727873] block mb-0.5"
+                >Tình trạng đồ vật lúc nhặt:</span
+              >
+              <p id="modal-condition" class="font-medium text-[#1b1c1b]">
+                Ví da đen hiệu Pedro, hơi sờn góc, bên trong có 1 thẻ SV CTU mã
+                B210xxxx, 1 thẻ xe máy.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div
+          class="px-6 py-4 border-t border-[#e7e1df] bg-[#fcf9f8] flex items-center justify-end gap-3"
+        >
+          <button
+            onclick="closeItemDetail()"
+            class="px-4 py-2 rounded-lg border border-[#e7e1df] hover:bg-[#e7e1df] text-sm font-medium text-[#727873] hover:text-[#1b1c1b] transition-colors"
+          >
+            Đóng
+          </button>
+          <button
+            class="px-5 py-2 rounded-lg bg-[#35483d] hover:bg-[#233229] text-white text-sm font-semibold transition-colors shadow-sm"
+          >
+            Liên hệ nhận lại đồ
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPT ĐIỀU KHIỂN TRANG FIND -->
+    <script>
+      function openItemDetail(id) {
+        document.getElementById("item-modal").classList.remove("hidden");
+      }
+      function closeItemDetail() {
+        document.getElementById("item-modal").classList.add("hidden");
+      }
+      function clearSearchInput() {
+        document.getElementById("search-input").value = "";
+      }
+      function resetAllFilters() {
+        document.getElementById("search-form").reset();
+      }
+      function handleSearch(e) {
+        e.preventDefault();
+      }
+    </script>
+  </body>
+</html>

@@ -7,14 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+    <link href="../css/index.css" rel="stylesheet" />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
@@ -50,82 +43,16 @@
           "opsz" 24;
       }
     </style>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/components.js"></script>
   </head>
 
   <body
     class="bg-ivory text-soft-black min-h-screen flex flex-col selection:bg-stone-200 selection:text-deep-sage"
   >
     <!-- Header -->
-    <header
-      class="sticky top-0 z-50 bg-[#F7F6F2]/90 backdrop-blur-md border-b border-stone-border"
-    >
-      <div
-        class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between h-16"
-      >
-        <a href="#" class="flex items-center gap-2.5">
-          <svg
-            class="w-7 h-7 text-[#1f3227]"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"
-            ></path>
-          </svg>
-          <span class="text-lg font-bold text-[#1b1c1c] tracking-tight"
-            >CTU Lost & Found</span
-          >
-        </a>
-
-        <nav class="hidden md:flex items-center gap-8 h-full">
-          <a
-            href="#"
-            class="flex items-center h-full text-sm font-semibold text-[#1b1c1c] border-b-2 border-[#1f3227]"
-            >Trang chủ</a
-          >
-          <a
-            href="#"
-            class="flex items-center h-full text-sm font-medium text-warm-gray hover:text-[#1b1c1c] transition-colors"
-            >Tìm đồ</a
-          >
-          <a
-            href="#"
-            class="flex items-center h-full text-sm font-medium text-warm-gray hover:text-[#1b1c1c] transition-colors"
-            >Đăng tin</a
-          >
-          <a
-            href="#"
-            class="flex items-center h-full text-sm font-medium text-warm-gray hover:text-[#1b1c1c] transition-colors"
-            >Thông báo</a
-          >
-        </nav>
-
-        <div class="flex items-center gap-3.5">
-          <div
-            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stone-200/70 text-[#1b1c1c] text-xs font-medium cursor-pointer hover:bg-stone-200 transition-colors"
-          >
-            <span>SV Khu II</span>
-            <span class="material-symbols-outlined text-[16px]"
-              >expand_more</span
-            >
-          </div>
-          <button
-            class="text-[#1b1c1c] hover:text-[#1f3227] p-1 flex items-center justify-center transition-colors"
-          >
-            <span class="material-symbols-outlined text-[22px]"
-              >notifications</span
-            >
-          </button>
-          <button
-            class="text-[#1b1c1c] hover:text-[#1f3227] p-1 flex items-center justify-center transition-colors"
-          >
-            <span class="material-symbols-outlined text-[24px]"
-              >account_circle</span
-            >
-          </button>
-        </div>
-      </div>
-    </header>
+    <app-header></app-header>
 
     <!-- Main Content -->
     <main
@@ -793,40 +720,6 @@
     </main>
 
     <!-- Footer -->
-    <footer
-      class="w-full bg-deep-sage text-ivory border-t border-deep-sage/80 mt-4"
-    >
-      <div
-        class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
-      >
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-white tracking-tight">
-            CTU Lost & Found
-          </h2>
-          <p class="text-xs text-white/70">
-            © 2024 Đại học Cần Thơ – CTU Lost & Found. Phát triển vì cộng đồng
-            sinh viên CTU.
-          </p>
-        </div>
-
-        <div class="flex flex-col items-start md:items-end gap-2 text-xs">
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <a href="#" class="text-white/80 hover:text-white transition-colors"
-              >Quy chế hoạt động</a
-            >
-            <a href="#" class="text-white/80 hover:text-white transition-colors"
-              >Hướng dẫn nhận lại đồ</a
-            >
-            <a href="#" class="text-white/80 hover:text-white transition-colors"
-              >Bảo mật thông tin</a
-            >
-          </div>
-          <span
-            class="text-white/80 hover:text-white transition-colors cursor-pointer"
-            >Hỗ trợ Đoàn Thanh niên – Hội Sinh viên</span
-          >
-        </div>
-      </div>
-    </footer>
+    <app-footer></app-footer>
   </body>
 </html>

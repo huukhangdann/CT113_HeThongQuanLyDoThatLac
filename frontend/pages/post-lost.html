@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="vi" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Báo Mất Đồ - CTU Lost & Found | Đại học Cần Thơ</title>
+
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="../css/index.css" rel="stylesheet" />
+
+    <!-- Material Symbols Outlined -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#b6ccbd",
+              "on-background": "#1b1c1c",
+              "surface-container-high": "#eae7e7",
+              "outline-variant": "#c3c8c2",
+              "on-surface-variant": "#424844",
+              "on-secondary-fixed": "#1b1c18",
+              "on-error": "#ffffff",
+              "tertiary-container": "#3f4541",
+              "surface-container-highest": "#e4e2e1",
+              "surface-container": "#f0eded",
+              "surface-bright": "#fcf9f8",
+              "on-primary": "#ffffff",
+              primary: "#1f3227",
+              "error-container": "#ffdad6",
+              "on-secondary-container": "#64655f",
+              "on-primary-fixed": "#0d1f16",
+              error: "#ba1a1a",
+              "on-primary-container": "#a1b6a8",
+              "tertiary-fixed-dim": "#c2c8c2",
+              "on-tertiary-container": "#acb2ad",
+              "on-secondary-fixed-variant": "#474742",
+              "primary-container": "#35483d",
+              "secondary-fixed": "#e4e3db",
+              "on-tertiary": "#171d19",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#384b40",
+              "on-surface": "#1b1c1c",
+              "inverse-on-surface": "#f3f0ef",
+              "on-error-container": "#93000a",
+              "tertiary-fixed": "#dee4de",
+              "secondary-container": "#e4e3db",
+              secondary: "#5e5f59",
+              "surface-variant": "#e4e2e1",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dcd9d9",
+              "surface-tint": "#4f6357",
+              background: "#fcf9f8",
+              surface: "#fcf9f8",
+              "inverse-surface": "#303030",
+              "secondary-fixed-dim": "#c8c7c0",
+              "inverse-primary": "#b6ccbd",
+              outline: "#737874",
+              "on-tertiary-fixed-variant": "#424844",
+              "surface-container-low": "#f6f3f2",
+              tertiary: "#292f2b",
+              "primary-fixed": "#d2e8d9",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+            fontFamily: {
+              "headline-section": ["Be Vietnam Pro"],
+              "label-action": ["Be Vietnam Pro"],
+              "body-default": ["Be Vietnam Pro"],
+              "caption-meta": ["Be Vietnam Pro"],
+              "body-compact": ["Be Vietnam Pro"],
+              "title-item": ["Be Vietnam Pro"],
+              "headline-hero": ["Be Vietnam Pro"],
+            },
+            fontSize: {
+              "headline-section": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.015em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-action": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-default": [
+                "15px",
+                { lineHeight: "24px", fontWeight: "400" },
+              ],
+              "caption-meta": [
+                "12px",
+                { lineHeight: "16px", fontWeight: "400" },
+              ],
+              "body-compact": [
+                "14px",
+                { lineHeight: "22px", fontWeight: "400" },
+              ],
+              "title-item": [
+                "16px",
+                {
+                  lineHeight: "24px",
+                  letterSpacing: "-0.005em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-hero": [
+                "44px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        line-height: 1;
+      }
+    </style>
+    <script src="../js/components.js"></script>
+    <script src="../js/main.js"></script>
+  </head>
+
+  <body
+    class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-default text-body-default selection:bg-primary-fixed selection:text-on-primary-fixed"
+  >
+    <!-- TOP NAV BAR -->
+    <app-header></app-header>
+
+    <!-- MAIN CANVAS -->
+    <main
+      class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-6"
+    >
+      <!-- Central Form Container -->
+      <div
+        class="bg-surface-container-lowest rounded-2xl border border-outline-variant/70 shadow-sm p-6 lg:p-8 max-w-7xl mx-auto"
+      >
+        <!-- Header Form -->
+        <div
+          class="border-b border-outline-variant/40 pb-4 mb-6 flex items-center justify-between"
+        >
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-on-surface">
+              Thông tin đồ thất lạc
+            </h1>
+            <p class="text-xs text-secondary mt-0.5">
+              Điền chi tiết thông tin giúp hệ thống đối soát tìm lại đồ nhanh
+              hơn.
+            </p>
+          </div>
+          <span
+            class="text-xs font-medium px-3 py-1 bg-error-container/60 text-on-error-container rounded-full border border-error/20"
+          >
+            Tin Báo Mất
+          </span>
+        </div>
+
+        <!-- Form Body -->
+        <form class="space-y-6" onsubmit="event.preventDefault()">
+          <!-- KHU VỰC 2 CỘT NGANG -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- CỘT TRÁI (7 Cột): THÔNG TIN VĂN BẢN -->
+            <div class="lg:col-span-7 space-y-4">
+              <!-- Tiêu đề bài đăng -->
+              <div>
+                <label
+                  class="block text-label-action text-on-surface mb-1.5"
+                  for="post-title"
+                >
+                  Tiêu đề bài đăng <span class="text-error font-bold">*</span>
+                </label>
+                <input
+                  class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
+                  id="post-title"
+                  name="post-title"
+                  placeholder="VD: Bị rơi ví da nam màu nâu đậm tại C1"
+                  required
+                  type="text"
+                  value="Bị rơi ví da nam màu nâu đậm tại C1"
+                />
+              </div>
+
+              <!-- Loại đồ vật & Màu sắc -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    class="block text-label-action text-on-surface mb-1.5"
+                    for="item-category"
+                  >
+                    Loại đồ vật <span class="text-error font-bold">*</span>
+                  </label>
+                  <div class="relative">
+                    <select
+                      class="w-full h-10 px-3 pr-8 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all appearance-none cursor-pointer"
+                      id="item-category"
+                      name="item-category"
+                      required
+                    >
+                      <option selected value="wallet">Ví tiền / Bóp da</option>
+                      <option value="student_card">
+                        Thẻ sinh viên / Thẻ thư viện
+                      </option>
+                      <option value="electronic">
+                        Đồ điện tử (Laptop, Điện thoại...)
+                      </option>
+                      <option value="keys">Chìa khóa xe / Phòng trọ</option>
+                      <option value="documents">
+                        Giấy tờ tùy thân (CCCD, Bằng lái)
+                      </option>
+                      <option value="other">Tài sản khác</option>
+                    </select>
+                    <div
+                      class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-secondary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    class="block text-label-action text-on-surface mb-1.5"
+                    for="item-color"
+                  >
+                    Màu sắc <span class="text-error font-bold">*</span>
+                  </label>
+                  <input
+                    class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
+                    id="item-color"
+                    name="item-color"
+                    placeholder="VD: Nâu sẫm, Đen..."
+                    required
+                    type="text"
+                    value="Nâu sẫm"
+                  />
+                </div>
+              </div>
+
+              <!-- Mô tả chi tiết -->
+              <div>
+                <label
+                  class="block text-label-action text-on-surface mb-1.5"
+                  for="item-description"
+                >
+                  Mô tả chi tiết đặc điểm nhận dạng
+                  <span class="text-error font-bold">*</span>
+                </label>
+                <textarea
+                  class="w-full p-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all resize-none"
+                  id="item-description"
+                  name="item-description"
+                  placeholder="Mô tả vết xước, giấy tờ bên trong..."
+                  required
+                  rows="3"
+                >
+Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCCD Nguyễn Văn An, Thẻ SV CTU MSSV B2203456, thẻ Vietcombank.</textarea
+                >
+              </div>
+
+              <!-- Địa điểm & Thời gian -->
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                <div class="sm:col-span-6">
+                  <label
+                    class="block text-label-action text-on-surface mb-1.5"
+                    for="item-location"
+                  >
+                    Địa điểm nghi mất
+                    <span class="text-error font-bold">*</span>
+                  </label>
+                  <div class="relative">
+                    <span
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >location_on</span
+                      >
+                    </span>
+                    <input
+                      class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all"
+                      id="item-location"
+                      required
+                      type="text"
+                      value="Khoa CNTT&TT (Nhà C1), Tầng 2"
+                    />
+                  </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                  <label
+                    class="block text-label-action text-on-surface mb-1.5"
+                    for="item-date"
+                  >
+                    Ngày mất <span class="text-error font-bold">*</span>
+                  </label>
+                  <input
+                    class="w-full h-10 px-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs"
+                    id="item-date"
+                    required
+                    type="date"
+                    value="2025-05-18"
+                  />
+                </div>
+
+                <div class="sm:col-span-3">
+                  <label
+                    class="block text-label-action text-on-surface mb-1.5"
+                    for="item-time"
+                  >
+                    Khoảng giờ
+                  </label>
+                  <input
+                    class="w-full h-10 px-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs"
+                    id="item-time"
+                    type="time"
+                    value="09:30"
+                  />
+                </div>
+              </div>
+
+              <!-- Thông tin liên hệ -->
+              <div
+                class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50"
+              >
+                <label
+                  class="block text-label-action text-on-surface mb-1"
+                  for="contact-info"
+                >
+                  Thông tin liên hệ xác minh
+                  <span class="text-error font-bold">*</span>
+                </label>
+                <div class="relative">
+                  <span
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >contact_phone</span
+                    >
+                  </span>
+                  <input
+                    class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all"
+                    id="contact-info"
+                    required
+                    type="text"
+                    value="0912 345 678 (Nguyễn Văn An - K48 CNTT)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- CỘT PHẢI (5 Cột): HÌNH ẢNH MINH HỌA -->
+            <div class="lg:col-span-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="block text-label-action text-on-surface">
+                  Hình ảnh minh họa đồ vật
+                </label>
+                <span class="text-caption-meta text-secondary"
+                  >Tối đa 4 ảnh</span
+                >
+              </div>
+
+              <!-- Drag and Drop Zone -->
+              <div
+                class="border-2 border-dashed border-outline-variant hover:border-primary-container transition-colors rounded-xl p-4 bg-surface-container-low/40 flex flex-col items-center justify-center text-center cursor-pointer group"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/60 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform mb-1.5"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >add_photo_alternate</span
+                  >
+                </div>
+                <p class="text-xs font-medium text-on-surface">
+                  Kéo thả ảnh hoặc
+                  <span class="text-primary-container underline font-semibold"
+                    >chọn tệp</span
+                  >
+                </p>
+                <p class="text-[11px] text-secondary mt-0.5">
+                  JPG, PNG dưới 5MB
+                </p>
+              </div>
+
+              <!-- Thumbnails đã chọn (Lưới 2x2) -->
+              <div class="grid grid-cols-2 gap-3 pt-1">
+                <!-- Thumbnail 1 -->
+                <div
+                  class="relative group rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest"
+                >
+                  <img
+                    class="w-full h-24 object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwgsHfDeUMuXLn-KDxGqdKCmCzcFsea0yjciPEqeIOLUjh98V9xYFzKo4k6sUbLg8MAt8PWe1KLduTMKWtY2BftsSB5yryfn-qGcq2pgtap-TUBaEtQjVpUXuXsvVDWF8nQ5H_9KYUF1a0Yk2ftlazeR3OAxmMkcQ6jw6Ev07d9GAw6Jdj42FfhKrhgLvyjmtup9I0Z1SEny4p3Z3ZzT5ytYiRoofIVRHZdIyJbE--N5Z3_ab_9D0_"
+                  />
+                  <button
+                    aria-label="Xóa ảnh"
+                    class="absolute top-1 right-1 w-5 h-5 rounded-full bg-surface/90 hover:bg-error hover:text-on-error text-on-surface flex items-center justify-center shadow transition-colors"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[12px]"
+                      >close</span
+                    >
+                  </button>
+                  <div
+                    class="p-1.5 bg-surface-container-lowest border-t border-outline-variant/40"
+                  >
+                    <p class="text-[11px] truncate text-on-surface font-medium">
+                      vi_da_nau_dam.jpg
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Thumbnail 2 -->
+                <div
+                  class="relative group rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest"
+                >
+                  <img
+                    class="w-full h-24 object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYisLAyvnCrS3Uw9iuXlzvnfyrEUXA5HLlsC64Jj7cgtYvhZfEajiwZKWWUzd2vDFI5G9fQtGTWGV9dhJrf0RiJWCeAuhmwkX6jv6p8Lt3cJaN6SJewbB8YP60K4jyFcaHqn-_Qhfboc0u2LOS411jJ6m96eEjrqIIWJxrObY90OoZmM0R3zzcMmqZIZ18MjWwxJ7RpcIfC6YJ0SJXIMkk2rRvnvjYgVwdBpvtBcT_OvmO9iwBJxAZ"
+                  />
+                  <button
+                    aria-label="Xóa ảnh"
+                    class="absolute top-1 right-1 w-5 h-5 rounded-full bg-surface/90 hover:bg-error hover:text-on-error text-on-surface flex items-center justify-center shadow transition-colors"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[12px]"
+                      >close</span
+                    >
+                  </button>
+                  <div
+                    class="p-1.5 bg-surface-container-lowest border-t border-outline-variant/40"
+                  >
+                    <p class="text-[11px] truncate text-on-surface font-medium">
+                      the_sinh_vien_ctu.png
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Empty Slot 3 -->
+                <div
+                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
+                >
+                  <span class="material-symbols-outlined text-[20px]">add</span>
+                  <span class="text-[11px] mt-0.5">Thêm ảnh</span>
+                </div>
+
+                <!-- Empty Slot 4 -->
+                <div
+                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
+                >
+                  <span class="material-symbols-outlined text-[20px]">add</span>
+                  <span class="text-[11px] mt-0.5">Thêm ảnh</span>
+                </div>
+              </div>
+
+              <!-- Checkbox tùy chọn thông báo -->
+              <div
+                class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50 mt-3"
+              >
+                <label class="flex items-start gap-2.5 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    name="notify-match"
+                    checked
+                    class="mt-0.5 w-4 h-4 rounded border-outline-variant text-primary-container focus:ring-primary-container cursor-pointer"
+                  />
+                  <span
+                    class="text-xs text-on-surface font-medium group-hover:text-primary transition-colors"
+                  >
+                    Nhận thông báo khi có bài đăng báo nhặt khớp với tin này
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- KHU VỰC NÚT HÀNH ĐỘNG (CĂN GIỮA PHÍA DƯỚI 2 CỘT) -->
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
+            <a
+              href="post.html"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl border border-outline-variant text-on-surface-variant text-sm font-medium hover:bg-surface-container-high transition-colors"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >arrow_back</span
+              >
+              <span>Hủy</span>
+            </a>
+
+            <button
+              class="w-full sm:w-64 inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-primary-container text-on-primary text-sm font-semibold hover:bg-primary transition-all duration-150 active:scale-[0.98] shadow-sm"
+              type="submit"
+            >
+              <span>Gửi bài báo mất</span>
+              <span class="material-symbols-outlined text-[18px]"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <app-footer></app-footer>
+  </body>
+</html>
