@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="vi" class="light">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Chi Tiết Yêu Cầu Xác Minh - CTU Lost &amp; Found</title>
+
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+          },
+          colors: {
+            primary: '#35483d',
+            'primary-dark': '#28372e',
+            surface: '#fcf9f8',
+            'surface-card': '#ffffff',
+            'surface-dim': '#dcd9d9',
+            'surface-container-low': '#f6f3f2',
+            'surface-container': '#f0edec',
+            'outline-variant': '#e7e1df',
+            'text-primary': '#1b1c1c',
+            'text-muted': '#797675',
+            'footer-bg': '#27382B',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Liên kết CSS và Web Component Header/Footer chung của dự án -->
+  <link href="../css/index.css" rel="stylesheet" />
+  <script src="../js/components.js"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    body {
+      background-color: #fcf9f8;
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
+
+    app-header {
+      display: block;
+      min-height: 64px;
+    }
+  </style>
+</head>
+
+<body
+  class="min-h-screen bg-[#fcf9f8] text-[#1b1c1c] font-sans flex flex-col justify-between antialiased selection:bg-[#35483d] selection:text-white">
+
+  <!-- =========================================================================
+       1. GLOBAL TOP NAVBAR (Web Component Header chung của dự án)
+       ========================================================================= -->
+  <app-header></app-header>
+
+  <!-- =========================================================================
+       2. BREADCRUMB & BACK ACTION
+       ========================================================================= -->
+  <div class="w-full bg-[#fcf9f8] border-b border-[#e7e1df]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center text-xs">
+        <a class="font-medium text-[#797675] hover:text-[#1b1c1c] transition-colors flex items-center gap-1.5"
+          href="requests.html">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span>Quay lại yêu cầu ghép nối</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. MAIN CONTENT: BỐ CỤC CHIA ĐÔI 1/2 VÀ 1/2 (2 EQUAL COLUMNS GRID)
+       ========================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+      <!-- =====================================================================
+           CỘT TRÁI (1/2): THÔNG TIN TÀI SẢN (CARD TRẮNG BO GÓC LỚN)
+           ===================================================================== -->
+      <section class="bg-white rounded-2xl p-6 shadow-sm border border-[#e7e1df] flex flex-col transition-all">
+        <!-- KHU VỰC ẢNH PHÍA TRÊN -->
+        <div>
+          <!-- 1 Ảnh chính to (Tỷ lệ 4:3, object-cover, bo góc rounded-xl) -->
+          <div
+            class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#f0edec] border border-[#e7e1df] shadow-inner group">
+            <img alt="Ảnh chính chiếc ví da nam màu nâu"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              id="mainHeroImage"
+              src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" />
+            <div class="absolute top-3 left-3 flex items-center gap-2">
+              <span
+                class="bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-md shadow-sm">
+                Ảnh hiện trường nhặt được
+              </span>
+            </div>
+            <div class="absolute bottom-3 right-3">
+              <span
+                class="bg-black/60 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                3 hình ảnh
+              </span>
+            </div>
+          </div>
+
+          <!-- 3 Ảnh phụ (Thumbnails: Nằm ngay dưới ảnh chính, bo góc, ảnh đầu viền #35483d) -->
+          <div class="grid grid-cols-3 gap-3 mt-4">
+            <!-- Thumbnail 1 (Active) -->
+            <button
+              class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-[#35483d] p-0.5 bg-white transition-all cursor-pointer shadow-sm hover:opacity-90"
+              onclick="selectThumbnail(0, 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=1000&amp;q=80')"
+              title="Xem góc chụp chính diện" type="button">
+              <img alt="Ví da nam góc chụp chính diện" class="w-full h-full object-cover rounded"
+                src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" />
+            </button>
+            <!-- Thumbnail 2 -->
+            <button
+              class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-transparent hover:border-[#35483d]/50 p-0.5 bg-white transition-all cursor-pointer shadow-sm hover:opacity-90"
+              onclick="selectThumbnail(1, 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=1000&amp;q=80')"
+              title="Xem góc mở ngăn đựng giấy tờ" type="button">
+              <img alt="Chi tiết bên trong ví" class="w-full h-full object-cover rounded"
+                src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" />
+            </button>
+            <!-- Thumbnail 3 -->
+            <button
+              class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-transparent hover:border-[#35483d]/50 p-0.5 bg-white transition-all cursor-pointer shadow-sm hover:opacity-90"
+              onclick="selectThumbnail(2, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=1000&amp;q=80')"
+              title="Xem vị trí nhặt tại bàn học" type="button">
+              <img alt="Ảnh vị trí nhặt được ở dãy bàn C1" class="w-full h-full object-cover rounded"
+                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Phân cách ngang mỏng -->
+        <hr class="border-t border-[#e7e1df] my-6" />
+
+        <!-- KHU VỰC THÔNG TIN BÀI ĐĂNG (Phía dưới) -->
+        <div>
+          <!-- Tiêu đề: "Ví da nam màu nâu - Tòa C1" -->
+          <h1 class="font-bold text-2xl text-[#1b1c1c] tracking-tight mt-1 mb-4">
+            Ví da nam màu nâu - Tòa C1
+          </h1>
+
+          <!-- Danh sách Meta (Xếp dọc, có icon) -->
+          <div class="space-y-3 text-sm">
+            <!-- Địa điểm nhặt -->
+            <div class="flex items-center gap-3 text-[#4a4746]">
+              <div class="w-8 h-8 rounded-lg bg-[#f0edec] text-[#35483d] flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]">location_on</span>
+              </div>
+              <div>
+                <span class="text-xs text-[#797675] block">Địa điểm nhặt:</span>
+                <span class="font-semibold text-[#1b1c1c]">Khu II - Tòa C1 (Khoa CNTT&amp;TT)</span>
+              </div>
+            </div>
+
+            <!-- Thời gian -->
+            <div class="flex items-center gap-3 text-[#4a4746]">
+              <div class="w-8 h-8 rounded-lg bg-[#f0edec] text-[#35483d] flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]">schedule</span>
+              </div>
+              <div>
+                <span class="text-xs text-[#797675] block">Thời gian phát hiện:</span>
+                <span class="font-semibold text-[#1b1c1c]">10 phút trước (Hôm nay, 14:25)</span>
+              </div>
+            </div>
+
+            <!-- Nơi lưu giữ -->
+            <div class="flex items-center gap-3 text-[#4a4746]">
+              <div class="w-8 h-8 rounded-lg bg-[#f0edec] text-[#35483d] flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]">apartment</span>
+              </div>
+              <div>
+                <span class="text-xs text-[#797675] block">Nơi lưu giữ hiện tại:</span>
+                <span class="font-semibold text-[#1b1c1c]">Phòng Công tác Sinh viên (PCTSV)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mô tả chi tiết: Khung nền xám nhạt -->
+          <div class="bg-[#fcf9f8] p-4 rounded-xl border border-[#e7e1df] mt-5">
+            <span class="text-xs font-bold text-[#35483d] uppercase tracking-wider block mb-1.5">
+              Ghi chú mô tả của người nhặt:
+            </span>
+            <p class="text-sm text-[#4a4746] leading-relaxed">
+              "Mình nhặt được chiếc ví màu nâu ở khu vực dãy bàn tự học Tầng 2 nhà C1 lúc khoảng 14h15 sau khi tan ca
+              học thực hành. Trong ví có một số thẻ cá nhân và giấy tờ sinh viên, hiện đã chuyển giao bảo quản an toàn
+              để tránh thất lạc."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           CỘT PHẢI (1/2): NGHIỆP VỤ XÁC MINH & HÀNH ĐỘNG (CARD TRẮNG TƯƠNG TÁC)
+           ===================================================================== -->
+      <section
+        class="bg-white rounded-2xl p-6 lg:p-7 shadow-sm border border-[#e7e1df] flex flex-col justify-between h-full transition-all">
+        <div>
+          <!-- Header cột phải -->
+          <div class="border-b border-[#e7e1df] pb-4 mb-4 flex items-center justify-between">
+            <h2 class="font-bold text-xl text-[#1b1c1c] tracking-tight">
+              Yêu cầu xác minh quyền sở hữu
+            </h2>
+            <span
+              class="text-xs font-semibold text-[#35483d] bg-[#f0edec] px-2.5 py-1 rounded-full border border-[#e7e1df]"
+              id="requestCountBadge">
+              4 yêu cầu
+            </span>
+          </div>
+
+          <!-- Câu hỏi xác minh -->
+          <div class="bg-[#fcf9f8] border border-[#e7e1df] p-3.5 rounded-xl mb-4 flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-[#35483d] text-lg mt-0.5">help</span>
+            <div>
+              <p class="text-xs text-[#797675] font-medium">Câu hỏi xác minh:</p>
+              <p class="text-sm font-semibold text-[#1b1c1c] mt-0.5">Cái ví này thuộc hãng gì?</p>
+            </div>
+          </div>
+
+          <!-- Danh sách câu trả lời của các sinh viên -->
+          <div class="flex flex-col gap-4 overflow-y-auto max-h-[700px] pr-1">
+
+            <!-- Card 1: Nguyễn Văn A -->
+            <div
+              class="flex flex-row items-center gap-4 p-4 border border-[#e7e1df] rounded-xl bg-white shadow-sm hover:border-[#35483d] transition-all">
+              <div
+                class="w-14 h-14 rounded-xl bg-[#f0edec] text-[#35483d] font-bold text-lg flex items-center justify-center flex-shrink-0 border border-[#e7e1df]">
+                NA
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-1">
+                <div class="font-semibold text-[#1b1c1c] truncate">
+                  Nguyễn Văn A <span class="text-xs font-normal text-[#797675]">(MSSV: B210xxxx)</span>
+                </div>
+                <div class="text-sm text-[#4a4746] leading-snug">
+                  Ví của mình hiệu Leonardo, da bò sáp màu nâu đất.
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <button type="button"
+                  onclick="handleAccept('Nguyễn Văn A', 'B210xxxx', this)"
+                  class="accept-btn bg-[#35483d] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#28372e] transition-colors whitespace-nowrap cursor-pointer shadow-sm">
+                  Chấp nhận
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: Trần Thị B -->
+            <div
+              class="flex flex-row items-center gap-4 p-4 border border-[#e7e1df] rounded-xl bg-white shadow-sm hover:border-[#35483d] transition-all">
+              <div
+                class="w-14 h-14 rounded-xl bg-[#f0edec] text-[#35483d] font-bold text-lg flex items-center justify-center flex-shrink-0 border border-[#e7e1df]">
+                TB
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-1">
+                <div class="font-semibold text-[#1b1c1c] truncate">
+                  Trần Thị B <span class="text-xs font-normal text-[#797675]">(MSSV: B211xxxx)</span>
+                </div>
+                <div class="text-sm text-[#4a4746] leading-snug">
+                  Đó là ví hiệu Pedro, có logo kim loại nhỏ đính ở góc phải bên dưới.
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <button type="button"
+                  onclick="handleAccept('Trần Thị B', 'B211xxxx', this)"
+                  class="accept-btn bg-[#35483d] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#28372e] transition-colors whitespace-nowrap cursor-pointer shadow-sm">
+                  Chấp nhận
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 3: Lê Hoàng C -->
+            <div
+              class="flex flex-row items-center gap-4 p-4 border border-[#e7e1df] rounded-xl bg-white shadow-sm hover:border-[#35483d] transition-all">
+              <div
+                class="w-14 h-14 rounded-xl bg-[#f0edec] text-[#35483d] font-bold text-lg flex items-center justify-center flex-shrink-0 border border-[#e7e1df]">
+                LC
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-1">
+                <div class="font-semibold text-[#1b1c1c] truncate">
+                  Lê Hoàng C <span class="text-xs font-normal text-[#797675]">(MSSV: B200xxxx)</span>
+                </div>
+                <div class="text-sm text-[#4a4746] leading-snug">
+                  Ví da thật mua ở Lata, không có logo nổi.
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <button type="button"
+                  onclick="handleAccept('Lê Hoàng C', 'B200xxxx', this)"
+                  class="accept-btn bg-[#35483d] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#28372e] transition-colors whitespace-nowrap cursor-pointer shadow-sm">
+                  Chấp nhận
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 4: Phạm Minh D -->
+            <div
+              class="flex flex-row items-center gap-4 p-4 border border-[#e7e1df] rounded-xl bg-white shadow-sm hover:border-[#35483d] transition-all">
+              <div
+                class="w-14 h-14 rounded-xl bg-[#f0edec] text-[#35483d] font-bold text-lg flex items-center justify-center flex-shrink-0 border border-[#e7e1df]">
+                PD
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-1">
+                <div class="font-semibold text-[#1b1c1c] truncate">
+                  Phạm Minh D <span class="text-xs font-normal text-[#797675]">(MSSV: B220xxxx)</span>
+                </div>
+                <div class="text-sm text-[#4a4746] leading-snug">
+                  Ví Tommy Hilfiger, bên trong có lót vải sọc đặc trưng.
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <button type="button"
+                  onclick="handleAccept('Phạm Minh D', 'B220xxxx', this)"
+                  class="accept-btn bg-[#35483d] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#28372e] transition-colors whitespace-nowrap cursor-pointer shadow-sm">
+                  Chấp nhận
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       4. GLOBAL FOOTER (Web Component Footer chung của dự án)
+       ========================================================================= -->
+  <app-footer></app-footer>
+
+  <!-- Toast Notification Alert -->
+  <div id="toastNotification"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-md bg-white border border-emerald-200 text-[#1b1c1c] p-4 rounded-xl shadow-lg flex items-start gap-3 pointer-events-none">
+    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
+      <span class="material-symbols-outlined text-xl">check_circle</span>
+    </div>
+    <div class="flex-1">
+      <h4 class="font-bold text-sm text-emerald-900" id="toastTitle">Xác nhận thành công!</h4>
+      <p class="text-xs text-[#4a4746] mt-0.5" id="toastMessage">
+        Đã xác nhận chính xác thông tin chủ nhân. Hệ thống sẽ kết nối phương thức liên lạc an toàn.
+      </p>
+    </div>
+  </div>
+
+  <!-- Interaction Logic Script -->
+  <script>
+    // Hàm chọn Thumbnail đổi ảnh chính
+    function selectThumbnail(index, imageUrl) {
+      const heroImg = document.getElementById('mainHeroImage');
+      if (heroImg) {
+        heroImg.src = imageUrl;
+      }
+      const buttons = document.querySelectorAll('.thumb-btn');
+      buttons.forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('border-[#35483d]');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-[#35483d]');
+          btn.classList.add('border-transparent');
+        }
+      });
+    }
+
+    // Hàm hiển thị Toast thông báo
+    function showToast(title, message) {
+      const toast = document.getElementById('toastNotification');
+      const titleEl = document.getElementById('toastTitle');
+      const msgEl = document.getElementById('toastMessage');
+      if (titleEl && title) titleEl.textContent = title;
+      if (msgEl && message) msgEl.textContent = message;
+
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 4000);
+    }
+
+    // Hàm xử lý nút Chấp nhận
+    function handleAccept(studentName, mssv, buttonEl) {
+      const confirmed = confirm(
+        `Bạn có chắc chắn muốn xác nhận ghép nối với ${studentName} (MSSV: ${mssv}) không?\n\n` +
+        `Sau khi chấp nhận, hệ thống sẽ gửi thông báo và thủ tục nhận lại đồ tại Phòng Công tác Sinh viên (PCTSV).`
+      );
+
+      if (!confirmed) return;
+
+      // Cập nhật trạng thái nút đã bấm
+      buttonEl.innerHTML = `
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+          </svg>
+          Đã chấp nhận
+        </span>
+      `;
+      buttonEl.classList.remove('bg-[#35483d]', 'hover:bg-[#28372e]');
+      buttonEl.classList.add('bg-emerald-700', 'cursor-default');
+      buttonEl.disabled = true;
+
+      // Vô hiệu hóa các nút chấp nhận còn lại
+      const allButtons = document.querySelectorAll('.accept-btn');
+      allButtons.forEach((btn) => {
+        if (btn !== buttonEl) {
+          btn.disabled = true;
+          btn.classList.add('opacity-40', 'cursor-not-allowed');
+        }
+      });
+
+      // Hiển thị thông báo Toast
+      showToast(
+        'Ghép nối thành công!',
+        `Đã xác nhận chủ sở hữu là ${studentName}. Bạn và bạn ấy có thể liên hệ nhận lại ví tại Phòng Công tác Sinh viên.`
+      );
+    }
+  </script>
+
+</body>
+
+</html>
