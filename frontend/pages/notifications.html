@@ -1,174 +1,382 @@
 <!doctype html>
 <html class="light" lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Thông báo Kết quả Ghép nối - CTU Lost & Found</title>
 
-    <!-- Google Fonts: Be Vietnam Pro -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Thông báo Kết quả Ghép nối - CTU Lost &amp; Found</title>
 
-    <!-- Material Symbols Outlined -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-    <!-- Tailwind CSS v3 with Plugins -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
 
-    <!-- Liên kết CSS và JS chung -->
-    <link href="../css/index.css" rel="stylesheet" />
-    <script src="../js/components.js"></script>
-    <script src="../js/main.js"></script>
+  <!-- Tailwind CSS v3 with Plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 1;
-      }
-      body {
-        background-color: #fcf9f8;
-        font-family: "Be Vietnam Pro", sans-serif;
-      }
-      app-header {
-        display: block;
-        min-height: 64px;
-      }
-    </style>
-  </head>
+  <!-- Liên kết CSS và JS chung -->
+  <link href="../css/index.css" rel="stylesheet" />
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
 
-  <body
-    class="bg-background text-on-surface antialiased flex flex-col min-h-screen"
-  >
-    <!-- TOP NAV BAR (Web Component) -->
-    <app-header></app-header>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
 
-    <!-- Thanh Sub-nav (Điều hướng phụ dạng tab thông báo) -->
-    <section class="w-full bg-surface border-b border-outline-variant">
-      <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 pt-4">
-        <div class="flex items-center gap-8">
-          <!-- Tab 1: Kết quả ghép nối (Active) -->
-          <a
-            class="text-primary border-b-2 border-primary pb-2 font-bold text-body-default flex items-center gap-2"
-            href="notifications.html"
-          >
-            <span class="material-symbols-outlined text-lg">auto_awesome</span>
-            Kết quả ghép nối
-          </a>
-          <!-- Tab 2: Yêu cầu ghép nối (Inactive) -->
-          <a
-            class="text-on-surface-variant font-medium hover:text-primary pb-2 text-body-default transition-colors duration-150 flex items-center gap-2"
-            href="requests.html"
-          >
-            <span class="material-symbols-outlined text-lg">inbox</span>
-            Yêu cầu ghép nối
-          </a>
+    body {
+      background-color: #fcf9f8;
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
+
+    app-header {
+      display: block;
+      min-height: 64px;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface antialiased flex flex-col min-h-screen">
+  <!-- TOP NAV BAR (Web Component) -->
+  <app-header></app-header>
+
+  <!-- Thanh Sub-nav (Điều hướng phụ dạng tab thông báo) -->
+  <section class="w-full bg-[#F7F6F2] border-b border-[#E6E4DE]">
+    <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 pt-4">
+      <div class="flex items-center gap-8">
+        <!-- Tab 1: Kết quả ghép nối (Active) -->
+        <a class="text-[#1f3227] border-b-2 border-[#1f3227] pb-2 font-bold text-[15px] flex items-center gap-2"
+          href="notifications.html">
+          <span class="material-symbols-outlined text-lg">auto_awesome</span>
+          Kết quả ghép nối
+        </a>
+        <!-- Tab 2: Yêu cầu ghép nối (Inactive) -->
+        <a class="text-[#777771] font-medium hover:text-[#1b1c1b] pb-2 text-[15px] transition-colors duration-150 flex items-center gap-2"
+          href="requests.html">
+          <span class="material-symbols-outlined text-lg">inbox</span>
+          Yêu cầu ghép nối
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nội dung chính -->
+  <main class="flex-grow max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 py-8">
+    <!-- Section Heading -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-2">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h1 class="text-2xl md:text-3xl font-bold text-[#1b1c1c] tracking-tight">
+            Những món đồ thất lạc của tôi
+          </h1>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Nội dung chính (Google Classroom Card Grid) -->
-    <main
-      class="flex-grow max-w-7xl w-full mx-auto px-6 md:px-12 lg:px-16 py-8 min-h-screen"
-    >
-      <!-- Section Heading -->
-      <div
-        class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-2"
-      >
+    <!-- Cards Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+      <!-- Card 1: Ví da nam màu nâu -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
         <div>
-          <div class="flex items-center gap-2 mb-1">
-            <h1
-              class="text-2xl md:text-3xl font-bold text-on-surface tracking-tight font-headline-section"
-            >
-              Những món đồ thất lạc của tôi
-            </h1>
+          <!-- Banner Top -->
+          <div class="relative h-32 w-full overflow-hidden bg-[#35483d]">
+            <img class="w-full h-full object-cover opacity-60" alt="Ví da nam màu nâu"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4krsSH65DETYigspQtl4eay9ABGWwoWIr4yFJAtWTGyTMsWecWSjNczyxhb8yxDXXP8sAYSHv60HBRZ80vvAM_G-H3X2Q3BEs4Sh0KK_1uRFAEKXdDtxfOKVyp9_APee0q5qofBZTIW9skD3768F4ua8F_oMUk-649hRhVlwhYzDLQQlQnlqW5f6r4yC4BXmUHy7wKzL3RyM4DsSO5kmRMNqz3LAItWV2iyF9ekMIPnq_jQYOVtUY" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f3227]/80 to-transparent"></div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-[#1f3227]">
+              Khu II • Tòa C1
+            </span>
+          </div>
+          <!-- Notification Badge -->
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            2
+          </div>
+          <!-- Avatar & Body -->
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">wallet</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Ví da nam màu nâu - Tòa C1
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 2 kết quả ghép nối mới
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">10 phút trước</p>
+            </div>
           </div>
         </div>
-      </div>
+        <!-- Bottom Actions -->
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-3 ml-auto">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
 
-      <!-- Cards Grid -->
-      <section
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2"
-      >
-        <!-- Card 1: Ví da nam màu nâu -->
-        <article
-          class="relative bg-surface rounded-2xl border border-outline-variant shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow"
-        >
-          <div>
-            <!-- Banner Top -->
+      <!-- Card 2: Thẻ sinh viên CTU -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-[#35483d]">
+            <img class="w-full h-full object-cover opacity-60" alt="Thẻ sinh viên CTU"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuARNHgksfIws9Z2UQUUEbPfKnsNbo_WPEGgjTtNKRKeUJctpIZIa9gdy4qbtY4zuIy2X5bEwv-a-bbyTxumveQymhJw2j2gtx7RE-Zv6gB6clUMvLXgLgT-W2ed977dttODZ3VrStbTjQfBRqrJCu-DjFLhtDSwU9-QCHo9AnJnsMZdsN-AdFQ1TvvlrwF3U-7GNPeilhE7CIQjbVpIc14QDn2JtDOxPycf-5anksYtAbwY22sDT-br" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f3227]/80 to-transparent"></div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-[#1f3227]">
+              Khu II • Nhà học B1
+            </span>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            1
+          </div>
+          <div class="px-5 pb-4">
             <div
-              class="relative h-32 w-full overflow-hidden bg-primary-container"
-            >
-              <img
-                class="w-full h-full object-cover opacity-60"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4krsSH65DETYigspQtl4eay9ABGWwoWIr4yFJAtWTGyTMsWecWSjNczyxhb8yxDXXP8sAYSHv60HBRZ80vvAM_G-H3X2Q3BEs4Sh0KK_1uRFAEKXdDtxfOKVyp9_APee0q5qofBZTIW9skD3768F4ua8F_oMUk-649hRhVlwhYzDLQQlQnlqW5f6r4yC4BXmUHy7wKzL3RyM4DsSO5kmRMNqz3LAItWV2iyF9ekMIPnq_jQYOVtUY"
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"
-              ></div>
-              <span
-                class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-caption-meta font-medium bg-surface text-primary"
-              >
-                Khu II • Tòa C1
-              </span>
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">badge</span>
             </div>
-            <!-- Notification Badge -->
-            <div
-              class="absolute top-3 right-3 w-7 h-7 rounded-full bg-error text-on-error font-bold text-xs flex items-center justify-center shadow-md"
-            >
-              2
-            </div>
-            <!-- Avatar & Body -->
-            <div class="px-5 pb-4">
-              <div
-                class="w-12 h-12 rounded-full border-2 border-surface bg-surface-container shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-primary relative"
-              >
-                <span class="material-symbols-outlined text-xl">wallet</span>
-              </div>
-              <div class="mt-3">
-                <h2 class="text-title-item font-bold text-on-surface">
-                  Ví da nam màu nâu - Tòa C1
-                </h2>
-                <p
-                  class="mt-1 text-body-compact font-medium text-primary flex items-center gap-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm">hub</span>
-                  Có 2 kết quả ghép nối mới
-                </p>
-                <p class="mt-1 text-caption-meta text-on-secondary-container">
-                  10 phút trước
-                </p>
-              </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Thẻ sinh viên CTU B2105432
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 1 kết quả ghép nối mới
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">25 phút trước</p>
             </div>
           </div>
-          <!-- Bottom Actions -->
-          <div>
-            <div class="border-t border-outline-variant"></div>
-            <div
-              class="px-5 py-3 flex items-center justify-between text-on-surface-variant"
-            >
-              <div class="flex items-center gap-3 ml-auto">
-                <button
-                  class="hover:text-primary transition-colors p-1"
-                  title="Xem chi tiết"
-                ></button>
-              </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-3 ml-auto">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
           </div>
-        </article>
-      </section>
-    </main>
-  </body>
+        </div>
+      </article>
+
+      <!-- Card 3: Bình giữ nhiệt Lock&Lock -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-[#35483d]">
+            <img class="w-full h-full object-cover opacity-60" alt="Bình giữ nhiệt Lock&amp;Lock xanh"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyB4F-sar009JOTS1EwU1ga0UtcHH34bh_agHY5D7YF7GAJS4Wy-x2L-kcss9HvTkuqBgYeaVrm7cWw-sXjQLlqx4NNmwofFkBPDxJRmoSJwFfCJKM8RPoyUAlODw5oOPWWSVGGlj-Xt1Vk65HcozH3rGTxi1SybXMtmUMor0BKo6qr6Gbrqmd1p11GKGAst1cAMjZPd4RB60WDxNX6ZRmudqtJdjqfHK9muHQLfQGwmcsUePOofiP" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f3227]/80 to-transparent"></div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-[#1f3227]">
+              Trung tâm Học liệu
+            </span>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            3
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">local_cafe</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Bình giữ nhiệt Lock&amp;Lock xanh
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 3 kết quả ghép nối mới
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">1 giờ trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-3 ml-auto">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Balo laptop đen -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-[#35483d]">
+            <img class="w-full h-full object-cover opacity-60" alt="Balo laptop Predator"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuu2T8O0cLqHJ5pTtVr_WmzBs9-frIgnf5GhV61wx-Q0VZIbmjjrrEurwPeh0-SVSUW4Mu5TwNJU9E7_1zAQiv-QoV4VZelx-PhQwCxQ2uB4Li90-beP88q1WR4olko0ZTVrzW1FMr1WkLM-ZUlVK3nR1qX2Qm5YWF9lzlwGJaQVa_pfgh4afL4YcC9zQhqu20jc4HU6TpJ38aovNWdLshP8rDXD1V7vnnMK0hb_XRdsT4TwhYzo-p" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f3227]/80 to-transparent"></div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-[#1f3227]">
+              Khoa CNTT&amp;TT
+            </span>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            2
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">backpack</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Balo laptop Predator 15.6 inch
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 2 kết quả ghép nối mới
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">3 giờ trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-3 ml-auto">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Chìa khóa xe Honda Smartkey -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-[#35483d]">
+            <img class="w-full h-full object-cover opacity-60" alt="Chìa khóa xe Honda Smartkey"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuyvW0mdnur8KKNBMgIcrlviLhTSMtjUe1c-aq7TVsT7mDDLP7knoUmouGM-vtcwggM8vRhxOArfZO-o4HipO-Z1hncMn-x96zKyoCjEvUbooaoEhI-k4sn5rpzC2N9RIytGNuYPvvFvyiPwvxL3qXJwZFKA1Dhyv7asva-rBQstm4VfM_-Kv4OD14MkAxSgREqS8bwDhjQX5uR6pZu36F71vQDI6TvFv9W7hQhcER5cfcf3GU-MLb" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f3227]/80 to-transparent"></div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-[#1f3227]">
+              Bãi xe Cổng A
+            </span>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            5
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">vpn_key</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Chìa khóa xe Honda Smartkey
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 5 kết quả ghép nối mới
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">5 giờ trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-3 ml-auto">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: Hộp sạc AirPods Pro -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-[#35483d]">
+            <img class="w-full h-full object-cover opacity-60" alt="Hộp sạc AirPods Pro vỏ ốp đen"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo59obF6YvVHgkJmA-LGObfnbal9vj-WJkguSH0X1pzRy5oEd5xST-f6msei9vHIQctvQktasZwckGDdWXJqCjSLOrpGwk0FIn-X-PJixxJWxMMSnYY_zwhUe7LvIrVb3vXn3lCs3vBFVGId_aVsKqygtdqanUePL5Y-ttqlEBVOjJPiiyOTvTtGnIgPHwOK2TXZDwahLJFZw0ol2mpjRNhVH_dO5SamWNHO9GU8Zl8KYeekE2DC_i" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f3227]/80 to-transparent"></div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-[#1f3227]">
+              Hội trường Rùa
+            </span>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            1
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">headphones</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Hộp sạc AirPods Pro vỏ ốp đen
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 1 kết quả ghép nối mới
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Hôm qua</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-3 ml-auto">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- FOOTER (Web Component) -->
+  <app-footer></app-footer>
+</body>
+
 </html>
