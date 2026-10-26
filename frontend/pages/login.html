@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Nhập - CTU Lost &amp; Found</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+          },
+          colors: {
+            primary: '#35483d',
+            'primary-dark': '#28372e',
+            surface: '#fcf9f8',
+            'surface-card': '#ffffff',
+            'border-base': '#e7e1df',
+            'text-main': '#1b1c1c',
+            'text-muted': '#797675',
+            'text-body': '#4a4746',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes marquee-scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 32s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    /* Mờ dần ở 2 mép container */
+    .marquee-mask {
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#fcf9f8] text-[#1b1c1c] font-sans antialiased flex flex-col justify-between selection:bg-[#35483d] selection:text-white">
+
+  <!-- 1. Brand Header (Đã xóa bỏ huy hiệu xác thực hệ thống CTU theo yêu cầu) -->
+  <header class="w-full pt-6 pb-2 px-6 sm:px-12 max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5 group">
+      <div class="w-9 h-9 rounded-lg bg-[#35483d] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      </div>
+      <span class="font-bold text-lg tracking-tight text-[#1b1c1c]">CTU Lost &amp; Found</span>
+    </a>
+
+    <div class="flex items-center gap-4 text-xs">
+      <a href="index.html" class="font-semibold text-[#35483d] hover:underline flex items-center gap-1 transition-colors">
+        <span>Về trang chủ</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- 2. Main Layout Chia Đôi (2 Cột Grid) -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-6 sm:px-10 lg:px-12 py-8 md:py-12 flex items-center justify-center">
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      
+      <!-- CỘT TRÁI: Hero & Dải Thẻ Cuộn Xoay Ngang Vô Tận -->
+      <div class="lg:col-span-6 flex flex-col justify-center overflow-hidden">
+        <div class="mb-5">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1b1c1c] tracking-tight leading-tight mb-2 text-center lg:text-left">
+            Mất đồ hả, tui tìm cho
+          </h1>
+          <p class="text-sm sm:text-base text-[#797675] text-center lg:text-left">
+            Hệ thống đối soát thông minh tự động kết nối tài sản thất lạc tại CTU
+          </p>
+        </div>
+
+        <!-- DẢI THẺ CUỘN XOAY THEO CHIỀU NGANG (Hover để tạm dừng) -->
+        <div class="relative w-full overflow-hidden marquee-mask py-3 select-none">
+          <div class="marquee-track flex gap-4">
+            
+            <!-- ====== BỘ 6 THẺ MINH HỌA (LƯỢT 1) ====== -->
+
+            <!-- Thẻ 1: Ba lô sinh viên -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Đã khớp 99%
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Ba lô sinh viên</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Màu xám đen • Laptop Acer Predator</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  </svg>
+                  Tầng 2 Thư viện
+                </span>
+                <span class="text-[#797675]">15 phút trước</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 2: Ví da cá nhân -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                  <svg class="w-3 h-3 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  NFC / Thẻ SV
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Ví da cá nhân</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Thẻ SV: B2105*** • Căn cước công dân</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                  VP Đoàn - Hội
+                </span>
+                <span class="font-medium text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Bảo quản an toàn</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 3: iPhone 14 Midnight -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f0edec] text-[#35483d] border border-[#e7e1df]">
+                  Tự đối soát
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">iPhone 14 Midnight</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Cảnh báo khớp đồ thất lạc trên màn hình...</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1.5 text-[#797675]">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Sảnh tòa C1
+                </span>
+                <span class="text-[#35483d] font-semibold hover:underline cursor-pointer">Xác nhận ngay →</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 4: Bình giữ nhiệt Lock&Lock (Mới thêm) -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 8l-4 4h.01M5 8h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Đã khớp 95%
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Bình giữ nhiệt Lock&amp;Lock</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Xanh pastel 800ml • Sticker mèo CTU</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  </svg>
+                  Nhà học B1
+                </span>
+                <span class="text-[#797675]">30 phút trước</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 5: Chìa khóa xe Honda Smartkey (Mới thêm) -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                  Xác minh khóa
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Chìa khóa xe Honda Smartkey</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Bọc silicon đen • Móc khóa gấu bông</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                  Bãi xe Cổng A (3/2)
+                </span>
+                <span class="font-medium text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Đang lưu giữ</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 6: Tai nghe AirPods Pro 2 (Mới thêm) -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Đã khớp 98%
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Hộp AirPods Pro 2</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Vỏ Spigen nhám đen • Có vết xước nhỏ</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  </svg>
+                  Hội trường Rùa
+                </span>
+                <span class="text-[#35483d] font-semibold hover:underline cursor-pointer">Xác nhận ngay →</span>
+              </div>
+            </div>
+
+            <!-- ====== BỘ 6 THẺ MINH HỌA (LƯỢT 2 - NHÂN BẢN ĐỂ LOOP VÔ TẬN) ====== -->
+
+            <!-- Thẻ 1 -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Đã khớp 99%
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Ba lô sinh viên</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Màu xám đen • Laptop Acer Predator</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  </svg>
+                  Tầng 2 Thư viện
+                </span>
+                <span class="text-[#797675]">15 phút trước</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 2 -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                  <svg class="w-3 h-3 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  NFC / Thẻ SV
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Ví da cá nhân</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Thẻ SV: B2105*** • Căn cước công dân</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                  VP Đoàn - Hội
+                </span>
+                <span class="font-medium text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Bảo quản an toàn</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 3 -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f0edec] text-[#35483d] border border-[#e7e1df]">
+                  Tự đối soát
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">iPhone 14 Midnight</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Cảnh báo khớp đồ thất lạc trên màn hình...</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1.5 text-[#797675]">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Sảnh tòa C1
+                </span>
+                <span class="text-[#35483d] font-semibold hover:underline cursor-pointer">Xác nhận ngay →</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 4 -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 8l-4 4h.01M5 8h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Đã khớp 95%
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Bình giữ nhiệt Lock&amp;Lock</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Xanh pastel 800ml • Sticker mèo CTU</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  </svg>
+                  Nhà học B1
+                </span>
+                <span class="text-[#797675]">30 phút trước</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 5 -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                  Xác minh khóa
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Chìa khóa xe Honda Smartkey</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Bọc silicon đen • Móc khóa gấu bông</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                  Bãi xe Cổng A (3/2)
+                </span>
+                <span class="font-medium text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Đang lưu giữ</span>
+              </div>
+            </div>
+
+            <!-- Thẻ 6 -->
+            <div class="w-72 sm:w-80 flex-shrink-0 bg-white rounded-2xl border border-[#e7e1df] p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#f0edec] flex items-center justify-center text-[#35483d] flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Đã khớp 98%
+                </span>
+              </div>
+              <h4 class="font-bold text-sm sm:text-base text-[#1b1c1c]">Hộp AirPods Pro 2</h4>
+              <p class="text-xs text-[#797675] mt-1 line-clamp-1">Vỏ Spigen nhám đen • Có vết xước nhỏ</p>
+              <div class="mt-3 pt-2.5 border-t border-[#f0edec] flex items-center justify-between text-[11px] text-[#4a4746]">
+                <span class="flex items-center gap-1 text-[#797675]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  </svg>
+                  Hội trường Rùa
+                </span>
+                <span class="text-[#35483d] font-semibold hover:underline cursor-pointer">Xác nhận ngay →</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- CỘT PHẢI: Card Form Đăng Nhập -->
+      <div class="lg:col-span-6 flex flex-col justify-center max-w-md w-full mx-auto lg:mr-0">
+        <div class="bg-white rounded-2xl border border-[#e7e1df] shadow-md p-7 sm:p-9 transition-all">
+          
+          <!-- Header Form -->
+          <div class="mb-6 text-center">
+            <h2 class="text-2xl font-bold text-[#1b1c1c] tracking-tight mb-1">
+              Đăng nhập
+            </h2>
+            <p class="text-sm text-[#797675] font-medium">
+              Dành cho Sinh viên &amp; Cán bộ CTU
+            </p>
+          </div>
+
+          <form action="#" method="POST" class="space-y-4" onsubmit="event.preventDefault(); handleLogin();">
+            <!-- Input 1: Email / Số điện thoại / Mã số SV -->
+            <div>
+              <label class="block text-xs font-semibold text-[#1b1c1c] uppercase tracking-wider mb-1.5">
+                Email / Số điện thoại / Mã số SV
+              </label>
+              <input type="text" required placeholder="Mã số SV hoặc @sv.edu.vn" value="B2404990" class="w-full px-4 py-2.5 rounded-lg text-sm bg-white text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 transition-all outline-none placeholder:text-[#797675]/60">
+            </div>
+
+            <!-- Input 2: Mật khẩu với icon con mắt -->
+            <div>
+              <label class="block text-xs font-semibold text-[#1b1c1c] uppercase tracking-wider mb-1.5">
+                Mật khẩu
+              </label>
+              <div class="relative">
+                <input id="password-input" type="password" required placeholder="••••••••••••" value="12345678" class="w-full pl-4 pr-11 py-2.5 rounded-lg text-sm bg-white text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 transition-all outline-none placeholder:text-[#797675]/60">
+                <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#797675] hover:text-[#1b1c1c] transition-colors focus:outline-none cursor-pointer" title="Hiện/Ẩn mật khẩu" onclick="const input = document.getElementById('password-input'); input.type = input.type === 'password' ? 'text' : 'password';">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Link Quên mật khẩu -->
+            <div class="text-right pt-0.5">
+              <a href="#" class="text-sm font-medium text-[#35483d] hover:underline transition-colors">
+                Quên mật khẩu?
+              </a>
+            </div>
+
+            <!-- Nút Đăng nhập -->
+            <div class="pt-2">
+              <button type="submit" class="w-full py-3 px-4 rounded-xl bg-[#35483d] hover:bg-[#28372e] text-white text-sm font-bold shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center gap-2 group cursor-pointer active:scale-98">
+                <span>Đăng nhập</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Divider HOẶC -->
+            <div class="relative py-2 my-1">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-[#e7e1df]"></div>
+              </div>
+              <div class="relative flex justify-center text-xs">
+                <span class="bg-white px-3 text-[#797675] uppercase tracking-wider font-semibold">
+                  HOẶC
+                </span>
+              </div>
+            </div>
+
+            <!-- Nút Google Login -->
+            <div>
+              <button type="button" onclick="handleLogin();" class="w-full py-2.5 px-4 rounded-xl border border-[#e7e1df] bg-white hover:bg-gray-50 text-sm font-semibold text-[#1b1c1c] shadow-sm transition-all flex items-center justify-center gap-3 cursor-pointer active:scale-98">
+                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"></path>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"></path>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"></path>
+                </svg>
+                <span>Đăng nhập bằng Google (@sv.edu.vn)</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Dưới cùng: Text Đăng ký ngay -->
+        <div class="mt-4 text-center">
+          <p class="text-xs sm:text-sm text-[#4a4746]">
+            Chưa có tài khoản?&nbsp;<a href="register.html" class="text-[#35483d] font-semibold hover:underline transition-colors">Đăng ký ngay</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. Footer -->
+  <footer class="w-full border-t border-[#e7e1df] py-6 px-8 bg-[#fcf9f8]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#797675]">
+      <div class="text-center md:text-left">
+        <span>© 2026 Cổng Thông Tin Đồ Thất Lạc PCTSV. All rights reserved.</span>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-6 font-medium">
+        <a href="#" class="hover:text-[#1b1c1c] transition-colors">Điều khoản sử dụng</a>
+        <a href="#" class="hover:text-[#1b1c1c] transition-colors">Chính sách bảo mật</a>
+        <a href="#" class="hover:text-[#1b1c1c] transition-colors">Hỗ trợ kỹ thuật PCTSV</a>
+        <a href="#" class="hover:text-[#1b1c1c] transition-colors">Liên hệ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Khi đang ở trang đăng nhập (trạng thái đăng xuất)
+    // Đảm bảo ctu_user_logged_in là 'false' để khi bấm Về trang chủ, Header hiển thị trạng thái chưa đăng nhập
+    localStorage.setItem('ctu_user_logged_in', 'false');
+
+    function handleLogin() {
+      // Khi người dùng bấm Đăng nhập thành công -> lưu trạng thái đăng nhập
+      localStorage.setItem('ctu_user_logged_in', 'true');
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
