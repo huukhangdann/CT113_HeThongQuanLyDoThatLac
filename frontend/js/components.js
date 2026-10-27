@@ -41,53 +41,81 @@ class AppHeader extends HTMLElement {
           </button>
 
           <!-- DROPDOWN POPUP THÔNG BÁO -->
-          <div id="notif-dropdown" class="hidden absolute top-full mt-2 w-[360px] sm:w-[410px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left">
+          <div id="notif-dropdown" class="hidden absolute top-full mt-2 w-[360px] sm:w-[420px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-300 right-0 sm:-right-24 text-left flex flex-col">
             <!-- Mũi tên liên kết trực tiếp với icon chuông -->
-            <div class="absolute -top-2 right-3.5 sm:right-[107px] w-3.5 h-2 pointer-events-none z-20">
+            <div id="notif-arrow" class="absolute -top-2 right-3.5 sm:right-[107px] w-3.5 h-2 pointer-events-none z-20">
               <svg class="w-full h-full block" viewBox="0 0 14 8" fill="none">
                 <path d="M0 8 L7 1 L14 8" fill="#ffffff" stroke="#e7e1df" stroke-width="1.2" stroke-linejoin="round" />
               </svg>
             </div>
 
             <!-- 1. Header Dropdown -->
-            <div class="px-5 pt-4 pb-2 flex items-center justify-between bg-white relative rounded-t-2xl border-b border-[#f0edec]">
-              <h3 class="font-extrabold text-[#1b1c1c] text-xl tracking-tight">
-                Thông báo mới
-              </h3>
-              <div class="relative">
-                <button id="notif-header-options-btn" aria-label="Tùy chọn thông báo" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#f0edec] text-[#4a4746] transition-colors focus:outline-none cursor-pointer" type="button">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                  </svg>
+            <div class="px-5 pt-4 pb-2.5 flex items-center justify-between bg-white relative rounded-t-2xl border-b border-[#f0edec] shrink-0">
+              <div class="flex items-center gap-2">
+                <h3 id="notif-header-title" class="font-extrabold text-[#1b1c1c] text-xl tracking-tight">
+                  Thông báo
+                </h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <!-- Nút thu gọn dạng icon khi đang mở rộng full height -->
+                <button id="notif-collapse-btn" aria-label="Thu gọn" class="hidden w-8 h-8 rounded-full hover:bg-[#f0edec] text-[#4a4746] items-center justify-center transition-colors focus:outline-none cursor-pointer" type="button" title="Thu gọn danh sách">
+                  <span class="material-symbols-outlined text-[20px]">unfold_less</span>
                 </button>
-                <!-- Menu tùy chọn header -->
-                <div id="notif-header-menu" class="hidden absolute right-0 top-full mt-1.5 w-56 bg-white rounded-xl shadow-xl border border-[#e7e1df] py-1.5 z-50">
-                  <button id="notif-mark-all-read-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-[#1b1c1c] hover:bg-[#f6f3f2] flex items-center gap-2.5 transition-colors cursor-pointer">
-                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+
+                <!-- Nút đóng popup -->
+                <button id="notif-close-btn" aria-label="Đóng" class="hidden w-8 h-8 rounded-full hover:bg-[#f0edec] text-[#4a4746] items-center justify-center transition-colors focus:outline-none cursor-pointer" type="button" title="Đóng thông báo">
+                  <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+
+                <div class="relative">
+                  <button id="notif-header-options-btn" aria-label="Tùy chọn thông báo" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#f0edec] text-[#4a4746] transition-colors focus:outline-none cursor-pointer" type="button" title="Tùy chọn">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
                     </svg>
-                    <span>Đánh dấu tất cả là đã đọc</span>
                   </button>
-                  <button id="notif-delete-all-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer">
-                    <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                    <span>Xóa tất cả</span>
-                  </button>
+                  <!-- Menu tùy chọn header -->
+                  <div id="notif-header-menu" class="hidden absolute right-0 top-full mt-1.5 w-56 bg-white rounded-xl shadow-xl border border-[#e7e1df] py-1.5 z-50">
+                    <button id="notif-mark-all-read-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-[#1b1c1c] hover:bg-[#f6f3f2] flex items-center gap-2.5 transition-colors cursor-pointer">
+                      <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                      </svg>
+                      <span>Đánh dấu tất cả là đã đọc</span>
+                    </button>
+                    <button id="notif-delete-all-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer">
+                      <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                      </svg>
+                      <span>Xóa tất cả</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- 2. Danh sách thông báo -->
+            <!-- Filter tabs (Ảnh 1: Tất cả / Chưa đọc) -->
+            <div id="notif-filter-bar" class="hidden px-5 py-2.5 flex items-center gap-2 bg-white border-b border-[#f0edec] shrink-0">
+              <button type="button" id="notif-filter-all-btn" class="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#35483d] text-white transition-all cursor-pointer">
+                Tất cả
+              </button>
+              <button type="button" id="notif-filter-unread-btn" class="px-3.5 py-1 rounded-full text-xs font-medium text-[#797675] hover:text-[#1b1c1c] hover:bg-[#f0edec] transition-all cursor-pointer">
+                Chưa đọc
+              </button>
+            </div>
+
+            <!-- 2. Danh sách thông báo (Cuộn riêng lẻ mượt mà) -->
             <div id="notif-list-container" class="flex flex-col bg-white py-1 max-h-[380px] overflow-y-auto">
               <!-- Render động -->
             </div>
 
             <!-- 3. Footer của Popup -->
-            <div class="p-4 pt-2 bg-white text-center rounded-b-2xl border-t border-[#f0edec]">
-              <a href="notifications.html" class="w-full py-2.5 px-4 bg-[#f0edec] hover:bg-[#e7e1df] text-[#1b1c1c] text-sm font-semibold rounded-xl text-center transition-colors block shadow-sm">
+            <div id="notif-footer" class="p-3 bg-white text-center rounded-b-2xl border-t border-[#f0edec] shrink-0">
+              <button type="button" id="notif-expand-btn" class="w-full py-2.5 px-4 bg-[#f0edec] hover:bg-[#e7e1df] text-[#1b1c1c] text-sm font-semibold rounded-xl text-center transition-colors block shadow-sm cursor-pointer">
                 Xem các thông báo trước đó
-              </a>
+              </button>
+              <button type="button" id="notif-collapse-bottom-btn" class="hidden w-full py-2 px-3 text-xs font-semibold text-[#797675] hover:text-[#1b1c1c] hover:bg-[#f6f3f2] rounded-lg text-center transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+                <span class="material-symbols-outlined text-[16px]">unfold_less</span>
+                <span>Thu gọn thông báo</span>
+              </button>
             </div>
           </div>
         </div>
@@ -157,7 +185,7 @@ class AppHeader extends HTMLElement {
     const headerBorderClass = isHomePage ? "" : "border-b border-[#E6E4DE]";
 
     this.innerHTML = `
-      <header class="sticky top-0 z-50 bg-[#F7F6F2]/90 backdrop-blur-md ${headerBorderClass}">
+      <header class="sticky top-0 z-50 bg-[#F7F6F2] ${headerBorderClass}">
         <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between h-16 md:h-20">
           
           <!-- Logo Brand -->
@@ -200,7 +228,8 @@ class AppHeader extends HTMLElement {
         desc: 'Nguyễn Văn A đã gửi câu trả lời xác nhận chiếc ví da màu nâu tại Tòa C1: "Ví của mình hiệu Leonardo da bò sáp".',
         isUnread: true,
         type: "verification",
-        link: "requests.html"
+        link: "requests.html",
+        section: "new"
       },
       {
         id: 2,
@@ -209,7 +238,8 @@ class AppHeader extends HTMLElement {
         desc: 'Phát hiện bài đăng nhặt được "Bóp cầm tay màu nâu kèm thẻ sinh viên CTU" trùng khớp đặc điểm tin báo mất của bạn.',
         isUnread: true,
         type: "match",
-        link: "match-detail.html"
+        link: "match-detail.html",
+        section: "new"
       },
       {
         id: 3,
@@ -218,13 +248,84 @@ class AppHeader extends HTMLElement {
         desc: 'Đồ vật "Ví da nam màu nâu - Tòa C1" đã được bàn giao an toàn và niêm phong bảo quản tại Phòng Công tác Sinh viên (Khu II).',
         isUnread: false,
         type: "handover",
-        link: "notifications.html"
+        link: "notifications.html",
+        section: "new"
+      },
+      {
+        id: 4,
+        title: "Xác nhận ghép nối thành công",
+        time: "Hôm qua, 16:30",
+        desc: 'Bạn đã xác nhận quyền sở hữu cho bạn Trần Thị B đối với "Thẻ sinh viên B211xxxx". Đồ vật sẵn sàng để nhận tại PCTSV.',
+        isUnread: false,
+        type: "verification",
+        link: "requests.html",
+        section: "earlier"
+      },
+      {
+        id: 5,
+        title: "Khớp đồ thất lạc mới (85%)",
+        time: "2 ngày trước",
+        desc: 'Phát hiện bài đăng nhặt được "Balo laptop bỏ quên có ví da nâu bên trong" tại Phòng máy Lab 02 - Nhà C1.',
+        isUnread: false,
+        type: "match",
+        link: "match-detail.html",
+        section: "earlier"
+      },
+      {
+        id: 6,
+        title: "Cập nhật bài đăng thành công",
+        time: "3 ngày trước",
+        desc: 'Tin báo mất "Chìa khóa xe Honda Smartkey" của bạn đã được cập nhật vị trí nghi mất tại Khuôn viên Bãi xe Cổng A.',
+        isUnread: false,
+        type: "system",
+        link: "notifications.html",
+        section: "earlier"
+      },
+      {
+        id: 7,
+        title: "Khớp đồ thất lạc mới (80%)",
+        time: "4 ngày trước",
+        desc: 'Phát hiện bài đăng nhặt được "Ví đựng thẻ da bò màu nâu nhạt" tại Bãi giữ xe Tòa C1.',
+        isUnread: true,
+        type: "match",
+        link: "match-detail.html",
+        section: "earlier"
+      },
+      {
+        id: 8,
+        title: "Đồ vật đã được nhận lại an toàn",
+        time: "5 ngày trước",
+        desc: 'Sinh viên Lê Hoàng C đã nhận lại tài sản "Tai nghe Bluetooth" tại Văn phòng Đoàn Thanh niên.',
+        isUnread: false,
+        type: "handover",
+        link: "notifications.html",
+        section: "earlier"
+      },
+      {
+        id: 9,
+        title: "Cảnh báo bảo mật hệ thống",
+        time: "1 tuần trước",
+        desc: 'Ghi nhận lượt đăng nhập thành công vào tài khoản CTU của bạn từ trình duyệt Chrome trên Windows.',
+        isUnread: false,
+        type: "system",
+        link: "#",
+        section: "earlier"
+      },
+      {
+        id: 10,
+        title: "Chào mừng đến với CTU Lost & Found",
+        time: "2 tuần trước",
+        desc: 'Hệ thống kết nối và hỗ trợ tìm kiếm tài sản thất lạc chính thức dành cho sinh viên và cán bộ Trường Đại học Cần Thơ.',
+        isUnread: false,
+        type: "system",
+        link: "index.html",
+        section: "earlier"
       }
     ];
 
     const getStoredNotifs = () => {
       try {
-        const stored = localStorage.getItem("ctu_notifications_data");
+        const stored = localStorage.getItem("ctu_notifications_data_v2");
         if (stored) return JSON.parse(stored);
       } catch (e) {
         console.error("Lỗi đọc dữ liệu thông báo:", e);
@@ -233,17 +334,27 @@ class AppHeader extends HTMLElement {
     };
 
     const saveNotifs = (data) => {
-      localStorage.setItem("ctu_notifications_data", JSON.stringify(data));
+      localStorage.setItem("ctu_notifications_data_v2", JSON.stringify(data));
     };
 
     let notifications = getStoredNotifs();
+    let isExpanded = false;
+    let currentFilter = "all"; // "all" | "unread"
 
     const notifBadge = this.querySelector("#notif-badge");
     const notifListContainer = this.querySelector("#notif-list-container");
     const notifHeaderMenu = this.querySelector("#notif-header-menu");
     const notifBellBtn = this.querySelector("#notif-bell-btn");
     const notifDropdown = this.querySelector("#notif-dropdown");
+    const notifArrow = this.querySelector("#notif-arrow");
+    const notifCollapseBtn = this.querySelector("#notif-collapse-btn");
+    const notifCloseBtn = this.querySelector("#notif-close-btn");
     const notifHeaderOptionsBtn = this.querySelector("#notif-header-options-btn");
+    const notifFilterBar = this.querySelector("#notif-filter-bar");
+    const filterAllBtn = this.querySelector("#notif-filter-all-btn");
+    const filterUnreadBtn = this.querySelector("#notif-filter-unread-btn");
+    const notifExpandBtn = this.querySelector("#notif-expand-btn");
+    const notifCollapseBottomBtn = this.querySelector("#notif-collapse-bottom-btn");
     const markAllReadBtn = this.querySelector("#notif-mark-all-read-btn");
     const deleteAllBtn = this.querySelector("#notif-delete-all-btn");
 
@@ -258,22 +369,177 @@ class AppHeader extends HTMLElement {
       }
     };
 
+    const compactClasses = "absolute top-full mt-2 w-[360px] sm:w-[420px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left flex flex-col";
+    const expandedClasses = "fixed top-16 md:top-20 right-2 sm:right-6 md:right-8 lg:right-12 bottom-4 w-[380px] sm:w-[440px] max-w-[calc(100vw-20px)] h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 text-left flex flex-col overflow-hidden";
+
+    const setExpandedMode = (expanded) => {
+      isExpanded = expanded;
+      if (!notifDropdown) return;
+
+      const isHidden = notifDropdown.classList.contains("hidden");
+
+      if (isExpanded) {
+        // Sổ xuống hết full height bên phải theo minh họa Ảnh 1 & Ảnh 2, cuộn độc lập
+        notifDropdown.className = expandedClasses + (isHidden ? " hidden" : "");
+        if (notifArrow) notifArrow.classList.add("hidden");
+        if (notifCollapseBtn) {
+          notifCollapseBtn.classList.remove("hidden");
+          notifCollapseBtn.classList.add("flex");
+        }
+        if (notifCloseBtn) {
+          notifCloseBtn.classList.remove("hidden");
+          notifCloseBtn.classList.add("flex");
+        }
+        if (notifFilterBar) {
+          notifFilterBar.classList.remove("hidden");
+          notifFilterBar.classList.add("flex");
+        }
+        if (notifExpandBtn) notifExpandBtn.classList.add("hidden");
+        if (notifCollapseBottomBtn) {
+          notifCollapseBottomBtn.classList.remove("hidden");
+          notifCollapseBottomBtn.classList.add("flex");
+        }
+        if (notifListContainer) {
+          notifListContainer.classList.remove("max-h-[380px]");
+          notifListContainer.classList.add("flex-1", "min-h-0");
+        }
+      } else {
+        // Trở về dạng popup popover nhỏ gọn ban đầu
+        notifDropdown.className = compactClasses + (isHidden ? " hidden" : "");
+        if (notifArrow) notifArrow.classList.remove("hidden");
+        if (notifCollapseBtn) {
+          notifCollapseBtn.classList.add("hidden");
+          notifCollapseBtn.classList.remove("flex");
+        }
+        if (notifCloseBtn) {
+          notifCloseBtn.classList.add("hidden");
+          notifCloseBtn.classList.remove("flex");
+        }
+        if (notifFilterBar) {
+          notifFilterBar.classList.add("hidden");
+          notifFilterBar.classList.remove("flex");
+        }
+        if (notifExpandBtn) notifExpandBtn.classList.remove("hidden");
+        if (notifCollapseBottomBtn) {
+          notifCollapseBottomBtn.classList.add("hidden");
+          notifCollapseBottomBtn.classList.remove("flex");
+        }
+        if (notifListContainer) {
+          notifListContainer.classList.add("max-h-[380px]");
+          notifListContainer.classList.remove("flex-1", "min-h-0");
+        }
+      }
+      renderNotifications();
+    };
+
+    const renderItemHtml = (item, index, totalCount) => {
+      let iconHtml = "";
+      if (item.type === "verification") {
+        iconHtml = `
+          <div class="w-10 h-10 bg-emerald-50 text-[#35483d] border border-emerald-200/80 flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
+      } else if (item.type === "match") {
+        iconHtml = `
+          <div class="w-10 h-10 bg-amber-50 text-amber-800 border border-amber-200/80 flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
+      } else if (item.type === "handover") {
+        iconHtml = `
+          <div class="w-10 h-10 bg-blue-50 text-blue-800 border border-blue-200/80 flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
+      } else {
+        iconHtml = `
+          <div class="w-10 h-10 bg-neutral-100 text-[#797675] border border-[#e7e1df] flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
+      }
+
+      const isLastItem = index === totalCount - 1;
+      const menuPositionClass = isLastItem ? "bottom-full mb-1 right-0" : "top-full mt-1 right-0";
+
+      return `
+        <div class="group flex items-start gap-3 px-5 py-3.5 hover:bg-[#f6f3f2] transition-colors cursor-pointer relative notif-row border-b border-[#f0edec]/70 last:border-b-0" data-id="${item.id}" data-link="${item.link}">
+          <div class="relative flex-shrink-0 mt-0.5">
+            ${iconHtml}
+          </div>
+          <div class="flex-1 min-w-0 pr-1 notif-content-area">
+            <div class="flex items-start justify-between gap-1 mb-0.5">
+              <h4 class="${item.isUnread ? 'font-bold text-[#1b1c1c]' : 'font-semibold text-[#4a4746]'} text-xs leading-snug line-clamp-1">
+                ${item.title}
+              </h4>
+            </div>
+            <p class="text-xs ${item.isUnread ? 'text-[#1b1c1c] font-medium' : 'text-[#797675]'} leading-relaxed line-clamp-2 mt-0.5">
+              ${item.desc}
+            </p>
+            <span class="text-[11px] text-[#797675] block mt-1">
+              ${item.time}
+            </span>
+          </div>
+          
+          <!-- Cột phải: Dấu chấm xanh chưa đọc & nút 3 chấm hover (Giống Facebook ảnh 1) -->
+          <div class="flex-shrink-0 relative w-7 h-7 flex items-center justify-center self-center">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#1877F2] ${item.isUnread ? 'block' : 'hidden'} group-hover:opacity-0 transition-opacity"></span>
+            <button aria-label="Tùy chọn thông báo" class="notif-item-options-btn absolute inset-0 w-7 h-7 rounded-full bg-white shadow-sm border border-[#e7e1df] hover:bg-[#f0edec] flex items-center justify-center text-[#4a4746] opacity-0 group-hover:opacity-100 transition-opacity focus:outline-none cursor-pointer" type="button" data-id="${item.id}">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu của từng hàng thông báo -->
+            <div class="notif-item-menu hidden absolute ${menuPositionClass} w-48 bg-white rounded-xl shadow-xl border border-[#e7e1df] py-1.5 z-40" data-id="${item.id}">
+              <button type="button" class="notif-toggle-read-btn w-full px-3.5 py-2 text-left text-xs font-semibold text-[#1b1c1c] hover:bg-[#f6f3f2] flex items-center gap-2.5 transition-colors cursor-pointer" data-id="${item.id}">
+                ${item.isUnread ? `
+                  <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                  <span>Đánh dấu là đã đọc</span>
+                ` : `
+                  <span class="w-3.5 h-3.5 rounded-full bg-[#1877F2] flex-shrink-0"></span>
+                  <span>Đánh dấu là chưa đọc</span>
+                `}
+              </button>
+              <button type="button" class="notif-delete-item-btn w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer" data-id="${item.id}">
+                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Xóa thông báo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    };
+
     const renderNotifications = () => {
       if (!notifListContainer) return;
       updateBadge();
 
       if (notifications.length === 0) {
         notifListContainer.innerHTML = `
-          <div class="py-8 px-5 text-center">
+          <div class="py-12 px-5 text-center">
             <div class="w-12 h-12 mx-auto rounded-full bg-[#f0edec] text-[#797675] flex items-center justify-center mb-2">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
               </svg>
             </div>
-            <p class="text-sm font-semibold text-[#1b1c1c]">Không có thông báo mới</p>
+            <p class="text-sm font-semibold text-[#1b1c1c]">Không có thông báo nào</p>
             <p class="text-xs text-[#797675] mt-0.5">Bạn đã xem hết các thông báo gần đây</p>
             <button id="notif-reset-demo-btn" type="button" class="mt-3 text-xs text-[#35483d] font-semibold underline hover:text-[#1f3227] cursor-pointer">
-              Khôi phục 3 thông báo mẫu
+              Khôi phục danh sách thông báo mẫu
             </button>
           </div>
         `;
@@ -290,91 +556,59 @@ class AppHeader extends HTMLElement {
         return;
       }
 
-      notifListContainer.innerHTML = notifications.map((item, index) => {
-        let iconHtml = "";
-        if (item.type === "verification") {
-          iconHtml = `
-            <div class="w-9 h-9 bg-emerald-50 text-[#35483d] border border-emerald-200/80 flex items-center justify-center rounded-full">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-          `;
-        } else if (item.type === "match") {
-          iconHtml = `
-            <div class="w-9 h-9 bg-amber-50 text-amber-800 border border-amber-200/80 flex items-center justify-center rounded-full">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-          `;
+      // Xử lý render theo chế độ Compact hoặc Mở Rộng
+      if (!isExpanded) {
+        // Chế độ Compact: Chỉ hiển thị 3 thông báo mới nhất
+        const compactItems = notifications.slice(0, 3);
+        notifListContainer.innerHTML = compactItems.map((item, idx) => renderItemHtml(item, idx, compactItems.length)).join("");
+      } else {
+        // Chế độ Mở Rộng (Sổ xuống hết kiểu Facebook ảnh 1):
+        if (currentFilter === "unread") {
+          const unreadItems = notifications.filter(n => n.isUnread);
+          if (unreadItems.length === 0) {
+            notifListContainer.innerHTML = `
+              <div class="py-12 px-5 text-center">
+                <span class="material-symbols-outlined text-3xl text-emerald-600 mb-1">done_all</span>
+                <p class="text-sm font-semibold text-[#1b1c1c]">Tuyệt vời!</p>
+                <p class="text-xs text-[#797675] mt-0.5">Bạn không có thông báo chưa đọc nào</p>
+              </div>
+            `;
+          } else {
+            notifListContainer.innerHTML = `
+              <div class="px-5 pt-3 pb-1 flex items-center justify-between bg-stone-50/60 border-b border-[#f0edec]">
+                <span class="text-xs font-bold text-[#1b1c1c] uppercase tracking-wider">Chưa đọc (${unreadItems.length})</span>
+              </div>
+              ${unreadItems.map((item, idx) => renderItemHtml(item, idx, unreadItems.length)).join("")}
+            `;
+          }
         } else {
-          iconHtml = `
-            <div class="w-9 h-9 bg-neutral-100 text-[#797675] border border-[#e7e1df] flex items-center justify-center rounded-full">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-          `;
+          // Lọc Tất cả: Chia 2 khu vực "Mới nhất" và "Trước đó" đúng chuẩn ảnh 1 & ảnh 2
+          const newItems = notifications.filter(n => n.section === "new");
+          const earlierItems = notifications.filter(n => n.section === "earlier");
+
+          let html = "";
+          if (newItems.length > 0) {
+            html += `
+              <div class="px-5 pt-3 pb-1.5 flex items-center justify-between bg-stone-50/60 border-b border-[#f0edec]">
+                <span class="text-xs font-bold text-[#1b1c1c] uppercase tracking-wider">Mới nhất</span>
+              </div>
+              ${newItems.map((item, idx) => renderItemHtml(item, idx, newItems.length)).join("")}
+            `;
+          }
+
+          if (earlierItems.length > 0) {
+            html += `
+              <div class="px-5 pt-4 pb-1.5 flex items-center justify-between bg-stone-50/60 border-y border-[#f0edec]">
+                <span class="text-xs font-bold text-[#4a4746] uppercase tracking-wider">Trước đó</span>
+                <span class="text-[11px] font-medium text-[#797675]">${earlierItems.length} thông báo</span>
+              </div>
+              ${earlierItems.map((item, idx) => renderItemHtml(item, idx, earlierItems.length)).join("")}
+            `;
+          }
+
+          notifListContainer.innerHTML = html;
         }
-
-        const isLastItem = index === notifications.length - 1;
-        const menuPositionClass = isLastItem ? "bottom-full mb-1 right-0" : "top-full mt-1 right-0";
-
-        return `
-          <div class="group flex items-center gap-3 px-5 py-3 hover:bg-[#f6f3f2] transition-colors cursor-pointer relative notif-row" data-id="${item.id}" data-link="${item.link}">
-            <div class="relative flex-shrink-0">
-              ${iconHtml}
-            </div>
-            <div class="flex-1 min-w-0 pr-1 notif-content-area">
-              <div class="flex items-center justify-between gap-1 mb-0.5">
-                <h4 class="${item.isUnread ? 'font-bold text-[#1b1c1c]' : 'font-semibold text-[#4a4746]'} text-xs truncate">
-                  ${item.title}
-                </h4>
-                <span class="text-[11px] text-[#797675] whitespace-nowrap">
-                  ${item.time}
-                </span>
-              </div>
-              <div class="relative flex items-center overflow-hidden w-full h-5 text-xs text-[#4a4746] mt-0.5">
-                <span class="whitespace-nowrap overflow-hidden text-ellipsis block w-full pr-6">
-                  ${item.desc}
-                </span>
-              </div>
-            </div>
-            
-            <!-- Right side: Blue unread dot & Hover 3-dots action button -->
-            <div class="flex-shrink-0 relative w-8 h-8 flex items-center justify-center">
-              <span class="w-3 h-3 rounded-full bg-[#1877F2] ${item.isUnread ? 'block' : 'hidden'} group-hover:opacity-0 transition-opacity"></span>
-              <button aria-label="Tùy chọn thông báo" class="notif-item-options-btn absolute inset-0 w-8 h-8 rounded-full bg-white shadow-sm border border-[#e7e1df] hover:bg-[#f0edec] flex items-center justify-center text-[#4a4746] opacity-0 group-hover:opacity-100 transition-opacity focus:outline-none cursor-pointer" type="button" data-id="${item.id}">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                </svg>
-              </button>
-
-              <!-- Dropdown Menu của từng hàng thông báo -->
-              <div class="notif-item-menu hidden absolute ${menuPositionClass} w-48 bg-white rounded-xl shadow-xl border border-[#e7e1df] py-1.5 z-40" data-id="${item.id}">
-                <button type="button" class="notif-toggle-read-btn w-full px-3.5 py-2 text-left text-xs font-semibold text-[#1b1c1c] hover:bg-[#f6f3f2] flex items-center gap-2.5 transition-colors cursor-pointer" data-id="${item.id}">
-                  ${item.isUnread ? `
-                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                    <span>Đánh dấu là đã đọc</span>
-                  ` : `
-                    <span class="w-3.5 h-3.5 rounded-full bg-[#1877F2] flex-shrink-0"></span>
-                    <span>Đánh dấu là chưa đọc</span>
-                  `}
-                </button>
-                <button type="button" class="notif-delete-item-btn w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer" data-id="${item.id}">
-                  <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                  </svg>
-                  <span>Xóa thông báo</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join("");
+      }
 
       attachItemEvents();
     };
@@ -440,12 +674,69 @@ class AppHeader extends HTMLElement {
             target.isUnread = false;
             saveNotifs(notifications);
           }
-          if (link) {
+          if (link && link !== "#") {
             window.location.href = link;
           }
         });
       });
     };
+
+    // Sự kiện nút Xem các thông báo trước đó -> Mở rộng sổ xuống hết dạng panel full-height bên phải
+    if (notifExpandBtn) {
+      notifExpandBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setExpandedMode(true);
+        if (notifDropdown) notifDropdown.classList.remove("hidden");
+        if (notifBellBtn) {
+          notifBellBtn.classList.add("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+        }
+      });
+    }
+
+    // Sự kiện nút Thu gọn panel
+    if (notifCollapseBtn) {
+      notifCollapseBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setExpandedMode(false);
+      });
+    }
+    if (notifCollapseBottomBtn) {
+      notifCollapseBottomBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setExpandedMode(false);
+      });
+    }
+
+    // Nút đóng popup hoàn toàn
+    if (notifCloseBtn) {
+      notifCloseBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (notifDropdown) notifDropdown.classList.add("hidden");
+        if (notifBellBtn) {
+          notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+        }
+        setExpandedMode(false);
+      });
+    }
+
+    // Sự kiện filter Tất cả / Chưa đọc (Ảnh 1)
+    if (filterAllBtn && filterUnreadBtn) {
+      filterAllBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentFilter = "all";
+        filterAllBtn.className = "px-3.5 py-1 rounded-full text-xs font-semibold bg-[#35483d] text-white transition-all cursor-pointer";
+        filterUnreadBtn.className = "px-3.5 py-1 rounded-full text-xs font-medium text-[#797675] hover:text-[#1b1c1c] hover:bg-[#f0edec] transition-all cursor-pointer";
+        renderNotifications();
+      });
+
+      filterUnreadBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentFilter = "unread";
+        filterUnreadBtn.className = "px-3.5 py-1 rounded-full text-xs font-semibold bg-[#35483d] text-white transition-all cursor-pointer";
+        filterAllBtn.className = "px-3.5 py-1 rounded-full text-xs font-medium text-[#797675] hover:text-[#1b1c1c] hover:bg-[#f0edec] transition-all cursor-pointer";
+        renderNotifications();
+      });
+    }
 
     // Header options menu
     if (notifHeaderOptionsBtn && notifHeaderMenu) {
@@ -530,11 +821,15 @@ class AppHeader extends HTMLElement {
         }
 
         if (isHidden) {
+          // Khi bấm vào chuông để mở, khởi tạo ở chế độ compact
+          setExpandedMode(false);
           notifDropdown.classList.remove("hidden");
           notifBellBtn.classList.add("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
         } else {
+          // Khi bấm vào chuông để đóng
           notifDropdown.classList.add("hidden");
           notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+          setExpandedMode(false);
         }
       });
     }
@@ -551,6 +846,7 @@ class AppHeader extends HTMLElement {
         if (notifDropdown) {
           notifDropdown.classList.add("hidden");
           if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+          setExpandedMode(false);
         }
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
         if (notifListContainer) {
@@ -574,6 +870,7 @@ class AppHeader extends HTMLElement {
         if (notifDropdown) {
           notifDropdown.classList.add("hidden");
           if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+          setExpandedMode(false);
         }
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
         if (notifListContainer) {
