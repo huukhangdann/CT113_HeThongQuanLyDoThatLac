@@ -1,728 +1,511 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CTU Lost & Found — Tìm lại đồ thất lạc tại CTU</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="../css/index.css" rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CTU Lost & Found — Tìm lại đồ thất lạc tại CTU</title>
 
-    <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script> -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              ivory: "#F7F6F2",
-              "deep-sage": "#35483D",
-              "soft-black": "#242424",
-              "warm-gray": "#777771",
-              "stone-border": "#E6E4DE",
-            },
-            fontFamily: {
-              vietnam: ["'Be Vietnam Pro'", "sans-serif"],
-            },
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="../css/index.css" rel="stylesheet" />
+
+  <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script> -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: "#F7F6F2",
+            "deep-sage": "#35483D",
+            "soft-black": "#242424",
+            "warm-gray": "#777771",
+            "stone-border": "#E6E4DE",
+          },
+          fontFamily: {
+            vietnam: ["'Be Vietnam Pro'", "sans-serif"],
           },
         },
-      };
-    </script>
-    <style>
-      body {
-        background-color: #f7f6f2;
-        color: #242424;
-        font-family: "Be Vietnam Pro", sans-serif;
-        -webkit-font-smoothing: antialiased;
-      }
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 300,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-      app-header header {
-        border-bottom: none !important;
-      }
-    </style>
+      },
+    };
+  </script>
+  <style>
+    body {
+      background-color: #f7f6f2;
+      color: #242424;
+      font-family: "Be Vietnam Pro", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-    <script src="../js/main.js"></script>
-    <script src="../js/components.js"></script>
-  </head>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 300,
+        "GRAD" 0,
+        "opsz" 24;
+    }
 
-  <body
-    class="bg-ivory text-soft-black min-h-screen flex flex-col selection:bg-stone-200 selection:text-deep-sage"
-  >
-    <!-- Header -->
-    <app-header></app-header>
+    app-header header {
+      border-bottom: none !important;
+    }
+  </style>
 
-    <!-- Main Content -->
-    <main
-      class="flex-grow max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 py-6 md:py-8 flex flex-col gap-8 md:gap-10"
-    >
-      <!-- Title Section -->
-      <section class="text-center pt-2">
-        <h1
-          class="text-4xl sm:text-5xl lg:text-[52px] leading-tight font-semibold text-soft-black tracking-tight max-w-3xl mx-auto"
-        >
-          Tìm lại đồ thất lạc tại CTU.
-        </h1>
-      </section>
+  <script src="../js/main.js"></script>
+  <script src="../js/components.js"></script>
+</head>
 
-      <!-- Actions Section with Enhanced Hover Effects -->
-      <section class="w-full relative">
-        <div
-          class="relative w-full px-4 sm:px-10 -mb-4 z-0 pointer-events-none select-none flex justify-center overflow-visible"
-        >
+<body class="bg-ivory text-soft-black min-h-screen flex flex-col selection:bg-stone-200 selection:text-deep-sage">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <!-- Main Content -->
+  <main
+    class="flex-grow max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 py-6 md:py-8 flex flex-col gap-8 md:gap-10">
+    <!-- Title Section -->
+    <section class="text-center pt-2">
+      <h1
+        class="text-4xl sm:text-5xl lg:text-[52px] leading-tight font-semibold text-soft-black tracking-tight max-w-3xl mx-auto">
+        Tìm lại đồ thất lạc tại CTU.
+      </h1>
+    </section>
+
+    <!-- Actions Section with Enhanced Hover Effects -->
+    <section class="w-full relative">
+      <div
+        class="relative w-full px-4 sm:px-10 -mb-4 z-0 pointer-events-none select-none flex justify-center overflow-visible">
+        <div class="relative w-[92%] sm:w-[86%] max-w-[960px] h-14 sm:h-16 flex items-end justify-center">
           <div
-            class="relative w-[92%] sm:w-[86%] max-w-[960px] h-14 sm:h-16 flex items-end justify-center"
-          >
-            <div
-              class="absolute bottom-0 w-full h-8 bg-[#0c140e] rounded-t-2xl border-t border-x border-[#1a281e] shadow-[0_-8px_20px_rgba(0,0,0,0.5)] z-0"
-            ></div>
+            class="absolute bottom-0 w-full h-8 bg-[#0c140e] rounded-t-2xl border-t border-x border-[#1a281e] shadow-[0_-8px_20px_rgba(0,0,0,0.5)] z-0">
+          </div>
 
+          <div
+            class="absolute bottom-1 left-[14%] sm:left-[18%] w-[68%] sm:w-[62%] h-11 sm:h-12 rounded-t-md bg-gradient-to-r from-[#ece5d4] via-[#f7f2e7] to-[#ede7d8] border-t border-x border-[#c9beaa] shadow-[0_-4px_12px_rgba(0,0,0,0.18)] transform -rotate-[1.2deg] origin-bottom-left z-1 overflow-hidden opacity-95">
             <div
-              class="absolute bottom-1 left-[14%] sm:left-[18%] w-[68%] sm:w-[62%] h-11 sm:h-12 rounded-t-md bg-gradient-to-r from-[#ece5d4] via-[#f7f2e7] to-[#ede7d8] border-t border-x border-[#c9beaa] shadow-[0_-4px_12px_rgba(0,0,0,0.18)] transform -rotate-[1.2deg] origin-bottom-left z-1 overflow-hidden opacity-95"
-            >
-              <div
-                class="absolute inset-0 opacity-20 bg-[radial-gradient(#877b63_1px,transparent_1px)] [background-size:6px_6px]"
-              ></div>
-              <div
-                class="absolute top-1.5 left-4 right-4 h-[2px] bg-gradient-to-r from-transparent via-[#b5a78d] to-transparent opacity-60"
-              ></div>
-              <div
-                class="absolute top-3 left-6 right-6 flex items-center justify-between px-3"
-              >
-                <div
-                  class="w-12 h-1.5 rounded-full bg-[#d6ccb8] border border-[#beb39c]/60 ml-auto"
-                ></div>
-              </div>
-              <div
-                class="absolute top-0 right-12 w-6 h-3 rounded-b-full border-b border-x border-[#c2b59e] bg-[#fbf8f1]"
-              ></div>
+              class="absolute inset-0 opacity-20 bg-[radial-gradient(#877b63_1px,transparent_1px)] [background-size:6px_6px]">
             </div>
-
             <div
-              class="absolute bottom-1.5 right-[10%] sm:right-[15%] w-[58%] sm:w-[54%] h-11 sm:h-13 rounded-t-md bg-gradient-to-r from-[#d1e4d8] via-[#e2efe7] to-[#cee2d5] border-t border-x border-[#9bb7a4] shadow-[0_-6px_14px_rgba(15,35,22,0.22)] transform rotate-[1.6deg] origin-bottom-right z-2 overflow-hidden"
-            >
-              <div
-                class="absolute inset-0 opacity-25 bg-[radial-gradient(#35483d_1px,transparent_1px)] [background-size:8px_8px]"
-              ></div>
-              <div
-                class="absolute top-2 left-6 w-5 h-5 rounded-full border border-[#86a892]/70 bg-white/40 shadow-inner flex items-center justify-center backdrop-blur-[1px]"
-              >
-                <div
-                  class="w-2.5 h-2.5 rounded-full border border-dashed border-[#557b63]/60"
-                ></div>
-              </div>
-              <div
-                class="absolute top-2 left-14 right-8 flex items-center justify-between"
-              >
-                <div class="w-12 h-[2px] bg-[#6d967c]/40"></div>
-              </div>
-              <div
-                class="absolute top-1 left-2 right-2 h-[1px] bg-gradient-to-r from-transparent via-[#769b82] to-transparent opacity-70"
-              ></div>
+              class="absolute top-1.5 left-4 right-4 h-[2px] bg-gradient-to-r from-transparent via-[#b5a78d] to-transparent opacity-60">
             </div>
+            <div class="absolute top-3 left-6 right-6 flex items-center justify-between px-3">
+              <div class="w-12 h-1.5 rounded-full bg-[#d6ccb8] border border-[#beb39c]/60 ml-auto"></div>
+            </div>
+            <div class="absolute top-0 right-12 w-6 h-3 rounded-b-full border-b border-x border-[#c2b59e] bg-[#fbf8f1]">
+            </div>
+          </div>
 
+          <div
+            class="absolute bottom-1.5 right-[10%] sm:right-[15%] w-[58%] sm:w-[54%] h-11 sm:h-13 rounded-t-md bg-gradient-to-r from-[#d1e4d8] via-[#e2efe7] to-[#cee2d5] border-t border-x border-[#9bb7a4] shadow-[0_-6px_14px_rgba(15,35,22,0.22)] transform rotate-[1.6deg] origin-bottom-right z-2 overflow-hidden">
             <div
-              class="absolute bottom-0 left-[8%] sm:left-[11%] right-[8%] sm:right-[11%] h-9 sm:h-11 rounded-t-md bg-gradient-to-r from-[#c0dcc9] via-[#d6ebd9] to-[#bfdcc8] border-t border-x border-[#83ab90] shadow-[0_-8px_18px_rgba(10,28,17,0.28)] transform -rotate-[0.4deg] z-3 overflow-hidden"
-            >
+              class="absolute inset-0 opacity-25 bg-[radial-gradient(#35483d_1px,transparent_1px)] [background-size:8px_8px]">
+            </div>
+            <div
+              class="absolute top-2 left-6 w-5 h-5 rounded-full border border-[#86a892]/70 bg-white/40 shadow-inner flex items-center justify-center backdrop-blur-[1px]">
+              <div class="w-2.5 h-2.5 rounded-full border border-dashed border-[#557b63]/60"></div>
+            </div>
+            <div class="absolute top-2 left-14 right-8 flex items-center justify-between">
+              <div class="w-12 h-[2px] bg-[#6d967c]/40"></div>
+            </div>
+            <div
+              class="absolute top-1 left-2 right-2 h-[1px] bg-gradient-to-r from-transparent via-[#769b82] to-transparent opacity-70">
+            </div>
+          </div>
+
+          <div
+            class="absolute bottom-0 left-[8%] sm:left-[11%] right-[8%] sm:right-[11%] h-9 sm:h-11 rounded-t-md bg-gradient-to-r from-[#c0dcc9] via-[#d6ebd9] to-[#bfdcc8] border-t border-x border-[#83ab90] shadow-[0_-8px_18px_rgba(10,28,17,0.28)] transform -rotate-[0.4deg] z-3 overflow-hidden">
+            <div
+              class="absolute inset-0 opacity-15 bg-[radial-gradient(#1f3a2b_1px,transparent_1px)] [background-size:5px_5px]">
+            </div>
+            <div
+              class="absolute top-1 left-3 right-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#467055] to-transparent opacity-80">
+            </div>
+            <div class="absolute top-2.5 left-5 right-5 flex items-center justify-between">
+              <div class="w-16 h-1 rounded-full bg-[#9dc4aa]/60 border border-[#74a182]"></div>
               <div
-                class="absolute inset-0 opacity-15 bg-[radial-gradient(#1f3a2b_1px,transparent_1px)] [background-size:5px_5px]"
-              ></div>
-              <div
-                class="absolute top-1 left-3 right-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#467055] to-transparent opacity-80"
-              ></div>
-              <div
-                class="absolute top-2.5 left-5 right-5 flex items-center justify-between"
-              >
-                <div
-                  class="w-16 h-1 rounded-full bg-[#9dc4aa]/60 border border-[#74a182]"
-                ></div>
-                <div
-                  class="w-8 h-3 rounded-sm bg-gradient-to-r from-amber-200/80 via-emerald-200/90 to-cyan-200/80 border border-amber-300/60"
-                ></div>
+                class="w-8 h-3 rounded-sm bg-gradient-to-r from-amber-200/80 via-emerald-200/90 to-cyan-200/80 border border-amber-300/60">
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Main Dual Card Container -->
+      <!-- Main Dual Card Container -->
+      <div class="relative w-full rounded-[28px] bg-[#141e17] p-3 sm:p-4 md:p-6 shadow-2xl border border-[#25362a]">
         <div
-          class="relative w-full rounded-[28px] bg-[#141e17] p-3 sm:p-4 md:p-6 shadow-2xl border border-[#25362a]"
-        >
-          <div
-            class="absolute inset-2 sm:inset-2.5 rounded-[22px] border border-dashed border-[#475c4e]/50 pointer-events-none z-30"
-          ></div>
+          class="absolute inset-2 sm:inset-2.5 rounded-[22px] border border-dashed border-[#475c4e]/50 pointer-events-none z-30">
+        </div>
 
-          <div
-            class="relative w-full rounded-[22px] border border-[#202f24] p-1.5 sm:p-2 bg-[#101912] shadow-inner"
-          >
+        <div class="relative w-full rounded-[22px] border border-[#202f24] p-1.5 sm:p-2 bg-[#101912] shadow-inner">
+          <div class="grid grid-cols-1 lg:grid-cols-12 relative overflow-hidden rounded-[18px] bg-[#0f1711]">
+            <!-- Left Card: Đăng tin nhặt đồ (Hover rõ nét) -->
             <div
-              class="grid grid-cols-1 lg:grid-cols-12 relative overflow-hidden rounded-[18px] bg-[#0f1711]"
-            >
-              <!-- Left Card: Đăng tin nhặt đồ (Hover rõ nét) -->
-              <div
-                class="lg:col-span-6 flex flex-col justify-between p-6 md:p-8 relative bg-gradient-to-b from-[#18261e] via-[#142018] to-[#101913] text-ivory border-b lg:border-b-0 border-[#223327] transition-all duration-300 hover:bg-[#1a2e23] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer z-10 group/left"
-              >
-                <div class="relative z-10 flex flex-col gap-5 mb-3 mt-2">
-                  <h2
-                    class="text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-tight group-hover/left:text-emerald-300 transition-colors"
-                  >
-                    Đăng tin nhặt đồ
-                  </h2>
+              class="lg:col-span-6 flex flex-col justify-between p-6 md:p-8 relative bg-gradient-to-b from-[#18261e] via-[#142018] to-[#101913] text-ivory border-b lg:border-b-0 border-[#223327] transition-all duration-300 hover:bg-[#1a2e23] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer z-10 group/left">
+              <div class="relative z-10 flex flex-col gap-5 mb-3 mt-2">
+                <h2
+                  class="text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-tight group-hover/left:text-emerald-300 transition-colors">
+                  Đăng tin nhặt đồ
+                </h2>
 
+                <div
+                  class="relative w-full rounded-xl bg-black/40 p-2.5 border border-white/10 shadow-lg group-hover/left:border-emerald-500/30 transition-all">
                   <div
-                    class="relative w-full rounded-xl bg-black/40 p-2.5 border border-white/10 shadow-lg group-hover/left:border-emerald-500/30 transition-all"
-                  >
+                    class="w-full h-44 sm:h-52 rounded-lg relative overflow-hidden bg-[#142018] p-4 flex flex-col justify-end border border-white/10 select-none group-hover/left:-translate-y-1.5 transition-transform duration-300">
                     <div
-                      class="w-full h-44 sm:h-52 rounded-lg relative overflow-hidden bg-[#142018] p-4 flex flex-col justify-end border border-white/10 select-none group-hover/left:-translate-y-1.5 transition-transform duration-300"
-                    >
-                      <div
-                        class="absolute inset-2 border border-dashed border-[#475c4e]/50 rounded pointer-events-none z-30"
-                      ></div>
-                      <div
-                        class="absolute top-3.5 left-4 right-4 h-12 rounded-t-lg bg-[#FAF8F5] border-t border-x border-stone-200 flex items-start justify-between px-3 pt-1.5 z-0 transform -translate-y-1"
-                      >
-                        <div
-                          class="w-12 h-1 rounded-full bg-stone-300/60"
-                        ></div>
-                        <div
-                          class="w-5 h-2.5 rounded border border-stone-300/80 bg-stone-100"
-                        ></div>
+                      class="absolute inset-2 border border-dashed border-[#475c4e]/50 rounded pointer-events-none z-30">
+                    </div>
+                    <div
+                      class="absolute top-3.5 left-4 right-4 h-12 rounded-t-lg bg-[#FAF8F5] border-t border-x border-stone-200 flex items-start justify-between px-3 pt-1.5 z-0 transform -translate-y-1">
+                      <div class="w-12 h-1 rounded-full bg-stone-300/60"></div>
+                      <div class="w-5 h-2.5 rounded border border-stone-300/80 bg-stone-100"></div>
+                    </div>
+                    <div
+                      class="absolute top-7 left-3.5 right-3.5 h-6 bg-[#18261e] border-t border-[#35483D] rounded-t-md z-10">
+                    </div>
+                    <div
+                      class="absolute top-9 left-4 right-4 h-12 rounded-t-lg bg-white border-t border-x border-stone-200 flex items-start justify-between px-3 pt-1.5 z-10">
+                      <div class="w-16 h-1 rounded-full bg-stone-300/70"></div>
+                      <div class="flex gap-1">
+                        <div class="w-2 h-2 rounded-full bg-stone-200"></div>
+                        <div class="w-2 h-2 rounded-full bg-stone-300"></div>
                       </div>
+                    </div>
+                    <div
+                      class="absolute top-14 left-3.5 right-3.5 h-6 bg-[#1a281f] border-t border-[#475c4e] rounded-t-md z-20">
+                    </div>
+                    <div
+                      class="absolute top-16 left-4 right-4 h-14 rounded-t-lg bg-white border-t border-x border-stone-300 flex items-start justify-between px-3 pt-2 z-20">
                       <div
-                        class="absolute top-7 left-3.5 right-3.5 h-6 bg-[#18261e] border-t border-[#35483D] rounded-t-md z-10"
-                      ></div>
-                      <div
-                        class="absolute top-9 left-4 right-4 h-12 rounded-t-lg bg-white border-t border-x border-stone-200 flex items-start justify-between px-3 pt-1.5 z-10"
-                      >
-                        <div
-                          class="w-16 h-1 rounded-full bg-stone-300/70"
-                        ></div>
-                        <div class="flex gap-1">
-                          <div class="w-2 h-2 rounded-full bg-stone-200"></div>
-                          <div class="w-2 h-2 rounded-full bg-stone-300"></div>
-                        </div>
+                        class="w-5 h-3.5 rounded bg-gradient-to-br from-amber-200 to-amber-400 border border-amber-300">
                       </div>
-                      <div
-                        class="absolute top-14 left-3.5 right-3.5 h-6 bg-[#1a281f] border-t border-[#475c4e] rounded-t-md z-20"
-                      ></div>
-                      <div
-                        class="absolute top-16 left-4 right-4 h-14 rounded-t-lg bg-white border-t border-x border-stone-300 flex items-start justify-between px-3 pt-2 z-20"
-                      >
-                        <div
-                          class="w-5 h-3.5 rounded bg-gradient-to-br from-amber-200 to-amber-400 border border-amber-300"
-                        ></div>
-                      </div>
-                      <div
-                        class="relative z-30 w-full h-20 rounded-lg bg-[#142018] border-t-2 border-[#5a7362] flex flex-col justify-between p-3"
-                      >
-                        <div
-                          class="w-full border-t border-dashed border-[#475c4e]/60 pt-1"
-                        ></div>
-                        <div
-                          class="flex items-center justify-between opacity-50 px-1"
-                        >
-                          <div
-                            class="w-12 h-1 rounded-full bg-emerald-400/40"
-                          ></div>
-                          <div class="flex items-center gap-1.5">
-                            <div
-                              class="w-2 h-2 rounded-full border border-white/30"
-                            ></div>
-                            <div class="w-5 h-1 rounded-full bg-white/20"></div>
-                          </div>
+                    </div>
+                    <div
+                      class="relative z-30 w-full h-20 rounded-lg bg-[#142018] border-t-2 border-[#5a7362] flex flex-col justify-between p-3">
+                      <div class="w-full border-t border-dashed border-[#475c4e]/60 pt-1"></div>
+                      <div class="flex items-center justify-between opacity-50 px-1">
+                        <div class="w-12 h-1 rounded-full bg-emerald-400/40"></div>
+                        <div class="flex items-center gap-1.5">
+                          <div class="w-2 h-2 rounded-full border border-white/30"></div>
+                          <div class="w-5 h-1 rounded-full bg-white/20"></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <div
-                  class="relative z-10 pt-4 border-t border-white/10 flex justify-end"
-                >
-                  <a
-                    href="post-found.html"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35483d] text-white group-hover/left:bg-[#FAF8F5] group-hover/left:text-[#142018] group-hover/left:border-stone-300 hover:!bg-[#FAF8F5] hover:!text-[#142018] hover:!border-stone-300 text-xs font-semibold shadow-md border border-[#4a6353] transition-all active:scale-95"
-                  >
-                    <span>Đăng tin ngay</span>
-                    <span
-                      class="material-symbols-outlined text-base group-hover/left:translate-x-1 transition-transform"
-                      >add</span
-                    >
-                  </a>
-                </div>
               </div>
 
-              <!-- Vertical Divider -->
-              <div
-                class="hidden lg:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-20 w-7 items-stretch justify-center pointer-events-none"
-              >
-                <div
-                  class="h-full w-[1px] border-r border-dashed border-[#73887b]/40 mr-1.5"
-                ></div>
-                <div
-                  class="h-full w-[2px] bg-gradient-to-b from-[#1c2920] via-[#0d1610] to-[#1c2920]"
-                ></div>
-                <div
-                  class="h-full w-[1px] border-l border-dashed border-[#a69e90]/40 ml-1.5"
-                ></div>
+              <div class="relative z-10 pt-4 border-t border-white/10 flex justify-end">
+                <a href="post-found.html"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35483d] text-white group-hover/left:bg-[#FAF8F5] group-hover/left:text-[#142018] group-hover/left:border-stone-300 hover:!bg-[#FAF8F5] hover:!text-[#142018] hover:!border-stone-300 text-xs font-semibold shadow-md border border-[#4a6353] transition-all active:scale-95">
+                  <span>Đăng tin ngay</span>
+                  <span
+                    class="material-symbols-outlined text-base group-hover/left:translate-x-1 transition-transform">add</span>
+                </a>
               </div>
+            </div>
 
-              <!-- Right Card: Báo mất đồ (Hover rõ nét) -->
-              <div
-                class="lg:col-span-6 flex flex-col justify-between p-6 md:p-8 relative bg-[#FAF8F5] text-soft-black transition-all duration-300 hover:bg-white hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] cursor-pointer z-10 group/right"
-              >
-                <div class="relative z-10 flex flex-col gap-5 mb-3 mt-2">
-                  <h2
-                    class="text-3xl sm:text-4xl font-semibold text-soft-black tracking-tight leading-tight group-hover/right:text-deep-sage transition-colors"
-                  >
-                    Báo mất đồ
-                  </h2>
+            <!-- Vertical Divider -->
+            <div
+              class="hidden lg:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-20 w-7 items-stretch justify-center pointer-events-none">
+              <div class="h-full w-[1px] border-r border-dashed border-[#73887b]/40 mr-1.5"></div>
+              <div class="h-full w-[2px] bg-gradient-to-b from-[#1c2920] via-[#0d1610] to-[#1c2920]"></div>
+              <div class="h-full w-[1px] border-l border-dashed border-[#a69e90]/40 ml-1.5"></div>
+            </div>
 
+            <!-- Right Card: Báo mất đồ (Hover rõ nét) -->
+            <div
+              class="lg:col-span-6 flex flex-col justify-between p-6 md:p-8 relative bg-[#FAF8F5] text-soft-black transition-all duration-300 hover:bg-white hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] cursor-pointer z-10 group/right">
+              <div class="relative z-10 flex flex-col gap-5 mb-3 mt-2">
+                <h2
+                  class="text-3xl sm:text-4xl font-semibold text-soft-black tracking-tight leading-tight group-hover/right:text-deep-sage transition-colors">
+                  Báo mất đồ
+                </h2>
+
+                <div
+                  class="relative w-full rounded-xl bg-white p-2.5 border border-stone-border shadow-sm group-hover/right:border-deep-sage/40 transition-all">
                   <div
-                    class="relative w-full rounded-xl bg-white p-2.5 border border-stone-border shadow-sm group-hover/right:border-deep-sage/40 transition-all"
-                  >
+                    class="w-full h-44 sm:h-52 rounded-lg relative overflow-hidden bg-[#FAF8F3] p-4 flex flex-col justify-end border border-stone-border select-none group-hover/right:-translate-y-1.5 transition-transform duration-300">
                     <div
-                      class="w-full h-44 sm:h-52 rounded-lg relative overflow-hidden bg-[#FAF8F3] p-4 flex flex-col justify-end border border-stone-border select-none group-hover/right:-translate-y-1.5 transition-transform duration-300"
-                    >
-                      <div
-                        class="absolute inset-2 border border-dashed border-[#b8b09f]/60 rounded pointer-events-none z-30"
-                      ></div>
-                      <div
-                        class="absolute top-3.5 left-4 right-4 h-12 rounded-t-lg bg-white border-t border-x border-[#ded8cb] flex items-start justify-between px-3 pt-1.5 z-0 transform -translate-y-1"
-                      >
-                        <div
-                          class="w-12 h-1 rounded-full bg-[#ded8cb]/80"
-                        ></div>
-                        <div
-                          class="w-5 h-2.5 rounded border border-[#ded8cb] bg-[#f2eee5]"
-                        ></div>
+                      class="absolute inset-2 border border-dashed border-[#b8b09f]/60 rounded pointer-events-none z-30">
+                    </div>
+                    <div
+                      class="absolute top-3.5 left-4 right-4 h-12 rounded-t-lg bg-white border-t border-x border-[#ded8cb] flex items-start justify-between px-3 pt-1.5 z-0 transform -translate-y-1">
+                      <div class="w-12 h-1 rounded-full bg-[#ded8cb]/80"></div>
+                      <div class="w-5 h-2.5 rounded border border-[#ded8cb] bg-[#f2eee5]"></div>
+                    </div>
+                    <div
+                      class="absolute top-7 left-3.5 right-3.5 h-6 bg-[#ebe7de] border-t border-[#ded8cb] rounded-t-md z-10">
+                    </div>
+                    <div
+                      class="absolute top-9 left-4 right-4 h-12 rounded-t-lg bg-[#FAF8F5] border-t border-x border-[#ded8cb] flex items-start justify-between px-3 pt-1.5 z-10">
+                      <div class="w-16 h-1 rounded-full bg-[#ded8cb]"></div>
+                      <div class="flex gap-1">
+                        <div class="w-2 h-2 rounded-full bg-[#ded8cb]"></div>
+                        <div class="w-2 h-2 rounded-full bg-[#e3ded4]"></div>
                       </div>
+                    </div>
+                    <div
+                      class="absolute top-14 left-3.5 right-3.5 h-6 bg-[#e3ded4] border-t border-[#ded8cb] rounded-t-md z-20">
+                    </div>
+                    <div
+                      class="absolute top-16 left-4 right-4 h-14 rounded-t-lg bg-white border-t border-x border-stone-300 flex items-start justify-between px-3 pt-2 z-20">
                       <div
-                        class="absolute top-7 left-3.5 right-3.5 h-6 bg-[#ebe7de] border-t border-[#ded8cb] rounded-t-md z-10"
-                      ></div>
-                      <div
-                        class="absolute top-9 left-4 right-4 h-12 rounded-t-lg bg-[#FAF8F5] border-t border-x border-[#ded8cb] flex items-start justify-between px-3 pt-1.5 z-10"
-                      >
-                        <div class="w-16 h-1 rounded-full bg-[#ded8cb]"></div>
-                        <div class="flex gap-1">
-                          <div class="w-2 h-2 rounded-full bg-[#ded8cb]"></div>
-                          <div class="w-2 h-2 rounded-full bg-[#e3ded4]"></div>
-                        </div>
+                        class="w-5 h-3.5 rounded bg-gradient-to-br from-[#d2e8d9] to-[#b6ccbd] border border-[#a1b6a8]">
                       </div>
-                      <div
-                        class="absolute top-14 left-3.5 right-3.5 h-6 bg-[#e3ded4] border-t border-[#ded8cb] rounded-t-md z-20"
-                      ></div>
-                      <div
-                        class="absolute top-16 left-4 right-4 h-14 rounded-t-lg bg-white border-t border-x border-stone-300 flex items-start justify-between px-3 pt-2 z-20"
-                      >
-                        <div
-                          class="w-5 h-3.5 rounded bg-gradient-to-br from-[#d2e8d9] to-[#b6ccbd] border border-[#a1b6a8]"
-                        ></div>
-                      </div>
-                      <div
-                        class="relative z-30 w-full h-20 rounded-lg bg-[#FAF8F3] border-t-2 border-[#b8b09f] flex flex-col justify-between p-3"
-                      >
-                        <div
-                          class="w-full border-t border-dashed border-[#b8b09f]/60 pt-1"
-                        ></div>
-                        <div
-                          class="flex items-center justify-between opacity-50 px-1"
-                        >
-                          <div
-                            class="w-12 h-1 rounded-full bg-deep-sage/40"
-                          ></div>
-                          <div class="flex items-center gap-1.5">
-                            <div
-                              class="w-2 h-2 rounded-full border border-stone-border"
-                            ></div>
-                            <div
-                              class="w-5 h-1 rounded-full bg-stone-200"
-                            ></div>
-                          </div>
+                    </div>
+                    <div
+                      class="relative z-30 w-full h-20 rounded-lg bg-[#FAF8F3] border-t-2 border-[#b8b09f] flex flex-col justify-between p-3">
+                      <div class="w-full border-t border-dashed border-[#b8b09f]/60 pt-1"></div>
+                      <div class="flex items-center justify-between opacity-50 px-1">
+                        <div class="w-12 h-1 rounded-full bg-deep-sage/40"></div>
+                        <div class="flex items-center gap-1.5">
+                          <div class="w-2 h-2 rounded-full border border-stone-border"></div>
+                          <div class="w-5 h-1 rounded-full bg-stone-200"></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div
-                  class="relative z-10 pt-4 border-t border-stone-border flex justify-end"
-                >
-                  <a
-                    href="post-lost.html"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35483d] text-white group-hover/right:bg-[#142018] group-hover/right:text-white group-hover/right:border-[#223327] hover:!bg-[#142018] hover:!text-white hover:!border-[#223327] text-xs font-semibold shadow-md border border-[#35483d] transition-all active:scale-95"
-                  >
-                    <span>Gửi thông tin ngay</span>
-                    <span
-                      class="material-symbols-outlined text-base group-hover/right:translate-x-1 transition-transform"
-                      >arrow_forward</span
-                    >
-                  </a>
-                </div>
+              <div class="relative z-10 pt-4 border-t border-stone-border flex justify-end">
+                <a href="post-lost.html"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35483d] text-white group-hover/right:bg-[#142018] group-hover/right:text-white group-hover/right:border-[#223327] hover:!bg-[#142018] hover:!text-white hover:!border-[#223327] text-xs font-semibold shadow-md border border-[#35483d] transition-all active:scale-95">
+                  <span>Gửi thông tin ngay</span>
+                  <span
+                    class="material-symbols-outlined text-base group-hover/right:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Recent Posts Section -->
-      <section
-        class="bg-[#FAF8F5] rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col gap-6"
-      >
-        <h2
-          class="text-xl sm:text-2xl font-bold text-center text-soft-black tracking-tight"
-        >
-          CÁC BÀI ĐĂNG GẦN ĐÂY
-        </h2>
+    <!-- Recent Posts Section -->
+    <section class="bg-[#FAF8F5] rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col gap-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-center text-soft-black tracking-tight">
+        CÁC BÀI ĐĂNG GẦN ĐÂY
+      </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Post Item 1 -->
-          <article
-            class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
-          >
-            <div
-              class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y"
-                alt="Ví da màu đen"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Post Item 1 -->
+        <article
+          class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
+          <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y"
+              alt="Ví da màu đen"
+              class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                Ví da màu đen
+              </h3>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                Nhà học C1, Tầng 2
+              </p>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                Hôm nay, 09:30
+              </p>
             </div>
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3
-                  class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate"
-                >
-                  Ví da màu đen
-                </h3>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >location_on</span
-                  >
-                  Nhà học C1, Tầng 2
-                </p>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >schedule</span
-                  >
-                  Hôm nay, 09:30
-                </p>
-              </div>
-              <div
-                class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs"
-              >
-                <span class="text-warm-gray font-medium">Đang giữ hộ</span>
-                <a
-                  href="#"
-                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Xem chi tiết</span>
-                  <span class="material-symbols-outlined text-sm"
-                    >arrow_forward</span
-                  >
-                </a>
-              </div>
+            <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+              <span class="text-warm-gray font-medium">Đang giữ hộ</span>
+              <a href="#"
+                class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Post Item 2 -->
-          <article
-            class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
-          >
-            <div
-              class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
-                alt="Bình nước giữ nhiệt"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+        <!-- Post Item 2 -->
+        <article
+          class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
+          <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
+              alt="Bình nước giữ nhiệt"
+              class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                Bình nước giữ nhiệt
+              </h3>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                Thư viện Trung tâm
+              </p>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                Hôm nay, 08:15
+              </p>
             </div>
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3
-                  class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate"
-                >
-                  Bình nước giữ nhiệt
-                </h3>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >location_on</span
-                  >
-                  Thư viện Trung tâm
-                </p>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >schedule</span
-                  >
-                  Hôm nay, 08:15
-                </p>
-              </div>
-              <div
-                class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs"
-              >
-                <span class="text-warm-gray font-medium">Chờ bàn giao</span>
-                <a
-                  href="#"
-                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Xem chi tiết</span>
-                  <span class="material-symbols-outlined text-sm"
-                    >arrow_forward</span
-                  >
-                </a>
-              </div>
+            <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+              <span class="text-warm-gray font-medium">Chờ bàn giao</span>
+              <a href="#"
+                class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Post Item 3 -->
-          <article
-            class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
-          >
-            <div
-              class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpdOuyKsYtvg9mAaVicAmfVTVepKtUBgVUHlvsIx1a6Pl5bcWe5Sy4ZslVX1Ya_XFiHra5FJF1LfhCMblxZgkU9xCtxZh03d_rxMaObOG70tNrNyjQUeOD705F_hW2JRkKd2UAlj32OrS5hwtcXy9JmNKZCqX_MJ8_hlQpEO2VZkfjtuDz3DIfABZFGS5xGQTgqfTxjqw7eBRmyyX3EIFIeO0YyLxmw6d_NkT-V9P2UoEZsKBjr_en"
-                alt="Ô dù gấp xanh navy"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+        <!-- Post Item 3 -->
+        <article
+          class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
+          <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpdOuyKsYtvg9mAaVicAmfVTVepKtUBgVUHlvsIx1a6Pl5bcWe5Sy4ZslVX1Ya_XFiHra5FJF1LfhCMblxZgkU9xCtxZh03d_rxMaObOG70tNrNyjQUeOD705F_hW2JRkKd2UAlj32OrS5hwtcXy9JmNKZCqX_MJ8_hlQpEO2VZkfjtuDz3DIfABZFGS5xGQTgqfTxjqw7eBRmyyX3EIFIeO0YyLxmw6d_NkT-V9P2UoEZsKBjr_en"
+              alt="Ô dù gấp xanh navy"
+              class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                Ô dù gấp xanh navy
+              </h3>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                Hội trường Rùa
+              </p>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                Hôm qua, 16:45
+              </p>
             </div>
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3
-                  class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate"
-                >
-                  Ô dù gấp xanh navy
-                </h3>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >location_on</span
-                  >
-                  Hội trường Rùa
-                </p>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >schedule</span
-                  >
-                  Hôm qua, 16:45
-                </p>
-              </div>
-              <div
-                class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs"
-              >
-                <span class="text-warm-gray font-medium">Chờ liên hệ</span>
-                <a
-                  href="#"
-                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Xem chi tiết</span>
-                  <span class="material-symbols-outlined text-sm"
-                    >arrow_forward</span
-                  >
-                </a>
-              </div>
+            <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+              <span class="text-warm-gray font-medium">Chờ liên hệ</span>
+              <a href="#"
+                class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Post Item 4 -->
-          <article
-            class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
-          >
-            <div
-              class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxMGtnliRKncEmLOccvvngbz0u3tWpMZz8xzNuL-lq6pRKEbyWFj8lip2GytGWIWYq6TFW24N5aNiiSz7I4biZnv-4lWGRpwO-0zonFl84GuTqzskud8V0wG0vWkwWT9QacCpnpPGwG0HSGWPN2x2qhBRxKaE9gGrIJ7-2wYamqq4NAvZuPXmgPf0Fxad1mLGOJhQtffKX0u1uDwPTrGVpSJpGhb8J1hP-zx8Eh0fqW3zb1Dg0QVTw"
-                alt="Hộp tai nghe không dây"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+        <!-- Post Item 4 -->
+        <article
+          class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
+          <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxMGtnliRKncEmLOccvvngbz0u3tWpMZz8xzNuL-lq6pRKEbyWFj8lip2GytGWIWYq6TFW24N5aNiiSz7I4biZnv-4lWGRpwO-0zonFl84GuTqzskud8V0wG0vWkwWT9QacCpnpPGwG0HSGWPN2x2qhBRxKaE9gGrIJ7-2wYamqq4NAvZuPXmgPf0Fxad1mLGOJhQtffKX0u1uDwPTrGVpSJpGhb8J1hP-zx8Eh0fqW3zb1Dg0QVTw"
+              alt="Hộp tai nghe không dây"
+              class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                Hộp tai nghe không dây
+              </h3>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                Khoa CNTT&TT
+              </p>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                Hôm qua, 14:20
+              </p>
             </div>
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3
-                  class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate"
-                >
-                  Hộp tai nghe không dây
-                </h3>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >location_on</span
-                  >
-                  Khoa CNTT&TT
-                </p>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >schedule</span
-                  >
-                  Hôm qua, 14:20
-                </p>
-              </div>
-              <div
-                class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs"
-              >
-                <span class="text-warm-gray font-medium">Đang tìm kiếm</span>
-                <a
-                  href="#"
-                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Xem chi tiết</span>
-                  <span class="material-symbols-outlined text-sm"
-                    >arrow_forward</span
-                  >
-                </a>
-              </div>
+            <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+              <span class="text-warm-gray font-medium">Đang tìm kiếm</span>
+              <a href="#"
+                class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Post Item 5 -->
-          <article
-            class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
-          >
-            <div
-              class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
-                alt="Sổ tay bìa xanh"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+        <!-- Post Item 5 -->
+        <article
+          class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
+          <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
+              alt="Sổ tay bìa xanh"
+              class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                Sổ tay bìa xanh
+              </h3>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                Khu giảng đường B1
+              </p>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                24 Th10, 11:00
+              </p>
             </div>
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3
-                  class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate"
-                >
-                  Sổ tay bìa xanh
-                </h3>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >location_on</span
-                  >
-                  Khu giảng đường B1
-                </p>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >schedule</span
-                  >
-                  24 Th10, 11:00
-                </p>
-              </div>
-              <div
-                class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs"
-              >
-                <span class="text-warm-gray font-medium">Đang giữ hộ</span>
-                <a
-                  href="#"
-                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Xem chi tiết</span>
-                  <span class="material-symbols-outlined text-sm"
-                    >arrow_forward</span
-                  >
-                </a>
-              </div>
+            <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+              <span class="text-warm-gray font-medium">Đang giữ hộ</span>
+              <a href="#"
+                class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Post Item 6 -->
-          <article
-            class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
-          >
-            <div
-              class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
-                alt="Chùm chìa khóa xe máy"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+        <!-- Post Item 6 -->
+        <article
+          class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
+          <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo"
+              alt="Chùm chìa khóa xe máy"
+              class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                Chùm chìa khóa xe máy
+              </h3>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                Bãi xe Khu II
+              </p>
+              <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                23 Th10, 17:15
+              </p>
             </div>
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3
-                  class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate"
-                >
-                  Chùm chìa khóa xe máy
-                </h3>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >location_on</span
-                  >
-                  Bãi xe Khu II
-                </p>
-                <p
-                  class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5"
-                >
-                  <span class="material-symbols-outlined text-sm shrink-0"
-                    >schedule</span
-                  >
-                  23 Th10, 17:15
-                </p>
-              </div>
-              <div
-                class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs"
-              >
-                <span class="text-warm-gray font-medium">Chờ liên hệ</span>
-                <a
-                  href="#"
-                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Xem chi tiết</span>
-                  <span class="material-symbols-outlined text-sm"
-                    >arrow_forward</span
-                  >
-                </a>
-              </div>
+            <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+              <span class="text-warm-gray font-medium">Chờ liên hệ</span>
+              <a href="#"
+                class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
             </div>
-          </article>
-        </div>
+          </div>
+        </article>
+      </div>
 
-        <!-- View All Button -->
-        <div class="flex justify-center pt-2">
-          <a
-            href="find.html"
-            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-stone-100 hover:bg-[#35483d] text-soft-black hover:text-white text-sm font-medium transition-all group shadow-sm"
-          >
-            <span>Xem tất cả</span>
-            <span
-              class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform"
-              >arrow_forward</span
-            >
-          </a>
-        </div>
-      </section>
-    </main>
+      <!-- View All Button -->
+      <div class="flex justify-center pt-2">
+        <a href="find.html"
+          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-stone-100 hover:bg-[#35483d] text-soft-black hover:text-white text-sm font-medium transition-all group shadow-sm">
+          <span>Xem tất cả</span>
+          <span
+            class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
-    <!-- Footer -->
-    <app-footer></app-footer>
-  </body>
+  <!-- Footer -->
+  <app-footer></app-footer>
+</body>
+
 </html>
