@@ -15,6 +15,120 @@ class AppHeader extends HTMLElement {
       return "flex items-center h-full text-sm font-medium text-[#777771] hover:text-[#1b1c1b] transition-colors";
     };
 
+    // Kiểm tra trạng thái đăng nhập từ localStorage
+    const isLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
+
+    const userClusterHtml = isLoggedIn
+      ? `
+        <span class="hidden sm:inline-block px-3 py-1 bg-stone-200/60 text-stone-700 rounded-md text-xs font-medium">SV Khu II</span>
+
+        <!-- Khung chứa Icon Chuông & Dropdown Popover (Relative Anchor) -->
+        <div class="relative flex items-center">
+          <!-- Nút Chuông Thông báo -->
+          <button id="notif-bell-btn" type="button" aria-label="Thông báo" class="w-9 h-9 rounded-full bg-stone-200/60 hover:bg-stone-200 text-[#1f3227] flex items-center justify-center relative transition-all duration-200 cursor-pointer focus:outline-none" title="Thông báo">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+            <!-- Badge chấm đỏ chưa đọc -->
+            <span id="notif-badge" class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-[#ba1a1a] ring-2 ring-[#F7F6F2]"></span>
+          </button>
+
+          <!-- DROPDOWN POPUP THÔNG BÁO -->
+          <div id="notif-dropdown" class="hidden absolute top-full mt-2.5 w-[360px] sm:w-[410px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left">
+            <!-- 1. Header Dropdown -->
+            <div class="px-5 pt-4 pb-2 flex items-center justify-between bg-white relative rounded-t-2xl border-b border-[#f0edec]">
+              <h3 class="font-extrabold text-[#1b1c1c] text-xl tracking-tight">
+                Thông báo mới
+              </h3>
+              <div class="relative">
+                <button id="notif-header-options-btn" aria-label="Tùy chọn thông báo" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#f0edec] text-[#4a4746] transition-colors focus:outline-none cursor-pointer" type="button">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                  </svg>
+                </button>
+                <!-- Menu tùy chọn header -->
+                <div id="notif-header-menu" class="hidden absolute right-0 top-full mt-1.5 w-56 bg-white rounded-xl shadow-xl border border-[#e7e1df] py-1.5 z-50">
+                  <button id="notif-mark-all-read-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-[#1b1c1c] hover:bg-[#f6f3f2] flex items-center gap-2.5 transition-colors cursor-pointer">
+                    <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    <span>Đánh dấu tất cả là đã đọc</span>
+                  </button>
+                  <button id="notif-delete-all-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer">
+                    <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    <span>Xóa tất cả</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Danh sách thông báo -->
+            <div id="notif-list-container" class="flex flex-col bg-white py-1 max-h-[380px] overflow-y-auto">
+              <!-- Render động -->
+            </div>
+
+            <!-- 3. Footer của Popup -->
+            <div class="p-4 pt-2 bg-white text-center rounded-b-2xl border-t border-[#f0edec]">
+              <a href="notifications.html" class="w-full py-2.5 px-4 bg-[#f0edec] hover:bg-[#e7e1df] text-[#1b1c1c] text-sm font-semibold rounded-xl text-center transition-colors block shadow-sm">
+                Xem các thông báo trước đó
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Avatar & Popup Dropdown -->
+        <div class="relative flex items-center">
+          <button id="user-menu-btn" type="button" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-200/60 hover:bg-stone-200 text-[#1b1c1c] text-sm font-medium cursor-pointer transition-colors" title="Tài khoản: Đặng Hữu Khang">
+            <span class="material-symbols-outlined text-[22px] text-[#35483d]">account_circle</span>
+            <span>Đặng Hữu Khang</span>
+          </button>
+
+          <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white rounded-xl border border-[#e7e1df] shadow-xl overflow-hidden text-left">
+            <div class="p-4 bg-gray-50/50 border-b border-[#e7e1df]">
+              <h3 class="font-bold text-base text-[#1b1c1c]">Đặng Hữu Khang</h3>
+              <p class="text-sm font-medium text-[#797675] mt-0.5">MSSV: B2404990</p>
+            </div>
+            <div class="p-2 border-b border-[#e7e1df]">
+              <div class="flex items-center gap-3 p-2 text-sm text-[#4a4746] rounded-md">
+                <svg class="w-4 h-4 text-[#797675] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span class="truncate">khangb2404990@student.ctu.edu.vn</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 text-sm text-[#4a4746] rounded-md">
+                <svg class="w-4 h-4 text-[#797675] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>093 9715 761</span>
+              </div>
+            </div>
+            <div class="p-2">
+              <a href="login.html" id="switch-account-btn" class="w-full flex items-center gap-3 p-2 text-sm text-[#1b1c1c] font-medium rounded-md hover:bg-gray-100 transition-colors cursor-pointer">
+                <svg class="w-4 h-4 text-[#797675] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Chuyển tài khoản</span>
+              </a>
+              <a href="login.html" id="logout-btn" class="w-full flex items-center gap-3 p-2 text-sm text-red-600 font-medium rounded-md hover:bg-red-50 transition-colors cursor-pointer">
+                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Đăng xuất</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `
+      : `
+        <!-- Trạng thái chưa đăng nhập / đã đăng xuất -->
+        <a href="login.html" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1f3227] hover:bg-[#35483d] text-white text-xs sm:text-sm font-semibold transition-all shadow-sm hover:shadow active:scale-95 cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">login</span>
+          <span>Đăng nhập</span>
+        </a>
+      `;
+
     this.innerHTML = `
       <header class="sticky top-0 z-50 bg-[#F7F6F2]/90 backdrop-blur-md border-b border-[#E6E4DE]">
         <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between h-16 md:h-20">
@@ -39,68 +153,9 @@ class AppHeader extends HTMLElement {
             <a href="notifications.html" class="${getLinkClass(["notifications.html", "requests.html"])}">Thông báo</a>
           </nav>
 
-          <!-- User Info & Notification Bell -->
+          <!-- User Info & Action Cluster -->
           <div class="flex items-center gap-3">
-            <!-- Khung chứa Icon Chuông & Dropdown Popover (Relative Anchor) -->
-            <div class="relative flex items-center">
-              <!-- Nút Chuông Thông báo -->
-              <button id="notif-bell-btn" type="button" aria-label="Thông báo" class="w-9 h-9 rounded-full bg-stone-200/60 hover:bg-stone-200 text-[#1f3227] flex items-center justify-center relative transition-all duration-200 cursor-pointer focus:outline-none" title="Thông báo">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                <!-- Badge chấm đỏ chưa đọc -->
-                <span id="notif-badge" class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-[#ba1a1a] ring-2 ring-[#F7F6F2]"></span>
-              </button>
-
-              <!-- DROPDOWN POPUP THÔNG BÁO -->
-              <div id="notif-dropdown" class="hidden absolute top-full mt-2.5 w-[360px] sm:w-[410px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left">
-                <!-- 1. Header Dropdown -->
-                <div class="px-5 pt-4 pb-2 flex items-center justify-between bg-white relative rounded-t-2xl border-b border-[#f0edec]">
-                  <h3 class="font-extrabold text-[#1b1c1c] text-xl tracking-tight">
-                    Thông báo mới
-                  </h3>
-                  <div class="relative">
-                    <button id="notif-header-options-btn" aria-label="Tùy chọn thông báo" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#f0edec] text-[#4a4746] transition-colors focus:outline-none cursor-pointer" type="button">
-                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                      </svg>
-                    </button>
-                    <!-- Menu tùy chọn header -->
-                    <div id="notif-header-menu" class="hidden absolute right-0 top-full mt-1.5 w-56 bg-white rounded-xl shadow-xl border border-[#e7e1df] py-1.5 z-50">
-                      <button id="notif-mark-all-read-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-[#1b1c1c] hover:bg-[#f6f3f2] flex items-center gap-2.5 transition-colors cursor-pointer">
-                        <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                        <span>Đánh dấu tất cả là đã đọc</span>
-                      </button>
-                      <button id="notif-delete-all-btn" type="button" class="w-full px-3.5 py-2 text-left text-xs font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer">
-                        <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                        <span>Xóa tất cả</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 2. Danh sách thông báo -->
-                <div id="notif-list-container" class="flex flex-col bg-white py-1 max-h-[380px] overflow-y-auto">
-                  <!-- Render động -->
-                </div>
-
-                <!-- 3. Footer của Popup -->
-                <div class="p-4 pt-2 bg-white text-center rounded-b-2xl border-t border-[#f0edec]">
-                  <a href="notifications.html" class="w-full py-2.5 px-4 bg-[#f0edec] hover:bg-[#e7e1df] text-[#1b1c1c] text-sm font-semibold rounded-xl text-center transition-colors block shadow-sm">
-                    Xem các thông báo trước đó
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-200/60 hover:bg-stone-200 text-[#1b1c1c] text-sm font-medium cursor-pointer transition-colors">
-              <span class="material-symbols-outlined text-[22px] text-[#35483d]">account_circle</span>
-              <span>Nguyễn Văn A</span>
-            </div>
+            ${userClusterHtml}
           </div>
 
         </div>
@@ -396,11 +451,43 @@ class AppHeader extends HTMLElement {
       });
     }
 
+    const userMenuBtn = this.querySelector("#user-menu-btn");
+    const userMenuDropdown = this.querySelector("#user-menu-dropdown");
+
+    if (userMenuBtn && userMenuDropdown) {
+      userMenuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (notifDropdown) {
+          notifDropdown.classList.add("hidden");
+          if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+        }
+        userMenuDropdown.classList.toggle("hidden");
+      });
+    }
+
+    const logoutBtn = this.querySelector("#logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        localStorage.setItem("ctu_user_logged_in", "false");
+      });
+    }
+
+    const switchAccountBtn = this.querySelector("#switch-account-btn");
+    if (switchAccountBtn) {
+      switchAccountBtn.addEventListener("click", () => {
+        localStorage.setItem("ctu_user_logged_in", "false");
+      });
+    }
+
     // Toggle Bell Dropdown
     if (notifBellBtn && notifDropdown) {
       notifBellBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const isHidden = notifDropdown.classList.contains("hidden");
+
+        if (userMenuDropdown) {
+          userMenuDropdown.classList.add("hidden");
+        }
 
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
         if (notifListContainer) {
@@ -422,6 +509,7 @@ class AppHeader extends HTMLElement {
 
     document.addEventListener("click", (e) => {
       if (!this.contains(e.target)) {
+        if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
         if (notifDropdown) {
           notifDropdown.classList.add("hidden");
           if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
@@ -444,6 +532,7 @@ class AppHeader extends HTMLElement {
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
         if (notifDropdown) {
           notifDropdown.classList.add("hidden");
           if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
