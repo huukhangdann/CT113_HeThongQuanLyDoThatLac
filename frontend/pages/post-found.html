@@ -19,6 +19,11 @@
 
     <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      select {
+        background-image: none !important;
+      }
+    </style>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -209,10 +214,6 @@
             >
               Đăng tin nhặt đồ
             </h1>
-            <p class="text-xs text-secondary mt-0.5">
-              Tải ảnh lên để Gemini AI tự động phân tích và nhận diện đặc điểm
-              tài sản thất lạc.
-            </p>
           </div>
           <span
             class="text-xs font-medium px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full border border-primary/20"
@@ -270,56 +271,29 @@
                 </p>
               </div>
 
-              <!-- Uploaded Thumbnails Grid -->
+              <!-- Uploaded Thumbnails Grid (Khung tải ảnh trống mặc định) -->
               <div
-                class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3 pt-1"
+                class="grid grid-cols-2 gap-3 pt-1"
               >
-                <!-- Thumbnail 1 -->
-                <div
-                  class="relative group rounded-xl overflow-hidden border border-outline-variant bg-surface-container aspect-square"
-                >
-                  <img
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXE-wYx8d-6PilXPlmVaQgelIphE6D5Qb92LdE1isDxCnpARysg5mc9uJjp57JgRoDnDFhn2MZBSYza7pUgRNF0SX-2Yg4r3FUPFROp97T7_--bhqb55qpzDBMr0siJwfmSnUnBxkA7d3Ja9Fi4xrXTpEcXM7CVpNQj9Djdg2pRvrONqNjE-MhjsGOB23hU6P3GLThtB3MmdTYijkeFY4GNO4CFSmpBqP5VpRkZmliyUGMNyHQVdAU"
-                  />
-                  <button
-                    class="absolute top-2 right-2 w-7 h-7 rounded-full bg-inverse-surface/80 hover:bg-inverse-surface text-inverse-on-surface flex items-center justify-center transition-opacity shadow-sm"
-                    title="Xóa ảnh"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined text-base"
-                      >close</span
-                    >
-                  </button>
-                </div>
-
-                <!-- Thumbnail 2 -->
-                <div
-                  class="relative group rounded-xl overflow-hidden border border-outline-variant bg-surface-container aspect-square"
-                >
-                  <img
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmzYrkAX5tzsKOEga8CyXaiObKZrGzD2WIg9Q5r7arrA610e5Xne48emIrezX8v3qAnN5muyO5pERpAbOnFTaLVDyfW8dDYLJF9HHOzoDmtOwGnay8R_KT0t875twBdaw6Pi97aWSn4sv6FlU52GJi2Sy-PfHp-yobt6y7jL9ICZvtejmiRVuuyPXFSIA6-MwJ9KJI7YLLDZeDZ4piWbF6ddAIWKFUIsLd4uwUcAJUxtxtMXxUZtq9"
-                  />
-                  <button
-                    class="absolute top-2 right-2 w-7 h-7 rounded-full bg-inverse-surface/80 hover:bg-inverse-surface text-inverse-on-surface flex items-center justify-center transition-opacity shadow-sm"
-                    title="Xóa ảnh"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined text-base"
-                      >close</span
-                    >
-                  </button>
-                </div>
-
-                <!-- Add More Button -->
+                <!-- Slot 1 -->
                 <button
                   class="border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors"
                   type="button"
                 >
-                  <span class="material-symbols-outlined text-2xl">add</span>
+                  <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
                   <span class="text-caption-meta font-caption-meta font-medium"
-                    >Thêm ảnh</span
+                    >Thêm ảnh 1</span
+                  >
+                </button>
+
+                <!-- Slot 2 -->
+                <button
+                  class="border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                  <span class="text-caption-meta font-caption-meta font-medium"
+                    >Thêm ảnh 2</span
                   >
                 </button>
               </div>
@@ -327,10 +301,10 @@
 
             <!-- ================= CỘT PHẢI (7 Cột): CÁC TRƯỜNG THÔNG TIN ================= -->
             <div class="lg:col-span-7 space-y-6">
-              <!-- Row 1: Category & Title -->
+              <!-- Row 1: Category & Color -->
               <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
                 <!-- Category -->
-                <div class="md:col-span-5 space-y-1.5">
+                <div class="md:col-span-6 space-y-1.5">
                   <div class="flex items-center justify-between">
                     <label
                       class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
@@ -351,7 +325,8 @@
                     <select
                       class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
                     >
-                      <option selected>
+                      <option value="" disabled selected>-- Chọn loại đồ vật --</option>
+                      <option>
                         Bình nước giữ nhiệt / Bình đựng nước
                       </option>
                       <option>Thẻ sinh viên / Thẻ ATM / CCCD</option>
@@ -371,13 +346,13 @@
                   </div>
                 </div>
 
-                <!-- Title -->
-                <div class="md:col-span-7 space-y-1.5">
+                <!-- Color -->
+                <div class="md:col-span-6 space-y-1.5">
                   <div class="flex items-center justify-between">
                     <label
                       class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
                     >
-                      Tiêu đề bài đăng <span class="text-error">*</span>
+                      Màu sắc <span class="text-error">*</span>
                     </label>
                     <span
                       class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40"
@@ -389,13 +364,54 @@
                       AI gợi ý
                     </span>
                   </div>
-                  <input
-                    class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                    placeholder="Nhập tiêu đề ngắn gọn súc tích..."
-                    type="text"
-                    value="Nhặt được bình nước giữ nhiệt Lock&Lock màu bạc inox tại Thư viện"
-                  />
+                  <div class="relative">
+                    <select
+                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
+                    >
+                      <option value="" disabled selected>-- Chọn màu sắc --</option>
+                      <option value="black">Đen</option>
+                      <option value="white">Trắng</option>
+                      <option value="gray">Xám / Bạc</option>
+                      <option value="brown">Nâu / Da bò</option>
+                      <option value="blue">Xanh dương / Xanh navy</option>
+                      <option value="red">Đỏ / Đỏ đô</option>
+                      <option value="yellow">Vàng / Cam</option>
+                      <option value="green">Xanh lá / Rêu</option>
+                      <option value="pink">Hồng / Tím</option>
+                      <option value="multi">Nhiều màu / Khác</option>
+                    </select>
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg"
+                      >expand_more</span
+                    >
+                  </div>
                 </div>
+              </div>
+
+              <!-- Row: Title -->
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <label
+                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
+                  >
+                    Tiêu đề bài đăng <span class="text-error">*</span>
+                  </label>
+                  <span
+                    class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40"
+                  >
+                    <span
+                      class="material-symbols-outlined text-xs text-amber-600"
+                      >auto_awesome</span
+                    >
+                    AI gợi ý
+                  </span>
+                </div>
+                <input
+                  class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
+                  placeholder="VD: Nhặt được bình nước giữ nhiệt Lock&Lock tại Thư viện..."
+                  type="text"
+                  value=""
+                />
               </div>
 
               <!-- Row 2: Description -->
@@ -415,11 +431,11 @@
                         class="material-symbols-outlined text-xs text-amber-600"
                         >auto_awesome</span
                       >
-                      AI điền mẫu
+                      AI gợi ý
                     </span>
                     <span
                       class="text-caption-meta font-caption-meta text-on-surface-variant"
-                      >186/500 ký tự</span
+                      >0/500 ký tự</span
                     >
                   </div>
                 </div>
@@ -427,9 +443,7 @@
                   class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors leading-relaxed"
                   placeholder="Ghi rõ màu sắc, kích thước, thương hiệu, tình trạng đồ vật..."
                   rows="4"
-                >
-Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đen có quai xách nhỏ. Đáy bình có vết trầy nhẹ và dán 1 sticker mèo hoạt hình màu vàng. Đồ vật còn rất mới.</textarea
-                >
+                ></textarea>
               </div>
 
               <!-- Row 3: Location & Date/Time -->
@@ -443,15 +457,31 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
                   </label>
                   <div class="relative">
                     <span
-                      class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg"
+                      class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg pointer-events-none"
                       >pin_drop</span
                     >
-                    <input
-                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg pl-9 pr-3 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                      placeholder="Ví dụ: Giảng đường Rùa, Khoa CNTT, Căn tin..."
-                      type="text"
-                      value="Thư viện Trung tâm CTU (Tầng 2, Dãy bàn tự học)"
-                    />
+                    <select
+                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg pl-9 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
+                    >
+                      <option value="" disabled selected>-- Chọn địa điểm nhặt được --</option>
+                      <option>Khoa CNTT&TT (Nhà C1)</option>
+                      <option>Thư viện Trung tâm CTU</option>
+                      <option>Khu giảng đường B1</option>
+                      <option>Nhà học C2</option>
+                      <option>Hội trường Rùa</option>
+                      <option>Khoa Khoa học Tự nhiên</option>
+                      <option>Khoa Nông nghiệp</option>
+                      <option>Khoa Kinh tế</option>
+                      <option>Bãi xe sinh viên Khu II</option>
+                      <option>Khu ký túc xá CTU</option>
+                      <option>Khu phức hợp Thể thao / Sân vận động</option>
+                      <option>Căn tin / Nhà ăn sinh viên</option>
+                      <option>Khu vực khác tại trường</option>
+                    </select>
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg"
+                      >expand_more</span
+                    >
                   </div>
                 </div>
 
@@ -466,7 +496,7 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
                     <input
                       class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
                       type="date"
-                      value="2024-11-04"
+                      value=""
                     />
                   </div>
                 </div>
@@ -482,7 +512,7 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
                     <input
                       class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
                       type="time"
-                      value="08:30"
+                      value=""
                     />
                   </div>
                 </div>
@@ -499,7 +529,8 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
                   <select
                     class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
                   >
-                    <option selected>
+                    <option value="" disabled selected>-- Chọn nơi lưu giữ hiện tại --</option>
+                    <option>
                       Đang giữ cá nhân (Liên hệ trực tiếp sinh viên)
                     </option>
                     <option>Đã gửi Bàn trực Thư viện Trung tâm CTU</option>
@@ -571,7 +602,8 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
                     <select
                       class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
                     >
-                      <option selected>
+                      <option value="" disabled selected>-- Chọn câu hỏi xác minh phù hợp --</option>
+                      <option>
                         Bên trong bình hoặc dưới đáy bình có đặc điểm/sticker gì
                         đặc biệt?
                       </option>
@@ -607,7 +639,7 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-10 rounded-lg border border-outline-variant text-on-surface-variant text-body-compact font-medium hover:bg-surface-container-high transition-colors"
             >
               <span class="material-symbols-outlined text-lg">arrow_back</span>
-              <span>Hủy / Chọn lại</span>
+              <span>Hủy</span>
             </a>
 
             <button
@@ -617,7 +649,7 @@ Bình nước giữ nhiệt bằng inox dung tích khoảng 500ml, nắp màu đ
               <span>Đăng tin nhặt đồ</span>
               <span
                 class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-0.5"
-                >send</span
+                >arrow_forward</span
               >
             </button>
           </div>

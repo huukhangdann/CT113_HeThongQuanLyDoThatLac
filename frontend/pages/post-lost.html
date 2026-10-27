@@ -23,6 +23,11 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      select {
+        background-image: none !important;
+      }
+    </style>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -180,10 +185,6 @@
             <h1 class="text-xl sm:text-2xl font-bold text-on-surface">
               Thông tin đồ thất lạc
             </h1>
-            <p class="text-xs text-secondary mt-0.5">
-              Điền chi tiết thông tin giúp hệ thống đối soát tìm lại đồ nhanh
-              hơn.
-            </p>
           </div>
           <span
             class="text-xs font-medium px-3 py-1 bg-error-container/60 text-on-error-container rounded-full border border-error/20"
@@ -210,10 +211,10 @@
                   class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
                   id="post-title"
                   name="post-title"
-                  placeholder="VD: Bị rơi ví da nam màu nâu đậm tại C1"
+                  placeholder="VD: Bị rơi ví da nam màu nâu đậm tại C1..."
                   required
                   type="text"
-                  value="Bị rơi ví da nam màu nâu đậm tại C1"
+                  value=""
                 />
               </div>
 
@@ -233,7 +234,8 @@
                       name="item-category"
                       required
                     >
-                      <option selected value="wallet">Ví tiền / Bóp da</option>
+                      <option value="" disabled selected>-- Chọn loại đồ vật --</option>
+                      <option value="wallet">Ví tiền / Bóp da</option>
                       <option value="student_card">
                         Thẻ sinh viên / Thẻ thư viện
                       </option>
@@ -263,15 +265,33 @@
                   >
                     Màu sắc <span class="text-error font-bold">*</span>
                   </label>
-                  <input
-                    class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
-                    id="item-color"
-                    name="item-color"
-                    placeholder="VD: Nâu sẫm, Đen..."
-                    required
-                    type="text"
-                    value="Nâu sẫm"
-                  />
+                  <div class="relative">
+                    <select
+                      class="w-full h-10 px-3 pr-8 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all appearance-none cursor-pointer"
+                      id="item-color"
+                      name="item-color"
+                      required
+                    >
+                      <option value="" disabled selected>-- Chọn màu sắc --</option>
+                      <option value="black">Đen</option>
+                      <option value="white">Trắng</option>
+                      <option value="gray">Xám / Bạc</option>
+                      <option value="brown">Nâu / Da bò</option>
+                      <option value="blue">Xanh dương / Xanh navy</option>
+                      <option value="red">Đỏ / Đỏ đô</option>
+                      <option value="yellow">Vàng / Cam</option>
+                      <option value="green">Xanh lá / Rêu</option>
+                      <option value="pink">Hồng / Tím</option>
+                      <option value="multi">Nhiều màu / Khác</option>
+                    </select>
+                    <div
+                      class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-secondary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -291,9 +311,7 @@
                   placeholder="Mô tả vết xước, giấy tờ bên trong..."
                   required
                   rows="3"
-                >
-Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCCD Nguyễn Văn An, Thẻ SV CTU MSSV B2203456, thẻ Vietcombank.</textarea
-                >
+                ></textarea>
               </div>
 
               <!-- Địa điểm & Thời gian -->
@@ -315,11 +333,12 @@ Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCC
                       >
                     </span>
                     <input
-                      class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all"
+                      class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container outline-none transition-all"
                       id="item-location"
+                      placeholder="VD: Khoa CNTT&TT (Nhà C1), Tầng 2..."
                       required
                       type="text"
-                      value="Khoa CNTT&TT (Nhà C1), Tầng 2"
+                      value=""
                     />
                   </div>
                 </div>
@@ -336,7 +355,7 @@ Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCC
                     id="item-date"
                     required
                     type="date"
-                    value="2025-05-18"
+                    value=""
                   />
                 </div>
 
@@ -351,7 +370,7 @@ Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCC
                     class="w-full h-10 px-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs"
                     id="item-time"
                     type="time"
-                    value="09:30"
+                    value=""
                   />
                 </div>
               </div>
@@ -376,11 +395,12 @@ Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCC
                     >
                   </span>
                   <input
-                    class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all"
+                    class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container outline-none transition-all"
                     id="contact-info"
+                    placeholder="VD: 0912 345 678 (Nguyễn Văn A - K48 CNTT)..."
                     required
                     type="text"
-                    value="0912 345 678 (Nguyễn Văn An - K48 CNTT)"
+                    value=""
                   />
                 </div>
               </div>
@@ -419,74 +439,38 @@ Ví da bò gấp đôi màu nâu sẫm, xước góc dưới. Bên trong có CCC
                 </p>
               </div>
 
-              <!-- Thumbnails đã chọn (Lưới 2x2) -->
+              <!-- Khung tải ảnh (Lưới 2x2 trống dạng mặc định) -->
               <div class="grid grid-cols-2 gap-3 pt-1">
-                <!-- Thumbnail 1 -->
-                <div
-                  class="relative group rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest"
-                >
-                  <img
-                    class="w-full h-24 object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwgsHfDeUMuXLn-KDxGqdKCmCzcFsea0yjciPEqeIOLUjh98V9xYFzKo4k6sUbLg8MAt8PWe1KLduTMKWtY2BftsSB5yryfn-qGcq2pgtap-TUBaEtQjVpUXuXsvVDWF8nQ5H_9KYUF1a0Yk2ftlazeR3OAxmMkcQ6jw6Ev07d9GAw6Jdj42FfhKrhgLvyjmtup9I0Z1SEny4p3Z3ZzT5ytYiRoofIVRHZdIyJbE--N5Z3_ab_9D0_"
-                  />
-                  <button
-                    aria-label="Xóa ảnh"
-                    class="absolute top-1 right-1 w-5 h-5 rounded-full bg-surface/90 hover:bg-error hover:text-on-error text-on-surface flex items-center justify-center shadow transition-colors"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined text-[12px]"
-                      >close</span
-                    >
-                  </button>
-                  <div
-                    class="p-1.5 bg-surface-container-lowest border-t border-outline-variant/40"
-                  >
-                    <p class="text-[11px] truncate text-on-surface font-medium">
-                      vi_da_nau_dam.jpg
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Thumbnail 2 -->
-                <div
-                  class="relative group rounded-lg overflow-hidden border border-outline-variant bg-surface-container-lowest"
-                >
-                  <img
-                    class="w-full h-24 object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYisLAyvnCrS3Uw9iuXlzvnfyrEUXA5HLlsC64Jj7cgtYvhZfEajiwZKWWUzd2vDFI5G9fQtGTWGV9dhJrf0RiJWCeAuhmwkX6jv6p8Lt3cJaN6SJewbB8YP60K4jyFcaHqn-_Qhfboc0u2LOS411jJ6m96eEjrqIIWJxrObY90OoZmM0R3zzcMmqZIZ18MjWwxJ7RpcIfC6YJ0SJXIMkk2rRvnvjYgVwdBpvtBcT_OvmO9iwBJxAZ"
-                  />
-                  <button
-                    aria-label="Xóa ảnh"
-                    class="absolute top-1 right-1 w-5 h-5 rounded-full bg-surface/90 hover:bg-error hover:text-on-error text-on-surface flex items-center justify-center shadow transition-colors"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined text-[12px]"
-                      >close</span
-                    >
-                  </button>
-                  <div
-                    class="p-1.5 bg-surface-container-lowest border-t border-outline-variant/40"
-                  >
-                    <p class="text-[11px] truncate text-on-surface font-medium">
-                      the_sinh_vien_ctu.png
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Empty Slot 3 -->
+                <!-- Slot 1 -->
                 <div
                   class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
                 >
                   <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh</span>
+                  <span class="text-[11px] mt-0.5">Thêm ảnh 1</span>
                 </div>
 
-                <!-- Empty Slot 4 -->
+                <!-- Slot 2 -->
                 <div
                   class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
                 >
                   <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh</span>
+                  <span class="text-[11px] mt-0.5">Thêm ảnh 2</span>
+                </div>
+
+                <!-- Slot 3 -->
+                <div
+                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
+                >
+                  <span class="material-symbols-outlined text-[20px]">add</span>
+                  <span class="text-[11px] mt-0.5">Thêm ảnh 3</span>
+                </div>
+
+                <!-- Slot 4 -->
+                <div
+                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
+                >
+                  <span class="material-symbols-outlined text-[20px]">add</span>
+                  <span class="text-[11px] mt-0.5">Thêm ảnh 4</span>
                 </div>
               </div>
 

@@ -34,7 +34,10 @@ class AppHeader extends HTMLElement {
           </button>
 
           <!-- DROPDOWN POPUP THÔNG BÁO -->
-          <div id="notif-dropdown" class="hidden absolute top-full mt-2.5 w-[360px] sm:w-[410px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left">
+          <div id="notif-dropdown" class="hidden absolute top-full mt-2 w-[360px] sm:w-[410px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left">
+            <!-- Mũi tên liên kết trực tiếp với icon chuông -->
+            <div class="absolute -top-[7px] right-3 sm:right-[107px] w-3.5 h-3.5 bg-white border-t border-l border-[#e7e1df] transform rotate-45 z-20 pointer-events-none"></div>
+
             <!-- 1. Header Dropdown -->
             <div class="px-5 pt-4 pb-2 flex items-center justify-between bg-white relative rounded-t-2xl border-b border-[#f0edec]">
               <h3 class="font-extrabold text-[#1b1c1c] text-xl tracking-tight">
@@ -85,8 +88,10 @@ class AppHeader extends HTMLElement {
             <span>Đặng Hữu Khang</span>
           </button>
 
-          <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white rounded-xl border border-[#e7e1df] shadow-xl overflow-hidden text-left">
-            <div class="p-4 bg-gray-50/50 border-b border-[#e7e1df]">
+          <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white rounded-xl border border-[#e7e1df] shadow-xl text-left">
+            <!-- Mũi tên liên kết với nút tài khoản người dùng -->
+            <div class="absolute -top-[7px] right-[77px] w-3.5 h-3.5 bg-[#f9fafb] border-t border-l border-[#e7e1df] transform rotate-45 z-20 pointer-events-none"></div>
+            <div class="p-4 bg-gray-50/50 border-b border-[#e7e1df] rounded-t-xl">
               <h3 class="font-bold text-base text-[#1b1c1c]">Đặng Hữu Khang</h3>
               <p class="text-sm font-medium text-[#797675] mt-0.5">MSSV: B2404990</p>
             </div>
@@ -129,8 +134,15 @@ class AppHeader extends HTMLElement {
         </a>
       `;
 
+    const isHomePage =
+      currentPath === "index.html" ||
+      currentPath === "" ||
+      window.location.pathname.endsWith("/pages/") ||
+      window.location.pathname === "/";
+    const headerBorderClass = isHomePage ? "" : "border-b border-[#E6E4DE]";
+
     this.innerHTML = `
-      <header class="sticky top-0 z-50 bg-[#F7F6F2]/90 backdrop-blur-md border-b border-[#E6E4DE]">
+      <header class="sticky top-0 z-50 bg-[#F7F6F2]/90 backdrop-blur-md ${headerBorderClass}">
         <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between h-16 md:h-20">
           
           <!-- Logo Brand -->
@@ -461,7 +473,14 @@ class AppHeader extends HTMLElement {
           notifDropdown.classList.add("hidden");
           if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
         }
-        userMenuDropdown.classList.toggle("hidden");
+        const isHidden = userMenuDropdown.classList.contains("hidden");
+        if (isHidden) {
+          userMenuDropdown.classList.remove("hidden");
+          userMenuBtn.classList.add("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+        } else {
+          userMenuDropdown.classList.add("hidden");
+          userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+        }
       });
     }
 
@@ -487,6 +506,7 @@ class AppHeader extends HTMLElement {
 
         if (userMenuDropdown) {
           userMenuDropdown.classList.add("hidden");
+          if (userMenuBtn) userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
         }
 
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
@@ -509,7 +529,10 @@ class AppHeader extends HTMLElement {
 
     document.addEventListener("click", (e) => {
       if (!this.contains(e.target)) {
-        if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
+        if (userMenuDropdown) {
+          userMenuDropdown.classList.add("hidden");
+          if (userMenuBtn) userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+        }
         if (notifDropdown) {
           notifDropdown.classList.add("hidden");
           if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
