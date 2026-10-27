@@ -135,13 +135,6 @@
 
 
 
-        <!-- Góc phải trên: Badge loại món đồ -->
-        <div class="absolute top-4 right-4">
-          <span class="bg-black/50 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm">
-            Ví tiền / Giấy tờ
-          </span>
-        </div>
-
         <!-- Góc dưới: Tóm tắt thông tin tin báo mất của bạn -->
         <div class="absolute bottom-4 left-4 right-4 text-white">
           <h3 class="text-xl md:text-2xl font-bold tracking-tight drop-shadow-sm">
@@ -171,7 +164,8 @@
 
         <!-- DÒNG KẾT QUẢ 1 (Khớp 99%) -->
         <div
-          class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-[#e7e1df] shadow-sm hover:border-[#35483d] transition-all duration-200 group">
+          class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-[#e7e1df] shadow-sm hover:border-[#35483d] transition-all duration-200 group cursor-pointer"
+          onclick="window.location.href='claim.html'">
           <!-- Ô Trái (Ảnh): Ảnh thumbnail vuông w-24 h-24 rounded-lg object-cover flex-shrink-0 -->
           <div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-[#f0edec] border border-[#e7e1df]">
             <img alt="Ví da nam màu nâu - Tòa C1"
@@ -224,12 +218,9 @@
           <!-- Ô Phải (Nút bấm): flex-shrink-0 -->
           <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
             <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-              onclick="handleClaimItem('Ví da nam màu nâu - Tòa C1', this)" type="button">
-              <span>Đồ của tôi</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
+              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
+              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
+              <span>Xem chi tiết</span>
             </button>
           </div>
         </div>
@@ -286,12 +277,9 @@
           <!-- Ô Phải (Nút bấm) -->
           <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
             <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-              onclick="handleClaimItem('Bóp cầm tay màu nâu kèm thẻ sinh viên CTU', this)" type="button">
-              <span>Đồ của tôi</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
+              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
+              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
+              <span>Xem chi tiết</span>
             </button>
           </div>
         </div>
@@ -348,12 +336,9 @@
           <!-- Ô Phải (Nút bấm) -->
           <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
             <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-              onclick="handleClaimItem('Balo laptop bỏ quên có ví da nâu bên trong', this)" type="button">
-              <span>Đồ của tôi</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
+              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
+              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
+              <span>Xem chi tiết</span>
             </button>
           </div>
         </div>
@@ -410,12 +395,9 @@
           <!-- Ô Phải (Nút bấm) -->
           <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
             <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-              onclick="handleClaimItem('Ví đựng thẻ da bò màu nâu nhạt', this)" type="button">
-              <span>Đồ của tôi</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
+              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
+              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
+              <span>Xem chi tiết</span>
             </button>
           </div>
         </div>

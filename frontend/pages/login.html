@@ -43,8 +43,15 @@
       width: max-content;
       animation: marquee-scroll 32s linear infinite;
     }
-    .marquee-track:hover {
-      animation-play-state: paused;
+    /* 11. Di chuột vào không dừng lại mà chỉ phóng to card lên */
+    .marquee-track > div {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      transform-origin: center center;
+    }
+    .marquee-track > div:hover {
+      transform: scale(1.08) translateY(-2px);
+      z-index: 20;
+      box-shadow: 0 20px 30px -8px rgba(0, 0, 0, 0.18);
     }
     /* Mờ dần ở 2 mép container */
     .marquee-mask {
@@ -92,8 +99,8 @@
           </p>
         </div>
 
-        <!-- DẢI THẺ CUỘN XOAY THEO CHIỀU NGANG (Hover để tạm dừng) -->
-        <div class="relative w-full overflow-hidden marquee-mask py-3 select-none">
+        <!-- DẢI THẺ CUỘN XOAY THEO CHIỀU NGANG (Hover để phóng to card) -->
+        <div class="relative w-full overflow-hidden marquee-mask py-5 select-none">
           <div class="marquee-track flex gap-4">
             
             <!-- ====== BỘ 6 THẺ MINH HỌA (LƯỢT 1) ====== -->

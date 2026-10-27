@@ -1,239 +1,211 @@
 <!doctype html>
 <html lang="vi" class="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Báo Mất Đồ - CTU Lost & Found | Đại học Cần Thơ</title>
 
-    <!-- Google Fonts: Be Vietnam Pro -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Báo Mất Đồ - CTU Lost & Found | Đại học Cần Thơ</title>
 
-    <link href="../css/index.css" rel="stylesheet" />
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
 
-    <!-- Material Symbols Outlined -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+  <link href="../css/index.css" rel="stylesheet" />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-      select {
-        background-image: none !important;
-      }
-    </style>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary-fixed-dim": "#b6ccbd",
-              "on-background": "#1b1c1c",
-              "surface-container-high": "#eae7e7",
-              "outline-variant": "#c3c8c2",
-              "on-surface-variant": "#424844",
-              "on-secondary-fixed": "#1b1c18",
-              "on-error": "#ffffff",
-              "tertiary-container": "#3f4541",
-              "surface-container-highest": "#e4e2e1",
-              "surface-container": "#f0eded",
-              "surface-bright": "#fcf9f8",
-              "on-primary": "#ffffff",
-              primary: "#1f3227",
-              "error-container": "#ffdad6",
-              "on-secondary-container": "#64655f",
-              "on-primary-fixed": "#0d1f16",
-              error: "#ba1a1a",
-              "on-primary-container": "#a1b6a8",
-              "tertiary-fixed-dim": "#c2c8c2",
-              "on-tertiary-container": "#acb2ad",
-              "on-secondary-fixed-variant": "#474742",
-              "primary-container": "#35483d",
-              "secondary-fixed": "#e4e3db",
-              "on-tertiary": "#171d19",
-              "surface-container-lowest": "#ffffff",
-              "on-secondary": "#ffffff",
-              "on-primary-fixed-variant": "#384b40",
-              "on-surface": "#1b1c1c",
-              "inverse-on-surface": "#f3f0ef",
-              "on-error-container": "#93000a",
-              "tertiary-fixed": "#dee4de",
-              "secondary-container": "#e4e3db",
-              secondary: "#5e5f59",
-              "surface-variant": "#e4e2e1",
-              "on-tertiary": "#ffffff",
-              "surface-dim": "#dcd9d9",
-              "surface-tint": "#4f6357",
-              background: "#fcf9f8",
-              surface: "#fcf9f8",
-              "inverse-surface": "#303030",
-              "secondary-fixed-dim": "#c8c7c0",
-              "inverse-primary": "#b6ccbd",
-              outline: "#737874",
-              "on-tertiary-fixed-variant": "#424844",
-              "surface-container-low": "#f6f3f2",
-              tertiary: "#292f2b",
-              "primary-fixed": "#d2e8d9",
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              "2xl": "1rem",
-              full: "9999px",
-            },
-            fontFamily: {
-              "headline-section": ["Be Vietnam Pro"],
-              "label-action": ["Be Vietnam Pro"],
-              "body-default": ["Be Vietnam Pro"],
-              "caption-meta": ["Be Vietnam Pro"],
-              "body-compact": ["Be Vietnam Pro"],
-              "title-item": ["Be Vietnam Pro"],
-              "headline-hero": ["Be Vietnam Pro"],
-            },
-            fontSize: {
-              "headline-section": [
-                "24px",
-                {
-                  lineHeight: "32px",
-                  letterSpacing: "-0.015em",
-                  fontWeight: "600",
-                },
-              ],
-              "label-action": [
-                "13px",
-                {
-                  lineHeight: "18px",
-                  letterSpacing: "0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "body-default": [
-                "15px",
-                { lineHeight: "24px", fontWeight: "400" },
-              ],
-              "caption-meta": [
-                "12px",
-                { lineHeight: "16px", fontWeight: "400" },
-              ],
-              "body-compact": [
-                "14px",
-                { lineHeight: "22px", fontWeight: "400" },
-              ],
-              "title-item": [
-                "16px",
-                {
-                  lineHeight: "24px",
-                  letterSpacing: "-0.005em",
-                  fontWeight: "600",
-                },
-              ],
-              "headline-hero": [
-                "44px",
-                {
-                  lineHeight: "52px",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                },
-              ],
-            },
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    select {
+      background-image: none !important;
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed-dim": "#b6ccbd",
+            "on-background": "#1b1c1c",
+            "surface-container-high": "#eae7e7",
+            "outline-variant": "#c3c8c2",
+            "on-surface-variant": "#424844",
+            "on-secondary-fixed": "#1b1c18",
+            "on-error": "#ffffff",
+            "tertiary-container": "#3f4541",
+            "surface-container-highest": "#e4e2e1",
+            "surface-container": "#f0eded",
+            "surface-bright": "#fcf9f8",
+            "on-primary": "#ffffff",
+            primary: "#1f3227",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#64655f",
+            "on-primary-fixed": "#0d1f16",
+            error: "#ba1a1a",
+            "on-primary-container": "#a1b6a8",
+            "tertiary-fixed-dim": "#c2c8c2",
+            "on-tertiary-container": "#acb2ad",
+            "on-secondary-fixed-variant": "#474742",
+            "primary-container": "#35483d",
+            "secondary-fixed": "#e4e3db",
+            "on-tertiary": "#171d19",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed-variant": "#384b40",
+            "on-surface": "#1b1c1c",
+            "inverse-on-surface": "#f3f0ef",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#dee4de",
+            "secondary-container": "#e4e3db",
+            secondary: "#5e5f59",
+            "surface-variant": "#e4e2e1",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#dcd9d9",
+            "surface-tint": "#4f6357",
+            background: "#fcf9f8",
+            surface: "#fcf9f8",
+            "inverse-surface": "#303030",
+            "secondary-fixed-dim": "#c8c7c0",
+            "inverse-primary": "#b6ccbd",
+            outline: "#737874",
+            "on-tertiary-fixed-variant": "#424844",
+            "surface-container-low": "#f6f3f2",
+            tertiary: "#292f2b",
+            "primary-fixed": "#d2e8d9",
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            full: "9999px",
+          },
+          fontFamily: {
+            "headline-section": ["Be Vietnam Pro"],
+            "label-action": ["Be Vietnam Pro"],
+            "body-default": ["Be Vietnam Pro"],
+            "caption-meta": ["Be Vietnam Pro"],
+            "body-compact": ["Be Vietnam Pro"],
+            "title-item": ["Be Vietnam Pro"],
+            "headline-hero": ["Be Vietnam Pro"],
+          },
+          fontSize: {
+            "headline-section": [
+              "24px",
+              {
+                lineHeight: "32px",
+                letterSpacing: "-0.015em",
+                fontWeight: "600",
+              },
+            ],
+            "label-action": [
+              "13px",
+              {
+                lineHeight: "18px",
+                letterSpacing: "0.01em",
+                fontWeight: "600",
+              },
+            ],
+            "body-default": [
+              "15px",
+              { lineHeight: "24px", fontWeight: "400" },
+            ],
+            "caption-meta": [
+              "12px",
+              { lineHeight: "16px", fontWeight: "400" },
+            ],
+            "body-compact": [
+              "14px",
+              { lineHeight: "22px", fontWeight: "400" },
+            ],
+            "title-item": [
+              "16px",
+              {
+                lineHeight: "24px",
+                letterSpacing: "-0.005em",
+                fontWeight: "600",
+              },
+            ],
+            "headline-hero": [
+              "44px",
+              {
+                lineHeight: "52px",
+                letterSpacing: "-0.02em",
+                fontWeight: "700",
+              },
+            ],
           },
         },
-      };
-    </script>
+      },
+    };
+  </script>
 
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-        line-height: 1;
-      }
-    </style>
-    <script src="../js/components.js"></script>
-    <script src="../js/main.js"></script>
-  </head>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+      line-height: 1;
+    }
+  </style>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</head>
 
-  <body
-    class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-default text-body-default selection:bg-primary-fixed selection:text-on-primary-fixed"
-  >
-    <!-- TOP NAV BAR -->
-    <app-header></app-header>
+<body
+  class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-default text-body-default selection:bg-primary-fixed selection:text-on-primary-fixed">
+  <!-- TOP NAV BAR -->
+  <app-header></app-header>
 
-    <!-- MAIN CANVAS -->
-    <main
-      class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-6"
-    >
-      <!-- Central Form Container -->
-      <div
-        class="bg-surface-container-lowest rounded-2xl border border-outline-variant/70 shadow-sm p-6 lg:p-8 max-w-7xl mx-auto"
-      >
-        <!-- Header Form -->
-        <div
-          class="border-b border-outline-variant/40 pb-4 mb-6 flex items-center justify-between"
-        >
-          <div>
-            <h1 class="text-xl sm:text-2xl font-bold text-on-surface">
-              Thông tin đồ thất lạc
-            </h1>
-          </div>
-          <span
-            class="text-xs font-medium px-3 py-1 bg-error-container/60 text-on-error-container rounded-full border border-error/20"
-          >
-            Tin Báo Mất
-          </span>
-        </div>
+  <!-- MAIN CANVAS -->
+  <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-6">
+    <!-- Central Form Container -->
+    <div
+      class="bg-surface-container-lowest rounded-2xl border border-outline-variant/70 shadow-sm p-6 lg:p-8 max-w-7xl mx-auto">
+      <!-- Header Form -->
+      <div class="border-b border-outline-variant/40 pb-4 mb-6">
+        <h1 class="text-xl sm:text-2xl font-bold text-on-surface">
+          Thông tin đồ thất lạc
+        </h1>
+      </div>
 
-        <!-- Form Body -->
-        <form class="space-y-6" onsubmit="event.preventDefault()">
-          <!-- KHU VỰC 2 CỘT NGANG -->
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- CỘT TRÁI (7 Cột): THÔNG TIN VĂN BẢN -->
-            <div class="lg:col-span-7 space-y-4">
-              <!-- Tiêu đề bài đăng -->
-              <div>
-                <label
-                  class="block text-label-action text-on-surface mb-1.5"
-                  for="post-title"
-                >
-                  Tiêu đề bài đăng <span class="text-error font-bold">*</span>
-                </label>
-                <input
-                  class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
-                  id="post-title"
-                  name="post-title"
-                  placeholder="VD: Bị rơi ví da nam màu nâu đậm tại C1..."
-                  required
-                  type="text"
-                  value=""
-                />
-              </div>
+      <!-- Form Body -->
+      <form class="space-y-6" onsubmit="event.preventDefault()">
+        <!-- KHU VỰC 2 CỘT NGANG -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- CỘT TRÁI (7 Cột): THÔNG TIN VĂN BẢN -->
+          <div class="lg:col-span-7 space-y-4">
+            <!-- Tiêu đề bài đăng -->
+            <div>
+              <label class="block text-label-action text-on-surface mb-1.5" for="post-title">
+                Tiêu đề bài đăng <span class="text-error font-bold">*</span>
+              </label>
+              <input
+                class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
+                id="post-title" name="post-title" placeholder="VD: Bị rơi ví da nam màu nâu đậm tại C1..." required
+                type="text" value="" />
+            </div>
 
-              <!-- Loại đồ vật & Màu sắc -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Loại đồ vật & Màu sắc -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-4">
                 <div>
-                  <label
-                    class="block text-label-action text-on-surface mb-1.5"
-                    for="item-category"
-                  >
+                  <label class="block text-label-action text-on-surface mb-1.5" for="item-category">
                     Loại đồ vật <span class="text-error font-bold">*</span>
                   </label>
                   <div class="relative">
                     <select
                       class="w-full h-10 px-3 pr-8 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all appearance-none cursor-pointer"
-                      id="item-category"
-                      name="item-category"
-                      required
-                    >
+                      id="item-category" name="item-category" required>
                       <option value="" disabled selected>-- Chọn loại đồ vật --</option>
                       <option value="wallet">Ví tiền / Bóp da</option>
                       <option value="student_card">
@@ -248,282 +220,661 @@
                       </option>
                       <option value="other">Tài sản khác</option>
                     </select>
-                    <div
-                      class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-secondary"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >expand_more</span
-                      >
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined">expand_more</span>
                     </div>
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    class="block text-label-action text-on-surface mb-1.5"
-                    for="item-color"
-                  >
-                    Màu sắc <span class="text-error font-bold">*</span>
+                <!-- Container 2 ô màu phụ dời sang bên trái để cân bằng giao diện -->
+                <div id="sec-colors-left" class="space-y-2.5 max-w-sm"></div>
+              </div>
+
+              <!-- 2. Ô CHỌN MÀU SẮC (Đồng bộ giao diện sáng, chỉ hiện HEX) -->
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <label class="block text-label-action text-on-surface font-semibold text-xs">
+                    Màu chủ đạo <span class="text-error font-bold text-red-600">*</span>
                   </label>
-                  <div class="relative">
-                    <select
-                      class="w-full h-10 px-3 pr-8 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all appearance-none cursor-pointer"
-                      id="item-color"
-                      name="item-color"
-                      required
-                    >
-                      <option value="" disabled selected>-- Chọn màu sắc --</option>
-                      <option value="black">Đen</option>
-                      <option value="white">Trắng</option>
-                      <option value="gray">Xám / Bạc</option>
-                      <option value="brown">Nâu / Da bò</option>
-                      <option value="blue">Xanh dương / Xanh navy</option>
-                      <option value="red">Đỏ / Đỏ đô</option>
-                      <option value="yellow">Vàng / Cam</option>
-                      <option value="green">Xanh lá / Rêu</option>
-                      <option value="pink">Hồng / Tím</option>
-                      <option value="multi">Nhiều màu / Khác</option>
-                    </select>
-                    <div
-                      class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-secondary"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >expand_more</span
-                      >
-                    </div>
-                  </div>
+                  <span class="text-[11px] text-secondary">Nhấp vào thẻ để chọn màu</span>
                 </div>
-              </div>
 
-              <!-- Mô tả chi tiết -->
-              <div>
-                <label
-                  class="block text-label-action text-on-surface mb-1.5"
-                  for="item-description"
-                >
-                  Mô tả chi tiết đặc điểm nhận dạng
-                  <span class="text-error font-bold">*</span>
-                </label>
-                <textarea
-                  class="w-full p-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all resize-none"
-                  id="item-description"
-                  name="item-description"
-                  placeholder="Mô tả vết xước, giấy tờ bên trong..."
-                  required
-                  rows="3"
-                ></textarea>
-              </div>
-
-              <!-- Địa điểm & Thời gian -->
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                <div class="sm:col-span-6">
-                  <label
-                    class="block text-label-action text-on-surface mb-1.5"
-                    for="item-location"
-                  >
-                    Địa điểm nghi mất
-                    <span class="text-error font-bold">*</span>
-                  </label>
-                  <div class="relative">
-                    <span
-                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >location_on</span
-                      >
+                <!-- CARD MÀU CHỦ ĐẠO (Đồng bộ với màu nền trang web, chỉ hiện HEX) -->
+                <div class="bg-[#fcf9f8] border border-[#e7e1df] rounded-2xl p-3.5 sm:p-4 shadow-sm max-w-sm">
+                  <!-- Khung swatch màu lớn ở trên -->
+                  <div id="primary-color-swatch"
+                    class="h-22 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner bg-[#f6f3f2]"
+                    title="Nhấp để chọn màu chủ đạo">
+                    <span id="primary-swatch-placeholder" class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
+                      <span class="material-symbols-outlined text-[20px] text-[#35483d]">palette</span>
+                      <span>Nhấp để chọn màu</span>
                     </span>
-                    <input
-                      class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container outline-none transition-all"
-                      id="item-location"
-                      placeholder="VD: Khoa CNTT&TT (Nhà C1), Tầng 2..."
-                      required
-                      type="text"
-                      value=""
-                    />
+                    <!-- Icon bút chỉnh sửa khi đã chọn màu -->
+                    <div id="primary-swatch-edit-icon" class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
+                      <span class="material-symbols-outlined text-[13px]">edit</span>
+                    </div>
+                  </div>
+
+                  <!-- Ẩn input color -->
+                  <input type="color" id="primary-color" name="primary-color" class="sr-only" />
+
+                  <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
+                  <div class="mt-2.5 flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
+                    <span class="text-[#35483d] font-bold text-xs uppercase tracking-wider">HEX</span>
+                    <span id="primary-hex-val" class="text-[#1b1c1b] font-bold tracking-wider text-sm">Chưa chọn</span>
                   </div>
                 </div>
 
-                <div class="sm:col-span-3">
-                  <label
-                    class="block text-label-action text-on-surface mb-1.5"
-                    for="item-date"
-                  >
-                    Ngày mất <span class="text-error font-bold">*</span>
-                  </label>
-                  <input
-                    class="w-full h-10 px-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs"
-                    id="item-date"
-                    required
-                    type="date"
-                    value=""
-                  />
+                <!-- Thêm màu phụ (tối đa 3 màu, ràng buộc phải chọn xong màu trước mới được cộng) -->
+                <div class="pt-2 border-t border-outline-variant/30 max-w-sm">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-on-surface">Màu phụ (tối đa 3 màu):</span>
+                    <button type="button" id="add-sec-color-btn" disabled
+                      class="text-xs font-semibold text-primary hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:no-underline"
+                      title="Vui lòng chọn Màu chủ đạo trước">
+                      <span class="material-symbols-outlined text-[16px]">add_circle</span>
+                      <span id="add-sec-color-btn-text">Thêm màu phụ</span>
+                    </button>
+                  </div>
+
+                  <!-- Container các card màu phụ bên phải (Màu phụ 3) -->
+                  <div id="sec-colors-container" class="space-y-2.5">
+                    <!-- Render động các màu phụ -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mô tả chi tiết -->
+            <div>
+              <label class="block text-label-action text-on-surface mb-1.5" for="item-description">
+                Mô tả chi tiết đặc điểm nhận dạng
+                <span class="text-error font-bold">*</span>
+              </label>
+              <textarea
+                class="w-full p-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all resize-none"
+                id="item-description" name="item-description" placeholder="Mô tả vết xước, giấy tờ bên trong..."
+                required rows="3"></textarea>
+            </div>
+
+            <!-- Ô NHẬP ĐỊA ĐIỂM NGHI MẤT ĐỒNG BỘ: Chọn khoa -> Chọn tầng mấy -> Chọn phòng (có option hội trường) -->
+            <div class="space-y-3 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/60" id="location-cascade-group">
+              <div class="flex items-center justify-between">
+                <label class="block text-label-action text-on-surface font-semibold text-xs">
+                  Địa điểm nghi mất <span class="text-error font-bold text-red-600">*</span>
+                </label>
+                <span class="text-[11px] text-secondary">Chọn tuần tự</span>
+              </div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <!-- Bước 1: Chọn Khoa (Luôn hiển thị) -->
+                <div class="space-y-1" id="loc-step-1-wrapper">
+                  <span class="text-[11px] font-medium text-secondary block">1. Chọn Khoa / Khu</span>
+                  <div class="relative">
+                    <select id="loc-faculty" required
+                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>-- Chọn Khoa --</option>
+                      <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
+                      <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
+                      <option value="Nhà học C2">Nhà học C2</option>
+                      <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
+                      <option value="Khoa Kinh tế">Khoa Kinh tế</option>
+                      <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
+                      <option value="Khoa Luật">Khoa Luật</option>
+                      <option value="Khoa Sư phạm">Khoa Sư phạm</option>
+                      <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
+                      <option value="Khu vực khác">Khu vực khác</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="sm:col-span-3">
-                  <label
-                    class="block text-label-action text-on-surface mb-1.5"
-                    for="item-time"
-                  >
-                    Khoảng giờ
-                  </label>
-                  <input
-                    class="w-full h-10 px-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs"
-                    id="item-time"
-                    type="time"
-                    value=""
-                  />
+                <!-- Bước 2: Chọn Tầng mấy (Không có option hội trường, chỉ có tầng mấy) -->
+                <div class="space-y-1 hidden" id="loc-step-2-wrapper">
+                  <span class="text-[11px] font-medium text-secondary block">2. Chọn Tầng mấy</span>
+                  <div class="relative">
+                    <select id="loc-floor"
+                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>-- Chọn tầng --</option>
+                      <option value="1">Tầng 1</option>
+                      <option value="2">Tầng 2</option>
+                      <option value="3">Tầng 3</option>
+                      <option value="4">Tầng 4</option>
+                      <option value="5">Tầng 5</option>
+                      <option value="trệt">Tầng trệt</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bước 3: Chọn Phòng học / Hội trường (Trong phòng có các option Hội trường) -->
+                <div class="space-y-1 hidden" id="loc-step-3-wrapper">
+                  <span class="text-[11px] font-medium text-secondary block">3. Phòng học / Hội trường</span>
+                  <div class="relative">
+                    <select id="loc-room"
+                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- Thông tin liên hệ -->
-              <div
-                class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50"
-              >
-                <label
-                  class="block text-label-action text-on-surface mb-1"
-                  for="contact-info"
-                >
-                  Thông tin liên hệ xác minh
-                  <span class="text-error font-bold">*</span>
+              <!-- Input ẩn lưu giá trị địa điểm đầy đủ gửi form -->
+              <input type="hidden" id="item-location" name="item-location" required value="" />
+
+              <!-- Chỉ hiện chữ sau khi chọn xong, không đặt trong khối tô màu -->
+              <p id="loc-summary" class="hidden text-xs text-on-surface font-medium pt-1">
+                Địa điểm: <strong id="loc-summary-text" class="text-primary font-bold"></strong>
+              </p>
+            </div>
+
+            <!-- Ngày mất & Khung giờ (Hỗ trợ click vào toàn bộ ô để mở picker) -->
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+              <div class="sm:col-span-6">
+                <label class="block text-label-action text-on-surface mb-1.5 font-semibold text-xs" for="item-date">
+                  Ngày mất <span class="text-error font-bold text-red-600">*</span>
                 </label>
                 <div class="relative">
-                  <span
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >contact_phone</span
-                    >
-                  </span>
                   <input
-                    class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container outline-none transition-all"
-                    id="contact-info"
-                    placeholder="VD: 0912 345 678 (Nguyễn Văn A - K48 CNTT)..."
-                    required
-                    type="text"
-                    value=""
-                  />
+                    class="w-full h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs cursor-pointer"
+                    id="item-date" required type="date" value="" onclick="try{this.showPicker()}catch(e){}" />
+                </div>
+              </div>
+
+              <div class="sm:col-span-6">
+                <label class="block text-label-action text-on-surface mb-1.5 font-semibold text-xs" for="item-time">
+                  Khung giờ nghi mất
+                </label>
+                <div class="relative">
+                  <input
+                    class="w-full h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs cursor-pointer"
+                    id="item-time" type="time" value="" onclick="try{this.showPicker()}catch(e){}" />
                 </div>
               </div>
             </div>
 
-            <!-- CỘT PHẢI (5 Cột): HÌNH ẢNH MINH HỌA -->
-            <div class="lg:col-span-5 space-y-3">
-              <div class="flex items-center justify-between">
-                <label class="block text-label-action text-on-surface">
-                  Hình ảnh minh họa đồ vật
-                </label>
-                <span class="text-caption-meta text-secondary"
-                  >Tối đa 4 ảnh</span
-                >
-              </div>
-
-              <!-- Drag and Drop Zone -->
-              <div
-                class="border-2 border-dashed border-outline-variant hover:border-primary-container transition-colors rounded-xl p-4 bg-surface-container-low/40 flex flex-col items-center justify-center text-center cursor-pointer group"
-              >
-                <div
-                  class="w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/60 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform mb-1.5"
-                >
-                  <span class="material-symbols-outlined text-[20px]"
-                    >add_photo_alternate</span
-                  >
-                </div>
-                <p class="text-xs font-medium text-on-surface">
-                  Kéo thả ảnh hoặc
-                  <span class="text-primary-container underline font-semibold"
-                    >chọn tệp</span
-                  >
-                </p>
-                <p class="text-[11px] text-secondary mt-0.5">
-                  JPG, PNG dưới 5MB
-                </p>
-              </div>
-
-              <!-- Khung tải ảnh (Lưới 2x2 trống dạng mặc định) -->
-              <div class="grid grid-cols-2 gap-3 pt-1">
-                <!-- Slot 1 -->
-                <div
-                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
-                >
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 1</span>
-                </div>
-
-                <!-- Slot 2 -->
-                <div
-                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
-                >
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 2</span>
-                </div>
-
-                <!-- Slot 3 -->
-                <div
-                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
-                >
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 3</span>
-                </div>
-
-                <!-- Slot 4 -->
-                <div
-                  class="border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20"
-                >
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 4</span>
-                </div>
-              </div>
-
-              <!-- Checkbox tùy chọn thông báo -->
-              <div
-                class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50 mt-3"
-              >
-                <label class="flex items-start gap-2.5 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    name="notify-match"
-                    checked
-                    class="mt-0.5 w-4 h-4 rounded border-outline-variant text-primary-container focus:ring-primary-container cursor-pointer"
-                  />
-                  <span
-                    class="text-xs text-on-surface font-medium group-hover:text-primary transition-colors"
-                  >
-                    Nhận thông báo khi có bài đăng báo nhặt khớp với tin này
-                  </span>
-                </label>
+            <!-- Thông tin liên hệ -->
+            <div class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50">
+              <label class="block text-label-action text-on-surface mb-1" for="contact-info">
+                Thông tin liên hệ xác minh
+                <span class="text-error font-bold">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+                  <span class="material-symbols-outlined text-[18px]">contact_phone</span>
+                </span>
+                <input
+                  class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container outline-none transition-all"
+                  id="contact-info" placeholder="VD: 0912 345 678 (Nguyễn Văn A - K48 CNTT)..." required type="text"
+                  value="" />
               </div>
             </div>
           </div>
 
-          <!-- KHU VỰC NÚT HÀNH ĐỘNG (CĂN GIỮA PHÍA DƯỚI 2 CỘT) -->
-          <div
-            class="flex flex-col sm:flex-row items-center justify-center gap-3"
-          >
-            <a
-              href="post.html"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl border border-outline-variant text-on-surface-variant text-sm font-medium hover:bg-surface-container-high transition-colors"
-            >
-              <span class="material-symbols-outlined text-[18px]"
-                >arrow_back</span
-              >
-              <span>Hủy</span>
-            </a>
+          <!-- CỘT PHẢI (5 Cột): HÌNH ẢNH MINH HỌA -->
+          <div class="lg:col-span-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-label-action text-on-surface">
+                Hình ảnh minh họa đồ vật
+              </label>
+              <span class="text-caption-meta text-secondary">Tối đa 4 ảnh</span>
+            </div>
 
-            <button
-              class="w-full sm:w-64 inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-primary-container text-on-primary text-sm font-semibold hover:bg-primary transition-all duration-150 active:scale-[0.98] shadow-sm"
-              type="submit"
-            >
-              <span>Gửi bài báo mất</span>
-              <span class="material-symbols-outlined text-[18px]"
-                >arrow_forward</span
-              >
-            </button>
+            <!-- 6. KÉO THẢ ẢNH THAO TÁC ĐƯỢC VỀ MẶT FRONTEND -->
+            <input type="file" id="file-upload-input" accept="image/*" multiple class="hidden" />
+
+            <!-- Drag and Drop Zone -->
+            <div id="drop-zone"
+              class="border-2 border-dashed border-outline-variant hover:border-primary-container transition-all duration-200 rounded-xl p-4 bg-surface-container-low/40 flex flex-col items-center justify-center text-center cursor-pointer group">
+              <div
+                class="w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/60 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform mb-1.5">
+                <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+              </div>
+              <p class="text-xs font-medium text-on-surface">
+                Kéo thả ảnh hoặc
+                <span class="text-primary-container underline font-semibold">chọn tệp từ máy</span>
+              </p>
+              <p class="text-[11px] text-secondary mt-0.5">
+                PNG, JPG dưới 5MB (Tối đa 4 ảnh)
+              </p>
+            </div>
+
+            <!-- Khung tải ảnh 4 slot xem trước -->
+            <div class="grid grid-cols-2 gap-2.5 pt-1" id="image-slots-grid">
+              <!-- Slot 1 -->
+              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="0">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+                <span class="text-[11px] mt-0.5">Thêm ảnh 1</span>
+              </div>
+              <!-- Slot 2 -->
+              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="1">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+                <span class="text-[11px] mt-0.5">Thêm ảnh 2</span>
+              </div>
+              <!-- Slot 3 -->
+              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="2">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+                <span class="text-[11px] mt-0.5">Thêm ảnh 3</span>
+              </div>
+              <!-- Slot 4 -->
+              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="3">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+                <span class="text-[11px] mt-0.5">Thêm ảnh 4</span>
+              </div>
+            </div>
+
+            <!-- Checkbox tùy chọn thông báo -->
+            <div class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50 mt-3">
+              <label class="flex items-start gap-2.5 cursor-pointer group">
+                <input type="checkbox" name="notify-match" checked
+                  class="mt-0.5 w-4 h-4 rounded border-outline-variant text-primary-container focus:ring-primary-container cursor-pointer" />
+                <span class="text-xs text-on-surface font-medium group-hover:text-primary transition-colors">
+                  Nhận thông báo khi có bài đăng báo nhặt khớp với tin này
+                </span>
+              </label>
+            </div>
           </div>
-        </form>
-      </div>
-    </main>
+        </div>
 
-    <!-- FOOTER -->
-    <app-footer></app-footer>
-  </body>
+        <!-- KHU VỰC NÚT HÀNH ĐỘNG (CĂN GIỮA PHÍA DƯỚI 2 CỘT) -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="post.html"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl border border-outline-variant text-on-surface-variant text-sm font-medium hover:bg-surface-container-high transition-colors">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>Hủy</span>
+          </a>
+
+          <button
+            class="w-full sm:w-64 inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-primary-container text-on-primary text-sm font-semibold hover:bg-primary transition-all duration-150 active:scale-[0.98] shadow-sm"
+            type="submit">
+            <span>Gửi bài báo mất</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // ==========================================
+      // TIỆN ÍCH CHUYỂN ĐỔI MÀU SẮC (HEX -> RGB, HSL)
+      // ==========================================
+      const hexToRgb = (hex) => {
+        let c = hex.replace('#', '');
+        if (c.length === 3) c = c.split('').map(x => x + x).join('');
+        const num = parseInt(c, 16);
+        const r = (num >> 16) & 255;
+        const g = (num >> 8) & 255;
+        const b = num & 255;
+        return { r, g, b, str: `${r}, ${g}, ${b}` };
+      };
+
+      const hexToHsl = (hex) => {
+        const { r, g, b } = hexToRgb(hex);
+        const rNorm = r / 255, gNorm = g / 255, bNorm = b / 255;
+        const max = Math.max(rNorm, gNorm, bNorm), min = Math.min(rNorm, gNorm, bNorm);
+        let h = 0, s = 0, l = (max + min) / 2;
+
+        if (max !== min) {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case rNorm: h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0); break;
+            case gNorm: h = (bNorm - rNorm) / d + 2; break;
+            case bNorm: h = (rNorm - gNorm) / d + 4; break;
+          }
+          h /= 6;
+        }
+        return `${Math.round(h * 360)}°, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
+      };
+
+      // ==========================================
+      // 2. Ô CHỌN MÀU SẮC CHUẨN (CHỈ HIỆN HEX, MÀU NỀN ĐỒNG BỘ TRANG WEB)
+      // ==========================================
+      const primaryColorInput = document.getElementById("primary-color");
+      const primarySwatch = document.getElementById("primary-color-swatch");
+      const primaryPlaceholder = document.getElementById("primary-swatch-placeholder");
+      const primaryEditIcon = document.getElementById("primary-swatch-edit-icon");
+      const primaryHexVal = document.getElementById("primary-hex-val");
+      const addSecColorBtn = document.getElementById("add-sec-color-btn");
+      const addSecColorBtnText = document.getElementById("add-sec-color-btn-text");
+      const secColorsContainer = document.getElementById("sec-colors-container");
+
+      let hasPrimaryColor = false;
+      let secColors = []; // Danh sách màu phụ: { id, hex, isChosen }
+
+      // Cập nhật trạng thái nút thêm màu phụ
+      const updateAddSecBtnState = () => {
+        if (!addSecColorBtn) return;
+        if (!hasPrimaryColor) {
+          addSecColorBtn.disabled = true;
+          addSecColorBtn.title = "Vui lòng chọn Màu chủ đạo trước";
+          addSecColorBtnText.textContent = "Thêm màu phụ";
+          return;
+        }
+
+        if (secColors.length >= 3) {
+          addSecColorBtn.style.display = "none";
+          return;
+        }
+
+        addSecColorBtn.style.display = "inline-flex";
+
+        // Kiểm tra màu phụ trước đó đã chọn chưa
+        if (secColors.length > 0) {
+          const lastSec = secColors[secColors.length - 1];
+          if (!lastSec.isChosen) {
+            addSecColorBtn.disabled = true;
+            addSecColorBtn.title = `Vui lòng chọn màu cho Màu phụ ${secColors.length} trước`;
+            addSecColorBtnText.textContent = `Thêm màu phụ (chọn màu ${secColors.length} trước)`;
+            return;
+          }
+        }
+
+        addSecColorBtn.disabled = false;
+        addSecColorBtn.title = "Thêm màu phụ mới";
+        addSecColorBtnText.textContent = "Thêm màu phụ";
+      };
+
+      // Nhấp vào swatch màu chủ đạo để mở picker
+      if (primarySwatch && primaryColorInput) {
+        primarySwatch.addEventListener("click", () => primaryColorInput.click());
+
+        primaryColorInput.addEventListener("input", (e) => {
+          const hex = e.target.value.toUpperCase();
+          hasPrimaryColor = true;
+          primarySwatch.style.backgroundColor = hex;
+          if (primaryPlaceholder) primaryPlaceholder.style.display = "none";
+          if (primaryEditIcon) primaryEditIcon.classList.remove("hidden");
+          if (primaryHexVal) primaryHexVal.textContent = hex;
+          updateAddSecBtnState();
+        });
+      }
+
+      const secColorsLeft = document.getElementById("sec-colors-left");
+
+      // Render danh sách màu phụ (chỉ hiện HEX, nền đồng bộ trang web, kéo thả mượt mà)
+      const renderSecColors = () => {
+        if (secColorsLeft) secColorsLeft.innerHTML = "";
+        if (secColorsContainer) secColorsContainer.innerHTML = "";
+
+        secColors.forEach((sec, idx) => {
+          const card = document.createElement("div");
+          card.className = "bg-[#fcf9f8] border border-[#e7e1df] rounded-xl p-3 shadow-sm relative";
+          card.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold text-on-surface">Màu phụ ${idx + 1}</span>
+              <button type="button" class="remove-sec-btn text-secondary hover:text-red-600 text-xs p-1 rounded-full hover:bg-surface-container transition-colors cursor-pointer" data-id="${sec.id}" title="Xóa màu phụ ${idx + 1}">
+                <span class="material-symbols-outlined text-[16px]">close</span>
+              </button>
+            </div>
+
+            <!-- Swatch màu -->
+            <div class="sec-swatch h-14 w-full rounded-lg cursor-pointer transition-all border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01]"
+              style="background-color: ${sec.isChosen ? sec.hex : '#f6f3f2'}"
+              title="Nhấp để chọn màu phụ ${idx + 1}">
+              <span class="sec-placeholder text-xs text-secondary font-medium flex items-center gap-1.5 select-none" style="display: ${sec.isChosen ? 'none' : 'flex'}">
+                <span class="material-symbols-outlined text-[16px] text-primary">palette</span>
+                <span>Nhấp để chọn màu</span>
+              </span>
+              <div class="sec-edit-icon ${sec.isChosen ? '' : 'hidden'} absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
+                <span class="material-symbols-outlined text-[11px]">edit</span>
+              </div>
+            </div>
+
+            <input type="color" class="sec-input sr-only" value="${sec.hex || '#3b82f6'}" />
+
+            <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
+            <div class="mt-2 flex items-center justify-between font-mono py-1 px-2.5 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
+              <span class="text-primary font-bold text-[10px] uppercase tracking-wider">HEX</span>
+              <span class="sec-hex-val text-on-surface font-bold tracking-wider text-xs">${sec.isChosen ? sec.hex : 'Chưa chọn'}</span>
+            </div>
+          `;
+
+          const swatch = card.querySelector(".sec-swatch");
+          const input = card.querySelector(".sec-input");
+          const rmBtn = card.querySelector(".remove-sec-btn");
+          const hexValSpan = card.querySelector(".sec-hex-val");
+          const placeholder = swatch.querySelector(".sec-placeholder");
+          const editIcon = swatch.querySelector(".sec-edit-icon");
+
+          swatch.addEventListener("click", () => input.click());
+
+          // Cập nhật trực tiếp không re-render để hỗ trợ kéo thả liên tục
+          input.addEventListener("input", (e) => {
+            const hex = e.target.value.toUpperCase();
+            sec.hex = hex;
+            sec.isChosen = true;
+            swatch.style.backgroundColor = hex;
+            if (placeholder) placeholder.style.display = "none";
+            if (editIcon) editIcon.classList.remove("hidden");
+            if (hexValSpan) hexValSpan.textContent = hex;
+            updateAddSecBtnState();
+          });
+
+          rmBtn.addEventListener("click", () => {
+            secColors = secColors.filter(s => s.id !== sec.id);
+            renderSecColors();
+            updateAddSecBtnState();
+          });
+
+          // 2 ô màu phụ đầu tiên dời qua bên trái để cân bằng giao diện
+          if (idx < 2) {
+            if (secColorsLeft) secColorsLeft.appendChild(card);
+          } else {
+            if (secColorsContainer) secColorsContainer.appendChild(card);
+          }
+        });
+
+        updateAddSecBtnState();
+      };
+
+      if (addSecColorBtn) {
+        addSecColorBtn.addEventListener("click", () => {
+          if (!hasPrimaryColor || secColors.length >= 3) return;
+          if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) return;
+
+          secColors.push({
+            id: Date.now() + Math.random(),
+            hex: null,
+            isChosen: false
+          });
+
+          renderSecColors();
+        });
+      }
+
+      // ==========================================
+      // 3 & 4. Ô NHẬP ĐỊA ĐIỂM: Khoa -> Tầng mấy (chỉ tầng, ko có hội trường) -> Phòng (có option hội trường)
+      // Hiện tuần tự sau khi chọn bước trước, khi xong chỉ hiện chữ không đóng khối tô màu
+      // ==========================================
+      const locFaculty = document.getElementById("loc-faculty");
+      const locStep2Wrapper = document.getElementById("loc-step-2-wrapper");
+      const locFloor = document.getElementById("loc-floor");
+      const locStep3Wrapper = document.getElementById("loc-step-3-wrapper");
+      const locRoom = document.getElementById("loc-room");
+      const itemLocationInput = document.getElementById("item-location");
+      const locSummary = document.getElementById("loc-summary");
+      const locSummaryText = document.getElementById("loc-summary-text");
+
+      const updateLocationSummary = () => {
+        const faculty = locFaculty ? locFaculty.value : "";
+        const floor = locFloor ? locFloor.value : "";
+        const room = locRoom ? locRoom.value : "";
+
+        const isComplete = Boolean(faculty && floor && room);
+        const fullLoc = isComplete 
+          ? `${faculty} - ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor} - ${room}`
+          : "";
+
+        if (itemLocationInput) itemLocationInput.value = fullLoc;
+
+        if (locSummary && locSummaryText) {
+          if (isComplete) {
+            locSummary.classList.remove("hidden");
+            locSummaryText.textContent = fullLoc;
+          } else {
+            locSummary.classList.add("hidden");
+          }
+        }
+      };
+
+      if (locFaculty) {
+        locFaculty.addEventListener("change", () => {
+          if (locFaculty.value) {
+            if (locStep2Wrapper) locStep2Wrapper.classList.remove("hidden");
+          } else {
+            if (locStep2Wrapper) locStep2Wrapper.classList.add("hidden");
+          }
+          if (locFloor) locFloor.selectedIndex = 0;
+          if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
+          if (locRoom) locRoom.selectedIndex = 0;
+          updateLocationSummary();
+        });
+      }
+
+      if (locFloor) {
+        locFloor.addEventListener("change", () => {
+          const floor = locFloor.value;
+          if (floor) {
+            if (locStep3Wrapper) locStep3Wrapper.classList.remove("hidden");
+            if (locRoom) {
+              const floorPrefix = floor === 'trệt' ? 'Trệt ' : `${floor}0`;
+              locRoom.innerHTML = `
+                <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
+                <optgroup label="Phòng học">
+                  <option value="Phòng ${floor === 'trệt' ? '001' : floor + '01'}">Phòng ${floor === 'trệt' ? '001' : floor + '01'}</option>
+                  <option value="Phòng ${floor === 'trệt' ? '002' : floor + '02'}">Phòng ${floor === 'trệt' ? '002' : floor + '02'}</option>
+                  <option value="Phòng ${floor === 'trệt' ? '003' : floor + '03'}">Phòng ${floor === 'trệt' ? '003' : floor + '03'}</option>
+                  <option value="Phòng ${floor === 'trệt' ? '004' : floor + '04'}">Phòng ${floor === 'trệt' ? '004' : floor + '04'}</option>
+                  <option value="Phòng Máy ${floor}">Phòng Máy ${floor}</option>
+                  <option value="Hành lang ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor}">Hành lang ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor}</option>
+                </optgroup>
+                <optgroup label="Hội trường">
+                  <option value="Hội trường Rùa">Hội trường Rùa</option>
+                  <option value="Hội trường Lớn">Hội trường Lớn</option>
+                  <option value="Hội trường C1">Hội trường C1</option>
+                  <option value="Hội trường Khoa">Hội trường Khoa</option>
+                  <option value="Hội trường 1">Hội trường 1</option>
+                  <option value="Hội trường 2">Hội trường 2</option>
+                </optgroup>
+              `;
+            }
+          } else {
+            if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
+            if (locRoom) locRoom.selectedIndex = 0;
+          }
+          updateLocationSummary();
+        });
+      }
+
+      if (locRoom) {
+        locRoom.addEventListener("change", updateLocationSummary);
+      }
+
+      // ==========================================
+      // 6. KÉO THẢ ẢNH FRONTEND HOÀN CHỈNH
+      // ==========================================
+      const dropZone = document.getElementById("drop-zone");
+      const fileInput = document.getElementById("file-upload-input");
+      const slots = document.querySelectorAll(".image-slot");
+      let uploadedImages = [];
+
+      const renderSlots = () => {
+        slots.forEach((slot, idx) => {
+          if (uploadedImages[idx]) {
+            slot.innerHTML = `
+              <img src="${uploadedImages[idx]}" class="w-full h-full object-cover rounded-lg" alt="Ảnh ${idx + 1}" />
+              <button type="button" class="remove-photo-btn absolute top-1 right-1 w-6 h-6 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" data-idx="${idx}" title="Xóa ảnh">
+                <span class="material-symbols-outlined text-[14px]">close</span>
+              </button>
+            `;
+            const rmBtn = slot.querySelector(".remove-photo-btn");
+            if (rmBtn) {
+              rmBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                uploadedImages.splice(idx, 1);
+                renderSlots();
+              });
+            }
+          } else {
+            slot.innerHTML = `
+              <span class="material-symbols-outlined text-[20px]">add</span>
+              <span class="text-[11px] mt-0.5">Thêm ảnh ${idx + 1}</span>
+            `;
+          }
+        });
+      };
+
+      const handleFiles = (files) => {
+        Array.from(files).forEach(file => {
+          if (file.type.startsWith("image/") && uploadedImages.length < 4) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              if (uploadedImages.length < 4) {
+                uploadedImages.push(e.target.result);
+                renderSlots();
+              }
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      };
+
+      if (dropZone && fileInput) {
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        ["dragenter", "dragover"].forEach(eventName => {
+          dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add("border-primary", "bg-primary/5", "scale-[1.01]");
+          });
+        });
+
+        ["dragleave", "drop"].forEach(eventName => {
+          dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove("border-primary", "bg-primary/5", "scale-[1.01]");
+          });
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          const dt = e.dataTransfer;
+          if (dt && dt.files) {
+            handleFiles(dt.files);
+          }
+        });
+
+        fileInput.addEventListener("change", (e) => {
+          if (e.target.files) {
+            handleFiles(e.target.files);
+          }
+        });
+      }
+
+      slots.forEach(slot => {
+        slot.addEventListener("click", () => {
+          const idx = parseInt(slot.dataset.index, 10);
+          if (!uploadedImages[idx] && fileInput) {
+            fileInput.click();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
 </html>

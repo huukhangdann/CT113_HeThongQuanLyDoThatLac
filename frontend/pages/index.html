@@ -506,6 +506,37 @@
 
   <!-- Footer -->
   <app-footer></app-footer>
+
+  <!-- 10. Chặn và chuyển hướng sang login.html nếu ở trạng thái đăng xuất khi click vào card hoặc đăng tin -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
+      if (!isLoggedIn) {
+        const protectedSelectors = [
+          'a[href*="post-found.html"]',
+          'a[href*="post-lost.html"]',
+          'a[href*="find.html"]',
+          'a[href*="notifications.html"]',
+          'a[href*="requests.html"]',
+          '.group\\/left',
+          '.group\\/right',
+          'article'
+        ];
+
+        document.querySelectorAll(protectedSelectors.join(",")).forEach((el) => {
+          el.addEventListener(
+            "click",
+            (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.location.href = "login.html";
+            },
+            true
+          );
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

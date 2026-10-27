@@ -18,9 +18,16 @@ class AppHeader extends HTMLElement {
     // Kiểm tra trạng thái đăng nhập từ localStorage
     const isLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
 
+    // 10. Sau khi ở trạng thái đăng xuất chỉ có thể truy cập trang chủ còn nếu cố click vào các trang khác hay card, đăng tin thì lập tức nhảy sang trang đăng nhập
+    const allowedGuestPages = ["index.html", "login.html", "register.html", ""];
+    if (!isLoggedIn && !allowedGuestPages.includes(currentPath)) {
+      window.location.href = "login.html";
+      return;
+    }
+
     const userClusterHtml = isLoggedIn
       ? `
-        <span class="hidden sm:inline-block px-3 py-1 bg-stone-200/60 text-stone-700 rounded-md text-xs font-medium">SV Khu II</span>
+       
 
         <!-- Khung chứa Icon Chuông & Dropdown Popover (Relative Anchor) -->
         <div class="relative flex items-center">
@@ -36,7 +43,11 @@ class AppHeader extends HTMLElement {
           <!-- DROPDOWN POPUP THÔNG BÁO -->
           <div id="notif-dropdown" class="hidden absolute top-full mt-2 w-[360px] sm:w-[410px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left">
             <!-- Mũi tên liên kết trực tiếp với icon chuông -->
-            <div class="absolute -top-[7px] right-3 sm:right-[107px] w-3.5 h-3.5 bg-white border-t border-l border-[#e7e1df] transform rotate-45 z-20 pointer-events-none"></div>
+            <div class="absolute -top-2 right-3.5 sm:right-[107px] w-3.5 h-2 pointer-events-none z-20">
+              <svg class="w-full h-full block" viewBox="0 0 14 8" fill="none">
+                <path d="M0 8 L7 1 L14 8" fill="#ffffff" stroke="#e7e1df" stroke-width="1.2" stroke-linejoin="round" />
+              </svg>
+            </div>
 
             <!-- 1. Header Dropdown -->
             <div class="px-5 pt-4 pb-2 flex items-center justify-between bg-white relative rounded-t-2xl border-b border-[#f0edec]">
@@ -90,7 +101,11 @@ class AppHeader extends HTMLElement {
 
           <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white rounded-xl border border-[#e7e1df] shadow-xl text-left">
             <!-- Mũi tên liên kết với nút tài khoản người dùng -->
-            <div class="absolute -top-[7px] right-[77px] w-3.5 h-3.5 bg-[#f9fafb] border-t border-l border-[#e7e1df] transform rotate-45 z-20 pointer-events-none"></div>
+            <div class="absolute -top-2 right-[76px] w-3.5 h-2 pointer-events-none z-20">
+              <svg class="w-full h-full block" viewBox="0 0 14 8" fill="none">
+                <path d="M0 8 L7 1 L14 8" fill="#f9fafb" stroke="#e7e1df" stroke-width="1.2" stroke-linejoin="round" />
+              </svg>
+            </div>
             <div class="p-4 bg-gray-50/50 border-b border-[#e7e1df] rounded-t-xl">
               <h3 class="font-bold text-base text-[#1b1c1c]">Đặng Hữu Khang</h3>
               <p class="text-sm font-medium text-[#797675] mt-0.5">MSSV: B2404990</p>
@@ -158,11 +173,11 @@ class AppHeader extends HTMLElement {
           <!-- Navigation Links -->
           <nav class="hidden md:flex items-center gap-8 h-full">
             <a href="index.html" class="${getLinkClass("index.html")}">Trang chủ</a>
-            <a href="find.html" class="${getLinkClass("find.html")}">Tìm đồ</a>
-            <a href="post.html" class="${getLinkClass(["post.html", "post-lost.html", "post-found.html"])}">Đăng tin</a>
+            <a href="${isLoggedIn ? 'find.html' : 'login.html'}" class="${getLinkClass("find.html")}">Tìm đồ</a>
+            <a href="${isLoggedIn ? 'post.html' : 'login.html'}" class="${getLinkClass(["post.html", "post-lost.html", "post-found.html"])}">Đăng tin</a>
             
-            <!-- THÔNG BÁO: Active khi ở trang notifications.html hoặc requests.html -->
-            <a href="notifications.html" class="${getLinkClass(["notifications.html", "requests.html"])}">Thông báo</a>
+            <!-- THÔNG BÁO: Active khi ở trang notifications.html, requests.html, match-detail.html, request-detail.html hoặc claim.html -->
+            <a href="${isLoggedIn ? 'notifications.html' : 'login.html'}" class="${getLinkClass(["notifications.html", "requests.html", "match-detail.html", "request-detail.html", "claim.html"])}">Thông báo</a>
           </nav>
 
           <!-- User Info & Action Cluster -->
@@ -372,7 +387,7 @@ class AppHeader extends HTMLElement {
           e.stopPropagation();
           const id = Number(btn.dataset.id);
           const menu = notifListContainer.querySelector(`.notif-item-menu[data-id="${id}"]`);
-          
+
           notifListContainer.querySelectorAll(".notif-item-menu").forEach((m) => {
             if (m !== menu) m.classList.add("hidden");
           });
@@ -595,3 +610,23 @@ class AppFooter extends HTMLElement {
 
 customElements.define("app-header", AppHeader);
 customElements.define("app-footer", AppFooter);
+
+// 7. Ở các ô nhập liệu khi click vào ô thì bắt đầu cho nhập (ví dụ ngày và giờ)
+if (typeof window !== "undefined") {
+  const initDatePickers = () => {
+    document.querySelectorAll('input[type="date"], input[type="time"]').forEach(input => {
+      input.style.cursor = 'pointer';
+      if (!input.dataset.hasPickerHandler) {
+        input.dataset.hasPickerHandler = "true";
+        input.addEventListener('click', function() {
+          if (typeof this.showPicker === 'function') {
+            try { this.showPicker(); } catch(e) {}
+          }
+        });
+      }
+    });
+  };
+  document.addEventListener("DOMContentLoaded", initDatePickers);
+  window.addEventListener("load", initDatePickers);
+  setTimeout(initDatePickers, 500);
+}
