@@ -442,9 +442,9 @@
             </div>
             <div class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-between text-xs">
               <span class="text-[#727873] font-medium">Đang giữ hộ</span>
-              <span
+              <a href="claim.html?id=find-1&from=find.html"
                 class="font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">Xem
-                chi tiết →</span>
+                chi tiết →</a>
             </div>
           </div>
         </article>
@@ -483,9 +483,9 @@
             </div>
             <div class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-between text-xs">
               <span class="text-[#727873] font-medium">Chờ bàn giao</span>
-              <span
+              <a href="claim.html?id=find-2&from=find.html"
                 class="font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">Xem
-                chi tiết →</span>
+                chi tiết →</a>
             </div>
           </div>
         </article>
@@ -524,9 +524,9 @@
             </div>
             <div class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-between text-xs">
               <span class="text-[#727873] font-medium">Đang giữ hộ</span>
-              <span
+              <a href="claim.html?id=find-3&from=find.html"
                 class="font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">Xem
-                chi tiết →</span>
+                chi tiết →</a>
             </div>
           </div>
         </article>
@@ -565,9 +565,9 @@
             </div>
             <div class="pt-4 mt-4 border-t border-[#f1edea] flex items-center justify-between text-xs">
               <span class="text-[#727873] font-medium">Chờ liên hệ</span>
-              <span
+              <a href="claim.html?id=find-4&from=find.html"
                 class="font-semibold text-[#35483d] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">Xem
-                chi tiết →</span>
+                chi tiết →</a>
             </div>
           </div>
         </article>
@@ -643,90 +643,10 @@
   <!-- VỊ TRÍ FOOTER CHUNG SẼ ĐƯỢC TIÊM VÀO -->
   <app-footer></app-footer>
 
-  <!-- VIEW 4: MODAL DETAIL ITEM -->
-  <div id="item-modal"
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity hidden">
-    <div
-      class="relative w-full max-w-3xl bg-white rounded-2xl border border-[#e7e1df] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-      <!-- Modal Header -->
-      <div class="px-6 py-4 border-b border-[#e7e1df] flex items-center justify-between bg-[#fcf9f8]">
-        <div class="flex items-center gap-2.5">
-          <span class="w-3 h-3 rounded-full bg-[#35483d]"></span>
-          <span class="text-xs font-bold uppercase tracking-wider text-[#35483d]">Chi tiết bài đăng nhặt được đồ</span>
-        </div>
-        <button onclick="closeItemDetail()" title="Đóng modal"
-          class="w-8 h-8 rounded-full hover:bg-[#e7e1df] flex items-center justify-center text-[#727873] hover:text-[#1b1c1b] transition-colors">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-6">
-        <div class="w-full aspect-16/9 rounded-xl overflow-hidden bg-[#f6f3f2] border border-[#e7e1df]">
-          <img id="modal-image"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y"
-            alt="Ảnh chi tiết đồ vật nhặt được" class="w-full h-full object-cover" />
-        </div>
-
-        <div>
-          <div class="flex flex-wrap items-center gap-2 mb-2">
-            <span id="modal-category"
-              class="px-2.5 py-1 rounded-md text-xs font-semibold bg-[#e8f0eb] text-[#35483d]">Ví tiền / Bóp da</span>
-            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800">Đã tiếp nhận xác
-              minh</span>
-            <span class="text-xs text-[#727873]">Mã lưu trữ: K2-C1-042</span>
-          </div>
-          <h2 id="modal-title" class="text-xl md:text-2xl font-bold text-[#1b1c1b]">
-            Ví da nam màu đen gấp đôi có chứa thẻ sinh viên CTU
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-[#fcf9f8] border border-[#e7e1df] text-sm">
-          <div>
-            <span class="text-xs text-[#727873] block mb-0.5">Địa điểm nhặt:</span>
-            <p id="modal-location" class="font-semibold text-[#1b1c1b]">
-              Khoa CNTT&TT, Tầng 2, Phòng 204
-            </p>
-          </div>
-          <div>
-            <span class="text-xs text-[#727873] block mb-0.5">Thời gian nhặt được:</span>
-            <p id="modal-time" class="font-semibold text-[#1b1c1b]">
-              Hôm nay, 09:30
-            </p>
-          </div>
-          <div class="sm:col-span-2">
-            <span class="text-xs text-[#727873] block mb-0.5">Tình trạng đồ vật lúc nhặt:</span>
-            <p id="modal-condition" class="font-medium text-[#1b1c1b]">
-              Ví da đen hiệu Pedro, hơi sờn góc, bên trong có 1 thẻ SV CTU mã
-              B210xxxx, 1 thẻ xe máy.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="px-6 py-4 border-t border-[#e7e1df] bg-[#fcf9f8] flex items-center justify-end gap-3">
-        <button onclick="closeItemDetail()"
-          class="px-4 py-2 rounded-lg border border-[#e7e1df] hover:bg-[#e7e1df] text-sm font-medium text-[#727873] hover:text-[#1b1c1b] transition-colors">
-          Đóng
-        </button>
-        <button
-          class="px-5 py-2 rounded-lg bg-[#35483d] hover:bg-[#233229] text-white text-sm font-semibold transition-colors shadow-sm">
-          Liên hệ nhận lại đồ
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- SCRIPT ĐIỀU KHIỂN TRANG FIND -->
   <script>
     function openItemDetail(id) {
-      document.getElementById("item-modal").classList.remove("hidden");
-    }
-    function closeItemDetail() {
-      document.getElementById("item-modal").classList.add("hidden");
+      window.location.href = `claim.html?id=find-${id}&from=find.html`;
     }
     function clearSearchInput() {
       document.getElementById("search-input").value = "";

@@ -44,6 +44,7 @@
   <!-- CSS & Web Component Header/Footer chung -->
   <link href="../css/index.css" rel="stylesheet" />
   <script src="../js/components.js"></script>
+  <script src="../js/items-data.js"></script>
   <script src="../js/main.js"></script>
 
   <style>
@@ -76,14 +77,14 @@
   <app-header></app-header>
 
   <!-- =========================================================================
-       SUB-NAV BREADCRUMB (Điều hướng quay lại kết quả ghép nối)
+       SUB-NAV BREADCRUMB (Điều hướng quay lại trang trước linh hoạt)
        ========================================================================= -->
   <div class="w-full bg-[#fcf9f8] border-b border-[#e7e1df]/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-xs">
       <div class="flex items-center gap-2 text-[#797675]">
-        <a href="match-detail.html" class="hover:text-[#35483d] font-medium flex items-center gap-1 transition-colors">
+        <a id="backBtn" href="match-detail.html" class="hover:text-[#35483d] font-medium flex items-center gap-1 transition-colors">
           <span class="material-symbols-outlined text-base">chevron_left</span>
-          Quay lại kết quả ghép nối
+          <span id="backBtnText">Quay lại kết quả ghép nối</span>
         </a>
       </div>
     </div>
@@ -111,59 +112,48 @@
         <!-- KHU VỰC ẢNH (Ảnh thực tế của card 1 trong chi tiết kết quả ghép nối) -->
         <div class="space-y-3">
           <!-- 1 Ảnh chính to (Tỷ lệ aspect-[4/3], bo góc rounded-xl) -->
-          <div class="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#f0edec] border border-[#e7e1df] shadow-inner flex items-center justify-center group">
-            <img id="mainPhoto" alt="Ảnh thực tế chiếc ví da nam màu nâu"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          <div id="mainPhotoWrapper" class="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#f0edec] border border-[#e7e1df] shadow-inner flex items-center justify-center group">
+            <img id="mainPhoto" alt="Ảnh thực tế món đồ"
+              class="w-full h-full object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
               src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
 
-            <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm">
+            <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm select-none">
               <span class="material-symbols-outlined text-sm">photo_camera</span>
               Ảnh hiện trường nhặt được
             </div>
-            <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm">
+            <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm select-none">
               <span class="material-symbols-outlined text-sm">collections</span>
-              3 hình ảnh
+              <span id="photoCounter">3 hình ảnh</span>
             </div>
           </div>
 
-          <!-- 3 Ảnh phụ (Thumbnails) -->
-          <div class="grid grid-cols-3 gap-3">
+          <!-- Danh sách ảnh phụ (Thumbnails) -->
+          <div id="thumbsContainer" class="grid grid-cols-3 gap-3">
             <!-- Thumbnail 1 (Active) -->
             <button type="button" onclick="selectThumb(this, 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
               class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-[#35483d] p-0.5 bg-white shadow-sm flex items-center justify-center transition-all focus:outline-none cursor-pointer">
-              <img alt="Ví da nam góc chụp chính diện" class="w-full h-full object-cover rounded"
+              <img alt="Ảnh góc chụp 1" class="w-full h-full object-cover rounded"
                 src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
             </button>
             <!-- Thumbnail 2 -->
             <button type="button" onclick="selectThumb(this, 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
               class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border border-[#e7e1df] p-0.5 bg-[#fcf9f8] shadow-sm hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer">
-              <img alt="Ngăn bên trong ví" class="w-full h-full object-cover rounded"
+              <img alt="Ảnh góc chụp 2" class="w-full h-full object-cover rounded"
                 src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
             </button>
             <!-- Thumbnail 3 -->
             <button type="button" onclick="selectThumb(this, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
               class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border border-[#e7e1df] p-0.5 bg-[#fcf9f8] shadow-sm hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer">
-              <img alt="Vị trí nhặt được tại dãy bàn C1" class="w-full h-full object-cover rounded"
+              <img alt="Ảnh góc chụp 3" class="w-full h-full object-cover rounded"
                 src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
             </button>
           </div>
         </div>
 
-        <!-- Phân cách: Kẻ ngang mỏng -->
-        <hr class="border-t border-[#e7e1df] my-6">
-
         <!-- KHU VỰC THÔNG TIN BÀI ĐĂNG (Phía dưới) -->
-        <div>
-          <!-- Badges -->
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-[#f0edec] text-[#4a4746] border border-[#e7e1df]">
-              <span class="material-symbols-outlined text-sm">wallet</span>
-              Ví da
-            </span>
-          </div>
-
+        <div class="mt-6">
           <!-- Tiêu đề -->
-          <h1 class="font-extrabold text-2xl text-[#1b1c1c] tracking-tight mt-3 mb-4">
+          <h1 id="itemTitle" class="font-bold text-2xl text-[#1b1c1c] tracking-tight mb-4">
             Ví da nam màu nâu - Tòa C1
           </h1>
 
@@ -173,32 +163,32 @@
               <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">location_on</span>
               <div>
                 <span class="text-[#797675]">Địa điểm người kia nhặt được:</span>
-                <span class="font-semibold text-[#1b1c1c] ml-1">Khu II - Tòa C1 (Khoa CNTT&amp;TT)</span>
+                <span id="itemLocation" class="font-semibold text-[#1b1c1c] ml-1">Khu II - Tòa C1 (Khoa CNTT&amp;TT)</span>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
               <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">schedule</span>
               <div>
                 <span class="text-[#797675]">Thời gian đăng tin:</span>
-                <span class="font-semibold text-[#1b1c1c] ml-1">10 phút trước (Hôm nay, 14:25)</span>
+                <span id="itemTime" class="font-semibold text-[#1b1c1c] ml-1">10 phút trước (Hôm nay, 14:25)</span>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
               <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">apartment</span>
               <div>
                 <span class="text-[#797675]">Nơi lưu giữ:</span>
-                <span class="font-semibold text-[#1b1c1c] ml-1">Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành</span>
+                <span id="itemStorage" class="font-semibold text-[#1b1c1c] ml-1">Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành</span>
               </div>
             </div>
           </div>
 
-          <!-- Mô tả chi tiết -->
-          <div class="bg-[#fcf9f8] p-4 rounded-xl mt-5 border border-[#e7e1df]">
-            <div class="text-[11px] font-bold text-[#797675] uppercase tracking-wider mb-1.5 flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">notes</span>
-              Ghi chú mô tả của người nhặt:
+          <!-- Ghi chú mô tả của người nhặt (Tối giản chuẩn phong cách Apple) -->
+          <div class="mt-5 space-y-1.5">
+            <div class="text-xs font-semibold text-[#797675] flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base text-[#797675]">notes</span>
+              <span>Ghi chú mô tả của người nhặt:</span>
             </div>
-            <p class="text-sm text-[#4a4746] leading-relaxed italic">
+            <p id="itemNote" class="text-sm text-[#4a4746] leading-relaxed">
               "Mình nhặt được chiếc ví màu nâu ở khu vực dãy bàn tự học Tầng 2 Thư viện (khu tự học máy lạnh). Trong ví có một số thẻ cá nhân và giấy tờ sinh viên, hiện đã chuyển giao bảo quản an toàn để tránh thất lạc."
             </p>
           </div>
@@ -221,13 +211,13 @@
         <form onsubmit="event.preventDefault(); handleSubmitClaim();" class="space-y-5 flex-1 flex flex-col justify-between">
           <div class="space-y-5">
             
-            <!-- BOX CÂU HỎI BẢO MẬT (Nổi bật nền xanh nhạt) -->
-            <div class="bg-blue-50/80 border border-blue-200/80 p-4 rounded-xl shadow-xs">
-              <div class="flex items-center gap-2 text-blue-900 font-bold text-xs uppercase tracking-wider mb-1.5">
-                <span class="material-symbols-outlined text-base text-blue-700">lock</span>
-                Câu hỏi bảo mật từ người nhặt:
+            <!-- CÂU HỎI BẢO MẬT (Tối giản chuẩn phong cách Apple) -->
+            <div class="space-y-1.5 pb-2">
+              <div class="text-xs font-semibold text-[#797675] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base text-[#35483d]">lock</span>
+                <span>Câu hỏi bảo mật từ người nhặt:</span>
               </div>
-              <p class="text-sm font-semibold text-blue-950 italic pl-6 border-l-2 border-blue-400 my-1 leading-relaxed">
+              <p id="securityQuestion" class="text-base font-semibold text-[#1b1c1c] leading-relaxed">
                 "Mã số in trên thẻ sinh viên kẹp trong ví là gì?"
               </p>
             </div>
@@ -333,18 +323,66 @@
   </div>
 
   <script>
-    // Logic đổi ảnh thumbnail chính
-    function selectThumb(btn, imgUrl) {
+    // =========================================================================
+    // SLIDESHOW & AUTO-CYCLE THUMBNAILS (Tuần hoàn 5s mỗi ảnh)
+    // =========================================================================
+    let currentThumbsList = [];
+    let currentSlideIndex = 0;
+    let slideTimer = null;
+
+    function goToSlide(index, restartTimer = true) {
+      if (!currentThumbsList || currentThumbsList.length === 0) return;
+      currentSlideIndex = (index + currentThumbsList.length) % currentThumbsList.length;
+      const targetUrl = currentThumbsList[currentSlideIndex];
+
       const mainPhoto = document.getElementById('mainPhoto');
-      if (mainPhoto && imgUrl) {
-        mainPhoto.src = imgUrl;
+      if (mainPhoto) {
+        mainPhoto.style.opacity = '0.35';
+        setTimeout(() => {
+          mainPhoto.src = targetUrl;
+          mainPhoto.style.opacity = '1';
+        }, 150);
       }
-      document.querySelectorAll('.thumb-btn').forEach(b => {
-        b.classList.remove('border-[#35483d]', 'border-2');
-        b.classList.add('border-[#e7e1df]', 'border');
+
+      // Cập nhật trạng thái thumbnail active
+      const buttons = document.querySelectorAll('#thumbsContainer .thumb-btn');
+      buttons.forEach((btn, idx) => {
+        if (idx === currentSlideIndex) {
+          btn.className = 'thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-[#35483d] ring-2 ring-[#35483d]/25 p-0.5 bg-white shadow-sm flex items-center justify-center transition-all focus:outline-none cursor-pointer';
+        } else {
+          btn.className = 'thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border border-[#e7e1df] p-0.5 bg-white shadow-sm hover:border-[#35483d]/60 opacity-70 hover:opacity-100 flex items-center justify-center transition-all focus:outline-none cursor-pointer';
+        }
       });
-      btn.classList.add('border-[#35483d]', 'border-2');
-      btn.classList.remove('border-[#e7e1df]', 'border');
+
+      if (restartTimer) {
+        startAutoSlide();
+      }
+    }
+
+    function startAutoSlide() {
+      stopAutoSlide();
+      if (currentThumbsList && currentThumbsList.length > 1) {
+        slideTimer = setInterval(() => {
+          goToSlide(currentSlideIndex + 1, false);
+        }, 5000);
+      }
+    }
+
+    function stopAutoSlide() {
+      if (slideTimer) {
+        clearInterval(slideTimer);
+        slideTimer = null;
+      }
+    }
+
+    function selectThumb(btn, imgUrl) {
+      const idx = currentThumbsList.indexOf(imgUrl);
+      if (idx !== -1) {
+        goToSlide(idx, true);
+      } else {
+        const mainPhoto = document.getElementById('mainPhoto');
+        if (mainPhoto && imgUrl) mainPhoto.src = imgUrl;
+      }
     }
 
     // Đếm ký tự textarea
@@ -441,6 +479,107 @@
       document.getElementById('successModal').classList.add('hidden');
       window.location.href = 'notifications.html';
     }
+
+    // Render dữ liệu động từ URL params (?id=...&from=...)
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const itemId = urlParams.get('id') || 'match-default';
+      const fromPage = urlParams.get('from') || '';
+
+      // 1. Cập nhật nút quay lại (breadcrumb)
+      const backBtn = document.getElementById('backBtn');
+      const backBtnText = document.getElementById('backBtnText');
+
+      if (fromPage.includes('index.html') || fromPage === 'home') {
+        if (backBtn) backBtn.href = 'index.html';
+        if (backBtnText) backBtnText.textContent = 'Quay lại trang chủ';
+      } else if (fromPage.includes('find.html') || fromPage === 'find') {
+        if (backBtn) backBtn.href = 'find.html';
+        if (backBtnText) backBtnText.textContent = 'Quay lại trang tìm đồ';
+      } else {
+        // Mặc định hoặc từ kết quả ghép nối
+        if (backBtn) backBtn.href = fromPage || 'match-detail.html';
+        if (backBtnText) backBtnText.textContent = 'Quay lại kết quả ghép nối';
+      }
+
+      // 2. Lấy dữ liệu item
+      const db = window.CTU_ITEMS_DATABASE || {};
+      const item = db[itemId] || db['match-default'] || Object.values(db)[0];
+
+      if (!item) return;
+
+      // Cập nhật tiêu đề trang
+      document.title = `Xác minh nhận: ${item.title} - CTU Lost & Found`;
+
+      // Cập nhật ảnh chính
+      const mainPhoto = document.getElementById('mainPhoto');
+      if (mainPhoto && item.mainPhoto) {
+        mainPhoto.src = item.mainPhoto;
+        mainPhoto.alt = item.title;
+      }
+
+      // Cập nhật bộ đếm & danh sách ảnh phụ (thumbnails)
+      const photoCounter = document.getElementById('photoCounter');
+      currentThumbsList = (item.thumbnails && item.thumbnails.length > 0) ? item.thumbnails : [item.mainPhoto];
+      currentSlideIndex = 0;
+
+      if (photoCounter) {
+        photoCounter.textContent = `${currentThumbsList.length} hình ảnh`;
+      }
+
+      const thumbsContainer = document.getElementById('thumbsContainer');
+      if (thumbsContainer) {
+        thumbsContainer.innerHTML = '';
+        currentThumbsList.forEach((thumbUrl, idx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden ${
+            idx === 0 ? 'border-2 border-[#35483d] ring-2 ring-[#35483d]/25' : 'border border-[#e7e1df] opacity-70'
+          } p-0.5 bg-white shadow-sm hover:opacity-100 hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer`;
+          btn.onclick = function() { goToSlide(idx, true); };
+          btn.innerHTML = `<img alt="${item.title} - ảnh ${idx + 1}" class="w-full h-full object-cover rounded" src="${thumbUrl}" />`;
+          thumbsContainer.appendChild(btn);
+        });
+      }
+
+      // Khởi động tuần hoàn 5s tự động chuyển ảnh
+      startAutoSlide();
+
+      // Tương tác hover tạm dừng tuần hoàn
+      const photoBox = document.getElementById('mainPhotoWrapper');
+      if (photoBox) {
+        photoBox.addEventListener('mouseenter', stopAutoSlide);
+        photoBox.addEventListener('mouseleave', startAutoSlide);
+      }
+      if (thumbsContainer) {
+        thumbsContainer.addEventListener('mouseenter', stopAutoSlide);
+        thumbsContainer.addEventListener('mouseleave', startAutoSlide);
+      }
+
+      // Cập nhật thông tin chi tiết
+      const itemTitle = document.getElementById('itemTitle');
+      if (itemTitle && item.title) itemTitle.textContent = item.title;
+
+      const itemLocation = document.getElementById('itemLocation');
+      if (itemLocation && item.location) itemLocation.textContent = item.location;
+
+      const itemTime = document.getElementById('itemTime');
+      if (itemTime && item.time) itemTime.textContent = item.time;
+
+      const itemStorage = document.getElementById('itemStorage');
+      if (itemStorage && item.storage) itemStorage.textContent = item.storage;
+
+      const itemNote = document.getElementById('itemNote');
+      if (itemNote && item.note) itemNote.textContent = `"${item.note}"`;
+
+      // Cập nhật câu hỏi bảo mật
+      const securityQuestion = document.getElementById('securityQuestion');
+      if (securityQuestion && item.question) securityQuestion.textContent = `"${item.question}"`;
+
+      // Cập nhật placeholder câu trả lời
+      const answerInput = document.getElementById('answerInput');
+      if (answerInput && item.answerPlaceholder) answerInput.placeholder = item.answerPlaceholder;
+    });
   </script>
 
 </body>
