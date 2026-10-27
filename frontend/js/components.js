@@ -600,7 +600,7 @@ class AppHeader extends HTMLElement {
             html += `
               <div class="px-5 pt-4 pb-1.5 flex items-center justify-between bg-stone-50/60 border-y border-[#f0edec]">
                 <span class="text-xs font-bold text-[#4a4746] uppercase tracking-wider">Trước đó</span>
-                <span class="text-[11px] font-medium text-[#797675]">${earlierItems.length} thông báo</span>
+                <span class="text-[11px] font-medium text-[#797675]">${earlierItems.length} Bài đăng</span>
               </div>
               ${earlierItems.map((item, idx) => renderItemHtml(item, idx, earlierItems.length)).join("")}
             `;
@@ -915,9 +915,9 @@ if (typeof window !== "undefined") {
       input.style.cursor = 'pointer';
       if (!input.dataset.hasPickerHandler) {
         input.dataset.hasPickerHandler = "true";
-        input.addEventListener('click', function() {
+        input.addEventListener('click', function () {
           if (typeof this.showPicker === 'function') {
-            try { this.showPicker(); } catch(e) {}
+            try { this.showPicker(); } catch (e) { }
           }
         });
       }

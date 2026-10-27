@@ -14,6 +14,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
   <link href="../css/index.css" rel="stylesheet" />
+  <!-- Map CSS -->
+  <link href="../map/map.css" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
 
@@ -591,6 +593,26 @@
           </button>
         </div>
       </div>
+
+      <!-- BẢN ĐỒ TƯƠNG TÁC 3 CẤP ĐỘ KHU II (Được định vị theo yêu cầu) -->
+      <div class="pt-6 mt-6 border-t border-[#e7e1df]">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-[#1b1c1b] flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#35483d] text-[22px]">map</span>
+              <span>Bản đồ vị trí đồ nhặt được tại Khu II</span>
+            </h3>
+            <p class="text-xs text-[#727873] mt-0.5">
+              Khám phá nhanh vị trí đồ vật nhặt được tại Khu II - Đại học Cần Thơ theo từng tòa nhà, tầng và phòng học
+            </p>
+          </div>
+        </div>
+
+        <!-- Khung chứa Map 3 cấp độ -->
+        <div id="map-viewport-container" class="rounded-2xl overflow-hidden border border-[#e7e1df] shadow-xs">
+          <!-- Render tự động bởi map.js -->
+        </div>
+      </div>
     </section>
 
     <!-- VIEW 3A: LOADING STATE -->
@@ -1034,6 +1056,10 @@
       };
     });
   </script>
+
+  <!-- Bản đồ tương tác 3 cấp độ Scripts -->
+  <script src="../map/map-data.js"></script>
+  <script src="../map/map.js"></script>
 </body>
 
 </html>

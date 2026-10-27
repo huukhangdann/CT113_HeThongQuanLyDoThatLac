@@ -1,0 +1,703 @@
+/* ===================================================================
+   BẢN ĐỒ TƯƠNG TÁC 3 CẤP ĐỘ - CTU LOST & FOUND
+   Cấp 1: Ảnh sơ đồ thực tế ĐHCT Khu II + Chấm đỏ định vị
+   Cấp 2: Mặt đứng 2D tối giản (Hình chữ nhật phân tầng bằng gạch ngang)
+   Cấp 3: Sơ đồ phòng học (Grid layout + Popover chi tiết món đồ)
+   =================================================================== */
+
+/* === RESET & BASE CONTAINER === */
+.map-viewport-wrapper {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e7e1df;
+}
+
+/* === BREADCRUMB THANH ĐIỀU HƯỚNG === */
+.map-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #727873;
+  padding: 16px 20px 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #f6f3f2;
+}
+.map-breadcrumb a {
+  color: #35483d;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.map-breadcrumb a:hover {
+  text-decoration: underline;
+  color: #233229;
+}
+.map-breadcrumb .sep {
+  color: #c5c0be;
+  font-size: 12px;
+  user-select: none;
+}
+.map-breadcrumb .current {
+  color: #1b1c1b;
+  font-weight: 700;
+}
+
+/* === THANH CÔNG CỤ TOOLBAR (Nút quay lại + Tiêu đề) === */
+.map-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: #fcfbfb;
+  border-bottom: 1px solid #e7e1df;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.map-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #d4ccc8;
+  background: #ffffff;
+  color: #35483d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.map-back-btn:hover {
+  background: #f3efe9;
+  border-color: #35483d;
+  transform: translateX(-2px);
+}
+.map-back-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+.map-toolbar-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.map-toolbar-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b1c1b;
+}
+.map-toolbar-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: #727873;
+  padding: 2px 8px;
+  background: #f0edec;
+  border-radius: 20px;
+}
+
+/* === THANH THÔNG TIN GỢI Ý (Info Bar) === */
+.map-info-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fbfbfb;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: #4a4746;
+  border-bottom: 1px solid #f0edec;
+}
+.map-info-bar .material-symbols-outlined {
+  font-size: 18px;
+  color: #35483d;
+  flex-shrink: 0;
+}
+
+/* ===================================================================
+   CẤP 1: ẢNH BẢN ĐỒ THỰC TẾ + CHẤM ĐỎ TRÊN MAP
+   =================================================================== */
+.campus-map-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.campus-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Lớp phủ chứa chấm đỏ định vị */
+.campus-pins-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Chấm đỏ định vị trên bản đồ */
+.campus-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.campus-pin:hover {
+  transform: translate(-50%, -50%) scale(1.18);
+  z-index: 30;
+}
+
+/* Vòng tròn nhấp nháy (pulse) phát sáng */
+.campus-pin-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38px;
+  height: 38px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.35);
+  animation: campus-pulse-anim 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes campus-pulse-anim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.9;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Chấm đỏ chính chứa số lượng */
+.campus-pin-badge {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.45), 0 0 0 2px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  user-select: none;
+}
+
+/* Nhãn tên tòa nhà dưới chấm đỏ */
+.campus-pin-label {
+  margin-top: 4px;
+  background: rgba(27, 28, 27, 0.85);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  letter-spacing: -0.2px;
+  pointer-events: none;
+}
+
+/* Chấm xám nhỏ cho tòa nhà chưa có báo nhặt (nếu hiển thị) */
+.campus-pin.pin-empty {
+  opacity: 0.55;
+}
+.campus-pin.pin-empty .campus-pin-badge {
+  background: #727873;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  border: 1.5px solid #ffffff;
+}
+.campus-pin.pin-empty .campus-pin-pulse {
+  display: none;
+}
+.campus-pin.pin-empty .campus-pin-label {
+  display: none;
+}
+.campus-pin.pin-empty:hover {
+  opacity: 1;
+}
+.campus-pin.pin-empty:hover .campus-pin-label {
+  display: block;
+}
+
+/* Tooltip hiển thị khi hover chấm đỏ */
+.campus-pin-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid #e7e1df;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.18s ease;
+  z-index: 50;
+  text-align: center;
+}
+.campus-pin:hover .campus-pin-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-2px);
+}
+.campus-pin-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+.campus-pin-tooltip .tt-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1b1c1b;
+}
+.campus-pin-tooltip .tt-count {
+  font-size: 11px;
+  color: #dc2626;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+/* Chú thích map */
+.map-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px 20px;
+  background: #fbfbfb;
+  border-top: 1px solid #e7e1df;
+  font-size: 12px;
+  color: #4a4746;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-dot-red {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+}
+.legend-dot-gray {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #a09a97;
+}
+
+/* ===================================================================
+   CẤP 2: MẶT ĐỨNG 2D TỐI GIẢN (Hình chữ nhật phân tầng bằng gạch ngang)
+   =================================================================== */
+.elevation-container {
+  padding: 32px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #faf8f7;
+}
+
+/* Khối hình chữ nhật 2D đơn giản phân tầng */
+.elevation-rect-building {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border: 2px solid #35483d;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Hàng ngang đại diện cho 1 tầng */
+.elevation-floor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e7e1df;
+  background: #ffffff;
+  transition: background 0.15s ease, border-left 0.15s ease;
+  position: relative;
+  cursor: default;
+}
+
+.elevation-floor-row:last-child {
+  border-bottom: none;
+}
+
+/* Tầng có đồ nhặt được -> Click được, có viền nổi bật */
+.elevation-floor-row.has-items {
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.elevation-floor-row.has-items:hover {
+  background: #fef2f2;
+  border-left: 5px solid #dc2626;
+  padding-left: 17px;
+}
+
+/* Cột trái: Tên tầng (Tầng 5, Tầng 4, Tầng 1 / Trệt) */
+.floor-col-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1b1c1b;
+}
+
+/* Cột phải: Trạng thái tầng */
+.floor-col-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Chấm đỏ nhấp nháy ở tầng có đồ */
+.floor-red-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+  animation: floor-dot-pulse 1.8s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes floor-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.15);
+  }
+}
+
+.floor-items-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.floor-rooms-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: #4a4746;
+  background: #f6f3f2;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+
+.floor-action-arrow {
+  color: #dc2626;
+  font-size: 18px;
+  transition: transform 0.15s;
+}
+
+.elevation-floor-row.has-items:hover .floor-action-arrow {
+  transform: translateX(3px);
+}
+
+.floor-empty-text {
+  font-size: 12px;
+  color: #a09a97;
+  font-style: italic;
+}
+
+/* ===================================================================
+   CẤP 3: SƠ ĐỒ MẶT BẰNG PHÒNG HỌC (Floor Plan Grid)
+   =================================================================== */
+.floorplan-container {
+  padding: 24px 20px 32px;
+  background: #faf8f7;
+}
+
+.floorplan-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.floorplan-header {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.floorplan-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b1c1b;
+}
+
+/* Grid phòng học */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1.5px solid #d4ccc8;
+}
+
+/* Ô phòng học */
+.room-cell {
+  position: relative;
+  min-height: 85px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e7e1df;
+  background: #faf8f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.room-cell.type-hall {
+  background: #f4f1ee;
+  border-style: dashed;
+}
+
+.room-cell.type-stairs {
+  background: #f1edea;
+}
+
+.room-cell.type-lab {
+  background: #f6f8f6;
+  border-color: #d1ded4;
+}
+
+.room-cell.has-item {
+  border-color: #dc2626;
+  background: #fff5f5;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.12);
+}
+
+.room-cell.has-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.2);
+  border-color: #b91c1c;
+}
+
+.room-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.room-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b1c1b;
+}
+
+.room-type-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: #727873;
+  text-transform: uppercase;
+}
+
+/* Chấm đỏ trong phòng có đồ */
+.room-item-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: #dc2626;
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.3);
+}
+
+.room-item-pin .pin-dot-blink {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: room-dot-blink 1s infinite alternate;
+}
+
+@keyframes room-dot-blink {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* ===================================================================
+   POPOVER CHI TIẾT MÓN ĐỒ
+   =================================================================== */
+.item-popover-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.item-popover-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.item-popover-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e7e1df;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.97);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item-popover-overlay.visible .item-popover-card {
+  transform: translateY(0) scale(1);
+}
+
+.popover-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #f6f3f2;
+}
+
+.popover-body {
+  padding: 18px 20px;
+}
+
+.popover-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: #eef3ef;
+  color: #35483d;
+  margin-bottom: 8px;
+}
+
+.popover-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b1c1b;
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.popover-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: #4a4746;
+  margin-bottom: 16px;
+}
+
+.popover-info-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.popover-info-item .material-symbols-outlined {
+  font-size: 16px;
+  color: #727873;
+}
+
+.popover-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #f0edec;
+  padding-top: 14px;
+}
+
+.popover-close-btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #e7e1df;
+  background: #fcf9f8;
+  color: #727873;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.popover-detail-btn {
+  padding: 7px 16px;
+  border-radius: 8px;
+  background: #35483d;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.15s;
+}
+
+.popover-detail-btn:hover {
+  background: #233229;
+}
