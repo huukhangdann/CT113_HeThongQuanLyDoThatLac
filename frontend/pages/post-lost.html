@@ -245,12 +245,14 @@
                   <div id="primary-color-swatch"
                     class="h-22 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner bg-[#f6f3f2]"
                     title="Nhấp để chọn màu chủ đạo">
-                    <span id="primary-swatch-placeholder" class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
+                    <span id="primary-swatch-placeholder"
+                      class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
                       <span class="material-symbols-outlined text-[20px] text-[#35483d]">palette</span>
                       <span>Nhấp để chọn màu</span>
                     </span>
                     <!-- Icon bút chỉnh sửa khi đã chọn màu -->
-                    <div id="primary-swatch-edit-icon" class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
+                    <div id="primary-swatch-edit-icon"
+                      class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
                       <span class="material-symbols-outlined text-[13px]">edit</span>
                     </div>
                   </div>
@@ -259,7 +261,8 @@
                   <input type="color" id="primary-color" name="primary-color" class="sr-only" />
 
                   <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
-                  <div class="mt-2.5 flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
+                  <div
+                    class="mt-2.5 flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
                     <span class="text-[#35483d] font-bold text-xs uppercase tracking-wider">HEX</span>
                     <span id="primary-hex-val" class="text-[#1b1c1b] font-bold tracking-wider text-sm">Chưa chọn</span>
                   </div>
@@ -298,14 +301,15 @@
             </div>
 
             <!-- Ô NHẬP ĐỊA ĐIỂM NGHI MẤT ĐỒNG BỘ: Chọn khoa -> Chọn tầng mấy -> Chọn phòng (có option hội trường) -->
-            <div class="space-y-3 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/60" id="location-cascade-group">
+            <div class="space-y-3 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/60"
+              id="location-cascade-group">
               <div class="flex items-center justify-between">
                 <label class="block text-label-action text-on-surface font-semibold text-xs">
                   Địa điểm nghi mất <span class="text-error font-bold text-red-600">*</span>
                 </label>
                 <span class="text-[11px] text-secondary">Chọn tuần tự</span>
               </div>
-              
+
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                 <!-- Bước 1: Chọn Khoa (Luôn hiển thị) -->
                 <div class="space-y-1" id="loc-step-1-wrapper">
@@ -449,22 +453,30 @@
             <!-- Khung tải ảnh 4 slot xem trước -->
             <div class="grid grid-cols-2 gap-2.5 pt-1" id="image-slots-grid">
               <!-- Slot 1 -->
-              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="0">
+              <div
+                class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
+                data-index="0">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 <span class="text-[11px] mt-0.5">Thêm ảnh 1</span>
               </div>
               <!-- Slot 2 -->
-              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="1">
+              <div
+                class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
+                data-index="1">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 <span class="text-[11px] mt-0.5">Thêm ảnh 2</span>
               </div>
               <!-- Slot 3 -->
-              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="2">
+              <div
+                class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
+                data-index="2">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 <span class="text-[11px] mt-0.5">Thêm ảnh 3</span>
               </div>
               <!-- Slot 4 -->
-              <div class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden" data-index="3">
+              <div
+                class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
+                data-index="3">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 <span class="text-[11px] mt-0.5">Thêm ảnh 4</span>
               </div>
@@ -714,7 +726,7 @@
         const room = locRoom ? locRoom.value : "";
 
         const isComplete = Boolean(faculty && floor && room);
-        const fullLoc = isComplete 
+        const fullLoc = isComplete
           ? `${faculty} - ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor} - ${room}`
           : "";
 

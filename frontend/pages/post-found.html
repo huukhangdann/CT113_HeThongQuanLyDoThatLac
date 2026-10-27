@@ -1,804 +1,714 @@
 <!doctype html>
 <html class="light" lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Đăng tin nhặt đồ | CTU Lost & Found - Đại học Cần Thơ</title>
 
-    <!-- Google Fonts: Be Vietnam Pro & Material Symbols -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Đăng tin nhặt đồ | CTU Lost & Found - Đại học Cần Thơ</title>
 
-    <!-- Tailwind CSS v3 -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-      select {
-        background-image: none !important;
-      }
-    </style>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              surface: "#fcf9f8",
-              "on-tertiary-fixed": "#171d19",
-              "on-primary-fixed": "#0d1f16",
-              "inverse-surface": "#303030",
-              "on-primary-container": "#a1b6a8",
-              primary: "#1f3227",
-              "surface-dim": "#dcd9d9",
-              "secondary-container": "#e4e3db",
-              "tertiary-fixed-dim": "#c2c8c2",
-              "tertiary-fixed": "#dee4de",
-              "on-secondary": "#ffffff",
-              "inverse-primary": "#b6ccbd",
-              "inverse-on-surface": "#f3f0ef",
-              "on-surface-variant": "#424844",
-              "surface-container-high": "#eae7e7",
-              "outline-variant": "#c3c8c2",
-              "on-tertiary-container": "#acb2ad",
-              "surface-container": "#f0eded",
-              "on-error-container": "#93000a",
-              background: "#fcf9f8",
-              "tertiary-container": "#3f4541",
-              "on-primary-fixed-variant": "#384b40",
-              "on-secondary-fixed": "#1b1c18",
-              "on-secondary-container": "#64655f",
-              "on-secondary-fixed-variant": "#474742",
-              "on-error": "#ffffff",
-              "surface-container-highest": "#e4e2e1",
-              outline: "#737874",
-              secondary: "#5e5f59",
-              error: "#ba1a1a",
-              "primary-container": "#35483d",
-              "surface-container-lowest": "#ffffff",
-              "secondary-fixed-dim": "#c8c7c0",
-              "on-background": "#1b1c1c",
-              "surface-bright": "#fcf9f8",
-              "surface-variant": "#e4e2e1",
-              "on-primary": "#ffffff",
-              "on-tertiary-fixed-variant": "#424844",
-              "secondary-fixed": "#e4e3db",
-              "primary-fixed": "#d2e8d9",
-              "surface-tint": "#4f6357",
-              tertiary: "#292f2b",
-              "error-container": "#ffdad6",
-              "on-surface": "#1b1c1c",
-              "primary-fixed-dim": "#b6ccbd",
-              "on-tertiary": "#ffffff",
-              "surface-container-low": "#f6f3f2",
-            },
-            fontFamily: {
-              "headline-hero-mobile": ["Be Vietnam Pro"],
-              "label-action": ["Be Vietnam Pro"],
-              "headline-section-mobile": ["Be Vietnam Pro"],
-              "body-compact": ["Be Vietnam Pro"],
-              "title-item": ["Be Vietnam Pro"],
-              "caption-meta": ["Be Vietnam Pro"],
-              "headline-hero": ["Be Vietnam Pro"],
-              "body-default": ["Be Vietnam Pro"],
-              "headline-section": ["Be Vietnam Pro"],
-            },
-            fontSize: {
-              "headline-hero-mobile": [
-                "32px",
-                {
-                  lineHeight: "40px",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "700",
-                },
-              ],
-              "label-action": [
-                "13px",
-                {
-                  lineHeight: "18px",
-                  letterSpacing: "0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "headline-section-mobile": [
-                "20px",
-                {
-                  lineHeight: "28px",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "body-compact": [
-                "14px",
-                { lineHeight: "22px", fontWeight: "400" },
-              ],
-              "title-item": [
-                "16px",
-                {
-                  lineHeight: "24px",
-                  letterSpacing: "-0.005em",
-                  fontWeight: "600",
-                },
-              ],
-              "caption-meta": [
-                "12px",
-                { lineHeight: "16px", fontWeight: "400" },
-              ],
-              "headline-hero": [
-                "44px",
-                {
-                  lineHeight: "52px",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                },
-              ],
-              "body-default": [
-                "15px",
-                { lineHeight: "24px", fontWeight: "400" },
-              ],
-              "headline-section": [
-                "24px",
-                {
-                  lineHeight: "32px",
-                  letterSpacing: "-0.015em",
-                  fontWeight: "600",
-                },
-              ],
-            },
+  <!-- Google Fonts: Be Vietnam Pro & Material Symbols -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    select {
+      background-image: none !important;
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            surface: "#fcf9f8",
+            "on-tertiary-fixed": "#171d19",
+            "on-primary-fixed": "#0d1f16",
+            "inverse-surface": "#303030",
+            "on-primary-container": "#a1b6a8",
+            primary: "#1f3227",
+            "surface-dim": "#dcd9d9",
+            "secondary-container": "#e4e3db",
+            "tertiary-fixed-dim": "#c2c8c2",
+            "tertiary-fixed": "#dee4de",
+            "on-secondary": "#ffffff",
+            "inverse-primary": "#b6ccbd",
+            "inverse-on-surface": "#f3f0ef",
+            "on-surface-variant": "#424844",
+            "surface-container-high": "#eae7e7",
+            "outline-variant": "#c3c8c2",
+            "on-tertiary-container": "#acb2ad",
+            "surface-container": "#f0eded",
+            "on-error-container": "#93000a",
+            background: "#fcf9f8",
+            "tertiary-container": "#3f4541",
+            "on-primary-fixed-variant": "#384b40",
+            "on-secondary-fixed": "#1b1c18",
+            "on-secondary-container": "#64655f",
+            "on-secondary-fixed-variant": "#474742",
+            "on-error": "#ffffff",
+            "surface-container-highest": "#e4e2e1",
+            outline: "#737874",
+            secondary: "#5e5f59",
+            error: "#ba1a1a",
+            "primary-container": "#35483d",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#c8c7c0",
+            "on-background": "#1b1c1c",
+            "surface-bright": "#fcf9f8",
+            "surface-variant": "#e4e2e1",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#424844",
+            "secondary-fixed": "#e4e3db",
+            "primary-fixed": "#d2e8d9",
+            "surface-tint": "#4f6357",
+            tertiary: "#292f2b",
+            "error-container": "#ffdad6",
+            "on-surface": "#1b1c1c",
+            "primary-fixed-dim": "#b6ccbd",
+            "on-tertiary": "#ffffff",
+            "surface-container-low": "#f6f3f2",
+          },
+          fontFamily: {
+            "headline-hero-mobile": ["Be Vietnam Pro"],
+            "label-action": ["Be Vietnam Pro"],
+            "headline-section-mobile": ["Be Vietnam Pro"],
+            "body-compact": ["Be Vietnam Pro"],
+            "title-item": ["Be Vietnam Pro"],
+            "caption-meta": ["Be Vietnam Pro"],
+            "headline-hero": ["Be Vietnam Pro"],
+            "body-default": ["Be Vietnam Pro"],
+            "headline-section": ["Be Vietnam Pro"],
+          },
+          fontSize: {
+            "headline-hero-mobile": [
+              "32px",
+              {
+                lineHeight: "40px",
+                letterSpacing: "-0.01em",
+                fontWeight: "700",
+              },
+            ],
+            "label-action": [
+              "13px",
+              {
+                lineHeight: "18px",
+                letterSpacing: "0.01em",
+                fontWeight: "600",
+              },
+            ],
+            "headline-section-mobile": [
+              "20px",
+              {
+                lineHeight: "28px",
+                letterSpacing: "-0.01em",
+                fontWeight: "600",
+              },
+            ],
+            "body-compact": [
+              "14px",
+              { lineHeight: "22px", fontWeight: "400" },
+            ],
+            "title-item": [
+              "16px",
+              {
+                lineHeight: "24px",
+                letterSpacing: "-0.005em",
+                fontWeight: "600",
+              },
+            ],
+            "caption-meta": [
+              "12px",
+              { lineHeight: "16px", fontWeight: "400" },
+            ],
+            "headline-hero": [
+              "44px",
+              {
+                lineHeight: "52px",
+                letterSpacing: "-0.02em",
+                fontWeight: "700",
+              },
+            ],
+            "body-default": [
+              "15px",
+              { lineHeight: "24px", fontWeight: "400" },
+            ],
+            "headline-section": [
+              "24px",
+              {
+                lineHeight: "32px",
+                letterSpacing: "-0.015em",
+                fontWeight: "600",
+              },
+            ],
           },
         },
-      };
-    </script>
+      },
+    };
+  </script>
 
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 1;
-      }
-      .material-symbols-outlined.fill {
-        font-variation-settings:
-          "FILL" 1,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-      body {
-        background-color: #fcf9f8;
-        font-family: "Be Vietnam Pro", sans-serif;
-      }
-      app-header {
-        display: block;
-        min-height: 64px;
-      }
-    </style>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
 
-    <!-- 3 File Liên kết theo yêu cầu -->
-    <link href="../css/index.css" rel="stylesheet" />
-    <script src="../js/components.js"></script>
-    <script src="../js/main.js"></script>
-  </head>
+    .material-symbols-outlined.fill {
+      font-variation-settings:
+        "FILL" 1,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+    }
 
-  <body
-    class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary"
-  >
-    <!-- TOP APP BAR / NAVBAR (Sử dụng Web Component) -->
-    <app-header></app-header>
+    body {
+      background-color: #fcf9f8;
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
 
-    <!-- MAIN CANVAS -->
-    <main
-      class="flex-1 w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-6"
-    >
-      <!-- MAIN FORM CARD (Chia 2 Cột Ngang) -->
-      <section
-        class="max-w-7xl mx-auto bg-surface-container-lowest border border-outline-variant/70 rounded-2xl p-6 lg:p-8 shadow-sm"
-      >
-        <!-- Card Header -->
-        <div class="border-b border-outline-variant/40 pb-4 mb-6">
-          <h1 class="text-xl sm:text-2xl font-bold text-primary tracking-tight">
-            Đăng tin nhặt đồ
-          </h1>
-        </div>
+    app-header {
+      display: block;
+      min-height: 64px;
+    }
+  </style>
 
-        <form class="space-y-6" onsubmit="event.preventDefault()">
-          <!-- GRID layout: BÊN TRÁI LÀ HÌNH ẢNH, BÊN PHẢI LÀ THÔNG TIN -->
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <!-- ================= CỘT TRÁI (5 Cột): UPLOAD HÌNH ẢNH TRƯỚC ================= -->
-            <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
-              <div class="space-y-1">
-                <div class="flex items-center justify-between">
-                  <label
-                    class="text-title-item font-title-item text-on-surface flex items-center gap-2"
-                  >
-                    <span>Hình ảnh đồ vật nhặt được</span>
-                    <span class="text-error font-normal text-sm">*</span>
-                  </label>
-                </div>
-                <p
-                  class="text-caption-meta font-caption-meta text-on-surface-variant"
-                >
-                  Tối đa 5 hình ảnh (PNG, JPG &lt; 5MB)
-                </p>
+  <!-- 3 File Liên kết theo yêu cầu -->
+  <link href="../css/index.css" rel="stylesheet" />
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</head>
+
+<body
+  class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary">
+  <!-- TOP APP BAR / NAVBAR (Sử dụng Web Component) -->
+  <app-header></app-header>
+
+  <!-- MAIN CANVAS -->
+  <main class="flex-1 w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-6">
+    <!-- MAIN FORM CARD (Chia 2 Cột Ngang) -->
+    <section
+      class="max-w-7xl mx-auto bg-surface-container-lowest border border-outline-variant/70 rounded-2xl p-6 lg:p-8 shadow-sm">
+      <!-- Card Header -->
+      <div class="border-b border-outline-variant/40 pb-4 mb-6">
+        <h1 class="text-xl sm:text-2xl font-bold text-primary tracking-tight">
+          Đăng tin nhặt đồ
+        </h1>
+      </div>
+
+      <form class="space-y-6" onsubmit="event.preventDefault()">
+        <!-- GRID layout: BÊN TRÁI LÀ HÌNH ẢNH, BÊN PHẢI LÀ THÔNG TIN -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- ================= CỘT TRÁI (5 Cột): UPLOAD HÌNH ẢNH TRƯỚC ================= -->
+          <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
+            <div class="space-y-1">
+              <div class="flex items-center justify-between">
+                <label class="text-title-item font-title-item text-on-surface flex items-center gap-2">
+                  <span>Hình ảnh đồ vật nhặt được</span>
+                  <span class="text-error font-normal text-sm">*</span>
+                </label>
               </div>
-
-              <!-- 6. KÉO THẢ ẢNH THAO TÁC ĐƯỢC VỀ MẶT FRONTEND -->
-              <input type="file" id="file-upload-input" accept="image/*" multiple class="hidden" />
-
-              <!-- Drag and Drop Upload Box -->
-              <div
-                id="drop-zone"
-                class="border-2 border-dashed border-outline-variant hover:border-primary-container rounded-xl p-6 text-center bg-surface-container-low transition-all duration-200 cursor-pointer group"
-              >
-                <div
-                  class="w-12 h-12 mx-auto mb-3 rounded-full bg-surface-container flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform"
-                >
-                  <span class="material-symbols-outlined text-2xl"
-                    >add_a_photo</span
-                  >
-                </div>
-                <p
-                  class="text-body-compact font-body-compact font-medium text-on-surface mb-1"
-                >
-                  Kéo thả hình ảnh vào đây, hoặc
-                  <span
-                    class="text-primary-container font-semibold underline underline-offset-2"
-                    >chọn từ thiết bị</span
-                  >
-                </p>
-                <p
-                  class="text-caption-meta font-caption-meta text-on-surface-variant leading-relaxed"
-                >
-                  Hình ảnh rõ nét giúp Gemini AI quét các thông tin chính xác và
-                  điền tự động vào các ô bên phải.
-                </p>
-              </div>
-
-              <!-- Uploaded Thumbnails Grid (4 Slots xem trước ảnh) -->
-              <div class="grid grid-cols-2 gap-3 pt-1" id="image-slots-grid">
-                <!-- Slot 1 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
-                  data-index="0"
-                >
-                  <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
-                  <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 1</span>
-                </div>
-
-                <!-- Slot 2 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
-                  data-index="1"
-                >
-                  <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
-                  <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 2</span>
-                </div>
-
-                <!-- Slot 3 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
-                  data-index="2"
-                >
-                  <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
-                  <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 3</span>
-                </div>
-
-                <!-- Slot 4 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
-                  data-index="3"
-                >
-                  <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
-                  <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 4</span>
-                </div>
-              </div>
+              <p class="text-caption-meta font-caption-meta text-on-surface-variant">
+                Tối đa 5 hình ảnh (PNG, JPG &lt; 5MB)
+              </p>
             </div>
 
-            <!-- ================= CỘT PHẢI (7 Cột): CÁC TRƯỜNG THÔNG TIN ================= -->
-            <div class="lg:col-span-7 space-y-6">
-              <!-- Row 1: Category & Color -->
-              <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-                <!-- Category -->
-                <div class="md:col-span-6 space-y-1.5">
-                  <div class="flex items-center justify-between">
-                    <label
-                      class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
-                    >
-                      Loại đồ vật <span class="text-error">*</span>
-                    </label>
-                    <span
-                      class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40"
-                    >
-                      <span
-                        class="material-symbols-outlined text-xs text-amber-600"
-                        >auto_awesome</span
-                      >
-                      AI gợi ý
-                    </span>
-                  </div>
-                  <div class="relative">
-                    <select
-                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
-                    >
-                      <option value="" disabled selected>-- Chọn loại đồ vật --</option>
-                      <option>
-                        Bình nước giữ nhiệt / Bình đựng nước
-                      </option>
-                      <option>Thẻ sinh viên / Thẻ ATM / CCCD</option>
-                      <option>
-                        Thiết bị điện tử (Điện thoại, Laptop, Tai nghe)
-                      </option>
-                      <option>Tài liệu học tập / Giáo trình / Bìa hồ sơ</option>
-                      <option>Chìa khóa xe / Chìa khóa phòng trọ</option>
-                      <option>Ví tiền / Bóp / Túi xách</option>
-                      <option>Trang phục / Áo khoác / Mũ bảo hiểm</option>
-                      <option>Khác</option>
-                    </select>
-                    <span
-                      class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg"
-                      >expand_more</span
-                    >
-                  </div>
-                </div>
+            <!-- 6. KÉO THẢ ẢNH THAO TÁC ĐƯỢC VỀ MẶT FRONTEND -->
+            <input type="file" id="file-upload-input" accept="image/*" multiple class="hidden" />
 
-                <!-- 2. Ô CHỌN MÀU SẮC (Thiết kế chuẩn Ảnh 5: Màu chủ đạo + Các màu phụ tuần tự) -->
-                <div class="md:col-span-6 space-y-3">
-                  <div class="flex items-center justify-between">
-                    <label class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
-                      Màu chủ đạo <span class="text-error font-bold text-red-600">*</span>
-                    </label>
-                    <span class="text-[11px] text-secondary">Nhấp vào thẻ để chọn màu</span>
-                  </div>
+            <!-- Drag and Drop Upload Box -->
+            <div id="drop-zone"
+              class="border-2 border-dashed border-outline-variant hover:border-primary-container rounded-xl p-6 text-center bg-surface-container-low transition-all duration-200 cursor-pointer group">
+              <div
+                class="w-12 h-12 mx-auto mb-3 rounded-full bg-surface-container flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-2xl">add_a_photo</span>
+              </div>
+              <p class="text-body-compact font-body-compact font-medium text-on-surface mb-1">
+                Kéo thả hình ảnh vào đây, hoặc
+                <span class="text-primary-container font-semibold underline underline-offset-2">chọn từ thiết bị</span>
+              </p>
+              <p class="text-caption-meta font-caption-meta text-on-surface-variant leading-relaxed">
+                Hình ảnh rõ nét giúp Gemini AI quét các thông tin chính xác và
+                điền tự động vào các ô bên phải.
+              </p>
+            </div>
 
-                  <!-- CARD MÀU CHỦ ĐẠO (Chỉ hiện HEX, nền đồng bộ trang web) -->
-                  <div class="bg-[#fcf9f8] border border-[#e7e1df] rounded-2xl p-4 shadow-sm max-w-sm">
-                    <!-- Khung swatch màu lớn ở trên -->
-                    <div id="primary-color-swatch"
-                      class="h-24 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner bg-[#f6f3f2]"
-                      title="Nhấp để chọn màu chủ đạo">
-                      <span id="primary-swatch-placeholder" class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
-                        <span class="material-symbols-outlined text-[20px] text-[#35483d]">palette</span>
-                        <span>Nhấp để chọn màu</span>
-                      </span>
-                      <!-- Icon bút chỉnh sửa khi đã chọn màu -->
-                      <div id="primary-swatch-edit-icon" class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
-                        <span class="material-symbols-outlined text-[13px]">edit</span>
-                      </div>
-                    </div>
-
-                    <!-- Ẩn input color -->
-                    <input type="color" id="primary-color" name="primary-color" class="sr-only" />
-
-                    <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
-                    <div class="mt-2.5 flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
-                      <span class="text-[#35483d] font-bold text-xs uppercase tracking-wider">HEX</span>
-                      <span id="primary-hex-val" class="text-[#1b1c1b] font-bold tracking-wider text-sm">Chưa chọn</span>
-                    </div>
-                  </div>
-
-                  <!-- Thêm màu phụ (tối đa 3 màu, ràng buộc phải chọn xong màu trước mới được cộng) -->
-                  <div class="pt-2 border-t border-outline-variant/30 max-w-sm">
-                    <div class="flex items-center justify-between mb-2">
-                      <span class="text-xs font-semibold text-on-surface">Màu phụ (tối đa 3 màu):</span>
-                      <button type="button" id="add-sec-color-btn" disabled
-                        class="text-xs font-semibold text-primary hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:no-underline"
-                        title="Vui lòng chọn Màu chủ đạo trước">
-                        <span class="material-symbols-outlined text-[16px]">add_circle</span>
-                        <span id="add-sec-color-btn-text">Thêm màu phụ</span>
-                      </button>
-                    </div>
-
-                    <!-- Container các card màu phụ -->
-                    <div id="sec-colors-container" class="space-y-2.5">
-                      <!-- Render động các màu phụ -->
-                    </div>
-                  </div>
-                </div>
+            <!-- Uploaded Thumbnails Grid (4 Slots xem trước ảnh) -->
+            <div class="grid grid-cols-2 gap-3 pt-1" id="image-slots-grid">
+              <!-- Slot 1 -->
+              <div
+                class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
+                data-index="0">
+                <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 1</span>
               </div>
 
-              <!-- Row: Title -->
-              <div class="space-y-1.5">
+              <!-- Slot 2 -->
+              <div
+                class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
+                data-index="1">
+                <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 2</span>
+              </div>
+
+              <!-- Slot 3 -->
+              <div
+                class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
+                data-index="2">
+                <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 3</span>
+              </div>
+
+              <!-- Slot 4 -->
+              <div
+                class="image-slot relative border border-dashed border-outline-variant hover:border-primary-container rounded-xl aspect-square flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary-container hover:bg-surface-container-low transition-colors cursor-pointer overflow-hidden"
+                data-index="3">
+                <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+                <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh 4</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= CỘT PHẢI (7 Cột): CÁC TRƯỜNG THÔNG TIN ================= -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Row 1: Category & Color -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+              <!-- Category -->
+              <div class="md:col-span-6 space-y-1.5">
                 <div class="flex items-center justify-between">
                   <label
-                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
-                  >
-                    Tiêu đề bài đăng <span class="text-error">*</span>
+                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
+                    Loại đồ vật <span class="text-error">*</span>
                   </label>
                   <span
-                    class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40"
-                  >
-                    <span
-                      class="material-symbols-outlined text-xs text-amber-600"
-                      >auto_awesome</span
-                    >
+                    class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40">
+                    <span class="material-symbols-outlined text-xs text-amber-600">auto_awesome</span>
                     AI gợi ý
                   </span>
                 </div>
-                <input
-                  class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                  placeholder="VD: Nhặt được bình nước giữ nhiệt Lock&Lock tại Thư viện..."
-                  type="text"
-                  value=""
-                />
-              </div>
-
-              <!-- Row 2: Description -->
-              <div class="space-y-1.5">
-                <div class="flex items-center justify-between">
-                  <label
-                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
-                  >
-                    Mô tả chi tiết đặc điểm nhận dạng
-                    <span class="text-error">*</span>
-                  </label>
-                  <div class="flex items-center gap-2">
-                    <span
-                      class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40"
-                    >
-                      <span
-                        class="material-symbols-outlined text-xs text-amber-600"
-                        >auto_awesome</span
-                      >
-                      AI gợi ý
-                    </span>
-                    <span
-                      class="text-caption-meta font-caption-meta text-on-surface-variant"
-                      >0/500 ký tự</span
-                    >
-                  </div>
-                </div>
-                <textarea
-                  class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors leading-relaxed"
-                  placeholder="Ghi rõ màu sắc, kích thước, thương hiệu, tình trạng đồ vật..."
-                  rows="4"
-                ></textarea>
-              </div>
-
-              <!-- 3 & 4. Ô NHẬP ĐỊA ĐIỂM ĐỒNG BỘ: Chọn khoa -> Chọn tầng mấy -> Chọn phòng học / Hội trường -->
-              <div class="space-y-3 bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/60" id="location-cascade-group">
-                <div class="flex items-center justify-between">
-                  <label class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
-                    Địa điểm nhặt được <span class="text-error font-bold text-red-600">*</span>
-                  </label>
-                  <span class="text-[11px] text-secondary">Chọn tuần tự</span>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  <!-- Bước 1: Chọn Khoa (Luôn hiển thị) -->
-                  <div class="space-y-1" id="loc-step-1-wrapper">
-                    <span class="text-[11px] font-medium text-secondary block">1. Chọn Khoa / Khu</span>
-                    <div class="relative">
-                      <select id="loc-faculty" required
-                        class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
-                        <option value="" disabled selected>-- Chọn Khoa --</option>
-                        <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
-                        <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
-                        <option value="Nhà học C2">Nhà học C2</option>
-                        <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
-                        <option value="Khoa Kinh tế">Khoa Kinh tế</option>
-                        <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
-                        <option value="Khoa Luật">Khoa Luật</option>
-                        <option value="Khoa Sư phạm">Khoa Sư phạm</option>
-                        <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
-                        <option value="Khu vực khác">Khu vực khác</option>
-                      </select>
-                      <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
-                        <span class="material-symbols-outlined text-[16px]">expand_more</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Bước 2: Chọn Tầng mấy (Không có option hội trường, chỉ có tầng mấy) -->
-                  <div class="space-y-1 hidden" id="loc-step-2-wrapper">
-                    <span class="text-[11px] font-medium text-secondary block">2. Chọn Tầng mấy</span>
-                    <div class="relative">
-                      <select id="loc-floor"
-                        class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
-                        <option value="" disabled selected>-- Chọn tầng --</option>
-                        <option value="1">Tầng 1</option>
-                        <option value="2">Tầng 2</option>
-                        <option value="3">Tầng 3</option>
-                        <option value="4">Tầng 4</option>
-                        <option value="5">Tầng 5</option>
-                        <option value="trệt">Tầng trệt</option>
-                      </select>
-                      <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
-                        <span class="material-symbols-outlined text-[16px]">expand_more</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Bước 3: Chọn Phòng học / Hội trường (Trong phòng có các option Hội trường) -->
-                  <div class="space-y-1 hidden" id="loc-step-3-wrapper">
-                    <span class="text-[11px] font-medium text-secondary block">3. Phòng học / Hội trường</span>
-                    <div class="relative">
-                      <select id="loc-room"
-                        class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
-                        <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
-                      </select>
-                      <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
-                        <span class="material-symbols-outlined text-[16px]">expand_more</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Input ẩn lưu giá trị địa điểm đầy đủ gửi form -->
-                <input type="hidden" id="item-location" name="item-location" required value="" />
-
-                <!-- Chỉ hiện chữ sau khi chọn xong, không đặt trong khối tô màu -->
-                <p id="loc-summary" class="hidden text-xs text-on-surface font-medium pt-1">
-                  Địa điểm: <strong id="loc-summary-text" class="text-primary font-bold"></strong>
-                </p>
-              </div>
-
-              <!-- Row: Date & Time (Hỗ trợ click vào toàn bộ ô để mở picker) -->
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-                <!-- Date -->
-                <div class="sm:col-span-6 space-y-1.5">
-                  <label
-                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
-                    for="item-date"
-                  >
-                    Ngày nhặt <span class="text-error font-bold text-red-600">*</span>
-                  </label>
-                  <div class="relative">
-                    <input
-                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer"
-                      id="item-date"
-                      required
-                      type="date"
-                      onclick="try{this.showPicker()}catch(e){}"
-                      value=""
-                    />
-                  </div>
-                </div>
-
-                <!-- Time -->
-                <div class="sm:col-span-6 space-y-1.5">
-                  <label
-                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
-                    for="item-time"
-                  >
-                    Khoảng giờ <span class="text-error font-bold text-red-600">*</span>
-                  </label>
-                  <div class="relative">
-                    <input
-                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer"
-                      id="item-time"
-                      required
-                      type="time"
-                      onclick="try{this.showPicker()}catch(e){}"
-                      value=""
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Row 4: Current Custody Place -->
-              <div class="space-y-1.5">
-                <label
-                  class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
-                >
-                  Nơi lưu giữ đồ vật hiện tại <span class="text-error">*</span>
-                </label>
                 <div class="relative">
                   <select
-                    class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
-                  >
-                    <option value="" disabled selected>-- Chọn nơi lưu giữ hiện tại --</option>
+                    class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer">
+                    <option value="" disabled selected>-- Chọn loại đồ vật --</option>
                     <option>
-                      Đang giữ cá nhân (Liên hệ trực tiếp sinh viên)
+                      Bình nước giữ nhiệt / Bình đựng nước
                     </option>
-                    <option>Đã gửi Bàn trực Thư viện Trung tâm CTU</option>
-                    <option>Đã gửi Bảo vệ tòa nhà / Giảng đường</option>
+                    <option>Thẻ sinh viên / Thẻ ATM / CCCD</option>
                     <option>
-                      Đã gửi Văn phòng Đoàn Thanh niên - Hội Sinh viên trường
+                      Thiết bị điện tử (Điện thoại, Laptop, Tai nghe)
                     </option>
-                    <option>Đã gửi Văn phòng Khoa / Viện phụ trách</option>
+                    <option>Tài liệu học tập / Giáo trình / Bìa hồ sơ</option>
+                    <option>Chìa khóa xe / Chìa khóa phòng trọ</option>
+                    <option>Ví tiền / Bóp / Túi xách</option>
+                    <option>Trang phục / Áo khoác / Mũ bảo hiểm</option>
+                    <option>Khác</option>
                   </select>
                   <span
-                    class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg"
-                    >expand_more</span
-                  >
+                    class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg">expand_more</span>
                 </div>
               </div>
 
-              <!-- SECTION 3: VERIFICATION QUESTION (ANTI-FRAUD) -->
-              <div
-                class="border border-outline-variant/80 bg-surface-container-low/40 rounded-xl p-5 space-y-4 mt-6"
-              >
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span
-                      class="material-symbols-outlined text-primary-container text-xl"
-                      >verified_user</span
-                    >
-                    <h3
-                      class="text-title-item font-title-item text-on-surface font-semibold"
-                    >
-                      Thêm câu hỏi xác minh quyền sở hữu
-                    </h3>
+              <!-- 2. Ô CHỌN MÀU SẮC (Thiết kế chuẩn Ảnh 5: Màu chủ đạo + Các màu phụ tuần tự) -->
+              <div class="md:col-span-6 space-y-3">
+                <div class="flex items-center justify-between">
+                  <label
+                    class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
+                    Màu chủ đạo <span class="text-error font-bold text-red-600">*</span>
+                  </label>
+                  <span class="text-[11px] text-secondary">Nhấp vào thẻ để chọn màu</span>
+                </div>
+
+                <!-- CARD MÀU CHỦ ĐẠO (Chỉ hiện HEX, nền đồng bộ trang web) -->
+                <div class="bg-[#fcf9f8] border border-[#e7e1df] rounded-2xl p-4 shadow-sm max-w-sm">
+                  <!-- Khung swatch màu lớn ở trên -->
+                  <div id="primary-color-swatch"
+                    class="h-24 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner bg-[#f6f3f2]"
+                    title="Nhấp để chọn màu chủ đạo">
+                    <span id="primary-swatch-placeholder"
+                      class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
+                      <span class="material-symbols-outlined text-[20px] text-[#35483d]">palette</span>
+                      <span>Nhấp để chọn màu</span>
+                    </span>
+                    <!-- Icon bút chỉnh sửa khi đã chọn màu -->
+                    <div id="primary-swatch-edit-icon"
+                      class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
+                      <span class="material-symbols-outlined text-[13px]">edit</span>
+                    </div>
+                  </div>
+
+                  <!-- Ẩn input color -->
+                  <input type="color" id="primary-color" name="primary-color" class="sr-only" />
+
+                  <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
+                  <div
+                    class="mt-2.5 flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
+                    <span class="text-[#35483d] font-bold text-xs uppercase tracking-wider">HEX</span>
+                    <span id="primary-hex-val" class="text-[#1b1c1b] font-bold tracking-wider text-sm">Chưa chọn</span>
                   </div>
                 </div>
 
-                <!-- Radio Selector -->
-                <div class="flex flex-wrap items-center gap-6 pt-1">
-                  <label class="inline-flex items-center gap-2 cursor-pointer">
-                    <input
-                      checked
-                      class="w-4 h-4 text-primary-container focus:ring-primary-container border-outline cursor-pointer"
-                      name="question_type"
-                      type="radio"
-                    />
-                    <span
-                      class="text-body-compact font-body-compact font-medium text-on-surface"
-                      >Chọn câu hỏi có sẵn</span
-                    >
-                  </label>
-                  <label class="inline-flex items-center gap-2 cursor-pointer">
-                    <input
-                      class="w-4 h-4 text-primary-container focus:ring-primary-container border-outline cursor-pointer"
-                      name="question_type"
-                      type="radio"
-                    />
-                    <span
-                      class="text-body-compact font-body-compact font-medium text-on-surface"
-                      >Tự tạo câu hỏi riêng</span
-                    >
-                  </label>
-                </div>
+                <!-- Thêm màu phụ (tối đa 3 màu, ràng buộc phải chọn xong màu trước mới được cộng) -->
+                <div class="pt-2 border-t border-outline-variant/30 max-w-sm">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-on-surface">Màu phụ (tối đa 3 màu):</span>
+                    <button type="button" id="add-sec-color-btn" disabled
+                      class="text-xs font-semibold text-primary hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:no-underline"
+                      title="Vui lòng chọn Màu chủ đạo trước">
+                      <span class="material-symbols-outlined text-[16px]">add_circle</span>
+                      <span id="add-sec-color-btn-text">Thêm màu phụ</span>
+                    </button>
+                  </div>
 
-                <!-- Question Select Dropdown -->
-                <div class="space-y-1.5">
-                  <label
-                    class="text-caption-meta font-caption-meta font-medium text-on-surface-variant"
-                    >Câu hỏi xác minh hiển thị cho người nhận</label
-                  >
-                  <div class="relative">
-                    <select
-                      class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer"
-                    >
-                      <option value="" disabled selected>-- Chọn câu hỏi xác minh phù hợp --</option>
-                      <option>
-                        Bên trong bình hoặc dưới đáy bình có đặc điểm/sticker gì
-                        đặc biệt?
-                      </option>
-                      <option>
-                        Món đồ có vết trầy xước hoặc chi tiết gì ẩn bên trong?
-                      </option>
-                      <option>
-                        Mật khẩu mở khóa màn hình hoặc hình nền máy là gì?
-                      </option>
-                      <option>
-                        Số lượng hoặc giấy tờ cụ thể kèm theo trong ví là gì?
-                      </option>
-                      <option>
-                        Móc khóa kèm theo có hình dáng hoặc ký tự gì?
-                      </option>
-                    </select>
-                    <span
-                      class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg"
-                      >expand_more</span
-                    >
+                  <!-- Container các card màu phụ -->
+                  <div id="sec-colors-container" class="space-y-2.5">
+                    <!-- Render động các màu phụ -->
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Row: Title -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label
+                  class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
+                  Tiêu đề bài đăng <span class="text-error">*</span>
+                </label>
+                <span
+                  class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40">
+                  <span class="material-symbols-outlined text-xs text-amber-600">auto_awesome</span>
+                  AI gợi ý
+                </span>
+              </div>
+              <input
+                class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
+                placeholder="VD: Nhặt được bình nước giữ nhiệt Lock&Lock tại Thư viện..." type="text" value="" />
+            </div>
+
+            <!-- Row 2: Description -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label
+                  class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
+                  Mô tả chi tiết đặc điểm nhận dạng
+                  <span class="text-error">*</span>
+                </label>
+                <div class="flex items-center gap-2">
+                  <span
+                    class="inline-flex items-center gap-1 text-[11px] font-medium text-primary-container bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/40">
+                    <span class="material-symbols-outlined text-xs text-amber-600">auto_awesome</span>
+                    AI gợi ý
+                  </span>
+                  <span class="text-caption-meta font-caption-meta text-on-surface-variant">0/500 ký tự</span>
+                </div>
+              </div>
+              <textarea
+                class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors leading-relaxed"
+                placeholder="Ghi rõ màu sắc, kích thước, thương hiệu, tình trạng đồ vật..." rows="4"></textarea>
+            </div>
+
+            <!-- 3 & 4. Ô NHẬP ĐỊA ĐIỂM ĐỒNG BỘ: Chọn khoa -> Chọn tầng mấy -> Chọn phòng học / Hội trường -->
+            <div class="space-y-3 bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/60"
+              id="location-cascade-group">
+              <div class="flex items-center justify-between">
+                <label
+                  class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
+                  Địa điểm nhặt được <span class="text-error font-bold text-red-600">*</span>
+                </label>
+                <span class="text-[11px] text-secondary">Chọn tuần tự</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <!-- Bước 1: Chọn Khoa (Luôn hiển thị) -->
+                <div class="space-y-1" id="loc-step-1-wrapper">
+                  <span class="text-[11px] font-medium text-secondary block">1. Chọn Khoa / Khu</span>
+                  <div class="relative">
+                    <select id="loc-faculty" required
+                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>-- Chọn Khoa --</option>
+                      <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
+                      <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
+                      <option value="Nhà học C2">Nhà học C2</option>
+                      <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
+                      <option value="Khoa Kinh tế">Khoa Kinh tế</option>
+                      <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
+                      <option value="Khoa Luật">Khoa Luật</option>
+                      <option value="Khoa Sư phạm">Khoa Sư phạm</option>
+                      <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
+                      <option value="Khu vực khác">Khu vực khác</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bước 2: Chọn Tầng mấy (Không có option hội trường, chỉ có tầng mấy) -->
+                <div class="space-y-1 hidden" id="loc-step-2-wrapper">
+                  <span class="text-[11px] font-medium text-secondary block">2. Chọn Tầng mấy</span>
+                  <div class="relative">
+                    <select id="loc-floor"
+                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>-- Chọn tầng --</option>
+                      <option value="1">Tầng 1</option>
+                      <option value="2">Tầng 2</option>
+                      <option value="3">Tầng 3</option>
+                      <option value="4">Tầng 4</option>
+                      <option value="5">Tầng 5</option>
+                      <option value="trệt">Tầng trệt</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bước 3: Chọn Phòng học / Hội trường (Trong phòng có các option Hội trường) -->
+                <div class="space-y-1 hidden" id="loc-step-3-wrapper">
+                  <span class="text-[11px] font-medium text-secondary block">3. Phòng học / Hội trường</span>
+                  <div class="relative">
+                    <select id="loc-room"
+                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input ẩn lưu giá trị địa điểm đầy đủ gửi form -->
+              <input type="hidden" id="item-location" name="item-location" required value="" />
+
+              <!-- Chỉ hiện chữ sau khi chọn xong, không đặt trong khối tô màu -->
+              <p id="loc-summary" class="hidden text-xs text-on-surface font-medium pt-1">
+                Địa điểm: <strong id="loc-summary-text" class="text-primary font-bold"></strong>
+              </p>
+            </div>
+
+            <!-- Row: Date & Time (Hỗ trợ click vào toàn bộ ô để mở picker) -->
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
+              <!-- Date -->
+              <div class="sm:col-span-6 space-y-1.5">
+                <label class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
+                  for="item-date">
+                  Ngày nhặt <span class="text-error font-bold text-red-600">*</span>
+                </label>
+                <div class="relative">
+                  <input
+                    class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer"
+                    id="item-date" required type="date" onclick="try{this.showPicker()}catch(e){}" value="" />
+                </div>
+              </div>
+
+              <!-- Time -->
+              <div class="sm:col-span-6 space-y-1.5">
+                <label class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1"
+                  for="item-time">
+                  Khoảng giờ <span class="text-error font-bold text-red-600">*</span>
+                </label>
+                <div class="relative">
+                  <input
+                    class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer"
+                    id="item-time" required type="time" onclick="try{this.showPicker()}catch(e){}" value="" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 4: Current Custody Place -->
+            <div class="space-y-1.5">
+              <label class="text-body-compact font-body-compact font-semibold text-on-surface flex items-center gap-1">
+                Nơi lưu giữ đồ vật hiện tại <span class="text-error">*</span>
+              </label>
+              <div class="relative">
+                <select
+                  class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer">
+                  <option value="" disabled selected>-- Chọn nơi lưu giữ hiện tại --</option>
+                  <option>
+                    Đang giữ cá nhân (Liên hệ trực tiếp sinh viên)
+                  </option>
+                  <option>Đã gửi Bàn trực Thư viện Trung tâm CTU</option>
+                  <option>Đã gửi Bảo vệ tòa nhà / Giảng đường</option>
+                  <option>
+                    Đã gửi Văn phòng Đoàn Thanh niên - Hội Sinh viên trường
+                  </option>
+                  <option>Đã gửi Văn phòng Khoa / Viện phụ trách</option>
+                </select>
+                <span
+                  class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg">expand_more</span>
+              </div>
+            </div>
+
+            <!-- SECTION 3: VERIFICATION QUESTION (ANTI-FRAUD) -->
+            <div class="border border-outline-variant/80 bg-surface-container-low/40 rounded-xl p-5 space-y-4 mt-6">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="material-symbols-outlined text-primary-container text-xl">verified_user</span>
+                  <h3 class="text-title-item font-title-item text-on-surface font-semibold">
+                    Thêm câu hỏi xác minh quyền sở hữu
+                  </h3>
+                </div>
+              </div>
+
+              <!-- Radio Selector -->
+              <div class="flex flex-wrap items-center gap-6 pt-1">
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                  <input checked
+                    class="w-4 h-4 text-primary-container focus:ring-primary-container border-outline cursor-pointer"
+                    name="question_type" type="radio" />
+                  <span class="text-body-compact font-body-compact font-medium text-on-surface">Chọn câu hỏi có
+                    sẵn</span>
+                </label>
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                  <input
+                    class="w-4 h-4 text-primary-container focus:ring-primary-container border-outline cursor-pointer"
+                    name="question_type" type="radio" />
+                  <span class="text-body-compact font-body-compact font-medium text-on-surface">Tự tạo câu hỏi
+                    riêng</span>
+                </label>
+              </div>
+
+              <!-- Question Select Dropdown -->
+              <div class="space-y-1.5">
+                <label class="text-caption-meta font-caption-meta font-medium text-on-surface-variant">Câu hỏi xác minh
+                  hiển thị cho người nhận</label>
+                <div class="relative">
+                  <select
+                    class="w-full h-[42px] bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 pr-8 text-body-compact font-body-compact text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container appearance-none transition-colors cursor-pointer">
+                    <option value="" disabled selected>-- Chọn câu hỏi xác minh phù hợp --</option>
+                    <option>
+                      Bên trong bình hoặc dưới đáy bình có đặc điểm/sticker gì
+                      đặc biệt?
+                    </option>
+                    <option>
+                      Món đồ có vết trầy xước hoặc chi tiết gì ẩn bên trong?
+                    </option>
+                    <option>
+                      Mật khẩu mở khóa màn hình hoặc hình nền máy là gì?
+                    </option>
+                    <option>
+                      Số lượng hoặc giấy tờ cụ thể kèm theo trong ví là gì?
+                    </option>
+                    <option>
+                      Móc khóa kèm theo có hình dáng hoặc ký tự gì?
+                    </option>
+                  </select>
+                  <span
+                    class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-lg">expand_more</span>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <!-- FORM ACTIONS BOTTOM ROW (Căn giữa) -->
-          <div
-            class="pt-6 border-t border-outline-variant flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <a
-              href="post.html"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-10 rounded-lg border border-outline-variant text-on-surface-variant text-body-compact font-medium hover:bg-surface-container-high transition-colors"
-            >
-              <span class="material-symbols-outlined text-lg">arrow_back</span>
-              <span>Hủy</span>
-            </a>
+        <!-- FORM ACTIONS BOTTOM ROW (Căn giữa) -->
+        <div class="pt-6 border-t border-outline-variant flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="post.html"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-10 rounded-lg border border-outline-variant text-on-surface-variant text-body-compact font-medium hover:bg-surface-container-high transition-colors">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+            <span>Hủy</span>
+          </a>
 
-            <button
-              class="w-full sm:w-auto px-8 h-10 rounded-lg bg-primary-container text-on-primary font-semibold text-body-compact hover:bg-[#293a31] transition-all duration-150 shadow-sm flex items-center justify-center gap-2 group active:scale-98"
-              type="submit"
-            >
-              <span>Đăng tin nhặt đồ</span>
-              <span
-                class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-0.5"
-                >arrow_forward</span
-              >
-            </button>
-          </div>
-        </form>
-      </section>
-    </main>
+          <button
+            class="w-full sm:w-auto px-8 h-10 rounded-lg bg-primary-container text-on-primary font-semibold text-body-compact hover:bg-[#293a31] transition-all duration-150 shadow-sm flex items-center justify-center gap-2 group active:scale-98"
+            type="submit">
+            <span>Đăng tin nhặt đồ</span>
+            <span
+              class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-0.5">arrow_forward</span>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
 
-    <!-- FOOTER (Sử dụng Web Component) -->
-    <app-footer></app-footer>
+  <!-- FOOTER (Sử dụng Web Component) -->
+  <app-footer></app-footer>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // ==========================================
-        // 2. Ô CHỌN MÀU SẮC CHUẨN (CHỈ HIỆN HEX, NỀN ĐỒNG BỘ TRANG WEB)
-        // ==========================================
-        const primaryColorInput = document.getElementById("primary-color");
-        const primaryColorSwatch = document.getElementById("primary-color-swatch");
-        const primarySwatchPlaceholder = document.getElementById("primary-swatch-placeholder");
-        const primarySwatchEditIcon = document.getElementById("primary-swatch-edit-icon");
-        const primaryHexVal = document.getElementById("primary-hex-val");
-        const addSecColorBtn = document.getElementById("add-sec-color-btn");
-        const addSecColorBtnText = document.getElementById("add-sec-color-btn-text");
-        const secColorsContainer = document.getElementById("sec-colors-container");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // ==========================================
+      // 2. Ô CHỌN MÀU SẮC CHUẨN (CHỈ HIỆN HEX, NỀN ĐỒNG BỘ TRANG WEB)
+      // ==========================================
+      const primaryColorInput = document.getElementById("primary-color");
+      const primaryColorSwatch = document.getElementById("primary-color-swatch");
+      const primarySwatchPlaceholder = document.getElementById("primary-swatch-placeholder");
+      const primarySwatchEditIcon = document.getElementById("primary-swatch-edit-icon");
+      const primaryHexVal = document.getElementById("primary-hex-val");
+      const addSecColorBtn = document.getElementById("add-sec-color-btn");
+      const addSecColorBtnText = document.getElementById("add-sec-color-btn-text");
+      const secColorsContainer = document.getElementById("sec-colors-container");
 
-        let hasPrimaryColor = false;
-        let secColors = []; // Danh sách màu phụ: [{ id, hex, isChosen }]
+      let hasPrimaryColor = false;
+      let secColors = []; // Danh sách màu phụ: [{ id, hex, isChosen }]
 
-        if (primaryColorSwatch && primaryColorInput) {
-          primaryColorSwatch.addEventListener("click", () => {
-            primaryColorInput.click();
-          });
+      if (primaryColorSwatch && primaryColorInput) {
+        primaryColorSwatch.addEventListener("click", () => {
+          primaryColorInput.click();
+        });
 
-          primaryColorInput.addEventListener("input", (e) => {
-            const hex = e.target.value.toUpperCase();
-            hasPrimaryColor = true;
-            primaryColorSwatch.style.backgroundColor = hex;
-            if (primarySwatchPlaceholder) primarySwatchPlaceholder.classList.add("hidden");
-            if (primarySwatchEditIcon) primarySwatchEditIcon.classList.remove("hidden");
-            if (primaryHexVal) primaryHexVal.textContent = hex;
+        primaryColorInput.addEventListener("input", (e) => {
+          const hex = e.target.value.toUpperCase();
+          hasPrimaryColor = true;
+          primaryColorSwatch.style.backgroundColor = hex;
+          if (primarySwatchPlaceholder) primarySwatchPlaceholder.classList.add("hidden");
+          if (primarySwatchEditIcon) primarySwatchEditIcon.classList.remove("hidden");
+          if (primaryHexVal) primaryHexVal.textContent = hex;
 
-            updateAddSecBtnState();
-          });
+          updateAddSecBtnState();
+        });
+      }
+
+      const updateAddSecBtnState = () => {
+        if (!addSecColorBtn) return;
+        if (!hasPrimaryColor) {
+          addSecColorBtn.disabled = true;
+          addSecColorBtn.title = "Vui lòng chọn Màu chủ đạo trước";
+          return;
         }
 
-        const updateAddSecBtnState = () => {
-          if (!addSecColorBtn) return;
-          if (!hasPrimaryColor) {
+        if (secColors.length >= 3) {
+          addSecColorBtn.disabled = true;
+          addSecColorBtn.title = "Đã đạt tối đa 3 màu phụ";
+          return;
+        }
+
+        if (secColors.length > 0) {
+          const lastColor = secColors[secColors.length - 1];
+          if (!lastColor.isChosen) {
             addSecColorBtn.disabled = true;
-            addSecColorBtn.title = "Vui lòng chọn Màu chủ đạo trước";
+            addSecColorBtn.title = `Vui lòng chọn Màu phụ ${secColors.length} trước khi thêm`;
             return;
           }
+        }
 
-          if (secColors.length >= 3) {
-            addSecColorBtn.disabled = true;
-            addSecColorBtn.title = "Đã đạt tối đa 3 màu phụ";
-            return;
-          }
+        addSecColorBtn.disabled = false;
+        addSecColorBtn.title = "Thêm màu phụ";
+      };
 
-          if (secColors.length > 0) {
-            const lastColor = secColors[secColors.length - 1];
-            if (!lastColor.isChosen) {
-              addSecColorBtn.disabled = true;
-              addSecColorBtn.title = `Vui lòng chọn Màu phụ ${secColors.length} trước khi thêm`;
-              return;
-            }
-          }
+      const renderSecColors = () => {
+        if (!secColorsContainer) return;
+        secColorsContainer.innerHTML = "";
 
-          addSecColorBtn.disabled = false;
-          addSecColorBtn.title = "Thêm màu phụ";
-        };
+        secColors.forEach((sec, idx) => {
+          const card = document.createElement("div");
+          card.className = "bg-[#fcf9f8] border border-[#e7e1df] rounded-xl p-3 shadow-sm relative";
+          const hexText = sec.isChosen ? sec.hex : "Chưa chọn";
+          const swatchBg = sec.isChosen ? sec.hex : "#f6f3f2";
 
-        const renderSecColors = () => {
-          if (!secColorsContainer) return;
-          secColorsContainer.innerHTML = "";
-
-          secColors.forEach((sec, idx) => {
-            const card = document.createElement("div");
-            card.className = "bg-[#fcf9f8] border border-[#e7e1df] rounded-xl p-3 shadow-sm relative";
-            const hexText = sec.isChosen ? sec.hex : "Chưa chọn";
-            const swatchBg = sec.isChosen ? sec.hex : "#f6f3f2";
-
-            card.innerHTML = `
+          card.innerHTML = `
               <div class="flex items-center justify-between mb-2">
                 <span class="text-xs font-semibold text-on-surface">Màu phụ ${idx + 1}</span>
                 <button type="button" class="remove-sec-btn text-secondary hover:text-red-600 transition-colors p-0.5 cursor-pointer" title="Xóa màu phụ ${idx + 1}">
@@ -821,111 +731,111 @@
               </div>
             `;
 
-            const swatch = card.querySelector(".sec-swatch");
-            const input = card.querySelector(".sec-input");
-            const rmBtn = card.querySelector(".remove-sec-btn");
-            const hexValSpan = card.querySelector(".sec-hex-val");
-            const placeholder = swatch.querySelector(".sec-placeholder");
-            const editIcon = swatch.querySelector(".sec-edit-icon");
+          const swatch = card.querySelector(".sec-swatch");
+          const input = card.querySelector(".sec-input");
+          const rmBtn = card.querySelector(".remove-sec-btn");
+          const hexValSpan = card.querySelector(".sec-hex-val");
+          const placeholder = swatch.querySelector(".sec-placeholder");
+          const editIcon = swatch.querySelector(".sec-edit-icon");
 
-            swatch.addEventListener("click", () => input.click());
+          swatch.addEventListener("click", () => input.click());
 
-            // Cập nhật trực tiếp trên swatch và span để hỗ trợ kéo thả mượt mà không bị ngắt quãng
-            input.addEventListener("input", (e) => {
-              const hex = e.target.value.toUpperCase();
-              sec.hex = hex;
-              sec.isChosen = true;
-              swatch.style.backgroundColor = hex;
-              if (placeholder) placeholder.style.display = "none";
-              if (editIcon) editIcon.classList.remove("hidden");
-              if (hexValSpan) hexValSpan.textContent = hex;
-              updateAddSecBtnState();
-            });
-
-            rmBtn.addEventListener("click", () => {
-              secColors = secColors.filter(s => s.id !== sec.id);
-              renderSecColors();
-              updateAddSecBtnState();
-            });
-
-            secColorsContainer.appendChild(card);
+          // Cập nhật trực tiếp trên swatch và span để hỗ trợ kéo thả mượt mà không bị ngắt quãng
+          input.addEventListener("input", (e) => {
+            const hex = e.target.value.toUpperCase();
+            sec.hex = hex;
+            sec.isChosen = true;
+            swatch.style.backgroundColor = hex;
+            if (placeholder) placeholder.style.display = "none";
+            if (editIcon) editIcon.classList.remove("hidden");
+            if (hexValSpan) hexValSpan.textContent = hex;
+            updateAddSecBtnState();
           });
 
-          updateAddSecBtnState();
-        };
-
-        if (addSecColorBtn) {
-          addSecColorBtn.addEventListener("click", () => {
-            if (!hasPrimaryColor || secColors.length >= 3) return;
-            if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) return;
-
-            secColors.push({
-              id: Date.now() + Math.random(),
-              hex: null,
-              isChosen: false
-            });
-
+          rmBtn.addEventListener("click", () => {
+            secColors = secColors.filter(s => s.id !== sec.id);
             renderSecColors();
+            updateAddSecBtnState();
           });
-        }
 
-        // ==========================================
-        // 3 & 4. Ô NHẬP ĐỊA ĐIỂM: Khoa -> Tầng mấy (chỉ tầng, ko có hội trường) -> Phòng (có option hội trường)
-        // Hiện tuần tự sau khi chọn bước trước, khi xong chỉ hiện chữ không đóng khối tô màu
-        // ==========================================
-        const locFaculty = document.getElementById("loc-faculty");
-        const locStep2Wrapper = document.getElementById("loc-step-2-wrapper");
-        const locFloor = document.getElementById("loc-floor");
-        const locStep3Wrapper = document.getElementById("loc-step-3-wrapper");
-        const locRoom = document.getElementById("loc-room");
-        const itemLocationInput = document.getElementById("item-location");
-        const locSummary = document.getElementById("loc-summary");
-        const locSummaryText = document.getElementById("loc-summary-text");
+          secColorsContainer.appendChild(card);
+        });
 
-        const updateLocationSummary = () => {
-          const faculty = locFaculty ? locFaculty.value : "";
-          const floor = locFloor ? locFloor.value : "";
-          const room = locRoom ? locRoom.value : "";
+        updateAddSecBtnState();
+      };
 
-          const isComplete = Boolean(faculty && floor && room);
-          const fullLoc = isComplete 
-            ? `${faculty} - ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor} - ${room}`
-            : "";
+      if (addSecColorBtn) {
+        addSecColorBtn.addEventListener("click", () => {
+          if (!hasPrimaryColor || secColors.length >= 3) return;
+          if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) return;
 
-          if (itemLocationInput) itemLocationInput.value = fullLoc;
+          secColors.push({
+            id: Date.now() + Math.random(),
+            hex: null,
+            isChosen: false
+          });
 
-          // Chỉ hiện chữ sau khi xong hoàn toàn, không đặt trong khối tô màu
-          if (locSummary && locSummaryText) {
-            if (isComplete) {
-              locSummary.classList.remove("hidden");
-              locSummaryText.textContent = fullLoc;
-            } else {
-              locSummary.classList.add("hidden");
-            }
+          renderSecColors();
+        });
+      }
+
+      // ==========================================
+      // 3 & 4. Ô NHẬP ĐỊA ĐIỂM: Khoa -> Tầng mấy (chỉ tầng, ko có hội trường) -> Phòng (có option hội trường)
+      // Hiện tuần tự sau khi chọn bước trước, khi xong chỉ hiện chữ không đóng khối tô màu
+      // ==========================================
+      const locFaculty = document.getElementById("loc-faculty");
+      const locStep2Wrapper = document.getElementById("loc-step-2-wrapper");
+      const locFloor = document.getElementById("loc-floor");
+      const locStep3Wrapper = document.getElementById("loc-step-3-wrapper");
+      const locRoom = document.getElementById("loc-room");
+      const itemLocationInput = document.getElementById("item-location");
+      const locSummary = document.getElementById("loc-summary");
+      const locSummaryText = document.getElementById("loc-summary-text");
+
+      const updateLocationSummary = () => {
+        const faculty = locFaculty ? locFaculty.value : "";
+        const floor = locFloor ? locFloor.value : "";
+        const room = locRoom ? locRoom.value : "";
+
+        const isComplete = Boolean(faculty && floor && room);
+        const fullLoc = isComplete
+          ? `${faculty} - ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor} - ${room}`
+          : "";
+
+        if (itemLocationInput) itemLocationInput.value = fullLoc;
+
+        // Chỉ hiện chữ sau khi xong hoàn toàn, không đặt trong khối tô màu
+        if (locSummary && locSummaryText) {
+          if (isComplete) {
+            locSummary.classList.remove("hidden");
+            locSummaryText.textContent = fullLoc;
+          } else {
+            locSummary.classList.add("hidden");
           }
-        };
-
-        if (locFaculty) {
-          locFaculty.addEventListener("change", () => {
-            if (locFaculty.value) {
-              if (locStep2Wrapper) locStep2Wrapper.classList.remove("hidden");
-            } else {
-              if (locStep2Wrapper) locStep2Wrapper.classList.add("hidden");
-            }
-            if (locFloor) locFloor.selectedIndex = 0;
-            if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
-            if (locRoom) locRoom.selectedIndex = 0;
-            updateLocationSummary();
-          });
         }
+      };
 
-        if (locFloor) {
-          locFloor.addEventListener("change", () => {
-            const floor = locFloor.value;
-            if (floor) {
-              if (locStep3Wrapper) locStep3Wrapper.classList.remove("hidden");
-              if (locRoom) {
-                locRoom.innerHTML = `
+      if (locFaculty) {
+        locFaculty.addEventListener("change", () => {
+          if (locFaculty.value) {
+            if (locStep2Wrapper) locStep2Wrapper.classList.remove("hidden");
+          } else {
+            if (locStep2Wrapper) locStep2Wrapper.classList.add("hidden");
+          }
+          if (locFloor) locFloor.selectedIndex = 0;
+          if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
+          if (locRoom) locRoom.selectedIndex = 0;
+          updateLocationSummary();
+        });
+      }
+
+      if (locFloor) {
+        locFloor.addEventListener("change", () => {
+          const floor = locFloor.value;
+          if (floor) {
+            if (locStep3Wrapper) locStep3Wrapper.classList.remove("hidden");
+            if (locRoom) {
+              locRoom.innerHTML = `
                   <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
                   <optgroup label="Phòng học">
                     <option value="Phòng ${floor === 'trệt' ? '001' : floor + '01'}">Phòng ${floor === 'trệt' ? '001' : floor + '01'}</option>
@@ -944,110 +854,111 @@
                     <option value="Hội trường 2">Hội trường 2</option>
                   </optgroup>
                 `;
-              }
-            } else {
-              if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
-              if (locRoom) locRoom.selectedIndex = 0;
             }
-            updateLocationSummary();
-          });
-        }
+          } else {
+            if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
+            if (locRoom) locRoom.selectedIndex = 0;
+          }
+          updateLocationSummary();
+        });
+      }
 
-        if (locRoom) {
-          locRoom.addEventListener("change", updateLocationSummary);
-        }
+      if (locRoom) {
+        locRoom.addEventListener("change", updateLocationSummary);
+      }
 
-        // ==========================================
-        // 6. KÉO THẢ ẢNH FRONTEND HOÀN CHỈNH
-        // ==========================================
-        const dropZone = document.getElementById("drop-zone");
-        const fileInput = document.getElementById("file-upload-input");
-        const slots = document.querySelectorAll(".image-slot");
-        let uploadedImages = [];
+      // ==========================================
+      // 6. KÉO THẢ ẢNH FRONTEND HOÀN CHỈNH
+      // ==========================================
+      const dropZone = document.getElementById("drop-zone");
+      const fileInput = document.getElementById("file-upload-input");
+      const slots = document.querySelectorAll(".image-slot");
+      let uploadedImages = [];
 
-        const renderSlots = () => {
-          slots.forEach((slot, idx) => {
-            if (uploadedImages[idx]) {
-              slot.innerHTML = `
+      const renderSlots = () => {
+        slots.forEach((slot, idx) => {
+          if (uploadedImages[idx]) {
+            slot.innerHTML = `
                 <img src="${uploadedImages[idx]}" class="w-full h-full object-cover rounded-xl" alt="Ảnh ${idx + 1}" />
                 <button type="button" class="remove-photo-btn absolute top-1 right-1 w-6 h-6 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" data-idx="${idx}" title="Xóa ảnh">
                   <span class="material-symbols-outlined text-[14px]">close</span>
                 </button>
               `;
-              const rmBtn = slot.querySelector(".remove-photo-btn");
-              if (rmBtn) {
-                rmBtn.addEventListener("click", (e) => {
-                  e.stopPropagation();
-                  uploadedImages.splice(idx, 1);
-                  renderSlots();
-                });
-              }
-            } else {
-              slot.innerHTML = `
+            const rmBtn = slot.querySelector(".remove-photo-btn");
+            if (rmBtn) {
+              rmBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                uploadedImages.splice(idx, 1);
+                renderSlots();
+              });
+            }
+          } else {
+            slot.innerHTML = `
                 <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
                 <span class="text-caption-meta font-caption-meta font-medium">Thêm ảnh ${idx + 1}</span>
               `;
-            }
-          });
-        };
+          }
+        });
+      };
 
-        const handleFiles = (files) => {
-          Array.from(files).forEach(file => {
-            if (file.type.startsWith("image/") && uploadedImages.length < 4) {
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                if (uploadedImages.length < 4) {
-                  uploadedImages.push(e.target.result);
-                  renderSlots();
-                }
-              };
-              reader.readAsDataURL(file);
-            }
-          });
-        };
+      const handleFiles = (files) => {
+        Array.from(files).forEach(file => {
+          if (file.type.startsWith("image/") && uploadedImages.length < 4) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              if (uploadedImages.length < 4) {
+                uploadedImages.push(e.target.result);
+                renderSlots();
+              }
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      };
 
-        if (dropZone && fileInput) {
-          dropZone.addEventListener("click", () => fileInput.click());
+      if (dropZone && fileInput) {
+        dropZone.addEventListener("click", () => fileInput.click());
 
-          ["dragenter", "dragover"].forEach(eventName => {
-            dropZone.addEventListener(eventName, (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              dropZone.classList.add("border-primary", "bg-primary/5", "scale-[1.01]");
-            });
-          });
-
-          ["dragleave", "drop"].forEach(eventName => {
-            dropZone.addEventListener(eventName, (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              dropZone.classList.remove("border-primary", "bg-primary/5", "scale-[1.01]");
-            });
-          });
-
-          dropZone.addEventListener("drop", (e) => {
-            const dt = e.dataTransfer;
-            if (dt && dt.files) {
-              handleFiles(dt.files);
-            }
-          });
-
-          fileInput.addEventListener("change", (e) => {
-            if (e.target.files) {
-              handleFiles(e.target.files);
-            }
-          });
-        }
-
-        slots.forEach(slot => {
-          slot.addEventListener("click", () => {
-            const idx = parseInt(slot.dataset.index, 10);
-            if (!uploadedImages[idx] && fileInput) {
-              fileInput.click();
-            }
+        ["dragenter", "dragover"].forEach(eventName => {
+          dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add("border-primary", "bg-primary/5", "scale-[1.01]");
           });
         });
+
+        ["dragleave", "drop"].forEach(eventName => {
+          dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove("border-primary", "bg-primary/5", "scale-[1.01]");
+          });
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          const dt = e.dataTransfer;
+          if (dt && dt.files) {
+            handleFiles(dt.files);
+          }
+        });
+
+        fileInput.addEventListener("change", (e) => {
+          if (e.target.files) {
+            handleFiles(e.target.files);
+          }
+        });
+      }
+
+      slots.forEach(slot => {
+        slot.addEventListener("click", () => {
+          const idx = parseInt(slot.dataset.index, 10);
+          if (!uploadedImages[idx] && fileInput) {
+            fileInput.click();
+          }
+        });
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>

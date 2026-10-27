@@ -9,11 +9,13 @@
   <!-- Google Fonts: Be Vietnam Pro -->
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
     rel="stylesheet" />
 
   <!-- Material Symbols Outlined -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
@@ -54,14 +56,17 @@
       color: #1b1c1c;
       -webkit-font-smoothing: antialiased;
     }
+
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       vertical-align: middle;
       line-height: 1;
     }
+
     .material-symbols-outlined.fill {
       font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
+
     app-header {
       display: block;
       min-height: 64px;
@@ -69,7 +74,8 @@
   </style>
 </head>
 
-<body class="min-h-screen bg-[#fcf9f8] text-[#1b1c1c] flex flex-col justify-between selection:bg-[#35483d] selection:text-white">
+<body
+  class="min-h-screen bg-[#fcf9f8] text-[#1b1c1c] flex flex-col justify-between selection:bg-[#35483d] selection:text-white">
 
   <!-- =========================================================================
        1. GLOBAL TOP NAVBAR (Web Component Header chuẩn CTU Lost & Found)
@@ -82,7 +88,8 @@
   <div class="w-full bg-[#fcf9f8] border-b border-[#e7e1df]/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-xs">
       <div class="flex items-center gap-2 text-[#797675]">
-        <a id="backBtn" href="match-detail.html" class="hover:text-[#35483d] font-medium flex items-center gap-1 transition-colors">
+        <a id="backBtn" href="match-detail.html"
+          class="hover:text-[#35483d] font-medium flex items-center gap-1 transition-colors">
           <span class="material-symbols-outlined text-base">chevron_left</span>
           <span id="backBtnText">Quay lại kết quả ghép nối</span>
         </a>
@@ -100,7 +107,7 @@
            CỘT TRÁI - 1/2 BÊN TRÁI: THÔNG TIN MÓN ĐỒ NHẶT ĐƯỢC
            ===================================================================== -->
       <section class="bg-white rounded-2xl p-6 md:p-7 shadow-sm border border-[#e7e1df] flex flex-col w-full">
-        
+
         <!-- Header phụ của thẻ tài sản -->
         <div class="flex items-center justify-between mb-4">
           <div class="inline-flex items-center gap-2">
@@ -112,16 +119,19 @@
         <!-- KHU VỰC ẢNH (Ảnh thực tế của card 1 trong chi tiết kết quả ghép nối) -->
         <div class="space-y-3">
           <!-- 1 Ảnh chính to (Tỷ lệ aspect-[4/3], bo góc rounded-xl) -->
-          <div id="mainPhotoWrapper" class="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#f0edec] border border-[#e7e1df] shadow-inner flex items-center justify-center group">
+          <div id="mainPhotoWrapper"
+            class="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#f0edec] border border-[#e7e1df] shadow-inner flex items-center justify-center group">
             <img id="mainPhoto" alt="Ảnh thực tế món đồ"
               class="w-full h-full object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
               src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
 
-            <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm select-none">
+            <div
+              class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm select-none">
               <span class="material-symbols-outlined text-sm">photo_camera</span>
               Ảnh hiện trường nhặt được
             </div>
-            <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm select-none">
+            <div
+              class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm select-none">
               <span class="material-symbols-outlined text-sm">collections</span>
               <span id="photoCounter">3 hình ảnh</span>
             </div>
@@ -130,19 +140,22 @@
           <!-- Danh sách ảnh phụ (Thumbnails) -->
           <div id="thumbsContainer" class="grid grid-cols-3 gap-3">
             <!-- Thumbnail 1 (Active) -->
-            <button type="button" onclick="selectThumb(this, 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
+            <button type="button"
+              onclick="selectThumb(this, 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
               class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-[#35483d] p-0.5 bg-white shadow-sm flex items-center justify-center transition-all focus:outline-none cursor-pointer">
               <img alt="Ảnh góc chụp 1" class="w-full h-full object-cover rounded"
                 src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
             </button>
             <!-- Thumbnail 2 -->
-            <button type="button" onclick="selectThumb(this, 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
+            <button type="button"
+              onclick="selectThumb(this, 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
               class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border border-[#e7e1df] p-0.5 bg-[#fcf9f8] shadow-sm hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer">
               <img alt="Ảnh góc chụp 2" class="w-full h-full object-cover rounded"
                 src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
             </button>
             <!-- Thumbnail 3 -->
-            <button type="button" onclick="selectThumb(this, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
+            <button type="button"
+              onclick="selectThumb(this, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=800&amp;q=80')"
               class="thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden border border-[#e7e1df] p-0.5 bg-[#fcf9f8] shadow-sm hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer">
               <img alt="Ảnh góc chụp 3" class="w-full h-full object-cover rounded"
                 src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
@@ -163,7 +176,8 @@
               <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">location_on</span>
               <div>
                 <span class="text-[#797675]">Địa điểm người kia nhặt được:</span>
-                <span id="itemLocation" class="font-semibold text-[#1b1c1c] ml-1">Khu II - Tòa C1 (Khoa CNTT&amp;TT)</span>
+                <span id="itemLocation" class="font-semibold text-[#1b1c1c] ml-1">Khu II - Tòa C1 (Khoa
+                  CNTT&amp;TT)</span>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
@@ -177,7 +191,8 @@
               <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">apartment</span>
               <div>
                 <span class="text-[#797675]">Nơi lưu giữ:</span>
-                <span id="itemStorage" class="font-semibold text-[#1b1c1c] ml-1">Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành</span>
+                <span id="itemStorage" class="font-semibold text-[#1b1c1c] ml-1">Phòng Công tác Sinh viên (PCTSV) - Nhà
+                  điều hành</span>
               </div>
             </div>
           </div>
@@ -189,7 +204,8 @@
               <span>Ghi chú mô tả của người nhặt:</span>
             </div>
             <p id="itemNote" class="text-sm text-[#4a4746] leading-relaxed">
-              "Mình nhặt được chiếc ví màu nâu ở khu vực dãy bàn tự học Tầng 2 Thư viện (khu tự học máy lạnh). Trong ví có một số thẻ cá nhân và giấy tờ sinh viên, hiện đã chuyển giao bảo quản an toàn để tránh thất lạc."
+              "Mình nhặt được chiếc ví màu nâu ở khu vực dãy bàn tự học Tầng 2 Thư viện (khu tự học máy lạnh). Trong ví
+              có một số thẻ cá nhân và giấy tờ sinh viên, hiện đã chuyển giao bảo quản an toàn để tránh thất lạc."
             </p>
           </div>
         </div>
@@ -199,7 +215,7 @@
            CỘT PHẢI - 1/2 BÊN PHẢI: FORM ĐIỀN THÔNG TIN XÁC MINH
            ===================================================================== -->
       <section class="bg-white rounded-2xl p-6 md:p-7 shadow-sm border border-[#e7e1df] flex flex-col w-full">
-        
+
         <!-- Header Cột Phải -->
         <div class="pb-4 mb-6 border-b border-[#e7e1df]">
           <h2 class="font-extrabold text-2xl text-[#1b1c1c] tracking-tight">
@@ -208,9 +224,10 @@
         </div>
 
         <!-- FORM CHÍNH -->
-        <form onsubmit="event.preventDefault(); handleSubmitClaim();" class="space-y-5 flex-1 flex flex-col justify-between">
+        <form onsubmit="event.preventDefault(); handleSubmitClaim();"
+          class="space-y-5 flex-1 flex flex-col justify-between">
           <div class="space-y-5">
-            
+
             <!-- CÂU HỎI BẢO MẬT (Tối giản chuẩn phong cách Apple) -->
             <div class="space-y-1.5 pb-2">
               <div class="text-xs font-semibold text-[#797675] flex items-center gap-1.5">
@@ -223,14 +240,16 @@
             </div>
 
             <!-- CÁC TRƯỜNG INPUT -->
-            
+
             <!-- Input 1: Câu trả lời -->
             <div>
               <label class="block text-xs font-bold text-[#1b1c1c] uppercase tracking-wider mb-1.5">
                 Câu trả lời của bạn <span class="text-rose-600">*</span>
               </label>
               <div class="relative">
-                <input type="text" required id="answerInput" placeholder="Nhập chính xác mã số sinh viên... (VD: B2105432)" class="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm bg-[#fcf9f8] text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 focus:bg-white transition-all outline-none placeholder:text-[#797675]/60 font-medium">
+                <input type="text" required id="answerInput"
+                  placeholder="Nhập chính xác mã số sinh viên... (VD: B2105432)"
+                  class="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm bg-[#fcf9f8] text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 focus:bg-white transition-all outline-none placeholder:text-[#797675]/60 font-medium">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#797675]">
                   <span class="material-symbols-outlined text-lg">badge</span>
                 </div>
@@ -242,7 +261,9 @@
               <label class="block text-xs font-bold text-[#1b1c1c] uppercase tracking-wider mb-1.5">
                 Lời nhắn &amp; Số điện thoại / Zalo <span class="text-rose-600">*</span>
               </label>
-              <textarea required id="messageInput" rows="4" placeholder="Nhập lời nhắn và phương thức liên lạc để người nhặt đối chiếu... (VD: Em tên Nguyễn Văn An, SĐT: 0912 345 678, em có thể nhận lại đồ tại sảnh C1 hoặc văn phòng PCTSV...)" class="w-full px-4 py-2.5 rounded-lg text-sm bg-[#fcf9f8] text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 focus:bg-white transition-all outline-none placeholder:text-[#797675]/60 resize-none leading-relaxed"></textarea>
+              <textarea required id="messageInput" rows="4"
+                placeholder="Nhập lời nhắn và phương thức liên lạc để người nhặt đối chiếu... (VD: Em tên Nguyễn Văn An, SĐT: 0912 345 678, em có thể nhận lại đồ tại sảnh C1 hoặc văn phòng PCTSV...)"
+                class="w-full px-4 py-2.5 rounded-lg text-sm bg-[#fcf9f8] text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 focus:bg-white transition-all outline-none placeholder:text-[#797675]/60 resize-none leading-relaxed"></textarea>
               <div class="mt-1 flex items-center justify-between text-[11px] text-[#797675]">
                 <span>Mô tả thêm đặc điểm nếu có</span>
                 <span id="charCount">0/300</span>
@@ -254,26 +275,33 @@
               <label class="block text-xs font-bold text-[#1b1c1c] uppercase tracking-wider mb-1.5">
                 Ảnh chứng minh <span class="text-xs font-normal text-[#797675] lowercase">(tùy chọn)</span>
               </label>
-              
+
               <!-- Ẩn input file -->
               <input type="file" id="proofFileInput" accept="image/*" class="sr-only" />
 
-              <div id="dropZoneProof" class="border-2 border-dashed border-[#e7e1df] hover:border-[#35483d] bg-[#fcf9f8] hover:bg-white rounded-xl p-4 text-center cursor-pointer transition-all group">
-                <span class="material-symbols-outlined text-2xl text-[#797675] group-hover:text-[#35483d] transition-colors mb-1">add_photo_alternate</span>
+              <div id="dropZoneProof"
+                class="border-2 border-dashed border-[#e7e1df] hover:border-[#35483d] bg-[#fcf9f8] hover:bg-white rounded-xl p-4 text-center cursor-pointer transition-all group">
+                <span
+                  class="material-symbols-outlined text-2xl text-[#797675] group-hover:text-[#35483d] transition-colors mb-1">add_photo_alternate</span>
                 <p class="text-xs font-semibold text-[#1b1c1c]">Nhấp để tải ảnh giấy tờ / ảnh cũ chứng minh</p>
-                <p class="text-[11px] text-[#797675] mt-0.5">Hỗ trợ PNG, JPG, JPEG (Tối đa 5MB) - Có thể kéo thả vào đây</p>
+                <p class="text-[11px] text-[#797675] mt-0.5">Hỗ trợ PNG, JPG, JPEG (Tối đa 5MB) - Có thể kéo thả vào đây
+                </p>
               </div>
 
               <!-- Upload preview (hiển thị ảnh thật khi chọn) -->
-              <div id="uploadPreview" class="mt-2.5 p-2 bg-[#f0edec]/60 border border-[#e7e1df] rounded-lg flex items-center justify-between text-xs hidden">
+              <div id="uploadPreview"
+                class="mt-2.5 p-2 bg-[#f0edec]/60 border border-[#e7e1df] rounded-lg flex items-center justify-between text-xs hidden">
                 <div class="flex items-center gap-2.5 text-[#1b1c1c] truncate">
-                  <img id="previewImg" src="" alt="Ảnh xem trước" class="w-8 h-8 rounded object-cover border border-[#e7e1df] bg-white flex-shrink-0" />
+                  <img id="previewImg" src="" alt="Ảnh xem trước"
+                    class="w-8 h-8 rounded object-cover border border-[#e7e1df] bg-white flex-shrink-0" />
                   <div class="truncate">
                     <span id="previewName" class="truncate font-medium block"></span>
                     <span id="previewSize" class="text-[#797675] text-[10px] block"></span>
                   </div>
                 </div>
-                <button type="button" id="removeFileBtn" class="text-rose-600 hover:text-rose-800 p-1 rounded hover:bg-red-50 cursor-pointer transition-colors" title="Xóa tệp">
+                <button type="button" id="removeFileBtn"
+                  class="text-rose-600 hover:text-rose-800 p-1 rounded hover:bg-red-50 cursor-pointer transition-colors"
+                  title="Xóa tệp">
                   <span class="material-symbols-outlined text-base">close</span>
                 </button>
               </div>
@@ -283,9 +311,11 @@
 
           <!-- NÚT HÀNH ĐỘNG Ở CHÂN CỘT PHẢI -->
           <div class="pt-6 border-t border-[#e7e1df] space-y-3">
-            <button type="submit" id="submitBtn" class="w-full py-3.5 px-4 rounded-xl bg-[#35483d] hover:bg-[#28372e] text-white text-sm font-bold shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center gap-2 group cursor-pointer active:scale-98">
+            <button type="submit" id="submitBtn"
+              class="w-full py-3.5 px-4 rounded-xl bg-[#35483d] hover:bg-[#28372e] text-white text-sm font-bold shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center gap-2 group cursor-pointer active:scale-98">
               <span>Gửi yêu cầu xác minh</span>
-              <span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1">arrow_forward</span>
+              <span
+                class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1">arrow_forward</span>
             </button>
           </div>
         </form>
@@ -303,7 +333,8 @@
   <!-- =========================================================================
        POPUP THÔNG BÁO GỬI THÀNH CÔNG (Mô phỏng tương tác hoàn chỉnh)
        ========================================================================= -->
-  <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+  <div id="successModal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-[#e7e1df]">
       <div class="w-14 h-14 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
         <span class="material-symbols-outlined text-3xl">check_circle</span>
@@ -312,10 +343,12 @@
         Gửi yêu cầu xác minh thành công!
       </h3>
       <p class="text-xs sm:text-sm text-[#4a4746] mt-2 leading-relaxed">
-        Thông tin và lời nhắn của bạn đã được gửi trực tiếp đến người giữ món đồ. Hãy chú ý kiểm tra mục <strong>Thông báo</strong> hoặc email sinh viên khi có phản hồi.
+        Thông tin và lời nhắn của bạn đã được gửi trực tiếp đến người giữ món đồ. Hãy chú ý kiểm tra mục <strong>Thông
+          báo</strong> hoặc email sinh viên khi có phản hồi.
       </p>
       <div class="mt-6 flex flex-col gap-2">
-        <button type="button" onclick="closeSuccessModal()" class="w-full py-2.5 rounded-xl bg-[#35483d] text-white text-xs font-bold hover:bg-[#28372e] transition-colors cursor-pointer">
+        <button type="button" onclick="closeSuccessModal()"
+          class="w-full py-2.5 rounded-xl bg-[#35483d] text-white text-xs font-bold hover:bg-[#28372e] transition-colors cursor-pointer">
           Xác nhận &amp; Về trang thông báo
         </button>
       </div>
@@ -420,7 +453,7 @@
       }
 
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         if (previewImg) previewImg.src = e.target.result;
         if (previewName) previewName.textContent = file.name;
         if (previewSize) previewSize.textContent = `(${formatFileSize(file.size)})`;
@@ -533,10 +566,9 @@
         currentThumbsList.forEach((thumbUrl, idx) => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = `thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden ${
-            idx === 0 ? 'border-2 border-[#35483d] ring-2 ring-[#35483d]/25' : 'border border-[#e7e1df] opacity-70'
-          } p-0.5 bg-white shadow-sm hover:opacity-100 hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer`;
-          btn.onclick = function() { goToSlide(idx, true); };
+          btn.className = `thumb-btn relative aspect-[4/3] rounded-lg overflow-hidden ${idx === 0 ? 'border-2 border-[#35483d] ring-2 ring-[#35483d]/25' : 'border border-[#e7e1df] opacity-70'
+            } p-0.5 bg-white shadow-sm hover:opacity-100 hover:border-[#35483d]/60 flex items-center justify-center transition-all focus:outline-none cursor-pointer`;
+          btn.onclick = function () { goToSlide(idx, true); };
           btn.innerHTML = `<img alt="${item.title} - ảnh ${idx + 1}" class="w-full h-full object-cover rounded" src="${thumbUrl}" />`;
           thumbsContainer.appendChild(btn);
         });
