@@ -230,3 +230,387 @@ app-header {
     min-height: 80px;
   }
 }
+
+/* ==============================================================
+   CHROME-STYLE 3-COLOR THEME VARIABLES & SYSTEM
+   (Top: Header | Bottom-Left: Background | Bottom-Right: Accent/Icon)
+   ============================================================== */
+:root {
+  --theme-bg-header: #f7f6f2;
+  --theme-header-border: #e6e4de;
+  --theme-header-text: #1b1c1b;
+  --theme-header-icon: #1f3227;
+  --theme-header-nav-text: #777771;
+  --theme-header-nav-active-border: #1f3227;
+  --theme-header-btn-bg: rgba(231, 229, 228, 0.6);
+  --theme-header-btn-text: #1f3227;
+
+  --theme-bg-page: #f7f6f2;
+  --theme-bg-card: #ffffff;
+  --theme-bg-subtle: #f6f3f2;
+  --theme-text-main: #1b1c1b;
+  --theme-text-muted: #777771;
+  --theme-text-body: #4a4746;
+  --theme-border: #e7e1df;
+
+  --theme-accent: #1f3227;
+  --theme-accent-hover: #142018;
+  --theme-accent-ring: rgba(31, 50, 39, 0.25);
+  --theme-custom-hue: 145;
+  --slider-thumb-color: #23a55a;
+}
+
+html.dark {
+  --theme-bg-header: #18191c;
+  --theme-header-border: #2e3035;
+  --theme-header-text: #f2f3f5;
+  --theme-header-icon: #5865f2;
+  --theme-header-nav-text: #949ba4;
+  --theme-header-nav-active-border: #5865f2;
+  --theme-header-btn-bg: rgba(255, 255, 255, 0.1);
+  --theme-header-btn-text: #f2f3f5;
+
+  --theme-bg-page: #121315;
+  --theme-bg-card: #1e1f22;
+  --theme-bg-subtle: #2b2d31;
+  --theme-text-main: #f2f3f5;
+  --theme-text-muted: #949ba4;
+  --theme-text-body: #dbdee1;
+  --theme-border: #35363c;
+  --theme-accent: #5865f2;
+  --theme-accent-hover: #4752c4;
+  --theme-accent-ring: rgba(88, 101, 242, 0.35);
+}
+
+/* 1. Header Styles (Thanh Header đổi màu chuẩn xác theo nửa trên ô tròn Chrome) */
+app-header header {
+  background-color: var(--theme-bg-header, #f7f6f2) !important;
+  border-color: var(--theme-header-border, #e6e4de) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+app-header .header-brand-text {
+  color: var(--theme-header-text, #1b1c1b) !important;
+}
+
+app-header .header-brand-icon {
+  color: var(--theme-header-icon, #1f3227) !important;
+}
+
+app-header .header-nav-link {
+  color: var(--theme-header-nav-text, #777771) !important;
+  transition: color 0.2s ease;
+}
+
+app-header .header-nav-link:hover {
+  color: var(--theme-header-text, #1b1c1b) !important;
+}
+
+app-header .header-nav-link.header-nav-active {
+  color: var(--theme-header-text, #1b1c1b) !important;
+  border-bottom-color: var(--theme-header-nav-active-border, #1f3227) !important;
+}
+
+app-header .header-action-btn {
+  background-color: var(--theme-header-btn-bg, rgba(231, 229, 228, 0.6)) !important;
+  color: var(--theme-header-btn-text, #1f3227) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 2. Page Background (Đổi màu chuẩn xác theo góc dưới trái ô tròn Chrome) */
+body,
+.bg-\[\#f7f6f2\],
+.bg-\[\#FAF8F5\],
+.bg-\[\#FAF8F3\],
+.bg-ivory,
+.bg-\[\#fcf9f8\] {
+  background-color: var(--theme-bg-page, #f7f6f2) !important;
+  transition: background-color 0.25s ease;
+}
+
+/* 3. Card Background */
+.bg-white {
+  background-color: var(--theme-bg-card, #ffffff) !important;
+  transition: background-color 0.25s ease;
+}
+
+/* 4. Accent Colors: Nút bấm, Icon, Viền active, Huy hiệu */
+.bg-\[\#1f3227\],
+.bg-\[\#35483d\],
+.bg-\[\#35483D\],
+.bg-deep-sage,
+.bg-primary {
+  background-color: var(--theme-accent, #1f3227) !important;
+}
+
+.hover\:bg-\[\#35483d\]:hover,
+.hover\:bg-\[\#1f3227\]:hover,
+.hover\:bg-\[\#233229\]:hover {
+  background-color: var(--theme-accent-hover, #142018) !important;
+}
+
+.text-\[\#1f3227\],
+.text-\[\#35483d\],
+.text-\[\#35483D\],
+.text-deep-sage,
+.text-primary {
+  color: var(--theme-accent, #1f3227) !important;
+}
+
+.border-\[\#1f3227\],
+.border-\[\#35483d\],
+.border-\[\#35483D\],
+.border-primary {
+  border-color: var(--theme-accent, #1f3227) !important;
+}
+
+.focus\:border-\[\#35483d\]:focus,
+.focus\:border-\[\#1f3227\]:focus {
+  border-color: var(--theme-accent, #1f3227) !important;
+}
+
+.focus\:ring-\[\#35483d\]\/20:focus {
+  --tw-ring-color: var(--theme-accent-ring) !important;
+}
+
+/* Đảm bảo phần đáy trang không bị Bottom Tab Bar che lấp trên mobile */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 74px !important;
+  }
+}
+
+/* ==============================================================
+   IPHONE ASSISTIVETOUCH FLOATING CONTROL & MOBILE MODAL
+   ============================================================== */
+#assistive-touch-container {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#assistive-touch-btn {
+  touch-action: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+#assistive-touch-menu {
+  touch-action: auto !important;
+  pointer-events: auto !important;
+}
+
+#assistive-touch-menu button {
+  touch-action: auto !important;
+  pointer-events: auto !important;
+}
+
+.mobile-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9998;
+  animation: fadeInBackdrop 0.2s ease-out forwards;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dark Mode Overrides cho thẻ form và chữ */
+html.dark body {
+  background-color: var(--theme-bg-page) !important;
+  color: var(--theme-text-main) !important;
+}
+
+html.dark .bg-\[\#f6f3f2\],
+html.dark .bg-\[\#f0edec\],
+html.dark .bg-stone-200\/60,
+html.dark .bg-gray-50\/50 {
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-text-main) !important;
+}
+
+html.dark .text-\[\#1b1c1c\],
+html.dark .text-\[\#1b1c1b\],
+html.dark .text-soft-black {
+  color: var(--theme-text-main) !important;
+}
+
+html.dark .text-\[\#777771\],
+html.dark .text-\[\#797675\],
+html.dark .text-\[\#727873\] {
+  color: var(--theme-text-muted) !important;
+}
+
+html.dark .text-\[\#4a4746\] {
+  color: var(--theme-text-body) !important;
+}
+
+html.dark .border-\[\#e7e1df\],
+html.dark .border-\[\#E6E4DE\],
+html.dark .border-\[\#f0edec\],
+html.dark .border-stone-border {
+  border-color: var(--theme-border) !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-text-main) !important;
+  border-color: var(--theme-border) !important;
+}
+
+/* ==============================================================
+   RAINBOW SLIDER
+   ============================================================== */
+.rainbow-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    #ff0000 0%,
+    #ff8000 12.5%,
+    #ffff00 25%,
+    #00ff00 37.5%,
+    #00ffff 50%,
+    #0080ff 62.5%,
+    #0000ff 75%,
+    #8000ff 87.5%,
+    #ff00ff 93.75%,
+    #ff0000 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+
+.rainbow-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--slider-thumb-color, #23a55a);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.rainbow-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.rainbow-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--slider-thumb-color, #23a55a);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+/* ==============================================================
+   EXPANDABLE ACTION PILL BUTTONS (Hiện tên tại ô, bung đẩy icon kia)
+   ============================================================== */
+.action-buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  min-width: 32px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: transparent;
+  color: #777771;
+  transition: width 0.3s cubic-bezier(0.2, 0.9, 0.3, 1),
+              background-color 0.25s ease,
+              color 0.25s ease,
+              padding 0.3s cubic-bezier(0.2, 0.9, 0.3, 1),
+              box-shadow 0.25s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.action-pill-btn .action-pill-label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  transition: max-width 0.3s cubic-bezier(0.2, 0.9, 0.3, 1),
+              opacity 0.2s ease 0.05s,
+              margin-left 0.25s ease;
+  margin-left: 0;
+}
+
+/* Khi hover: Bung rộng ra, đẩy các icon bên cạnh */
+.action-pill-btn:hover {
+  width: auto;
+  min-width: 32px;
+  padding: 0 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.action-pill-btn:hover .action-pill-label {
+  max-width: 120px;
+  opacity: 1;
+  margin-left: 6px;
+}
+
+/* 1. Nút Chỉnh sửa: Bung xanh dương */
+.edit-pill-btn:hover {
+  background-color: #dbeafe !important;
+  color: #1d4ed8 !important;
+  border-color: #bfdbfe !important;
+}
+html.dark .edit-pill-btn:hover {
+  background-color: rgba(30, 58, 138, 0.45) !important;
+  color: #93c5fd !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* 2. Nút Chuyển PCTSV: Bung xanh ngọc / ngọc bích */
+.transfer-pill-btn:hover {
+  background-color: #d1fae5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+html.dark .transfer-pill-btn:hover {
+  background-color: rgba(6, 78, 59, 0.45) !important;
+  color: #6ee7b7 !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+/* 3. Nút Xóa bài: Bung đỏ nhạt */
+.delete-pill-btn:hover {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
+  border-color: #fecaca !important;
+}
+html.dark .delete-pill-btn:hover {
+  background-color: rgba(127, 29, 29, 0.45) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
