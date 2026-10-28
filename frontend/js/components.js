@@ -1,3 +1,47 @@
+// Khởi tạo & đồng bộ Theme từ localStorage để đảm bảo giao diện luôn giữ đúng màu chủ đạo
+(function initGlobalTheme() {
+  try {
+    const rawData = localStorage.getItem("ctu_theme_data");
+    let theme = null;
+    if (rawData) {
+      try {
+        theme = JSON.parse(rawData);
+      } catch (e) {}
+    }
+
+    if (theme) {
+      if (theme.isLight) {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+
+      const root = document.documentElement;
+      if (theme.top) root.style.setProperty("--theme-bg-header", theme.top);
+      if (theme.headerBorder) root.style.setProperty("--theme-header-border", theme.headerBorder);
+      if (theme.headerText) root.style.setProperty("--theme-header-text", theme.headerText);
+      if (theme.headerIcon) root.style.setProperty("--theme-header-icon", theme.headerIcon);
+      if (theme.headerNavText) root.style.setProperty("--theme-header-nav-text", theme.headerNavText);
+      if (theme.headerNavActiveBorder) root.style.setProperty("--theme-header-nav-active-border", theme.headerNavActiveBorder);
+      if (theme.headerBtnBg) root.style.setProperty("--theme-header-btn-bg", theme.headerBtnBg);
+      if (theme.headerBtnText) root.style.setProperty("--theme-header-btn-text", theme.headerBtnText);
+
+      if (theme.pageBg) root.style.setProperty("--theme-bg-page", theme.pageBg);
+      if (theme.cardBg) root.style.setProperty("--theme-bg-card", theme.cardBg);
+
+      if (theme.accent) root.style.setProperty("--theme-accent", theme.accent);
+      if (theme.accentHover) root.style.setProperty("--theme-accent-hover", theme.accentHover);
+      if (theme.accentRing) root.style.setProperty("--theme-accent-ring", theme.accentRing);
+      if (theme.hue) {
+        root.style.setProperty("--theme-custom-hue", theme.hue);
+        root.style.setProperty("--slider-thumb-color", `hsl(${theme.hue}, 65%, 45%)`);
+      }
+    }
+  } catch (e) {
+    console.warn("Theme init in components error:", e);
+  }
+})();
+
 class AppHeader extends HTMLElement {
   connectedCallback() {
     const currentPath =
@@ -1321,11 +1365,10 @@ class AppHeader extends HTMLElement {
           const isSelected = currentThemePreset === String(p.id);
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className = `w-10 h-10 rounded-full relative cursor-pointer transition-transform hover:scale-110 focus:outline-none ${
-            isSelected
+          btn.className = `w-10 h-10 rounded-full relative cursor-pointer transition-transform hover:scale-110 focus:outline-none ${isSelected
               ? "ring-2 ring-white ring-offset-2 ring-offset-[#1e1f22] scale-105"
               : "ring-1 ring-white/15 hover:ring-white/40"
-          }`;
+            }`;
           btn.title = p.name;
 
           // Vẽ SVG 3 phần chia chuẩn Chrome Profile: Top (Header), Bottom-Left (Background), Bottom-Right (Accent)
@@ -1338,16 +1381,15 @@ class AppHeader extends HTMLElement {
               <!-- Góc dưới phải: Màu Nút bấm & Accent -->
               <path d="M 18,18 L 18,36 A 18,18 0 0,0 36,18 Z" fill="${p.br}" />
             </svg>
-            ${
-              isSelected
-                ? `<span class="absolute inset-0 flex items-center justify-center">
+            ${isSelected
+              ? `<span class="absolute inset-0 flex items-center justify-center">
                     <span class="w-4 h-4 rounded-full bg-white text-stone-900 flex items-center justify-center shadow-md">
                       <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                       </svg>
                     </span>
                   </span>`
-                : ""
+              : ""
             }
           `;
 
@@ -1363,11 +1405,10 @@ class AppHeader extends HTMLElement {
         const customBtn = document.createElement("button");
         customBtn.type = "button";
         customBtn.id = "theme-custom-btn";
-        customBtn.className = `w-10 h-10 rounded-full relative cursor-pointer transition-transform hover:scale-110 focus:outline-none flex items-center justify-center ${
-          isCustom
+        customBtn.className = `w-10 h-10 rounded-full relative cursor-pointer transition-transform hover:scale-110 focus:outline-none flex items-center justify-center ${isCustom
             ? "ring-2 ring-white ring-offset-2 ring-offset-[#1e1f22] scale-105"
             : "ring-1 ring-white/15 hover:ring-white/40"
-        }`;
+          }`;
         customBtn.style.backgroundColor = `hsl(${currentThemeHue}, 65%, 45%)`;
         customBtn.title = "Tùy chỉnh màu dải cầu vồng";
         customBtn.innerHTML = `
@@ -1392,6 +1433,11 @@ class AppHeader extends HTMLElement {
 
     // Khởi tạo trạng thái giao diện UI
     updateThemeUI();
+
+    // Đảm bảo CSS variables được áp dụng nếu trang chưa chạy main.js
+    if (!document.documentElement.style.getPropertyValue("--theme-bg-header") && currentThemePreset) {
+      applyTheme(currentThemePreset, currentThemeHue);
+    }
 
     // Hue Slider
     if (hueSlider) {
@@ -1556,7 +1602,7 @@ class AppHeader extends HTMLElement {
           }
         }
       }
-    } catch (e) {}
+    } catch (e) { }
 
     const onDragStart = (clientX, clientY) => {
       if (!assistiveContainer) return;
