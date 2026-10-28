@@ -324,13 +324,17 @@ body,
 .bg-\[\#FAF8F5\],
 .bg-\[\#FAF8F3\],
 .bg-ivory,
+.bg-background,
 .bg-\[\#fcf9f8\] {
   background-color: var(--theme-bg-page, #f7f6f2) !important;
   transition: background-color 0.25s ease;
 }
 
 /* 3. Card Background */
-.bg-white {
+.bg-white,
+.bg-surface,
+.bg-surface-container-lowest,
+.choice-card {
   background-color: var(--theme-bg-card, #ffffff) !important;
   transition: background-color 0.25s ease;
 }
@@ -340,13 +344,16 @@ body,
 .bg-\[\#35483d\],
 .bg-\[\#35483D\],
 .bg-deep-sage,
-.bg-primary {
+.bg-primary,
+.bg-primary-container {
   background-color: var(--theme-accent, #1f3227) !important;
 }
 
 .hover\:bg-\[\#35483d\]:hover,
 .hover\:bg-\[\#1f3227\]:hover,
-.hover\:bg-\[\#233229\]:hover {
+.hover\:bg-\[\#233229\]:hover,
+.hover\:bg-primary-container:hover,
+.hover\:bg-\[\#293a31\]:hover {
   background-color: var(--theme-accent-hover, #142018) !important;
 }
 
@@ -443,40 +450,64 @@ body,
   }
 }
 
-/* Dark Mode Overrides cho thẻ form và chữ */
-html.dark body {
+/* Dark Mode Overrides cho thẻ form, card và chữ */
+html.dark body,
+html.dark .bg-background {
   background-color: var(--theme-bg-page) !important;
   color: var(--theme-text-main) !important;
+}
+
+html.dark .bg-white,
+html.dark .bg-surface,
+html.dark .bg-surface-container-lowest,
+html.dark .choice-card {
+  background-color: var(--theme-bg-card, #1e1f22) !important;
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark .bg-stone-100 {
+  background-color: var(--theme-bg-card, #1e1f22) !important;
+  color: #ffffff !important;
 }
 
 html.dark .bg-\[\#f6f3f2\],
 html.dark .bg-\[\#f0edec\],
 html.dark .bg-stone-200\/60,
-html.dark .bg-gray-50\/50 {
+html.dark .bg-gray-50\/50,
+html.dark .bg-\[\#e7e1df\] {
   background-color: var(--theme-bg-subtle) !important;
   color: var(--theme-text-main) !important;
 }
 
 html.dark .text-\[\#1b1c1c\],
 html.dark .text-\[\#1b1c1b\],
-html.dark .text-soft-black {
+html.dark .text-soft-black,
+html.dark .text-on-surface,
+html.dark .text-ink-title {
   color: var(--theme-text-main) !important;
 }
 
 html.dark .text-\[\#777771\],
 html.dark .text-\[\#797675\],
-html.dark .text-\[\#727873\] {
+html.dark .text-\[\#727873\],
+html.dark .text-warm-gray,
+html.dark .text-secondary,
+html.dark .text-ink-muted {
   color: var(--theme-text-muted) !important;
 }
 
-html.dark .text-\[\#4a4746\] {
+html.dark .text-\[\#4a4746\],
+html.dark .text-on-surface-variant,
+html.dark .text-ink-body {
   color: var(--theme-text-body) !important;
 }
 
 html.dark .border-\[\#e7e1df\],
 html.dark .border-\[\#E6E4DE\],
 html.dark .border-\[\#f0edec\],
-html.dark .border-stone-border {
+html.dark .border-stone-border,
+html.dark .border-outline,
+html.dark .border-outline-variant {
   border-color: var(--theme-border) !important;
 }
 
@@ -486,6 +517,43 @@ html.dark select {
   background-color: var(--theme-bg-subtle) !important;
   color: var(--theme-text-main) !important;
   border-color: var(--theme-border) !important;
+}
+
+/* Đảm bảo popup tài khoản và chữ Chuyển tài khoản luôn tương phản cao và chuẩn xác */
+#user-menu-dropdown {
+  background-color: var(--theme-bg-card, #ffffff) !important;
+  border-color: var(--theme-border, #e7e1df) !important;
+}
+
+html.dark #user-menu-dropdown {
+  background-color: #1e1f22 !important;
+  border-color: #35363c !important;
+}
+
+#switch-account-btn {
+  color: var(--theme-text-main, #1b1c1c) !important;
+}
+
+html.dark #switch-account-btn {
+  color: #ffffff !important;
+}
+
+#switch-account-btn:hover {
+  background-color: var(--theme-bg-subtle, #f6f3f2) !important;
+}
+
+html.dark #switch-account-btn:hover {
+  background-color: #2b2d31 !important;
+}
+
+#theme-dropdown {
+  background-color: var(--theme-bg-card, #ffffff) !important;
+  border-color: var(--theme-border, #e7e1df) !important;
+}
+
+html.dark #theme-dropdown {
+  background-color: #1e1f22 !important;
+  border-color: #35363c !important;
 }
 
 /* ==============================================================

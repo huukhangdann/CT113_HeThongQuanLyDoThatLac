@@ -92,26 +92,25 @@ class AppHeader extends HTMLElement {
 
         <!-- DROPDOWN POPUP GIAO DIỆN & BẢNG MÀU CHROME PROFILE -->
         <div id="theme-dropdown"
-          class="hidden absolute top-full mt-2 w-[340px] sm:w-[380px] z-50 bg-[#1e1f22] text-[#dbdee1] rounded-2xl border border-[#35363c] shadow-2xl transition-all duration-200 right-0 sm:-right-14 text-left flex flex-col p-4">
+          class="hidden absolute top-full mt-2 w-[340px] sm:w-[380px] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl transition-all duration-200 right-0 sm:-right-14 text-left flex flex-col p-4">
           <!-- Mũi tên liên kết trực tiếp với icon palette -->
           <div id="theme-arrow" class="absolute -top-2 right-3.5 sm:right-[68px] w-3.5 h-2 pointer-events-none z-20">
             <svg class="w-full h-full block" viewBox="0 0 14 8" fill="none">
-              <path d="M0 8 L7 1 L14 8" fill="#1e1f22" stroke="#35363c" stroke-width="1.2" stroke-linejoin="round" />
+              <path d="M0 8 L7 1 L14 8" fill="#ffffff" stroke="#e7e1df" stroke-width="1.2" stroke-linejoin="round" class="dark:fill-[#1e1f22] dark:stroke-[#35363c]" />
             </svg>
           </div>
 
           <!-- Header Theme -->
-          <div class="flex items-center justify-between pb-2.5 border-b border-[#2e3035]">
-            <h3 class="font-bold text-white text-base tracking-tight">Giao diện màu chủ đề</h3>
-            <button type="button" id="close-theme-btn" class="w-7 h-7 rounded-full hover:bg-stone-800 text-stone-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Đóng">
+          <div class="flex items-center justify-between pb-2.5 border-b border-[#f0edec] dark:border-[#2e3035]">
+            <h3 class="font-bold text-[#1b1c1c] dark:text-white text-base tracking-tight">Giao diện màu chủ đề</h3>
+            <button type="button" id="close-theme-btn" class="w-7 h-7 rounded-full hover:bg-[#f0edec] dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Đóng">
               <span class="material-symbols-outlined text-[18px]">close</span>
             </button>
           </div>
 
-          <!-- Subtitle: Giải thích 3 màu giống Chrome Profile -->
-          <div class="pt-2.5 pb-2 text-xs font-medium text-[#949ba4] flex items-center justify-between">
+          <!-- Subtitle: Giải thích chọn màu -->
+          <div class="pt-2.5 pb-2 text-xs font-medium text-[#797675] dark:text-[#949ba4] flex items-center justify-between">
             <span>Chọn màu chủ đề cho trang web</span>
-            <span class="text-[10px] text-stone-500">Chuẩn Chrome</span>
           </div>
 
           <!-- Grid 15 Preset Circles + 1 Custom Picker Circle (Ảnh 1) -->
@@ -121,11 +120,11 @@ class AppHeader extends HTMLElement {
 
           <!-- SUB-POPOVER CÔNG CỤ CHỌN MÀU (Ảnh 2) -->
           <div id="custom-color-popover"
-            class="hidden absolute top-3 left-3 right-3 z-60 bg-[#18191c] p-4 rounded-xl border border-[#2e3035] shadow-2xl flex flex-col gap-3.5">
+            class="hidden absolute top-3 left-3 right-3 z-60 bg-white dark:bg-[#18191c] p-4 rounded-xl border border-[#e7e1df] dark:border-[#2e3035] shadow-2xl flex flex-col gap-3.5">
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm text-white">Công cụ chọn màu</span>
+              <span class="font-bold text-sm text-[#1b1c1c] dark:text-white">Công cụ chọn màu</span>
               <button type="button" id="close-color-picker-btn"
-                class="w-6 h-6 rounded-md hover:bg-stone-800 text-stone-400 hover:text-white flex items-center justify-center text-lg leading-none transition-colors cursor-pointer">
+                class="w-6 h-6 rounded-md hover:bg-[#f0edec] dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white flex items-center justify-center text-lg leading-none transition-colors cursor-pointer">
                 &times;
               </button>
             </div>
@@ -135,10 +134,10 @@ class AppHeader extends HTMLElement {
               <input id="hue-slider" type="range" min="0" max="360" value="142" class="rainbow-slider" />
             </div>
 
-            <!-- Nút hành động "Xóa hồ sơ" & "Xong" (Ảnh 2) -->
-            <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#2e3035]">
+            <!-- Nút hành động "Mặc định" & "Xong" (Ảnh 2) -->
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#f0edec] dark:border-[#2e3035]">
               <button type="button" id="btn-theme-reset"
-                class="px-3 py-1.5 rounded-lg text-xs font-semibold text-stone-300 hover:text-white bg-transparent hover:bg-stone-800 transition-colors cursor-pointer">
+                class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#797675] hover:text-[#1b1c1c] dark:text-stone-300 dark:hover:text-white bg-transparent hover:bg-[#f0edec] dark:hover:bg-stone-800 transition-colors cursor-pointer">
                 Mặc định
               </button>
               <button type="button" id="btn-theme-done"
@@ -254,30 +253,30 @@ class AppHeader extends HTMLElement {
             <span>Đặng Hữu Khang</span>
           </button>
 
-          <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white dark:bg-[#1e1f22] dark:text-[#dbdee1] rounded-xl border border-[#e7e1df] dark:border-[#35363c] shadow-xl text-left">
+          <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl text-left">
             <!-- Mũi tên liên kết với nút tài khoản người dùng -->
             <div class="absolute -top-2 right-[76px] w-3.5 h-2 pointer-events-none z-20">
               <svg class="w-full h-full block" viewBox="0 0 14 8" fill="none">
-                <path d="M0 8 L7 1 L14 8" fill="#f9fafb" stroke="#e7e1df" stroke-width="1.2" stroke-linejoin="round" class="dark:fill-[#1e1f22] dark:stroke-[#35363c]" />
+                <path d="M0 8 L7 1 L14 8" fill="#ffffff" stroke="#e7e1df" stroke-width="1.2" stroke-linejoin="round" class="dark:fill-[#1e1f22] dark:stroke-[#35363c]" />
               </svg>
             </div>
-            <div class="p-4 bg-gray-50/50 dark:bg-[#18191c] border-b border-[#e7e1df] dark:border-[#2e3035] rounded-t-xl flex items-center justify-between">
+            <div class="px-4 py-3.5 bg-white dark:bg-[#1e1f22] border-b border-[#f0edec] dark:border-[#2e3035] rounded-t-2xl flex items-center justify-between">
               <div>
                 <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Đặng Hữu Khang</h3>
-                <p class="text-sm font-medium text-[#797675] dark:text-stone-400 mt-0.5">MSSV: B2404990</p>
+                <p class="text-xs font-medium text-[#797675] dark:text-stone-400 mt-0.5">MSSV: B2404990</p>
               </div>
-              <button type="button" id="close-user-menu-btn" class="w-7 h-7 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-400 hover:text-stone-700 dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Đóng">
+              <button type="button" id="close-user-menu-btn" class="w-7 h-7 rounded-full hover:bg-[#f0edec] dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Đóng">
                 <span class="material-symbols-outlined text-[18px]">close</span>
               </button>
             </div>
-            <div class="p-2 border-b border-[#e7e1df] dark:border-[#2e3035]">
-              <div class="flex items-center gap-3 p-2 text-sm text-[#4a4746] dark:text-stone-300 rounded-md">
+            <div class="p-2 border-b border-[#f0edec] dark:border-[#2e3035]">
+              <div class="flex items-center gap-3 p-2 text-xs text-[#4a4746] dark:text-stone-300 rounded-md">
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
                 <span class="truncate">khangb2404990@student.ctu.edu.vn</span>
               </div>
-              <div class="flex items-center gap-3 p-2 text-sm text-[#4a4746] dark:text-stone-300 rounded-md">
+              <div class="flex items-center gap-3 p-2 text-xs text-[#4a4746] dark:text-stone-300 rounded-md">
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
@@ -285,14 +284,14 @@ class AppHeader extends HTMLElement {
               </div>
             </div>
             <div class="p-2">
-              <a href="login.html" id="switch-account-btn" class="w-full flex items-center gap-3 p-2 text-sm text-[#1b1c1c] dark:text-white font-medium rounded-md hover:bg-gray-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+              <a href="login.html" id="switch-account-btn" class="w-full flex items-center gap-3 p-2 text-xs text-[#1b1c1c] dark:text-white font-medium rounded-lg hover:bg-[#f6f3f2] dark:hover:bg-[#2b2d31] transition-colors cursor-pointer">
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
-                <span>Chuyển tài khoản</span>
+                <span class="font-medium text-[#1b1c1c] dark:text-white">Chuyển tài khoản</span>
               </a>
-              <a href="login.html" id="logout-btn" class="w-full flex items-center gap-3 p-2 text-sm text-red-600 font-medium rounded-md hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer">
-                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <a href="login.html" id="logout-btn" class="w-full flex items-center gap-3 p-2 text-xs text-red-600 dark:text-red-400 font-medium rounded-lg hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer">
+                <svg class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
                 <span>Đăng xuất</span>
@@ -552,8 +551,8 @@ class AppHeader extends HTMLElement {
       }
     };
 
-    const compactClasses = "absolute top-full mt-2 w-[360px] sm:w-[420px] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left flex flex-col";
-    const expandedClasses = "fixed top-16 md:top-20 right-2 sm:right-6 md:right-8 lg:right-12 bottom-4 w-[380px] sm:w-[440px] max-w-[calc(100vw-20px)] h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] z-50 bg-white rounded-2xl border border-[#e7e1df] shadow-2xl transition-all duration-200 text-left flex flex-col overflow-hidden";
+    const compactClasses = "absolute top-full mt-2 w-[360px] sm:w-[420px] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl transition-all duration-200 right-0 sm:-right-24 text-left flex flex-col";
+    const expandedClasses = "fixed top-16 md:top-20 right-2 sm:right-6 md:right-8 lg:right-12 bottom-4 w-[380px] sm:w-[440px] max-w-[calc(100vw-20px)] h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl transition-all duration-200 text-left flex flex-col overflow-hidden";
 
     const setExpandedMode = (expanded) => {
       isExpanded = expanded;
@@ -894,11 +893,7 @@ class AppHeader extends HTMLElement {
     if (notifCloseBtn) {
       notifCloseBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (notifDropdown) notifDropdown.classList.add("hidden");
-        if (notifBellBtn) {
-          notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
-        }
-        setExpandedMode(false);
+        closeNotifPopup();
       });
     }
 
@@ -952,23 +947,55 @@ class AppHeader extends HTMLElement {
       });
     }
 
+    const themeMenuBtn = this.querySelector("#theme-menu-btn");
+    const themeDropdown = this.querySelector("#theme-dropdown");
+    const closeThemeBtn = this.querySelector("#close-theme-btn");
     const userMenuBtn = this.querySelector("#user-menu-btn");
     const userMenuDropdown = this.querySelector("#user-menu-dropdown");
+    const closeUserMenuBtn = this.querySelector("#close-user-menu-btn");
+    const customColorPopover = this.querySelector("#custom-color-popover");
+
+    const closeThemePopup = () => {
+      if (themeDropdown) themeDropdown.classList.add("hidden");
+      if (themeMenuBtn) {
+        themeMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+      }
+      if (customColorPopover) customColorPopover.classList.add("hidden");
+    };
+
+    const closeUserMenuPopup = () => {
+      if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
+      if (userMenuBtn) {
+        userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+      }
+    };
+
+    const closeNotifPopup = () => {
+      if (notifDropdown) notifDropdown.classList.add("hidden");
+      if (notifBellBtn) {
+        notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+      }
+      setExpandedMode(false);
+    };
 
     if (userMenuBtn && userMenuDropdown) {
       userMenuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (notifDropdown) {
-          notifDropdown.classList.add("hidden");
-          if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
-        }
         const isHidden = userMenuDropdown.classList.contains("hidden");
+
+        // 1. Luôn đóng popup theme
+        closeThemePopup();
+
+        // 2. Chỉ đóng notif nếu notif không ở trạng thái mở rộng
+        if (!isExpanded) {
+          closeNotifPopup();
+        }
+
         if (isHidden) {
           userMenuDropdown.classList.remove("hidden");
           userMenuBtn.classList.add("ring-2", "ring-[#35483d]/20", "bg-stone-200");
         } else {
-          userMenuDropdown.classList.add("hidden");
-          userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+          closeUserMenuPopup();
         }
       });
     }
@@ -993,10 +1020,9 @@ class AppHeader extends HTMLElement {
         e.stopPropagation();
         const isHidden = notifDropdown.classList.contains("hidden");
 
-        if (userMenuDropdown) {
-          userMenuDropdown.classList.add("hidden");
-          if (userMenuBtn) userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
-        }
+        // Khi click chuông, đóng cả theme và user menu
+        closeUserMenuPopup();
+        closeThemePopup();
 
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
         if (notifListContainer) {
@@ -1010,9 +1036,7 @@ class AppHeader extends HTMLElement {
           notifBellBtn.classList.add("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
         } else {
           // Khi bấm vào chuông để đóng
-          notifDropdown.classList.add("hidden");
-          notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
-          setExpandedMode(false);
+          closeNotifPopup();
         }
       });
     }
@@ -1024,12 +1048,7 @@ class AppHeader extends HTMLElement {
     // THEME LOGIC & CHROME 3-COLOR SYSTEM
     // (Top: Header | Bottom-Left: Background | Bottom-Right: Accent/Icon)
     // ==========================================
-    const themeMenuBtn = this.querySelector("#theme-menu-btn");
-    const themeDropdown = this.querySelector("#theme-dropdown");
-    const closeThemeBtn = this.querySelector("#close-theme-btn");
-    const closeUserMenuBtn = this.querySelector("#close-user-menu-btn");
     const themePresetsGrid = this.querySelector("#theme-presets-grid");
-    const customColorPopover = this.querySelector("#custom-color-popover");
     const closeColorPickerBtn = this.querySelector("#close-color-picker-btn");
     const hueSlider = this.querySelector("#hue-slider");
     const btnThemeReset = this.querySelector("#btn-theme-reset");
@@ -1307,7 +1326,9 @@ class AppHeader extends HTMLElement {
       // Áp dụng class dark
       if (presetObj.isLight) {
         document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
       } else {
+        document.documentElement.classList.remove("light");
         document.documentElement.classList.add("dark");
       }
 
@@ -1366,8 +1387,8 @@ class AppHeader extends HTMLElement {
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = `w-10 h-10 rounded-full relative cursor-pointer transition-transform hover:scale-110 focus:outline-none ${isSelected
-              ? "ring-2 ring-white ring-offset-2 ring-offset-[#1e1f22] scale-105"
-              : "ring-1 ring-white/15 hover:ring-white/40"
+              ? "ring-2 ring-stone-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#1e1f22] scale-105"
+              : "ring-1 ring-stone-300 dark:ring-white/15 hover:ring-stone-400 dark:hover:ring-white/40"
             }`;
           btn.title = p.name;
 
@@ -1406,8 +1427,8 @@ class AppHeader extends HTMLElement {
         customBtn.type = "button";
         customBtn.id = "theme-custom-btn";
         customBtn.className = `w-10 h-10 rounded-full relative cursor-pointer transition-transform hover:scale-110 focus:outline-none flex items-center justify-center ${isCustom
-            ? "ring-2 ring-white ring-offset-2 ring-offset-[#1e1f22] scale-105"
-            : "ring-1 ring-white/15 hover:ring-white/40"
+            ? "ring-2 ring-stone-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#1e1f22] scale-105"
+            : "ring-1 ring-stone-300 dark:ring-white/15 hover:ring-stone-400 dark:hover:ring-white/40"
           }`;
         customBtn.style.backgroundColor = `hsl(${currentThemeHue}, 65%, 45%)`;
         customBtn.title = "Tùy chỉnh màu dải cầu vồng";
@@ -1415,7 +1436,7 @@ class AppHeader extends HTMLElement {
           <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path d="M20.71 5.63l-2.34-2.34a1 1 0 00-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.92-1.92 3.12-3.12c.4-.4.4-1.04.01-1.42zM6.92 19L5 17.08l8.06-8.06 1.92 1.92L6.92 19z"/>
           </svg>
-          <span class="${isCustom ? '' : 'hidden'} absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white text-stone-900 flex items-center justify-center border-2 border-[#1e1f22]">
+          <span class="${isCustom ? '' : 'hidden'} absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white text-stone-900 flex items-center justify-center border-2 border-white dark:border-[#1e1f22]">
             <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
             </svg>
@@ -1479,7 +1500,7 @@ class AppHeader extends HTMLElement {
       closeThemeBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         closeAllMobileModals();
-        if (themeDropdown) themeDropdown.classList.add("hidden");
+        closeThemePopup();
       });
     }
 
@@ -1487,7 +1508,7 @@ class AppHeader extends HTMLElement {
       closeUserMenuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         closeAllMobileModals();
-        if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
+        closeUserMenuPopup();
       });
     }
 
@@ -1554,16 +1575,19 @@ class AppHeader extends HTMLElement {
         e.stopPropagation();
         const isHidden = themeDropdown.classList.contains("hidden");
 
-        if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
-        if (notifDropdown) notifDropdown.classList.add("hidden");
+        // 1. Luôn đóng user menu
+        closeUserMenuPopup();
+
+        // 2. Chỉ đóng notif nếu notif không ở trạng thái mở rộng
+        if (!isExpanded) {
+          closeNotifPopup();
+        }
 
         if (isHidden) {
           themeDropdown.classList.remove("hidden");
           themeMenuBtn.classList.add("ring-2", "ring-[#35483d]/20", "bg-stone-200");
         } else {
-          themeDropdown.classList.add("hidden");
-          themeMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
-          if (customColorPopover) customColorPopover.classList.add("hidden");
+          closeThemePopup();
         }
       });
     }
@@ -1759,18 +1783,13 @@ class AppHeader extends HTMLElement {
     document.addEventListener("click", (e) => {
       if (!this.contains(e.target)) {
         if (userMenuDropdown && !userMenuDropdown.style.position) {
-          userMenuDropdown.classList.add("hidden");
-          if (userMenuBtn) userMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+          closeUserMenuPopup();
         }
         if (notifDropdown && !notifDropdown.style.position) {
-          notifDropdown.classList.add("hidden");
-          if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
-          setExpandedMode(false);
+          closeNotifPopup();
         }
         if (themeDropdown && !themeDropdown.style.position) {
-          themeDropdown.classList.add("hidden");
-          if (themeMenuBtn) themeMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
-          if (customColorPopover) customColorPopover.classList.add("hidden");
+          closeThemePopup();
         }
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
         if (notifListContainer) {
@@ -1793,17 +1812,9 @@ class AppHeader extends HTMLElement {
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        if (userMenuDropdown) userMenuDropdown.classList.add("hidden");
-        if (notifDropdown) {
-          notifDropdown.classList.add("hidden");
-          if (notifBellBtn) notifBellBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
-          setExpandedMode(false);
-        }
-        if (themeDropdown) {
-          themeDropdown.classList.add("hidden");
-          if (themeMenuBtn) themeMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
-          if (customColorPopover) customColorPopover.classList.add("hidden");
-        }
+        closeUserMenuPopup();
+        closeNotifPopup();
+        closeThemePopup();
         if (assistiveMenu) {
           assistiveMenu.classList.add("hidden");
         }
