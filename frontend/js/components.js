@@ -44,6 +44,12 @@
 
 class AppHeader extends HTMLElement {
   connectedCallback() {
+    this.style.position = "sticky";
+    this.style.top = "0";
+    this.style.zIndex = "50";
+    this.style.display = "block";
+    this.style.width = "100%";
+
     const currentPath =
       window.location.pathname.split("/").pop() || "index.html";
 
@@ -317,7 +323,7 @@ class AppHeader extends HTMLElement {
     const headerBorderClass = isHomePage ? "" : "border-b border-[#E6E4DE]";
 
     this.innerHTML = `
-      <header class="sticky top-0 z-40 ${headerBorderClass} transition-colors">
+      <header class="w-full ${headerBorderClass} transition-all duration-200 backdrop-blur-md shadow-xs" style="background-color: var(--theme-bg-header, rgba(255, 255, 255, 0.96));">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 flex items-center justify-between h-16 md:h-20">
           
           <!-- Logo Brand -->
@@ -1870,8 +1876,12 @@ class AppHeader extends HTMLElement {
 
 class AppFooter extends HTMLElement {
   connectedCallback() {
+    this.style.display = "block";
+    this.style.width = "100%";
+    this.style.marginTop = "auto";
+    this.style.backgroundColor = "#35483d";
     this.innerHTML = `
-      <footer class="w-full bg-[#35483d] text-[#fcf9f8] border-t border-[#35483d]/80 mt-auto">
+      <footer class="w-full bg-[#35483d] text-[#fcf9f8] border-t border-[#35483d]/80 mt-auto pb-28 md:pb-0 m-0">
         <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div class="space-y-1">
             <h2 class="text-base font-bold text-white tracking-tight">CTU Lost & Found</h2>

@@ -53,6 +53,7 @@
 
   <script src="../js/main.js"></script>
   <script src="../js/components.js"></script>
+  <script src="../js/items-data.js"></script>
 </head>
 
 <body class="bg-ivory text-soft-black min-h-screen flex flex-col selection:bg-stone-200 selection:text-deep-sage">
@@ -283,11 +284,24 @@
 
     <!-- Recent Posts Section -->
     <section class="bg-[#FAF8F5] rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col gap-6">
-      <h2 class="text-xl sm:text-2xl font-bold text-center text-soft-black tracking-tight">
-        CÁC BÀI ĐĂNG GẦN ĐÂY
-      </h2>
+      <div class="relative flex flex-col sm:flex-row items-center justify-center gap-3 pb-2 border-b border-[#E6E4DE]">
+        <h2 class="text-xl sm:text-2xl font-bold text-soft-black tracking-tight text-center w-full sm:w-auto">
+          CÁC BÀI ĐĂNG GẦN ĐÂY
+        </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="sm:absolute sm:right-0 flex items-center gap-2.5 text-xs text-warm-gray">
+          <span>Sắp xếp theo:</span>
+          <select id="home-sort-select"
+            class="bg-white border border-[#E6E4DE] rounded-md px-2.5 py-1 text-xs font-medium text-soft-black focus:border-[#35483d] outline-none cursor-pointer">
+            <option value="newest">Mới nhất trước</option>
+            <option value="oldest">Cũ nhất trước</option>
+            <option value="az">Tên đồ vật (A - Z)</option>
+            <option value="za">Tên đồ vật (Z - A)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="recent-posts-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Post Item 1 -->
         <article onclick="window.location.href='claim.html?id=home-1&from=index.html'"
           class="group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col">
@@ -493,14 +507,14 @@
         </article>
       </div>
 
-      <!-- View All Button -->
+      <!-- View More Button -->
       <div class="flex justify-center pt-2">
-        <a href="find.html"
-          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-stone-100 dark:bg-[#1e1f22] dark:border dark:border-[#35363c] text-soft-black dark:text-white hover:bg-[#35483d] hover:text-white text-sm font-medium transition-all group shadow-sm">
-          <span>Xem tất cả</span>
-          <span
-            class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
+        <button type="button" id="btn-load-more"
+          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-stone-100 dark:bg-[#1e1f22] dark:border dark:border-[#35363c] text-soft-black dark:text-white hover:bg-[#35483d] hover:text-white text-sm font-medium transition-all group shadow-sm cursor-pointer">
+          <span id="btn-load-more-text">Xem thêm</span>
+          <span id="btn-load-more-icon"
+            class="material-symbols-outlined text-base group-hover:translate-y-0.5 transition-transform">expand_more</span>
+        </button>
       </div>
     </section>
   </main>
@@ -534,6 +548,153 @@
             },
             true
           );
+        });
+      }
+
+      // Logic "Xem thêm" - Mở xuống thêm 6 card mỗi lần click
+      const btnLoadMore = document.getElementById("btn-load-more");
+      const grid = document.getElementById("recent-posts-grid");
+
+      if (btnLoadMore && grid) {
+        let currentBatch = 0;
+        const additionalPool = [
+          "home-7", "home-8", "home-9", "home-10", "home-11", "home-12",
+          "home-13", "home-14", "home-15", "home-16", "home-17", "home-18"
+        ];
+        const db = window.CTU_ITEMS_DATABASE || {};
+
+        function createNewCard(item) {
+          const article = document.createElement("article");
+          article.className = "group bg-stone-50 hover:bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col opacity-0 translate-y-4";
+          article.setAttribute("onclick", `window.location.href='claim.html?id=${item.id}&from=index.html'`);
+
+          const status = item.status || "Đang giữ hộ";
+          const claimUrl = `claim.html?id=${item.id}&from=index.html`;
+
+          article.innerHTML = `
+            <div class="h-48 sm:h-52 md:h-60 bg-stone-200 overflow-hidden shrink-0">
+              <img
+                src="${item.mainPhoto || item.image || ''}"
+                alt="${item.title}"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy" />
+            </div>
+            <div class="p-4 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="font-semibold text-sm text-soft-black group-hover:text-deep-sage transition-colors truncate">
+                  ${item.title}
+                </h3>
+                <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-2.5 truncate">
+                  <span class="material-symbols-outlined text-sm shrink-0">location_on</span>
+                  ${item.location}
+                </p>
+                <p class="flex items-center gap-1.5 text-warm-gray text-xs mt-1.5">
+                  <span class="material-symbols-outlined text-sm shrink-0">schedule</span>
+                  ${item.time}
+                </p>
+              </div>
+              <div class="pt-2.5 mt-3 border-t border-stone-border/70 flex items-center justify-between text-xs">
+                <span class="text-warm-gray font-medium">${status}</span>
+                <a href="${claimUrl}"
+                  class="font-medium text-deep-sage flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  <span>Xem chi tiết</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          `;
+
+          // Kiểm tra trạng thái đăng nhập nếu bấm vào card
+          article.addEventListener("click", (e) => {
+            const userLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
+            if (!userLoggedIn) {
+              e.preventDefault();
+              e.stopPropagation();
+              window.location.href = "login.html";
+            }
+          }, true);
+
+          return article;
+        }
+
+        // ==========================================
+        // SẮP XẾP BÀI ĐĂNG GẦN ĐÂY
+        // ==========================================
+        const homeSortSelect = document.getElementById("home-sort-select");
+        if (homeSortSelect && grid) {
+          // Khởi tạo thứ tự ban đầu cho các card đã có
+          grid.querySelectorAll("article").forEach((card, idx) => {
+            if (!card.dataset.initOrder) card.dataset.initOrder = idx;
+          });
+
+          homeSortSelect.addEventListener("change", () => {
+            const sortVal = homeSortSelect.value;
+            const cards = Array.from(grid.querySelectorAll("article"));
+
+            cards.sort((a, b) => {
+              const titleA = a.querySelector("h3") ? a.querySelector("h3").textContent.trim() : "";
+              const titleB = b.querySelector("h3") ? b.querySelector("h3").textContent.trim() : "";
+              const orderA = parseInt(a.dataset.initOrder || "0", 10);
+              const orderB = parseInt(b.dataset.initOrder || "0", 10);
+
+              if (sortVal === "newest") {
+                return orderA - orderB;
+              } else if (sortVal === "oldest") {
+                return orderB - orderA;
+              } else if (sortVal === "az") {
+                return titleA.localeCompare(titleB, "vi");
+              } else if (sortVal === "za") {
+                return titleB.localeCompare(titleA, "vi");
+              }
+              return 0;
+            });
+
+            cards.forEach((card, i) => {
+              card.style.opacity = "0";
+              card.style.transform = "translateY(6px)";
+              grid.appendChild(card);
+              setTimeout(() => {
+                card.style.transition = "all 0.25s ease-out";
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+              }, i * 25);
+            });
+          });
+        }
+
+        btnLoadMore.addEventListener("click", () => {
+          const btnIcon = document.getElementById("btn-load-more-icon");
+          if (btnIcon) btnIcon.classList.add("translate-y-1");
+
+          const batchSize = 6;
+          const startIndex = (currentBatch * batchSize) % additionalPool.length;
+
+          for (let i = 0; i < batchSize; i++) {
+            const poolKey = additionalPool[(startIndex + i) % additionalPool.length];
+            const item = db[poolKey] || {
+              id: poolKey,
+              title: "Đồ dùng tìm thấy tại CTU",
+              location: "Khu II - Đại học Cần Thơ",
+              time: "Gần đây",
+              status: "Đang giữ hộ",
+              mainPhoto: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
+            };
+
+            const card = createNewCard(item);
+            card.dataset.initOrder = grid.querySelectorAll("article").length;
+            grid.appendChild(card);
+
+            // Kích hoạt animation mượt mà
+            setTimeout(() => {
+              card.classList.remove("opacity-0", "translate-y-4");
+            }, i * 50);
+          }
+
+          currentBatch++;
+
+          setTimeout(() => {
+            if (btnIcon) btnIcon.classList.remove("translate-y-1");
+          }, 300);
         });
       }
     });

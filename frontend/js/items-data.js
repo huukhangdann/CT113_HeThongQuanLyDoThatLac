@@ -126,6 +126,223 @@ window.CTU_ITEMS_DATABASE = {
     answerPlaceholder: "Nhập số lượng chìa và mô tả móc khóa đi kèm... (VD: 2 chìa Honda + 1 móc khóa gấu dâu)"
   },
 
+  "home-7": {
+    id: "home-7",
+    title: "Balo thời trang Herschel đen",
+    category: "Balo / Túi xách",
+    categoryIcon: "backpack",
+    location: "Khoa Nông nghiệp, Giảng đường 1",
+    time: "Hôm nay, 07:45",
+    storage: "Văn phòng Đoàn Khoa Nông nghiệp",
+    status: "Đang giữ hộ",
+    mainPhoto: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Nhặt được tại hàng ghế thứ 3 Giảng đường 1 Khoa Nông nghiệp. Balo màu đen, khóa kéo đỏ.",
+    question: "Bên trong ngăn nhỏ có chiếc bút máy màu gì hoặc thẻ sinh viên tên gì?",
+    answerPlaceholder: "Nhập đặc điểm bút máy hoặc tên sinh viên..."
+  },
+
+  "home-8": {
+    id: "home-8",
+    title: "Thẻ sinh viên CTU - B2103456",
+    category: "Giấy tờ / Thẻ",
+    categoryIcon: "badge",
+    location: "Khu II, Bàn tự học C1",
+    time: "Hôm qua, 18:20",
+    storage: "Phòng Công tác Sinh viên (PCTSV)",
+    status: "Chờ liên hệ",
+    mainPhoto: "https://lh3.googleusercontent.com/aida-public/AB6AXuARNHgksfIws9Z2UQUUEbPfKnsNbo_WPEGgjTtNKRKeUJctpIZIa9gdy4qbtY4zuIy2X5bEwv-a-bbyTxumveQymhJw2j2gtx7RE-Zv6gB6clUMvLXgLgT-W2ed977dttODZ3VrStbTjQfBRqrJCu-DjFLhtDSwU9-QCHo9AnJnsMZdsN-AdFQ1TvvlrwF3U-7GNPeilhE7CIQjbVpIc14QDn2JtDOxPycf-5anksYtAbwY22sDT-br",
+    thumbnails: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuARNHgksfIws9Z2UQUUEbPfKnsNbo_WPEGgjTtNKRKeUJctpIZIa9gdy4qbtY4zuIy2X5bEwv-a-bbyTxumveQymhJw2j2gtx7RE-Zv6gB6clUMvLXgLgT-W2ed977dttODZ3VrStbTjQfBRqrJCu-DjFLhtDSwU9-QCHo9AnJnsMZdsN-AdFQ1TvvlrwF3U-7GNPeilhE7CIQjbVpIc14QDn2JtDOxPycf-5anksYtAbwY22sDT-br"
+    ],
+    note: "Thẻ sinh viên CTU bị rơi ở khe ghế bàn tự học tầng trệt nhà C1.",
+    question: "Họ và tên đầy đủ hoặc ngành học in trên thẻ sinh viên là gì?",
+    answerPlaceholder: "Nhập họ và tên hoặc ngành học trên thẻ..."
+  },
+
+  "home-9": {
+    id: "home-9",
+    title: "Áo khoác gió xanh đậm",
+    category: "Trang phục",
+    categoryIcon: "checkroom",
+    location: "Nhà thi đấu Thể thao CTU",
+    time: "Hôm qua, 17:30",
+    storage: "Phòng trực Ban Quản lý Nhà thi đấu",
+    status: "Đang giữ hộ",
+    mainPhoto: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Áo khoác bỏ quên ở khán đài sân cầu lông Nhà thi đấu thể thao.",
+    question: "Hãng áo hoặc trong túi áo có vật dụng gì?",
+    answerPlaceholder: "Nhập thương hiệu áo hoặc đồ vật trong túi..."
+  },
+
+  "home-10": {
+    id: "home-10",
+    title: "Kính mắt cận gọng kim loại",
+    category: "Đồ dùng cá nhân",
+    categoryIcon: "visibility",
+    location: "Thư viện Trung tâm, Tầng 4",
+    time: "Hôm qua, 15:10",
+    storage: "Bàn lễ tân Thư viện Trung tâm",
+    status: "Chờ bàn giao",
+    mainPhoto: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Kính mắt cận gọng tròn kim loại màu bạc, đựng trong hộp da màu xám.",
+    question: "Hộp kính có in chữ hiệu gì hoặc mắt kính có độ cận khoảng bao nhiêu?",
+    answerPlaceholder: "Nhập hiệu in trên hộp hoặc độ cận..."
+  },
+
+  "home-11": {
+    id: "home-11",
+    title: "Sạc dự phòng Anker 10000mAh",
+    category: "Thiết bị điện tử",
+    categoryIcon: "battery_charging_full",
+    location: "Căng tin Khu II",
+    time: "23 Th10, 12:30",
+    storage: "Quầy thu ngân Căng tin Khu II",
+    status: "Đang tìm kiếm",
+    mainPhoto: "https://images.unsplash.com/photo-1609592426508-cc02c524874d?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1609592426508-cc02c524874d?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Để quên tại bàn ăn căng tin khu II lúc giờ ăn trưa. Sạc màu đen có dán decal.",
+    question: "Cáp sạc cắm kèm là loại cáp gì (Type-C / Lightning) hoặc hình decal dán trên sạc?",
+    answerPlaceholder: "Nhập loại cáp hoặc mô tả decal..."
+  },
+
+  "home-12": {
+    id: "home-12",
+    title: "Máy tính cầm tay Casio fx-580VN X",
+    category: "Thiết bị học tập",
+    categoryIcon: "calculate",
+    location: "Khoa Khoa học Tự nhiên, P.302",
+    time: "23 Th10, 10:15",
+    storage: "Văn phòng Khoa KHTN",
+    status: "Đang giữ hộ",
+    mainPhoto: "https://images.unsplash.com/photo-1594980596870-8aa52a78d8cd?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1594980596870-8aa52a78d8cd?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Nhặt được sau giờ thi môn Toán cao cấp tại phòng 302 Khoa KHTN.",
+    question: "Phía sau nắp máy tính có viết chữ gì hoặc dán nhãn tên gì?",
+    answerPlaceholder: "Nhập chữ viết hoặc tên dán sau nắp..."
+  },
+
+  "home-13": {
+    id: "home-13",
+    title: "Tai nghe chụp tai Sony WH-CH520",
+    category: "Thiết bị điện tử",
+    categoryIcon: "headphones",
+    location: "Phòng tự học Thư viện, Tầng 2",
+    time: "22 Th10, 16:00",
+    storage: "Bàn trực Thư viện Trung tâm",
+    status: "Chờ bàn giao",
+    mainPhoto: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Tai nghe màu be nhạt để quên ở bàn tự học đơn tầng 2.",
+    question: "Tên thiết bị hiển thị khi kết nối Bluetooth hoặc vết xước nhận dạng ở đâu?",
+    answerPlaceholder: "Nhập tên Bluetooth hoặc vị trí vết xước..."
+  },
+
+  "home-14": {
+    id: "home-14",
+    title: "Đồng hồ đeo tay Casio dây da",
+    category: "Đồng hồ / Phụ kiện",
+    categoryIcon: "watch",
+    location: "Nhà học B1, P.105",
+    time: "22 Th10, 14:30",
+    storage: "Phòng Quản lý Giảng đường B1",
+    status: "Đang giữ hộ",
+    mainPhoto: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Rơi ở hộc bàn phòng học B1-105. Mặt đồng hồ tròn viền bạc.",
+    question: "Dây da màu gì và kim giây có màu gì đặc biệt?",
+    answerPlaceholder: "Nhập màu dây da và màu kim giây..."
+  },
+
+  "home-15": {
+    id: "home-15",
+    title: "Tập tài liệu đồ án tốt nghiệp",
+    category: "Sách vở / Tài liệu",
+    categoryIcon: "menu_book",
+    location: "Khoa Môi trường & TNTN",
+    time: "21 Th10, 11:20",
+    storage: "Văn phòng Khoa MT&TNTN",
+    status: "Chờ liên hệ",
+    mainPhoto: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Tập tài liệu in đóng bìa kiếng màu xanh lá, để quên tại ghế đá trước sảnh khoa.",
+    question: "Tên đề tài hoặc tên giảng viên hướng dẫn in trên trang bìa?",
+    answerPlaceholder: "Nhập tên đề tài hoặc tên GVHD..."
+  },
+
+  "home-16": {
+    id: "home-16",
+    title: "Bao da đựng iPad kèm bút cảm ứng",
+    category: "Thiết bị điện tử",
+    categoryIcon: "tablet_mac",
+    location: "Khoa Ngoại ngữ, Tầng 3",
+    time: "21 Th10, 09:40",
+    storage: "Văn phòng Khoa Ngoại ngữ",
+    status: "Đang tìm kiếm",
+    mainPhoto: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Bao da màu xám gấp tam giác, có khe cài bút Apple Pencil màu trắng.",
+    question: "Model iPad (iPad Air hay iPad Gen mấy) hoặc hình nền khóa máy là gì?",
+    answerPlaceholder: "Nhập model iPad hoặc mô tả hình nền..."
+  },
+
+  "home-17": {
+    id: "home-17",
+    title: "Mũ bảo hiểm Royal 3/4 màu trắng",
+    category: "Đồ dùng cá nhân",
+    categoryIcon: "sports_motorsports",
+    location: "Bãi xe Khoa CNTT&TT",
+    time: "20 Th10, 18:00",
+    storage: "Bốt trực bảo vệ Nhà C1",
+    status: "Chờ bàn giao",
+    mainPhoto: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Mũ bảo hiểm treo trên gương xe máy gửi tại bãi xe nhà C1.",
+    question: "Kính mũ là kính khói hay kính trong và có sticker gì phía sau mũ?",
+    answerPlaceholder: "Nhập loại kính mũ hoặc mô tả sticker..."
+  },
+
+  "home-18": {
+    id: "home-18",
+    title: "Bóp viết vải canvas màu vàng",
+    category: "Đồ dùng học tập",
+    categoryIcon: "draw",
+    location: "Khu nhà học B2, Giảng đường 2",
+    time: "20 Th10, 10:15",
+    storage: "Phòng Quản lý Giảng đường B2",
+    status: "Đang giữ hộ",
+    mainPhoto: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80"
+    ],
+    note: "Bóp viết nhiều ngăn màu vàng mù tạt, bên trong có nhiều bút dạ quang và máy tính bỏ túi nhỏ.",
+    question: "Bên trong có bao nhiêu cây bút dạ quang và loại máy tính mini nào?",
+    answerPlaceholder: "Nhập số lượng bút hoặc hiệu máy tính mini..."
+  },
+
   // =========================================================================
   // 4 CARD Ở TRANG TÌM ĐỒ (find.html)
   // =========================================================================
