@@ -891,10 +891,16 @@ class AppHeader extends HTMLElement {
 
     // Nút đóng popup hoàn toàn
     if (notifCloseBtn) {
-      notifCloseBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+      const handleCloseNotif = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        closeAllMobileModals();
         closeNotifPopup();
-      });
+      };
+      notifCloseBtn.addEventListener("click", handleCloseNotif);
+      notifCloseBtn.addEventListener("touchend", handleCloseNotif, { passive: false });
     }
 
     // Sự kiện filter Tất cả / Chưa đọc (Ảnh 1)
@@ -1497,32 +1503,50 @@ class AppHeader extends HTMLElement {
 
     // Nút đóng theme dropdown
     if (closeThemeBtn) {
-      closeThemeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+      const handleCloseTheme = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         closeAllMobileModals();
         closeThemePopup();
-      });
+      };
+      closeThemeBtn.addEventListener("click", handleCloseTheme);
+      closeThemeBtn.addEventListener("touchend", handleCloseTheme, { passive: false });
     }
 
     if (closeUserMenuBtn) {
-      closeUserMenuBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+      const handleCloseUserMenu = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         closeAllMobileModals();
         closeUserMenuPopup();
-      });
+      };
+      closeUserMenuBtn.addEventListener("click", handleCloseUserMenu);
+      closeUserMenuBtn.addEventListener("touchend", handleCloseUserMenu, { passive: false });
     }
 
     // ==========================================
     // MOBILE MODAL BACKDROP & RESPONSIVE POPUP
     // ==========================================
     let mobileBackdrop = null;
+    let modalOpenTimestamp = 0;
     const ensureMobileBackdrop = () => {
       if (!mobileBackdrop) {
         mobileBackdrop = document.createElement("div");
         mobileBackdrop.className = "mobile-modal-backdrop";
-        mobileBackdrop.addEventListener("click", () => {
+        const handleBackdropClose = (e) => {
+          if (Date.now() - modalOpenTimestamp < 400) return;
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
           closeAllMobileModals();
-        });
+        };
+        mobileBackdrop.addEventListener("click", handleBackdropClose);
+        mobileBackdrop.addEventListener("touchend", handleBackdropClose, { passive: false });
         document.body.appendChild(mobileBackdrop);
       }
       mobileBackdrop.style.display = "block";
@@ -1530,6 +1554,11 @@ class AppHeader extends HTMLElement {
 
     const closeAllMobileModals = () => {
       if (mobileBackdrop) mobileBackdrop.style.display = "none";
+      const headerEl = this.querySelector("header");
+      if (headerEl) headerEl.style.zIndex = "";
+      this.style.position = "";
+      this.style.zIndex = "";
+
       [themeDropdown, notifDropdown, userMenuDropdown].forEach((d) => {
         if (d) {
           d.classList.add("hidden");
@@ -1553,7 +1582,15 @@ class AppHeader extends HTMLElement {
       closeAllMobileModals();
       if (isOpen) return;
 
+      modalOpenTimestamp = Date.now();
       ensureMobileBackdrop();
+
+      // Nâng header và app-header lên z-index cao hơn backdrop (9998) để modal hiển thị và tương tác bình thường
+      const headerEl = this.querySelector("header");
+      if (headerEl) headerEl.style.zIndex = "100000";
+      this.style.position = "relative";
+      this.style.zIndex = "100000";
+
       dropdown.classList.remove("hidden");
       dropdown.style.position = "fixed";
       dropdown.style.top = "70px";
@@ -1561,12 +1598,14 @@ class AppHeader extends HTMLElement {
       dropdown.style.right = "16px";
       dropdown.style.width = "auto";
       dropdown.style.maxWidth = "calc(100vw - 32px)";
-      dropdown.style.zIndex = "9999";
-      dropdown.style.maxHeight = "calc(100vh - 100px)";
+      dropdown.style.zIndex = "100001";
+      dropdown.style.maxHeight = "calc(100vh - 90px)";
       dropdown.style.overflowY = "auto";
 
       const arrow = dropdown.querySelector("#theme-arrow, #notif-arrow");
       if (arrow) arrow.style.display = "none";
+
+      if (assistiveMenu) assistiveMenu.classList.add("hidden");
     };
 
     // Toggle Theme Dropdown (Desktop)
@@ -1758,6 +1797,7 @@ class AppHeader extends HTMLElement {
       }, { passive: false });
 
       btn.addEventListener("click", (e) => {
+        e.preventDefault();
         e.stopPropagation();
         if (handled) return;
         actionFn();

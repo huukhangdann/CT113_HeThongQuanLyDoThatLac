@@ -321,6 +321,8 @@ app-header .header-action-btn {
 /* 2. Page Background (Đổi màu chuẩn xác theo góc dưới trái ô tròn Chrome) */
 body,
 .bg-\[\#f7f6f2\],
+.bg-\[\#F7F6F2\],
+.sub-nav-tabs,
 .bg-\[\#FAF8F5\],
 .bg-\[\#FAF8F3\],
 .bg-ivory,
@@ -452,7 +454,8 @@ body,
 
 /* Dark Mode Overrides cho thẻ form, card và chữ */
 html.dark body,
-html.dark .bg-background {
+html.dark .bg-background,
+html.dark .sub-nav-tabs {
   background-color: var(--theme-bg-page) !important;
   color: var(--theme-text-main) !important;
 }
