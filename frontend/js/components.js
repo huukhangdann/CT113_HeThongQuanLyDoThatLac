@@ -254,9 +254,9 @@ class AppHeader extends HTMLElement {
 
         <!-- User Avatar & Popup Dropdown -->
         <div class="relative flex items-center">
-          <button id="user-menu-btn" type="button" class="hidden md:flex header-action-btn items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors" title="Tài khoản: Đặng Hữu Khang">
+          <button id="user-menu-btn" type="button" class="hidden md:flex header-action-btn items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors" title="Tài khoản: Phan Minh Khang">
             <span class="material-symbols-outlined text-[22px]">account_circle</span>
-            <span>Đặng Hữu Khang</span>
+            <span>Phan Minh Khang</span>
           </button>
 
           <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl text-left">
@@ -268,8 +268,8 @@ class AppHeader extends HTMLElement {
             </div>
             <div class="px-4 py-3.5 bg-white dark:bg-[#1e1f22] border-b border-[#f0edec] dark:border-[#2e3035] rounded-t-2xl flex items-center justify-between">
               <div>
-                <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Đặng Hữu Khang</h3>
-                <p class="text-xs font-medium text-[#797675] dark:text-stone-400 mt-0.5">MSSV: B2404990</p>
+                <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Phan Minh Khang</h3>
+                <p class="text-xs font-medium text-[#797675] dark:text-stone-400 mt-0.5">MSSV: B2404991</p>
               </div>
               <button type="button" id="close-user-menu-btn" class="w-7 h-7 rounded-full hover:bg-[#f0edec] dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Đóng">
                 <span class="material-symbols-outlined text-[18px]">close</span>
@@ -280,13 +280,13 @@ class AppHeader extends HTMLElement {
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
-                <span class="truncate">khangb2404990@student.ctu.edu.vn</span>
+                <span class="truncate">khangb2404991@student.ctu.edu.vn</span>
               </div>
               <div class="flex items-center gap-3 p-2 text-xs text-[#4a4746] dark:text-stone-300 rounded-md">
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
-                <span>093 9715 761</span>
+                <span>09 6868 6868</span>
               </div>
             </div>
             <div class="p-2">
