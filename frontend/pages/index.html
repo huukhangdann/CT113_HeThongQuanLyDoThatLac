@@ -8,6 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <link href="../css/index.css" rel="stylesheet" />
 
   <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script> -->
@@ -275,6 +276,215 @@
                   <span
                     class="material-symbols-outlined text-base group-hover/right:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== BẢNG VINH DANH (HONOR BOARD) ==================== -->
+    <section id="honor-board-section" class="w-full relative py-1">
+      <div class="honor-board-wrapper">
+        <!-- Header của Bảng vinh danh -->
+        <div class="relative z-10 flex items-center justify-between gap-4 pb-4 border-b border-[#E6E4DE] dark:border-[#26382b]">
+          <div class="flex items-center gap-3.5">
+            <!-- Icon cúp vàng danh dự -->
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 text-white flex items-center justify-center shadow-[0_4px_16px_rgba(245,158,11,0.4)] shrink-0">
+              <span class="material-symbols-outlined text-2xl drop-shadow">trophy</span>
+            </div>
+            <div>
+              <h2 class="text-xl sm:text-2xl font-black tracking-tight uppercase honor-board-title">
+                BẢNG VINH DANH
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dải Marquee cuộn ngang tự động vô tận -->
+        <div id="honor-marquee-container" class="honor-marquee-mask">
+          <div id="honor-marquee-track" class="honor-marquee-track">
+            <!-- Thẻ 1 -->
+            <div class="honor-card honor-card-gold">
+              <!-- PHẦN 1: BÊN TRÁI - HÌNH ĐẠI DIỆN -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" alt="Nguyễn Hoàng Long" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI (CHỨA PHẦN 2 VÀ PHẦN 3) -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Nguyễn Hoàng Long</span>
+                  <span class="honor-faculty">Khoa CNTT & TT</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG (BÌNH THƯỜNG, KHÔNG KHUNG) -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">24</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 2 -->
+            <div class="honor-card honor-card-silver">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" alt="Đặng Thu Thảo" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Đặng Thu Thảo</span>
+                  <span class="honor-faculty">Khoa Kinh tế</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">19</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 3 -->
+            <div class="honor-card honor-card-bronze">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Trần Bảo Nam" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Trần Bảo Nam</span>
+                  <span class="honor-faculty">Khoa Nông nghiệp</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">16</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 4 -->
+            <div class="honor-card honor-card-emerald">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" alt="Lê Thị Phương Uyên" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Lê Thị Phương Uyên</span>
+                  <span class="honor-faculty">Khoa Luật</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">14</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 5 -->
+            <div class="honor-card honor-card-emerald">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Huỳnh Gia Huy" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Huỳnh Gia Huy</span>
+                  <span class="honor-faculty">Khoa Công nghệ</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">12</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 6 -->
+            <div class="honor-card honor-card-emerald">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" alt="Phạm Minh Triết" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Phạm Minh Triết</span>
+                  <span class="honor-faculty">Khoa Thủy sản</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">11</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 7 -->
+            <div class="honor-card honor-card-emerald">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" alt="Võ Ngọc Trâm" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Võ Ngọc Trâm</span>
+                  <span class="honor-faculty">Khoa Sư phạm</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">9</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thẻ 8 -->
+            <div class="honor-card honor-card-emerald">
+              <!-- PHẦN 1: BÊN TRÁI -->
+              <div class="honor-avatar-col">
+                <div class="honor-avatar-ring">
+                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" alt="Bùi Quốc An" class="honor-avatar-img" loading="lazy" />
+                </div>
+              </div>
+              <!-- CỘT BÊN PHẢI -->
+              <div class="honor-content-col">
+                <!-- PHẦN 2: BÊN PHẢI - Ở TRÊN: TÊN & KHOA -->
+                <div class="honor-top-row">
+                  <span class="honor-name">Bùi Quốc An</span>
+                  <span class="honor-faculty">Khoa Ngoại ngữ</span>
+                </div>
+                <!-- PHẦN 3: BÊN PHẢI - Ở DƯỚI: SỐ LẦN TRAO TRẢ THÀNH CÔNG -->
+                <div class="honor-bottom-row">
+                  <span class="honor-success-num">8</span>
+                  <span class="honor-success-label">lần trao trả thành công</span>
+                </div>
               </div>
             </div>
           </div>
@@ -697,6 +907,86 @@
           }, 300);
         });
       }
+
+      // ==================== KHỞI TẠO BẢNG VINH DANH (HONOR BOARD) ====================
+      (function initHonorBoard() {
+        const container = document.getElementById("honor-marquee-container");
+        const track = document.getElementById("honor-marquee-track");
+        if (!container || !track) return;
+
+        // 1. Nhân bản thẻ để tạo dải cuộn vô tận
+        const originalCards = Array.from(track.children);
+        originalCards.forEach((card) => {
+          const clone = card.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          track.appendChild(clone);
+        });
+
+        // Thêm bản sao để đảm bảo track luôn phủ kín mọi kích thước màn hình
+        originalCards.forEach((card) => {
+          const clone = card.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          track.appendChild(clone);
+        });
+
+        const allCards = Array.from(track.children);
+        const cardCount = originalCards.length;
+        
+        let currentX = 0;
+        const scrollSpeed = 0.85; // Tốc độ trôi êm dịu, mượt mà
+        let singleLoopWidth = 0;
+
+        function updateLoopWidth() {
+          if (allCards.length >= cardCount && allCards[cardCount]) {
+            singleLoopWidth = allCards[cardCount].offsetLeft - allCards[0].offsetLeft;
+          }
+        }
+        
+        // Đợi layout ổn định để đo kích thước chuẩn
+        setTimeout(updateLoopWidth, 50);
+        window.addEventListener("resize", updateLoopWidth);
+
+        // 2. Chuyển động cuộn 60fps & hiệu ứng Càng vào trung tâm càng phóng to - Ra ngoài thu nhỏ và làm mờ đen
+        function tick() {
+          // Trôi liên tục không dừng lại kể cả khi di chuột vào card
+          currentX -= scrollSpeed;
+          if (singleLoopWidth > 0 && Math.abs(currentX) >= singleLoopWidth) {
+            currentX += singleLoopWidth;
+          }
+
+          track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+
+          const containerRect = container.getBoundingClientRect();
+          const containerCenter = containerRect.left + containerRect.width / 2;
+          const maxDist = containerRect.width / 2;
+
+          allCards.forEach((card) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const dist = Math.abs(cardCenter - containerCenter);
+
+            // Chuẩn hóa khoảng cách từ 0 (ngay chính giữa tâm) đến 1 (hai biên ngoài cùng)
+            const norm = Math.min(dist / maxDist, 1);
+
+            // Đường cong biến thiên nhạy bén: phản hồi thu nhỏ ngay lập tức khi card bước ra khỏi tâm
+            // Không bị lì hay giữ đỉnh quá lâu, đảm bảo card 1 thu nhỏ và card 2 phóng to hoàn toàn đồng bộ và đối xứng
+            const curve = Math.pow(norm, 0.75);
+
+            // Phóng to 1.10 ở tâm, thu nhỏ nhịp nhàng ngay khi rời tâm, xuống 0.72 ở ngoài cùng
+            const scale = (1.10 - curve * 0.38).toFixed(3);
+
+            // Z-index cao hơn ở trung tâm để card gần tâm luôn nổi lên trên
+            const zIndex = Math.round((1 - norm) * 40) + 1;
+
+            card.style.transform = `scale3d(${scale}, ${scale}, 1)`;
+            card.style.zIndex = zIndex;
+          });
+
+          requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+      })();
     });
   </script>
 </body>

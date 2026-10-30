@@ -70,6 +70,47 @@
   }
 }
 
+/* Trang Báo mất (post-lost): Phóng to mascot tối đa lấp đầy khoảng trống, căn đáy ngang bằng card thông tin liên hệ */
+.mascot-post-lost-container {
+  flex: 1 1 0%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0;
+}
+
+.mascot-post-lost-container .ctu-mascot-standalone {
+  height: 100%;
+  max-height: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mascot-post-lost-container .ctu-mascot-btn {
+  width: clamp(170px, 18vw, 215px);
+  height: clamp(170px, 18vw, 215px);
+  max-height: 215px;
+}
+
+@media (min-width: 1280px) {
+  .mascot-post-lost-container .ctu-mascot-btn {
+    width: 185px;
+    height: 185px;
+    max-height: 185px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .mascot-post-lost-container .ctu-mascot-btn {
+    width: 210px;
+    height: 210px;
+    max-height: 210px;
+  }
+}
+
 /* Khối nén dãn đàn hồi khi click (Squash & Stretch) */
 .ctu-mascot-squash {
   position: relative;
