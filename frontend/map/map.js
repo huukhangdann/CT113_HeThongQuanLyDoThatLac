@@ -49,11 +49,45 @@
     const data = window.campusData;
 
     // ==========================================
-    // RENDER CẤP 1: CAMPUS MAP (ẢNH THỰC TẾ + CHẤM ĐỎ)
+    // RENDER CẤP 1: CAMPUS MAP (ẢNH THỰC TẾ + CHẤM ĐỎ/VÀNG)
     // ==========================================
     function renderCampus() {
       const buildings = data.buildings;
       const totalItems = buildings.reduce((s, b) => s + b.totalItems, 0);
+
+      // Xác định tòa nhà đang tìm kiếm (ví dụ 'c1' tại match-detail.html)
+      const searchBuildingId = container.dataset.searchBuilding || (window.location.pathname.includes("match-detail") ? "c1" : null);
+      const searchBuilding = searchBuildingId ? buildings.find(b => b.id === searchBuildingId || b.code.toLowerCase() === searchBuildingId.toLowerCase()) : null;
+
+      let infoBarContent = `<span>Tổng cộng <strong>${totalItems} bài đăng nhặt đồ</strong> tại ${buildings.filter(b => b.totalItems > 0).length} tòa nhà — <em>Click vào tòa nhà trên bản đồ để xem chi tiết từng tầng</em></span>`;
+      let legendContent = `
+        <div class="legend-item">
+          <div class="legend-dot-red"></div>
+          <span>Có đồ nhặt được (Click để xem)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot-gray"></div>
+          <span>Chưa có báo nhặt</span>
+        </div>
+      `;
+
+      if (searchBuilding) {
+        infoBarContent = `<span>Vị trí tìm kiếm: <strong style="color: #dc2626;">${searchBuilding.name}</strong> (Sáng đỏ) &amp; các tòa nhà có đồ trùng khớp khác (Sáng vàng) — <em>Click vào tòa nhà để xem phòng/tầng</em></span>`;
+        legendContent = `
+          <div class="legend-item">
+            <div class="legend-dot-red"></div>
+            <span><strong>Tòa nhà đang tìm kiếm</strong> (${searchBuilding.shortName || searchBuilding.code})</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot-yellow"></div>
+            <span>Các tòa nhà có đồ trùng khớp khác</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot-gray"></div>
+            <span>Chưa có báo nhặt</span>
+          </div>
+        `;
+      }
 
       container.innerHTML = `
         <div class="map-viewport-wrapper">
@@ -65,29 +99,22 @@
           <!-- Info Bar -->
           <div class="map-info-bar">
             <span class="material-symbols-outlined">info</span>
-            <span>Tổng cộng <strong>${totalItems} bài đăng nhặt đồ</strong> tại ${buildings.filter(b => b.totalItems > 0).length} tòa nhà — <em>Click vào chấm đỏ trên bản đồ để xem chi tiết từng tầng</em></span>
+            ${infoBarContent}
           </div>
 
           <!-- Khung ảnh bản đồ thực tế -->
           <div class="campus-map-wrapper">
             <img src="${getMapImagePath()}" alt="Sơ đồ Khu II ĐHCT" class="campus-map-img" />
 
-            <!-- Lớp phủ chấm đỏ -->
+            <!-- Lớp phủ chấm định vị -->
             <div class="campus-pins-overlay">
-              ${buildings.map(b => renderPin(b)).join("")}
+              ${buildings.map(b => renderPin(b, searchBuildingId)).join("")}
             </div>
           </div>
 
           <!-- Chú thích -->
           <div class="map-legend">
-            <div class="legend-item">
-              <div class="legend-dot-red"></div>
-              <span>Có đồ nhặt được (Click để xem)</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot-gray"></div>
-              <span>Chưa có báo nhặt</span>
-            </div>
+            ${legendContent}
           </div>
         </div>
       `;
@@ -104,21 +131,40 @@
       });
     }
 
-    function renderPin(b) {
+    function renderPin(b, searchBuildingId) {
       const hasItems = b.totalItems > 0;
-      if (hasItems) {
+      const isSearchTarget = searchBuildingId && (b.id === searchBuildingId || b.code.toLowerCase() === searchBuildingId.toLowerCase());
+
+      if (isSearchTarget) {
+        // TÒA NHÀ ĐANG TÌM KIẾM: SÁNG ĐỎ NỔI BẬT NHẤT
         return `
-          <div class="campus-pin" style="left: ${b.pctX}%; top: ${b.pctY}%;" data-id="${b.id}" title="${b.name}">
+          <div class="campus-pin pin-target-red" style="left: ${b.pctX}%; top: ${b.pctY}%; z-index: 35;" data-id="${b.id}" title="${b.name}">
+            <div class="campus-pin-pulse"></div>
+            <div class="campus-pin-badge">${b.totalItems || "!"}</div>
+            <div class="campus-pin-label" style="background: rgba(186, 26, 26, 0.95); font-weight: 700;">★ ${b.shortName || b.code}</div>
+            <div class="campus-pin-tooltip">
+              <div class="tt-name" style="color: #dc2626;">🔴 ${b.name}</div>
+              <div class="tt-count">Tòa nhà đang tìm kiếm (${b.totalItems} đồ nhặt được) — Click xem</div>
+            </div>
+          </div>
+        `;
+      } else if (hasItems) {
+        // CÁC TÒA NHÀ KHÁC CÓ ĐỒ: SÁNG VÀNG
+        const pinClass = searchBuildingId ? "campus-pin pin-yellow" : "campus-pin";
+        const iconDot = searchBuildingId ? "🟡" : "🔴";
+        return `
+          <div class="${pinClass}" style="left: ${b.pctX}%; top: ${b.pctY}%;" data-id="${b.id}" title="${b.name}">
             <div class="campus-pin-pulse"></div>
             <div class="campus-pin-badge">${b.totalItems}</div>
             <div class="campus-pin-label">${b.shortName || b.code}</div>
             <div class="campus-pin-tooltip">
               <div class="tt-name">${b.name}</div>
-              <div class="tt-count">🔴 ${b.totalItems} đồ nhặt được — Click để xem</div>
+              <div class="tt-count">${iconDot} ${b.totalItems} đồ nhặt được — Click để xem</div>
             </div>
           </div>
         `;
       } else {
+        // TÒA NHÀ CHƯA CÓ BÁO NHẶT
         return `
           <div class="campus-pin pin-empty" style="left: ${b.pctX}%; top: ${b.pctY}%;" data-id="${b.id}">
             <div class="campus-pin-badge"></div>

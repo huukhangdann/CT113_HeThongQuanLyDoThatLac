@@ -207,7 +207,33 @@
   user-select: none;
 }
 
-/* Nhãn tên tòa nhà dưới chấm đỏ */
+/* Biến thể pin vàng cho các tòa nhà khác có đồ nhặt được */
+.campus-pin.pin-yellow .campus-pin-pulse {
+  background: rgba(245, 158, 11, 0.45);
+  animation: campus-pulse-yellow-anim 2s infinite ease-out;
+}
+
+@keyframes campus-pulse-yellow-anim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.9;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}
+
+.campus-pin.pin-yellow .campus-pin-badge {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.45), 0 0 0 2px #ffffff;
+}
+
+/* Nhãn tên tòa nhà dưới chấm đỏ/vàng */
 .campus-pin-label {
   margin-top: 4px;
   background: rgba(27, 28, 27, 0.85);
@@ -222,9 +248,9 @@
   pointer-events: none;
 }
 
-/* Chấm xám nhỏ cho tòa nhà chưa có báo nhặt (nếu hiển thị) */
+/* Chấm xám cho tòa nhà chưa có báo nhặt */
 .campus-pin.pin-empty {
-  opacity: 0.55;
+  opacity: 0.7;
 }
 .campus-pin.pin-empty .campus-pin-badge {
   background: #727873;
@@ -241,6 +267,7 @@
 }
 .campus-pin.pin-empty:hover {
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
 }
 .campus-pin.pin-empty:hover .campus-pin-label {
   display: block;
@@ -316,6 +343,13 @@
   border-radius: 50%;
   background: #dc2626;
   box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+}
+.legend-dot-yellow {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
 }
 .legend-dot-gray {
   width: 12px;

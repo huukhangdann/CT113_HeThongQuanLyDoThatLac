@@ -45,6 +45,8 @@
 
   <!-- Custom CSS và Web Components của dự án -->
   <link href="../css/index.css" rel="stylesheet" />
+  <!-- Map CSS -->
+  <link href="../map/map.css" rel="stylesheet" />
   <script src="../js/main.js"></script>
   <script src="../js/components.js"></script>
 
@@ -151,260 +153,29 @@
     </section>
 
     <!-- -----------------------------------------------------------------------
-         KHU VỰC 2: DANH SÁCH BÀI ĐĂNG TƯƠNG ĐỒNG (CUỘN DỌC - KHÔNG PHÂN TRANG)
+         KHU VỰC 2: BẢN ĐỒ VỊ TRÍ CÁC MÓN ĐỒ TRÙNG KHỚP
          ----------------------------------------------------------------------- -->
     <section class="flex flex-col gap-3">
       <div class="flex items-center justify-between mb-1">
         <div>
-          <h2 class="font-bold text-xl text-[#1b1c1c]">Các món đồ được tìm thấy có khả năng trùng khớp</h2>
+          <h2 class="font-bold text-xl text-[#1b1c1c] flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#35483d] text-[24px]">pin_drop</span>
+            <span>Vị trí các món đồ trùng khớp</span>
+          </h2>
+          <p class="text-xs text-[#797675] mt-1">
+            Vị trí tòa nhà nghi mất của bạn đang sáng đỏ. Các tòa nhà xung quanh có đồ nhặt được khả nghi đang sáng vàng.
+          </p>
         </div>
       </div>
 
-      <!-- Vùng chứa danh sách (Scroll Area): flex flex-col gap-4 overflow-y-auto max-h-[600px] pr-2 -->
-      <div class="flex flex-col gap-4 overflow-y-auto max-h-[600px] pr-2 custom-scrollbar">
-
-        <!-- DÒNG KẾT QUẢ 1 (Khớp 99%) -->
-        <div
-          class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-[#e7e1df] shadow-sm hover:border-[#35483d] transition-all duration-200 group cursor-pointer"
-          onclick="window.location.href='claim.html'">
-          <!-- Ô Trái (Ảnh): Ảnh thumbnail vuông w-24 h-24 rounded-lg object-cover flex-shrink-0 -->
-          <div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-[#f0edec] border border-[#e7e1df]">
-            <img alt="Ví da nam màu nâu - Tòa C1"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-          </div>
-
-          <!-- Ô Giữa (Thông tin): flex-1 min-w-0 flex flex-col gap-1 -->
-          <div class="flex-1 min-w-0 flex flex-col gap-1 w-full sm:w-auto">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f0edec] text-[#35483d]">
-                Ví tiền
-              </span>
-              <h4 class="font-semibold text-base text-[#1b1c1c] truncate group-hover:text-[#35483d] transition-colors">
-                Ví da nam màu nâu - Tòa C1
-              </h4>
-            </div>
-
-            <!-- Đoạn mô tả: line-clamp-2 text-sm text-[#4a4746] -->
-            <p class="text-sm text-[#4a4746] leading-relaxed line-clamp-1 truncate">
-              Hôm nay mình nhặt được chiếc ví da màu nâu sẫm ở khu vực dãy bàn tự học Tầng 2 Thư viện (khu tự học máy
-              lạnh). Trong ví có thẻ sinh viên tên An và một số giấy tờ tùy thân quan trọng, hiện đã chuyển giao bảo
-              quản an toàn để tránh thất lạc.
-            </p>
-
-            <!-- Dòng meta thời gian/địa điểm mờ: text-xs text-[#797675] -->
-            <div class="flex flex-wrap items-center gap-3 text-xs text-[#797675] pt-1">
-              <span class="font-semibold text-sm text-emerald-700 px-2 py-0.5 rounded  ">Khớp 99%</span>
-              <span class="text-[#797675]">|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"></path>
-                </svg>
-                Khu II - Tòa C1 (Khoa CNTT&amp;TT)
-              </span>
-              <span>|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"></path>
-                </svg>
-                10 phút trước (Hôm nay, 14:25)
-              </span>
-            </div>
-          </div>
-
-          <!-- Ô Phải (Nút bấm): flex-shrink-0 -->
-          <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
-            <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
-              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
-              <span>Xem chi tiết</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- DÒNG KẾT QUẢ 2 (Khớp 92%) -->
-        <div
-          class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-[#e7e1df] shadow-sm hover:border-[#35483d] transition-all duration-200 group">
-          <!-- Ô Trái (Ảnh) -->
-          <div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-[#f0edec] border border-[#e7e1df]">
-            <img alt="Bóp da nhỏ kèm thẻ sinh viên"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-          </div>
-
-          <!-- Ô Giữa (Thông tin) -->
-          <div class="flex-1 min-w-0 flex flex-col gap-1 w-full sm:w-auto">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f0edec] text-[#35483d]">
-                Bóp cầm tay
-              </span>
-              <h4 class="font-semibold text-base text-[#1b1c1c] truncate group-hover:text-[#35483d] transition-colors">
-                Bóp cầm tay màu nâu kèm thẻ sinh viên CTU
-              </h4>
-            </div>
-
-            <!-- Đoạn mô tả: line-clamp-2 -->
-            <p class="text-sm text-[#4a4746] leading-relaxed line-clamp-1 truncate">
-              Nhặt được ở ghế đá trước sảnh tòa C1 lúc tan tiết 4. Bên trong có thẻ sinh viên trường và một ít giấy tờ
-              ghi chú học phần lập trình. Bạn nào đánh rơi vui lòng liên hệ xác minh sớm nhé.
-            </p>
-
-            <!-- Dòng meta -->
-            <div class="flex flex-wrap items-center gap-3 text-xs text-[#797675] pt-1">
-              <span class="font-semibold text-sm text-emerald-700 px-2 py-0.5 rounded">Khớp 92%</span>
-              <span class="text-[#797675]">|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                Sảnh trước Tòa C1 (Ghế đá số 4)
-              </span>
-              <span>|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"></path>
-                </svg>
-                45 phút trước (Hôm nay, 13:50)
-              </span>
-            </div>
-          </div>
-
-          <!-- Ô Phải (Nút bấm) -->
-          <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
-            <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
-              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
-              <span>Xem chi tiết</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- DÒNG KẾT QUẢ 3 (Khớp 85%) -->
-        <div
-          class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-[#e7e1df] shadow-sm hover:border-[#35483d] transition-all duration-200 group">
-          <!-- Ô Trái (Ảnh) -->
-          <div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-[#f0edec] border border-[#e7e1df]">
-            <img alt="Balo có ngăn ví nhỏ"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-          </div>
-
-          <!-- Ô Giữa (Thông tin) -->
-          <div class="flex-1 min-w-0 flex flex-col gap-1 w-full sm:w-auto">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f0edec] text-[#35483d]">
-                Balo / Phụ kiện
-              </span>
-              <h4 class="font-semibold text-base text-[#1b1c1c] truncate group-hover:text-[#35483d] transition-colors">
-                Balo laptop bỏ quên có ví da nâu bên trong
-              </h4>
-            </div>
-
-            <!-- Đoạn mô tả: line-clamp-2 -->
-            <p class="text-sm text-[#4a4746] leading-relaxed line-clamp-1 truncate">
-              Bạn nào để quên balo tại phòng thực hành máy tính Khoa CNTT&amp;TT lúc 11h trưa nay. Bên trong ngăn phụ
-              phía trước có 1 chiếc ví da gấp màu nâu sẫm và chìa khóa phòng trọ.
-            </p>
-
-            <!-- Dòng meta -->
-            <div class="flex flex-wrap items-center gap-3 text-xs text-[#797675] pt-1">
-              <span class="font-semibold text-sm text-[#35483d] px-2 py-0.5 rounded">Khớp 85%</span>
-              <span class="text-[#797675]">|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                Phòng máy Lab 02 - Nhà C1
-              </span>
-              <span>|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"></path>
-                </svg>
-                3 giờ trước (Hôm nay, 11:30)
-              </span>
-            </div>
-          </div>
-
-          <!-- Ô Phải (Nút bấm) -->
-          <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
-            <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
-              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
-              <span>Xem chi tiết</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- DÒNG KẾT QUẢ 4 (Khớp 80%) -->
-        <div
-          class="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-xl border border-[#e7e1df] shadow-sm hover:border-[#35483d] transition-all duration-200 group">
-          <!-- Ô Trái (Ảnh) -->
-          <div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-[#f0edec] border border-[#e7e1df]">
-            <img alt="Ví đựng thẻ da bò"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
-          </div>
-
-          <!-- Ô Giữa (Thông tin) -->
-          <div class="flex-1 min-w-0 flex flex-col gap-1 w-full sm:w-auto">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f0edec] text-[#35483d]">
-                Ví tiền
-              </span>
-              <h4 class="font-semibold text-base text-[#1b1c1c] truncate group-hover:text-[#35483d] transition-colors">
-                Ví đựng thẻ da bò màu nâu nhạt
-              </h4>
-            </div>
-
-            <!-- Đoạn mô tả: line-clamp-2 -->
-            <p class="text-sm text-[#4a4746] leading-relaxed line-clamp-1 truncate">
-              Nhặt được ở khu vực bãi xe nhà học C1 vào đầu giờ chiều nay. Ví nhỏ gọn chỉ để vừa các loại thẻ ngân hàng
-              và thẻ sinh viên, có logo dập chìm ở góc dưới.
-            </p>
-
-            <!-- Dòng meta -->
-            <div class="flex flex-wrap items-center gap-3 text-xs text-[#797675] pt-1">
-              <span class="font-semibold text-sm text-[#35483d] px-2 py-0.5 rounded">Khớp 80%</span>
-              <span class="text-[#797675]">|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                Bãi giữ xe Tòa C1
-              </span>
-              <span>|</span>
-              <span class="inline-flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-[#797675]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"></path>
-                </svg>
-                5 giờ trước (Hôm nay, 13:10)
-              </span>
-            </div>
-          </div>
-
-          <!-- Ô Phải (Nút bấm) -->
-          <div class="flex-shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
-            <button
-              class="claim-btn w-full sm:w-auto bg-[#35483d] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#28372e] shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
-              onclick="event.stopPropagation(); window.location.href='claim.html'" type="button">
-              <span>Xem chi tiết</span>
-            </button>
-          </div>
-        </div>
-
+      <!-- Khung chứa Map 3 cấp độ thay thế cho các card -->
+      <div id="map-viewport-container" data-search-building="c1"
+        class="rounded-2xl overflow-hidden border border-[#e7e1df] shadow-xs bg-white">
+        <!-- Render tự động bởi map.js -->
       </div>
     </section>
+
+
 
   </main>
 
@@ -473,6 +244,9 @@
     }
   </script>
 
+  <!-- Bản đồ tương tác 3 cấp độ Scripts -->
+  <script src="../map/map-data.js"></script>
+  <script src="../map/map.js"></script>
 </body>
 
 </html>
