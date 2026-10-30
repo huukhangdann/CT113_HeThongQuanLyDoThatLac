@@ -1,7 +1,8 @@
 /**
- * Dữ liệu giả lập phân cấp cho Bản đồ tương tác 3 cấp độ CTU Khu II
- * Tọa độ pctX, pctY tính theo % trên ảnh sơ đồ thực tế (ctu-campus-map.png, kích thước 960x1024)
+ * Dữ liệu phân cấp cho Bản đồ tương tác 3 cấp độ CTU Khu II
+ * Tọa độ pctX, pctY tính theo % trên ảnh sơ đồ mới (ctu-campus-map.png, kích thước 1024x756)
  * Cấu trúc: Campus -> Buildings -> Floors -> Rooms -> Item
+ * TUYỆT ĐỐI KHÔNG TẠO PING Ở BÃI XE (Chỉ định vị các Khoa, Trường, Viện, Nhà học đọc từ ảnh)
  */
 
 const campusData = {
@@ -12,11 +13,11 @@ const campusData = {
     {
       id: "c1",
       code: "C1",
-      name: "Khoa CNTT & TT (Nhà C1)",
-      shortName: "Nhà C1",
+      name: "Trường Công nghệ Thông tin & Truyền thông (Nhà C1)",
+      shortName: "Khoa CNTT&TT",
       totalItems: 4,
-      pctX: 56.5,
-      pctY: 60.5,
+      pctX: 52.5,
+      pctY: 55.0,
       totalFloors: 5,
       floors: [
         {
@@ -124,8 +125,8 @@ const campusData = {
       name: "Nhà học B1",
       shortName: "Nhà B1",
       totalItems: 1,
-      pctX: 46.8,
-      pctY: 56.5,
+      pctX: 47.5,
+      pctY: 43.0,
       totalFloors: 3,
       floors: [
         {
@@ -168,12 +169,12 @@ const campusData = {
     },
     {
       id: "tv",
-      code: "TV",
-      name: "Thư viện Trung tâm CTU",
-      shortName: "Thư viện",
+      code: "TTHL",
+      name: "Trung tâm học liệu (Thư viện)",
+      shortName: "Trung tâm học liệu",
       totalItems: 1,
-      pctX: 74.0,
-      pctY: 67.5,
+      pctX: 57.0,
+      pctY: 80.7,
       totalFloors: 4,
       floors: [
         {
@@ -200,7 +201,7 @@ const campusData = {
                 title: "Hộp tai nghe không dây trắng",
                 category: "Thiết bị điện tử",
                 time: "Hôm qua, 14:20",
-                location: "Thư viện Trung tâm CTU, Bàn học T2",
+                location: "Trung tâm học liệu CTU, Bàn học T2",
                 status: "Đang giữ hộ",
                 image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxMGtnliRKncEmLOccvvngbz0u3tWpMZz8xzNuL-lq6pRKEbyWFj8lip2GytGWIWYq6TFW24N5aNiiSz7I4biZnv-4lWGRpwO-0zonFl84GuTqzskud8V0wG0vWkwWT9QacCpnpPGwG0HSGWPN2x2qhBRxKaE9gGrIJ7-2wYamqq4NAvZuPXmgPf0Fxad1mLGOJhQtffKX0u1uDwPTrGVpSJpGhb8J1hP-zx8Eh0fqW3zb1Dg0QVTw"
               }
@@ -219,13 +220,44 @@ const campusData = {
       ]
     },
     {
+      id: "c2",
+      code: "C2",
+      name: "Nhà học C2",
+      shortName: "Nhà C2",
+      totalItems: 1,
+      pctX: 32.0,
+      pctY: 64.8,
+      totalFloors: 4,
+      floors: [
+        {
+          floorNumber: 1, name: "Tầng 1 (Trệt)", itemsCount: 1,
+          rooms: [
+            { id: "c2-sanh", name: "Sảnh nhà C2", type: "hall", col: 1, row: 1 },
+            {
+              id: "c2-p102", name: "Phòng học 102-C2", type: "class", col: 2, row: 1,
+              hasItem: true,
+              item: {
+                id: "find-c2",
+                title: "Mũ bảo hiểm 3/4 màu xám",
+                category: "Đồ dùng cá nhân",
+                time: "Hôm qua, 17:30",
+                location: "Nhà học C2, Trước P.102",
+                status: "Chờ liên hệ",
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=400&q=80"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       id: "rua",
       code: "HTR",
       name: "Hội trường Rùa",
       shortName: "HT Rùa",
       totalItems: 1,
-      pctX: 58.5,
-      pctY: 73.5,
+      pctX: 40.0,
+      pctY: 72.8,
       totalFloors: 2,
       floors: [
         {
@@ -256,215 +288,112 @@ const campusData = {
       ]
     },
     {
-      id: "b2",
-      code: "B2",
-      name: "Nhà học B2 (Khu Giảng đường)",
-      shortName: "Nhà B2",
-      totalItems: 1,
-      pctX: 51.5,
-      pctY: 55.0,
-      totalFloors: 3,
-      floors: [
-        {
-          floorNumber: 2, name: "Tầng 2", itemsCount: 1,
-          rooms: [
-            { id: "b2-p201", name: "P.201-B2", type: "class", col: 1, row: 1 },
-            {
-              id: "b2-p202", name: "P.202-B2", type: "class", col: 2, row: 1,
-              hasItem: true,
-              item: {
-                id: "find-b2",
-                title: "Thẻ ngân hàng Vietcombank",
-                category: "Giấy tờ / Thẻ",
-                time: "Hôm nay, 11:20",
-                location: "Nhà học B2, Phòng 202",
-                status: "Đang giữ hộ",
-                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80"
-              }
-            },
-            { id: "b2-hl", name: "Hành lang dãy B2", type: "hall", col: "1 / 3", row: 2 }
-          ]
-        },
-        {
-          floorNumber: 1, name: "Tầng 1 (Trệt)", itemsCount: 0,
-          rooms: [
-            { id: "b2-gd1", name: "Giảng đường 1-B2", type: "class", col: 1, row: 1 },
-            { id: "b2-gd2", name: "Giảng đường 2-B2", type: "class", col: 2, row: 1 }
-          ]
-        }
-      ]
-    },
-    {
-      id: "c2",
-      code: "C2",
-      name: "Nhà học C2",
-      shortName: "Nhà C2",
-      totalItems: 1,
-      pctX: 48.5,
-      pctY: 77.5,
-      totalFloors: 4,
-      floors: [
-        {
-          floorNumber: 1, name: "Tầng 1 (Trệt)", itemsCount: 1,
-          rooms: [
-            { id: "c2-sanh", name: "Sảnh nhà C2", type: "hall", col: 1, row: 1 },
-            {
-              id: "c2-p102", name: "Phòng học 102-C2", type: "class", col: 2, row: 1,
-              hasItem: true,
-              item: {
-                id: "find-c2",
-                title: "Mũ bảo hiểm 3/4 màu xám",
-                category: "Đồ dùng cá nhân",
-                time: "Hôm qua, 17:30",
-                location: "Nhà học C2, Trước P.102",
-                status: "Chờ liên hệ",
-                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=400&q=80"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: "d1",
-      code: "D1",
-      name: "Nhà học D1 (Giảng đường D1)",
-      shortName: "Nhà D1",
+      id: "mtn",
+      code: "MTN",
+      name: "Khoa Môi trường & Tài nguyên thiên nhiên",
+      shortName: "Khoa Môi trường",
       totalItems: 0,
-      pctX: 44.5,
-      pctY: 62.0,
-      totalFloors: 3,
-      floors: []
-    },
-    {
-      id: "d2",
-      code: "D2",
-      name: "Nhà học D2 (Giảng đường D2)",
-      shortName: "Nhà D2",
-      totalItems: 0,
-      pctX: 41.5,
-      pctY: 63.5,
-      totalFloors: 3,
-      floors: []
-    },
-    {
-      id: "a1",
-      code: "A1",
-      name: "Nhà học A1",
-      shortName: "Nhà A1",
-      totalItems: 0,
-      pctX: 79.5,
-      pctY: 60.0,
-      totalFloors: 3,
-      floors: []
-    },
-    {
-      id: "a2",
-      code: "A2",
-      name: "Nhà học A2",
-      shortName: "Nhà A2",
-      totalItems: 0,
-      pctX: 82.5,
-      pctY: 57.5,
-      totalFloors: 3,
-      floors: []
-    },
-    {
-      id: "sp",
-      code: "SP",
-      name: "Khoa Sư Phạm (Nhà học SP)",
-      shortName: "Khoa Sư Phạm",
-      totalItems: 0,
-      pctX: 72.5,
-      pctY: 53.0,
+      pctX: 7.3,
+      pctY: 46.3,
       totalFloors: 4,
       floors: []
     },
     {
-      id: "luat",
-      code: "LUAT",
-      name: "Khoa Luật",
-      shortName: "Khoa Luật",
+      id: "gdtc",
+      code: "GDTC",
+      name: "Khoa Giáo dục Thể chất",
+      shortName: "Khoa GD Thể chất",
       totalItems: 0,
-      pctX: 61.5,
-      pctY: 42.5,
-      totalFloors: 3,
-      floors: []
-    },
-    {
-      id: "xh",
-      code: "KHXH",
-      name: "Khoa Khoa học Xã hội & Nhân văn",
-      shortName: "Khoa KHXH&NV",
-      totalItems: 0,
-      pctX: 76.5,
-      pctY: 48.0,
-      totalFloors: 4,
-      floors: []
-    },
-    {
-      id: "bm",
-      code: "BM",
-      name: "Khu học Bộ môn & Thí nghiệm",
-      shortName: "Khu Bộ Môn",
-      totalItems: 0,
-      pctX: 35.5,
-      pctY: 57.0,
-      totalFloors: 3,
-      floors: []
-    },
-    {
-      id: "tdtt",
-      code: "TDTT",
-      name: "Nhà thi đấu Thể dục Thể thao",
-      shortName: "Nhà thi đấu",
-      totalItems: 0,
-      pctX: 32.0,
-      pctY: 40.0,
+      pctX: 54.5,
+      pctY: 43.0,
       totalFloors: 2,
       floors: []
     },
     {
-      id: "nxa",
-      code: "NX-A",
-      name: "Nhà xe Cổng A",
-      shortName: "Nhà xe Cổng A",
+      id: "tdm",
+      code: "TDM",
+      name: "Nhà Thi đấu mới",
+      shortName: "Nhà Thi đấu mới",
       totalItems: 0,
-      pctX: 85.5,
-      pctY: 71.5,
-      totalFloors: 1,
-      floors: []
-    },
-    {
-      id: "nxb",
-      code: "NX-B",
-      name: "Nhà xe Cổng B",
-      shortName: "Nhà xe Cổng B",
-      totalItems: 0,
-      pctX: 53.0,
-      pctY: 82.5,
-      totalFloors: 1,
+      pctX: 65.0,
+      pctY: 39.0,
+      totalFloors: 2,
       floors: []
     },
     {
       id: "cn",
       code: "CN",
-      name: "Trường Bách Khoa (Khoa Công Nghệ)",
-      shortName: "Trường Bách Khoa",
+      name: "Trường Bách khoa (Khoa Công Nghệ)",
+      shortName: "Trường Bách khoa",
       totalItems: 0,
-      pctX: 40.6,
-      pctY: 49.0,
+      pctX: 48.5,
+      pctY: 27.8,
+      totalFloors: 4,
+      floors: []
+    },
+    {
+      id: "ts",
+      code: "TS",
+      name: "Trường Thủy sản",
+      shortName: "Trường Thủy sản",
+      totalItems: 0,
+      pctX: 34.2,
+      pctY: 18.5,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "ktxb",
+      code: "KTX-B",
+      name: "Ký túc xá khu B",
+      shortName: "KTX Khu B",
+      totalItems: 0,
+      pctX: 19.0,
+      pctY: 18.5,
+      totalFloors: 5,
+      floors: []
+    },
+    {
+      id: "dbscl",
+      code: "DBSCL",
+      name: "Viện Nghiên cứu Phát triển ĐBSCL",
+      shortName: "Viện NC ĐBSCL",
+      totalItems: 0,
+      pctX: 21.0,
+      pctY: 34.5,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "sh_tp",
+      code: "SH-TP",
+      name: "Viện CN Sinh học và Thực phẩm",
+      shortName: "Viện CNSH&TP",
+      totalItems: 0,
+      pctX: 32.2,
+      pctY: 33.7,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "rlc",
+      code: "RLC",
+      name: "Tòa nhà Khu phức hợp phòng thí nghiệm",
+      shortName: "Tòa RLC",
+      totalItems: 0,
+      pctX: 38.1,
+      pctY: 33.0,
       totalFloors: 4,
       floors: []
     },
     {
       id: "nn",
       code: "NN",
-      name: "Trường Nông Nghiệp",
-      shortName: "Trường Nông Nghiệp",
+      name: "Trường Nông nghiệp",
+      shortName: "Trường Nông nghiệp",
       totalItems: 0,
-      pctX: 43.5,
-      pctY: 69.0,
+      pctX: 35.0,
+      pctY: 49.6,
       totalFloors: 4,
       floors: []
     },
@@ -474,79 +403,156 @@ const campusData = {
       name: "Khoa Khoa học Tự nhiên",
       shortName: "Khoa KHTN",
       totalItems: 0,
-      pctX: 64.5,
-      pctY: 50.5,
+      pctX: 62.5,
+      pctY: 58.2,
       totalFloors: 4,
-      floors: []
-    },
-    {
-      id: "dh",
-      code: "DH",
-      name: "Nhà Điều Hành",
-      shortName: "Nhà Điều Hành",
-      totalItems: 0,
-      pctX: 67.5,
-      pctY: 68.0,
-      totalFloors: 5,
-      floors: []
-    },
-    {
-      id: "ktxa",
-      code: "KTX-A",
-      name: "Ký túc xá Khu A",
-      shortName: "KTX Khu A",
-      totalItems: 0,
-      pctX: 58.5,
-      pctY: 30.0,
-      totalFloors: 5,
-      floors: []
-    },
-    {
-      id: "ktxb",
-      code: "KTX-B",
-      name: "Ký túc xá Khu B",
-      shortName: "KTX Khu B",
-      totalItems: 0,
-      pctX: 15.5,
-      pctY: 65.0,
-      totalFloors: 5,
-      floors: []
-    },
-    {
-      id: "ts",
-      code: "TS",
-      name: "Trường Thủy Sản",
-      shortName: "Trường Thủy Sản",
-      totalItems: 0,
-      pctX: 23.5,
-      pctY: 56.0,
-      totalFloors: 3,
       floors: []
     },
     {
       id: "kt",
       code: "KT",
-      name: "Trường Kinh Tế",
-      shortName: "Trường Kinh Tế",
+      name: "Trường Kinh tế",
+      shortName: "Trường Kinh tế",
       totalItems: 0,
-      pctX: 68.0,
-      pctY: 44.0,
+      pctX: 75.0,
+      pctY: 52.9,
       totalFloors: 4,
       floors: []
     },
     {
-      id: "mtn",
-      code: "MTN",
-      name: "Khoa Môi trường & TNTN",
-      shortName: "Khoa Môi trường",
+      id: "mt",
+      code: "MT",
+      name: "Khoa Khoa học Chính trị",
+      shortName: "Khoa KH Chính trị",
       totalItems: 0,
-      pctX: 24.0,
-      pctY: 86.0,
+      pctX: 76.0,
+      pctY: 63.5,
+      totalFloors: 4,
+      floors: []
+    },
+    {
+      id: "ktxa",
+      code: "KTX-A",
+      name: "Ký túc xá khu A",
+      shortName: "KTX Khu A",
+      totalItems: 0,
+      pctX: 77.0,
+      pctY: 33.0,
+      totalFloors: 5,
+      floors: []
+    },
+    {
+      id: "db",
+      code: "DB",
+      name: "Khoa Dự bị Dân tộc",
+      shortName: "Khoa Dự bị Dân tộc",
+      totalItems: 0,
+      pctX: 23.0,
+      pctY: 64.1,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "sp",
+      code: "SP",
+      name: "Khoa Sư phạm",
+      shortName: "Khoa Sư phạm",
+      totalItems: 0,
+      pctX: 28.5,
+      pctY: 65.5,
+      totalFloors: 4,
+      floors: []
+    },
+    {
+      id: "kl",
+      code: "KL",
+      name: "Khoa Luật",
+      shortName: "Khoa Luật",
+      totalItems: 0,
+      pctX: 36.5,
+      pctY: 79.5,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "ttnn",
+      code: "TTNN",
+      name: "Trung tâm Ngoại ngữ",
+      shortName: "TT Ngoại ngữ",
+      totalItems: 0,
+      pctX: 36.5,
+      pctY: 84.0,
+      totalFloors: 2,
+      floors: []
+    },
+    {
+      id: "atl",
+      code: "ATL",
+      name: "Tòa nhà Công nghệ cao",
+      shortName: "Tòa ATL",
+      totalItems: 0,
+      pctX: 43.0,
+      pctY: 80.7,
+      totalFloors: 4,
+      floors: []
+    },
+    {
+      id: "d2",
+      code: "D2",
+      name: "Nhà học D2",
+      shortName: "Nhà D2",
+      totalItems: 0,
+      pctX: 52.0,
+      pctY: 71.4,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "dh",
+      code: "DH",
+      name: "Nhà điều hành",
+      shortName: "Nhà điều hành",
+      totalItems: 0,
+      pctX: 52.5,
+      pctY: 75.4,
+      totalFloors: 5,
+      floors: []
+    },
+    {
+      id: "d1",
+      code: "D1",
+      name: "Nhà học D1",
+      shortName: "Nhà D1",
+      totalItems: 0,
+      pctX: 52.5,
+      pctY: 80.0,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "a3",
+      code: "A3",
+      name: "Nhà học A3",
+      shortName: "Nhà A3",
+      totalItems: 0,
+      pctX: 64.0,
+      pctY: 79.4,
+      totalFloors: 3,
+      floors: []
+    },
+    {
+      id: "xh",
+      code: "XH",
+      name: "Khoa Khoa học Xã hội và Nhân văn",
+      shortName: "Khoa KHXH&NV",
+      totalItems: 0,
+      pctX: 74.0,
+      pctY: 80.7,
       totalFloors: 4,
       floors: []
     }
   ]
 };
 
-// Xuất biến toàn cục dùng chung cho cả map/index.html và pages/find.html
+// Xuất biến toàn cục dùng chung cho cả map/index.html và pages/match-detail.html
 window.campusData = campusData;
