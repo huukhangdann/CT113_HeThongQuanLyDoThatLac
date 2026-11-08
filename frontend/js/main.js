@@ -30,6 +30,8 @@
 
       if (theme.pageBg) root.style.setProperty("--theme-bg-page", theme.pageBg);
       if (theme.cardBg) root.style.setProperty("--theme-bg-card", theme.cardBg);
+      if (theme.subtleBg) root.style.setProperty("--theme-bg-subtle", theme.subtleBg);
+      if (theme.border) root.style.setProperty("--theme-border", theme.border);
 
       if (theme.accent) root.style.setProperty("--theme-accent", theme.accent);
       if (theme.accentHover) root.style.setProperty("--theme-accent-hover", theme.accentHover);
@@ -52,6 +54,8 @@
       root.style.setProperty("--theme-header-btn-text", "#1f3227");
       root.style.setProperty("--theme-bg-page", "#f7f6f2");
       root.style.setProperty("--theme-bg-card", "#ffffff");
+      root.style.setProperty("--theme-bg-subtle", "#f6f3f2");
+      root.style.setProperty("--theme-border", "#e7e1df");
       root.style.setProperty("--theme-accent", "#1f3227");
       root.style.setProperty("--theme-accent-hover", "#142018");
       root.style.setProperty("--theme-accent-ring", "rgba(31, 50, 39, 0.25)");

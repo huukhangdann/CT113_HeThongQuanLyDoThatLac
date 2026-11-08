@@ -28,6 +28,8 @@
 
       if (theme.pageBg) root.style.setProperty("--theme-bg-page", theme.pageBg);
       if (theme.cardBg) root.style.setProperty("--theme-bg-card", theme.cardBg);
+      if (theme.subtleBg) root.style.setProperty("--theme-bg-subtle", theme.subtleBg);
+      if (theme.border) root.style.setProperty("--theme-border", theme.border);
 
       if (theme.accent) root.style.setProperty("--theme-accent", theme.accent);
       if (theme.accentHover) root.style.setProperty("--theme-accent-hover", theme.accentHover);
@@ -88,7 +90,7 @@ class AppHeader extends HTMLElement {
 
     const themeClusterHtml = `
       <!-- Nút Giao diện & Popup Bảng màu (Cạnh icon thông báo) -->
-      <div class="relative flex items-center">
+      <div id="theme-menu-container" class="relative flex items-center">
         <!-- Nút Palette Theme (chỉ hiện trên desktop) -->
         <button id="theme-menu-btn" type="button" aria-label="Chế độ giao diện & Bảng màu"
           class="hidden md:flex header-action-btn w-9 h-9 rounded-full items-center justify-center relative transition-all duration-200 cursor-pointer focus:outline-none"
@@ -98,7 +100,7 @@ class AppHeader extends HTMLElement {
 
         <!-- DROPDOWN POPUP GIAO DIỆN & BẢNG MÀU CHROME PROFILE -->
         <div id="theme-dropdown"
-          class="hidden absolute top-full mt-2 w-[340px] sm:w-[380px] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl transition-all duration-200 right-0 sm:-right-14 text-left flex flex-col p-4">
+          class="hidden absolute top-full mt-2 w-[340px] sm:w-[380px] z-[100] bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl transition-all duration-200 right-0 sm:-right-14 text-left flex flex-col p-4">
           <!-- Mũi tên liên kết trực tiếp với icon palette -->
           <div id="theme-arrow" class="absolute -top-2 right-3.5 sm:right-[68px] w-3.5 h-2 pointer-events-none z-20">
             <svg class="w-full h-full block" viewBox="0 0 14 8" fill="none">
@@ -126,7 +128,7 @@ class AppHeader extends HTMLElement {
 
           <!-- SUB-POPOVER CÔNG CỤ CHỌN MÀU (Ảnh 2) -->
           <div id="custom-color-popover"
-            class="hidden absolute top-3 left-3 right-3 z-60 bg-white dark:bg-[#18191c] p-4 rounded-xl border border-[#e7e1df] dark:border-[#2e3035] shadow-2xl flex flex-col gap-3.5">
+            class="hidden absolute top-3 left-3 right-3 z-[110] bg-white dark:bg-[#18191c] p-4 rounded-xl border border-[#e7e1df] dark:border-[#2e3035] shadow-2xl flex flex-col gap-3.5">
             <div class="flex items-center justify-between">
               <span class="font-bold text-sm text-[#1b1c1c] dark:text-white">Công cụ chọn màu</span>
               <button type="button" id="close-color-picker-btn"
@@ -967,7 +969,13 @@ class AppHeader extends HTMLElement {
     const closeUserMenuBtn = this.querySelector("#close-user-menu-btn");
     const customColorPopover = this.querySelector("#custom-color-popover");
 
+    const themeMenuContainer = this.querySelector("#theme-menu-container");
+
     const closeThemePopup = () => {
+      if (themeMenuContainer) {
+        themeMenuContainer.classList.remove("theme-menu-open");
+        themeMenuContainer.style.zIndex = "";
+      }
       if (themeDropdown) themeDropdown.classList.add("hidden");
       if (themeMenuBtn) {
         themeMenuBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
@@ -1096,7 +1104,9 @@ class AppHeader extends HTMLElement {
         accent: "#5865f2",
         accentHover: "#4752c4",
         pageBg: "#121315",
-        cardBg: "#1e1f22"
+        cardBg: "#1e1f22",
+        subtleBg: "#2b2d31",
+        border: "#35363c"
       },
       {
         id: "chrome_blue",
@@ -1276,7 +1286,9 @@ class AppHeader extends HTMLElement {
         accent: "#10b981",
         accentHover: "#059669",
         pageBg: "#0c1f17",
-        cardBg: "#132e23"
+        cardBg: "#132e23",
+        subtleBg: "#18382b",
+        border: "rgba(16,185,129,0.3)"
       },
       {
         id: "chrome_dark_navy",
@@ -1291,48 +1303,51 @@ class AppHeader extends HTMLElement {
         accent: "#38bdf8",
         accentHover: "#0284c7",
         pageBg: "#0f172a",
-        cardBg: "#1e293b"
+        cardBg: "#1e293b",
+        subtleBg: "#1e293b",
+        border: "rgba(56,189,248,0.3)"
       }
     ];
 
     let currentThemePreset = localStorage.getItem("ctu_theme_preset") || "default";
     let currentThemeHue = parseInt(localStorage.getItem("ctu_theme_custom_hue") || "145", 10);
 
-    const applyTheme = (presetId, customHue) => {
+    let themeSaveTimeout = null;
+
+    const applyTheme = (presetId, customHue, isDragging = false) => {
       let presetObj = null;
 
       if (presetId === "custom") {
         const hue = customHue !== undefined ? customHue : currentThemeHue;
         currentThemeHue = hue;
         currentThemePreset = "custom";
+        const topColor = `hsl(${hue}, 65%, 45%)`;
+        const pageBg = `hsl(${hue}, 55%, 95%)`;
+        const accent = `hsl(${hue}, 70%, 35%)`;
+        const accentHover = `hsl(${hue}, 70%, 28%)`;
+        const accentRing = `hsla(${hue}, 70%, 35%, 0.35)`;
         presetObj = {
           id: "custom",
           name: "Tùy chỉnh màu",
           isLight: true,
           hue: hue,
-          top: `hsl(${hue}, 65%, 45%)`,
-          bl: `hsl(${hue}, 55%, 95%)`,
-          br: `hsl(${hue}, 70%, 35%)`,
+          top: topColor,
+          bl: pageBg,
+          br: accent,
           headerText: "#ffffff",
           headerNavText: "rgba(255,255,255,0.85)",
           headerBorder: "rgba(255,255,255,0.2)",
-          accent: `hsl(${hue}, 70%, 35%)`,
-          accentHover: `hsl(${hue}, 70%, 28%)`,
-          accentRing: `hsla(${hue}, 70%, 35%, 0.35)`,
-          pageBg: `hsl(${hue}, 55%, 95%)`,
-          cardBg: "#ffffff"
+          accent: accent,
+          accentHover: accentHover,
+          accentRing: accentRing,
+          pageBg: pageBg,
+          cardBg: "#ffffff",
+          subtleBg: "#f6f3f2",
+          border: "#e7e1df"
         };
       } else {
         presetObj = themePresets.find((p) => p.id === String(presetId)) || themePresets[0];
         currentThemePreset = presetObj.id;
-      }
-
-      // Lưu trữ cấu hình theme
-      localStorage.setItem("ctu_theme_preset", currentThemePreset);
-      localStorage.setItem("ctu_theme_data", JSON.stringify(presetObj));
-      localStorage.setItem("ctu_theme_mode", presetObj.isLight ? "light" : "dark");
-      if (customHue !== undefined) {
-        localStorage.setItem("ctu_theme_custom_hue", currentThemeHue);
       }
 
       // Áp dụng class dark
@@ -1371,6 +1386,8 @@ class AppHeader extends HTMLElement {
 
       root.style.setProperty("--theme-bg-page", presetObj.pageBg);
       root.style.setProperty("--theme-bg-card", presetObj.cardBg);
+      root.style.setProperty("--theme-bg-subtle", presetObj.subtleBg || (presetObj.isLight ? "#f6f3f2" : "#2b2d31"));
+      root.style.setProperty("--theme-border", presetObj.border || (presetObj.isLight ? "#e7e1df" : "#35363c"));
 
       root.style.setProperty("--theme-accent", presetObj.accent);
       root.style.setProperty("--theme-accent-hover", presetObj.accentHover);
@@ -1384,11 +1401,35 @@ class AppHeader extends HTMLElement {
         root.style.setProperty("--slider-thumb-color", `hsl(${presetObj.hue}, 65%, 45%)`);
       }
 
-      updateThemeUI();
+      // Cập nhật nhanh màu nút custom khi đang kéo slider mà không hủy toàn bộ grid
+      const customBtn = themePresetsGrid ? themePresetsGrid.querySelector("#theme-custom-btn") : null;
+      if (customBtn && presetObj.id === "custom") {
+        customBtn.style.backgroundColor = `hsl(${presetObj.hue}, 65%, 45%)`;
+      }
+
+      const saveThemeToStorage = () => {
+        try {
+          localStorage.setItem("ctu_theme_preset", currentThemePreset);
+          localStorage.setItem("ctu_theme_data", JSON.stringify(presetObj));
+          localStorage.setItem("ctu_theme_mode", presetObj.isLight ? "light" : "dark");
+          if (customHue !== undefined) {
+            localStorage.setItem("ctu_theme_custom_hue", currentThemeHue);
+          }
+        } catch (e) {}
+      };
+
+      if (isDragging) {
+        if (themeSaveTimeout) clearTimeout(themeSaveTimeout);
+        themeSaveTimeout = setTimeout(saveThemeToStorage, 150);
+      } else {
+        if (themeSaveTimeout) clearTimeout(themeSaveTimeout);
+        saveThemeToStorage();
+        updateThemeUI(false);
+      }
     };
 
-    const updateThemeUI = () => {
-      if (hueSlider) {
+    const updateThemeUI = (updateSliderValue = true) => {
+      if (hueSlider && updateSliderValue && document.activeElement !== hueSlider) {
         hueSlider.value = currentThemeHue;
       }
 
@@ -1472,12 +1513,24 @@ class AppHeader extends HTMLElement {
       applyTheme(currentThemePreset, currentThemeHue);
     }
 
-    // Hue Slider
+    // Hue Slider - Cho phép kéo liên tục không bị gián đoạn hay mất nét
     if (hueSlider) {
+      hueSlider.addEventListener("mousedown", (e) => e.stopPropagation());
+      hueSlider.addEventListener("pointerdown", (e) => e.stopPropagation());
+      hueSlider.addEventListener("touchstart", (e) => e.stopPropagation(), { passive: true });
+
       hueSlider.addEventListener("input", (e) => {
+        e.stopPropagation();
         const val = parseInt(e.target.value, 10);
         currentThemeHue = val;
-        applyTheme("custom", val);
+        applyTheme("custom", val, true);
+      });
+
+      hueSlider.addEventListener("change", (e) => {
+        e.stopPropagation();
+        const val = parseInt(e.target.value, 10);
+        currentThemeHue = val;
+        applyTheme("custom", val, false);
       });
     }
 
@@ -1629,6 +1682,10 @@ class AppHeader extends HTMLElement {
         }
 
         if (isHidden) {
+          if (themeMenuContainer) {
+            themeMenuContainer.classList.add("theme-menu-open");
+            themeMenuContainer.style.zIndex = "100";
+          }
           themeDropdown.classList.remove("hidden");
           themeMenuBtn.classList.add("ring-2", "ring-[#35483d]/20", "bg-stone-200");
         } else {
@@ -1827,6 +1884,13 @@ class AppHeader extends HTMLElement {
     });
 
     document.addEventListener("click", (e) => {
+      // Nếu click vào bên ngoài themeDropdown (kể cả khi popup notif đang mở rộng) thì đóng themeDropdown
+      if (themeDropdown && !themeDropdown.classList.contains("hidden")) {
+        if (!themeDropdown.contains(e.target) && !themeMenuBtn.contains(e.target)) {
+          closeThemePopup();
+        }
+      }
+
       if (!this.contains(e.target)) {
         if (userMenuDropdown && !userMenuDropdown.style.position) {
           closeUserMenuPopup();

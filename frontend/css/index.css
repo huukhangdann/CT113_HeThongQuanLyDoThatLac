@@ -549,14 +549,32 @@ html.dark #switch-account-btn:hover {
   background-color: #2b2d31 !important;
 }
 
+#theme-menu-container.theme-menu-open {
+  z-index: 100 !important;
+}
+
 #theme-dropdown {
   background-color: var(--theme-bg-card, #ffffff) !important;
   border-color: var(--theme-border, #e7e1df) !important;
+  z-index: 100 !important;
 }
 
 html.dark #theme-dropdown {
-  background-color: #1e1f22 !important;
-  border-color: #35363c !important;
+  background-color: var(--theme-bg-card, #1e1f22) !important;
+  border-color: var(--theme-border, #35363c) !important;
+  z-index: 100 !important;
+}
+
+#custom-color-popover {
+  background-color: var(--theme-bg-card, #ffffff) !important;
+  border-color: var(--theme-border, #e7e1df) !important;
+  z-index: 110 !important;
+}
+
+html.dark #custom-color-popover {
+  background-color: var(--theme-bg-card, #18191c) !important;
+  border-color: var(--theme-border, #2e3035) !important;
+  z-index: 110 !important;
 }
 
 /* ==============================================================
@@ -581,6 +599,9 @@ html.dark #theme-dropdown {
       #ff0000 100%);
   outline: none;
   cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .rainbow-slider::-webkit-slider-thumb {
@@ -877,8 +898,8 @@ html.dark .honor-board-title {
 }
 
 html.dark .honor-card {
-  background: #16241a;
-  border-color: #283d2c;
+  background: var(--theme-bg-card, #1e1f22) !important;
+  border-color: var(--theme-border, #35363c) !important;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
 }
 
@@ -1054,4 +1075,141 @@ html.dark .honor-success-num {
 
 html.dark .honor-success-label {
   color: #94a3b8;
+}
+/* ==============================================================
+   HOMEPAGE CARDS DARK THEME SYNCHRONIZATION
+   ============================================================== */
+
+/* 1. Card Báo mất đồ (Hero Action Right Card) */
+html.dark .group\/right {
+  background-color: var(--theme-bg-card, #1e1f22) !important;
+  border-color: var(--theme-border, #35363c) !important;
+  color: var(--theme-text-main, #f2f3f5) !important;
+}
+
+html.dark .group\/right:hover {
+  background-color: var(--theme-bg-subtle, #282a2e) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.dark .group\/right h2 {
+  color: var(--theme-text-main, #f2f3f5) !important;
+}
+
+html.dark .group\/right .bg-white {
+  background-color: var(--theme-bg-subtle, #242529) !important;
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark .group\/right .bg-\[\#FAF8F3\],
+html.dark .group\/right .bg-\[\#FAF8F5\] {
+  background-color: var(--theme-bg-card, #1e1f22) !important;
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark .group\/right .border-stone-border {
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark .group\/right .border-t-2 {
+  border-top-color: var(--theme-accent, #5865f2) !important;
+}
+
+/* 2. Card Đăng tin nhặt đồ (Hero Action Left Card) */
+html.dark .group\/left {
+  border-color: var(--theme-border, #223327) !important;
+}
+
+/* 3. Section Bài đăng gần đây */
+html.dark section.bg-\[\#FAF8F5\] {
+  background-color: var(--theme-bg-card, #18191c) !important;
+  border: 1px solid var(--theme-border, #35363c) !important;
+}
+
+html.dark section.bg-\[\#FAF8F5\] > div.border-b {
+  border-bottom-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark section.bg-\[\#FAF8F5\] h2 {
+  color: var(--theme-text-main, #f2f3f5) !important;
+}
+
+html.dark #home-sort-select {
+  background-color: var(--theme-bg-subtle, #2b2d31) !important;
+  color: var(--theme-text-main, #f2f3f5) !important;
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+/* 4. Các Card Bài đăng gần đây (#recent-posts-grid article) */
+html.dark #recent-posts-grid article,
+html.dark article.group {
+  background-color: var(--theme-bg-card, #1e1f22) !important;
+  border: 1px solid var(--theme-border, #35363c) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark #recent-posts-grid article:hover,
+html.dark article.group:hover {
+  background-color: var(--theme-bg-subtle, #2b2d31) !important;
+  border-color: var(--theme-accent, #5865f2) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.dark #recent-posts-grid article h3 {
+  color: var(--theme-text-main, #f2f3f5) !important;
+}
+
+html.dark #recent-posts-grid article p {
+  color: var(--theme-text-muted, #949ba4) !important;
+}
+
+html.dark #recent-posts-grid article .bg-stone-200 {
+  background-color: var(--theme-bg-subtle, #2b2d31) !important;
+}
+
+html.dark #recent-posts-grid article .border-stone-border\/70,
+html.dark #recent-posts-grid article .border-stone-border {
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark #recent-posts-grid article span.text-warm-gray {
+  color: var(--theme-text-muted, #949ba4) !important;
+}
+
+html.dark #recent-posts-grid article a {
+  color: var(--theme-accent, #5865f2) !important;
+}
+
+/* 5. Nút Xem thêm */
+html.dark #btn-load-more {
+  background-color: var(--theme-bg-subtle, #2b2d31) !important;
+  color: var(--theme-text-main, #f2f3f5) !important;
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark #btn-load-more:hover {
+  background-color: var(--theme-accent, #5865f2) !important;
+  color: #ffffff !important;
+}
+
+/* 6. Bảng vinh danh */
+html.dark .honor-board-wrapper {
+  background: var(--theme-bg-card, #18191c) !important;
+  border-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark .honor-board-wrapper > div.border-b {
+  border-bottom-color: var(--theme-border, #35363c) !important;
+}
+
+html.dark .honor-name {
+  color: var(--theme-text-main, #f2f3f5) !important;
+}
+
+html.dark .honor-faculty {
+  color: var(--theme-text-muted, #949ba4) !important;
+}
+
+html.dark .honor-bottom-row .honor-success-label {
+  color: var(--theme-text-muted, #949ba4) !important;
 }
