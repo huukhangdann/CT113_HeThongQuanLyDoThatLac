@@ -541,6 +541,23 @@ html.dark #switch-account-btn {
   color: #ffffff !important;
 }
 
+/* Đảm bảo tiêu đề và chữ trong các dropdown của header luôn đúng độ tương phản theo theme */
+html:not(.dark) #user-menu-dropdown h3,
+html:not(.dark) #user-menu-dropdown #switch-account-btn span,
+html:not(.dark) #notif-dropdown h3,
+html:not(.dark) #theme-dropdown h3,
+html:not(.dark) #custom-color-popover span {
+  color: #1b1c1c !important;
+}
+
+html.dark #user-menu-dropdown h3,
+html.dark #user-menu-dropdown #switch-account-btn span,
+html.dark #notif-dropdown h3,
+html.dark #theme-dropdown h3,
+html.dark #custom-color-popover span {
+  color: #ffffff !important;
+}
+
 #switch-account-btn:hover {
   background-color: var(--theme-bg-subtle, #f6f3f2) !important;
 }
