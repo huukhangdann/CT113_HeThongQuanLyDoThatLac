@@ -1,0 +1,1784 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Điều Khiển Quản Trị Hệ Thống — CTU Lost & Found</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            ivory: "#F7F6F2",
+            "deep-sage": "#35483D",
+            "soft-black": "#242424",
+            "warm-gray": "#777771",
+            "stone-border": "#E6E4DE",
+          },
+          fontFamily: {
+            vietnam: ["'Be Vietnam Pro'", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      background-color: var(--theme-bg-page, #f7f6f2);
+      color: #242424;
+      font-family: "Be Vietnam Pro", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 350,
+        "GRAD" 0,
+        "opsz" 24;
+    }
+
+    /* Tab switcher chuẩn Minimalist */
+    .tab-btn-active {
+      background-color: var(--theme-accent, #35483d) !important;
+      color: #ffffff !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Sub-filter pill active */
+    .subfilter-active {
+      background-color: var(--theme-accent, #35483d) !important;
+      color: #ffffff !important;
+      border-color: var(--theme-accent, #35483d) !important;
+    }
+
+    /* Print styles dành riêng cho in file điểm */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+      #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 24px;
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/items-data.js"></script>
+  <script src="../js/components.js"></script>
+</head>
+
+<body class="bg-ivory dark:bg-[#121316] text-soft-black dark:text-stone-100 min-h-screen flex flex-col selection:bg-stone-200 dark:selection:bg-stone-800">
+
+  <!-- Header của hệ thống (Đã cấu hình chỉ hiển thị đúng 2 tab: Quản lý bài đăng & Quản lý tài khoản) -->
+  <app-header class="no-print"></app-header>
+
+  <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-8 space-y-6 no-print">
+
+    <!-- 1. BREADCRUMB & HEADER QUẢN TRỊ -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
+      <div>
+        <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#797675] dark:text-stone-400">
+          <span>Hệ thống CTU Lost &amp; Found</span>
+          <span>•</span>
+          <span class="inline-flex items-center gap-1 text-stone-800 dark:text-stone-200 bg-stone-100 dark:bg-stone-800 px-2 py-0.5 rounded-md border border-stone-200 dark:border-stone-700 font-bold">
+            <span class="material-symbols-outlined text-[15px] text-amber-500">shield_person</span>
+            Quản trị viên (admin991)
+          </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1b1c1c] dark:text-white mt-1.5">
+          Bảng Điều Khiển Quản Trị Hệ Thống
+        </h1>
+        <p class="text-xs sm:text-sm text-[#797675] dark:text-stone-400 mt-1">
+          Giám sát bài đăng, xử lý báo cáo vi phạm, quản lý bài đăng bị ẩn và theo dõi điểm vinh danh sinh viên CTU.
+        </p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <button type="button" onclick="refreshAdminData();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/60 text-[#1b1c1c] dark:text-white shadow-2xs transition-colors cursor-pointer" title="Đồng bộ dữ liệu">
+          <span class="material-symbols-outlined text-[18px]">sync</span>
+          <span>Làm mới</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. BENTO KPI METRICS GRID (Thiết kế tối giản, đồng bộ tinh tế, không chói mắt) -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+      
+      <!-- Card 1: Tổng số bài đăng -->
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('all');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Tổng bài đăng</span>
+          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#1b1c1c] dark:text-white group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-total-posts">0</div>
+          <div class="text-[11px] text-[#797675] dark:text-stone-400 mt-1 flex items-center gap-1">
+            <span>Toàn hệ thống Trường ĐH Cần Thơ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Bài đăng bị báo cáo (Click vào để mở thẳng danh sách bị báo cáo) -->
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('reported');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-rose-400 dark:hover:border-rose-700 hover:shadow-sm cursor-pointer group">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài bị báo cáo</span>
+          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-rose-600 dark:text-rose-400 group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[20px]">flag</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-reported-posts">0</div>
+          <div class="text-[11px] text-rose-600 dark:text-rose-400 font-semibold mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">report</span>
+            <span>Bấm để xem &amp; xử lý ngay</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Bài đăng đang ẩn (Click vào để mở thẳng danh sách bài bị ẩn) -->
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('hidden');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-amber-400 dark:hover:border-amber-700 hover:shadow-sm cursor-pointer group">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài đăng đã ẩn</span>
+          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#797675] dark:text-stone-400 group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[20px]">visibility_off</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-hidden-posts">0</div>
+          <div class="text-[11px] text-[#797675] dark:text-stone-400 mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">lock</span>
+            <span>Không hiển thị ra công khai</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Tổng tài khoản & Điểm vinh danh -->
+      <div onclick="switchAdminTab('accounts');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Tài khoản người dùng</span>
+          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#35483d] dark:text-emerald-400 group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[20px]">workspace_premium</span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-total-accounts">0</div>
+          <div class="text-[11px] text-[#797675] dark:text-stone-400 mt-1 flex items-center gap-1">
+            <span>Điểm cao nhất: <strong class="text-emerald-600 dark:text-emerald-400" id="stat-top-score">24 điểm</strong> (Bảng vinh danh)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. MAIN TAB SWITCHER (Đồng bộ với Header: Quản lý bài đăng & Quản lý tài khoản) -->
+    <div class="flex items-center justify-between gap-3 border-b border-stone-200 dark:border-stone-800 pt-1">
+      <div class="inline-flex p-1 bg-stone-100 dark:bg-stone-800/90 rounded-xl" role="tablist">
+        
+        <!-- Tab 1 Button: Quản lý bài đăng -->
+        <button type="button" id="tab-btn-posts" onclick="switchAdminTab('posts');" role="tab" aria-selected="true" class="tab-btn-active px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">article</span>
+          <span>Quản lý bài đăng</span>
+          <span id="tab-badge-posts" class="px-2 py-0.5 text-[11px] font-mono font-bold rounded-full bg-stone-200 dark:bg-stone-700 text-[#1b1c1c] dark:text-white">0</span>
+        </button>
+
+        <!-- Tab 2 Button: Quản lý tài khoản -->
+        <button type="button" id="tab-btn-accounts" onclick="switchAdminTab('accounts');" role="tab" aria-selected="false" class="px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4a4746] dark:text-stone-300 hover:text-[#1b1c1c] dark:hover:text-white flex items-center gap-2 transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">manage_accounts</span>
+          <span>Quản lý tài khoản</span>
+          <span id="tab-badge-accounts" class="px-2 py-0.5 text-[11px] font-mono font-semibold rounded-full bg-stone-200 dark:bg-stone-700 text-[#1b1c1c] dark:text-white">0</span>
+        </button>
+
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- PHÂN HỆ 1: QUẢN LÝ BÀI ĐĂNG (POST MANAGEMENT TAB)                         -->
+    <!-- ========================================================================= -->
+    <section id="tab-content-posts" class="space-y-4">
+      
+      <!-- Thanh chuyển đổi xem nhanh các nhóm bài đăng (Sub-filters) -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#18191c] p-3 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs">
+        
+        <!-- Các nút lọc nhóm trạng thái -->
+        <div class="flex flex-wrap items-center gap-1.5" id="subfilter-container">
+          <button type="button" onclick="setPostSubFilter('all');" id="subfilter-all" class="subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
+            Tất cả (<span id="count-all">0</span>)
+          </button>
+          <button type="button" onclick="setPostSubFilter('active');" id="subfilter-active" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
+            Đang công khai (<span id="count-active">0</span>)
+          </button>
+          <button type="button" onclick="setPostSubFilter('reported');" id="subfilter-reported" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-all cursor-pointer flex items-center gap-1">
+            <span class="material-symbols-outlined text-[15px]">flag</span>
+            <span>Bị báo cáo (<span id="count-reported">0</span>)</span>
+          </button>
+          <button type="button" onclick="setPostSubFilter('hidden');" id="subfilter-hidden" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1">
+            <span class="material-symbols-outlined text-[15px]">visibility_off</span>
+            <span>Đã bị ẩn (<span id="count-hidden">0</span>)</span>
+          </button>
+          <button type="button" onclick="setPostSubFilter('returned');" id="subfilter-returned" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
+            Đã trao trả (<span id="count-returned">0</span>)
+          </button>
+        </div>
+
+        <!-- Ô tìm kiếm bài đăng tức thời -->
+        <div class="relative w-full sm:w-72">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#797675] dark:text-stone-400">search</span>
+          <input type="text" id="post-search-input" oninput="filterPosts();" placeholder="Tìm tên đồ vật, mã tin, người đăng..." class="w-full pl-9 pr-8 py-1.5 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white placeholder:text-[#797675]/70 focus:outline-none focus:ring-1 focus:ring-[#35483d] transition-all">
+          <button type="button" onclick="document.getElementById('post-search-input').value=''; filterPosts();" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white cursor-pointer">
+            <span class="material-symbols-outlined text-[15px]">close</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bảng danh sách bài đăng trên Desktop -->
+      <div class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
+                <th class="py-3 px-4 w-24">Mã tin</th>
+                <th class="py-3 px-4 w-16 text-center">Ảnh</th>
+                <th class="py-3 px-4 min-w-[220px]">Tên món đồ &amp; Danh mục</th>
+                <th class="py-3 px-4 w-28">Phân loại</th>
+                <th class="py-3 px-4 min-w-[150px]">Người đăng</th>
+                <th class="py-3 px-4 min-w-[150px]">Địa điểm</th>
+                <th class="py-3 px-4 w-32">Trạng thái</th>
+                <th class="py-3 px-4 w-40 text-right">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="posts-table-body" class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
+              <!-- Render động bằng JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Trạng thái trống (Empty State) -->
+        <div id="posts-empty-state" class="hidden p-12 text-center">
+          <div class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-[24px]">inbox</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không có bài đăng nào trong mục này</h3>
+          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Danh sách hiện tại trống hoặc từ khóa tìm kiếm không khớp.</p>
+        </div>
+      </div>
+
+      <!-- Danh sách bài đăng trên Mobile (Card List) -->
+      <div id="posts-mobile-list" class="block md:hidden space-y-3">
+        <!-- Render động cho mobile -->
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- PHÂN HỆ 2: QUẢN LÝ TÀI KHOẢN (ACCOUNT & SCORE MANAGEMENT TAB)             -->
+    <!-- ========================================================================= -->
+    <section id="tab-content-accounts" class="hidden space-y-4">
+      
+      <!-- Toolbar: Search + Sort by score + Print score report + Add Account -->
+      <div class="bg-white dark:bg-[#18191c] p-4 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+        
+        <!-- Ô tìm kiếm tài khoản -->
+        <div class="relative flex-1 min-w-[220px]">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#797675] dark:text-stone-400">person_search</span>
+          <input type="text" id="account-search-input" oninput="filterAccounts();" placeholder="Tìm theo MSSV, Họ tên, Email, Khoa..." class="w-full pl-9 pr-8 py-2 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white placeholder:text-[#797675]/70 focus:outline-none focus:ring-1 focus:ring-[#35483d] transition-all">
+          <button type="button" onclick="document.getElementById('account-search-input').value=''; filterAccounts();" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white cursor-pointer">
+            <span class="material-symbols-outlined text-[15px]">close</span>
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          
+          <!-- SẮP XẾP ĐIỂM (Cao / Thấp) -->
+          <div class="flex items-center gap-1.5 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 px-3 py-1.5 rounded-xl">
+            <span class="material-symbols-outlined text-[16px] text-[#797675] dark:text-stone-400">swap_vert</span>
+            <select id="account-sort-score" onchange="filterAccounts();" class="text-xs bg-transparent text-[#1b1c1c] dark:text-white focus:outline-none cursor-pointer font-semibold">
+              <option value="desc">Điểm: Cao đến thấp</option>
+              <option value="asc">Điểm: Thấp đến cao</option>
+            </select>
+          </div>
+
+          <!-- Lọc theo Mức điểm -->
+          <select id="account-filter-score-tier" onchange="filterAccounts();" class="px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white focus:outline-none cursor-pointer">
+            <option value="all">Tất cả mức điểm</option>
+            <option value="top">Từ 15 điểm trở lên</option>
+            <option value="high">Từ 10 - 14 điểm</option>
+            <option value="mid">Từ 5 - 9 điểm</option>
+            <option value="low">Dưới 5 điểm</option>
+          </select>
+
+          <!-- NÚT IN FILE ĐIỂM (Yêu cầu chính của User) -->
+          <button type="button" onclick="openPrintScoreModal();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white shadow-2xs transition-colors cursor-pointer" title="In danh sách điểm người dùng">
+            <span class="material-symbols-outlined text-[18px]">print</span>
+            <span>In file điểm</span>
+          </button>
+
+          <!-- Nút Thêm tài khoản mới -->
+          <button type="button" onclick="openAddAccountModal();" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+            <span>Thêm</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Bảng tài khoản & Điểm người dùng Desktop -->
+      <div class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
+                <th class="py-3 px-4 min-w-[200px]">Sinh viên / Cán bộ</th>
+                <th class="py-3 px-4 min-w-[170px]">Đơn vị / Khoa</th>
+                <th class="py-3 px-4 min-w-[190px]">Email &amp; SĐT</th>
+                <th class="py-3 px-4 w-28 text-center">Điểm</th>
+                <th class="py-3 px-4 w-28 text-center">Đồ đã trả</th>
+                <th class="py-3 px-4 w-32">Trạng thái</th>
+                <th class="py-3 px-4 w-36 text-right">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="accounts-table-body" class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
+              <!-- Render động bằng JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div id="accounts-empty-state" class="hidden p-12 text-center">
+          <div class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-[24px]">person_off</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không tìm thấy tài khoản nào</h3>
+          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Vui lòng điều chỉnh lại bộ lọc điểm hoặc từ khóa tìm kiếm.</p>
+        </div>
+      </div>
+
+      <!-- Danh sách tài khoản Mobile -->
+      <div id="accounts-mobile-list" class="block md:hidden space-y-3">
+        <!-- Render động cho mobile -->
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL XỬ LÝ ẨN BÀI ĐĂNG (HIDE POST CONFIRMATION)                          -->
+  <!-- ========================================================================= -->
+  <div id="modal-hide-post" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-md w-full p-5 sm:p-6 text-left space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-[22px]">visibility_off</span>
+        </div>
+        <div>
+          <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Ẩn bài đăng khỏi hệ thống</h3>
+          <p class="text-xs text-[#797675] dark:text-stone-400" id="hide-post-code">Mã tin: #POST</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-[#4a4746] dark:text-stone-300">
+        Bài đăng này sẽ không còn hiển thị với người dùng trên trang chủ và tìm kiếm. Bạn có thể mở lại bài đăng bất cứ lúc nào trong mục <strong>"Đã bị ẩn"</strong>.
+      </p>
+
+      <div class="space-y-1.5">
+        <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-300">
+          Lý do ẩn bài đăng:
+        </label>
+        <select id="hide-reason-select" class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+          <option value="Bài đăng có dấu hiệu gian lận / thông tin sai lệch">Có dấu hiệu gian lận / thông tin sai lệch</option>
+          <option value="Người đăng yêu cầu tạm ẩn bài">Người đăng yêu cầu tạm ẩn bài</option>
+          <option value="Bài đăng chứa hình ảnh hoặc nội dung không phù hợp">Chứa hình ảnh hoặc nội dung không phù hợp</option>
+          <option value="Nội dung vi phạm quy định diễn đàn CTU Lost & Found">Vi phạm quy định diễn đàn</option>
+        </select>
+      </div>
+
+      <div class="pt-2 flex items-center justify-end gap-2 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closeHidePostModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 dark:bg-stone-800 text-[#1b1c1c] dark:text-white hover:bg-stone-200 transition-colors cursor-pointer">
+          Hủy bỏ
+        </button>
+        <button type="button" onclick="confirmHidePost();" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white transition-colors cursor-pointer">
+          Xác nhận ẩn bài
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL XEM CHI TIẾT & BÁO CÁO BÀI ĐĂNG (POST & REPORT DETAIL MODAL)        -->
+  <!-- ========================================================================= -->
+  <div id="modal-post-detail" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-6 text-left space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[22px] text-[#35483d] dark:text-emerald-400">info</span>
+          <h3 class="font-bold text-base sm:text-lg text-[#1b1c1c] dark:text-white" id="modal-post-title">Chi tiết bài đăng</h3>
+        </div>
+        <button type="button" onclick="closePostDetailModal();" class="w-8 h-8 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div id="modal-post-content" class="space-y-4 text-xs sm:text-sm">
+        <!-- Đổ dữ liệu động -->
+      </div>
+
+      <div class="pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between gap-2.5">
+        <div id="modal-post-left-actions" class="flex items-center gap-2">
+          <!-- Nút thao tác nhanh theo trạng thái -->
+        </div>
+        <button type="button" onclick="closePostDetailModal();" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL XEM TRƯỚC BẢN IN FILE ĐIỂM (PRINT SCORE PREVIEW MODAL)              -->
+  <!-- ========================================================================= -->
+  <div id="modal-print-score" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-2xs no-print">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden text-left">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between shrink-0 bg-stone-50 dark:bg-stone-900/60">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[22px] text-[#35483d] dark:text-emerald-400">print</span>
+          <div>
+            <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Bản In Điểm Người Dùng (Bảng Vinh Danh)</h3>
+            <p class="text-xs text-[#797675] dark:text-stone-400">Xem trước văn bản trước khi in hoặc xuất tệp</p>
+          </div>
+        </div>
+        <button type="button" onclick="closePrintScoreModal();" class="w-8 h-8 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800 flex items-center justify-center transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <!-- Printable Document Canvas -->
+      <div class="flex-1 overflow-y-auto p-6 sm:p-8 bg-stone-100 dark:bg-stone-950/40">
+        <div id="print-sheet" class="bg-white text-black p-8 sm:p-10 rounded-xl shadow-md border border-stone-200 mx-auto max-w-[800px] text-xs leading-relaxed space-y-6">
+          
+          <!-- Quốc hiệu / Đơn vị -->
+          <div class="flex items-start justify-between border-b pb-4 border-stone-300">
+            <div class="text-center font-serif">
+              <p class="text-[11px] font-bold tracking-tight">TRƯỜNG ĐẠI HỌC CẦN THƠ</p>
+              <p class="text-[11px] font-semibold text-stone-700">PHÒNG CÔNG TÁC SINH VIÊN</p>
+              <p class="text-[10px] text-stone-500 mt-0.5">Số: ....../TB-PCTSV-2026</p>
+            </div>
+            <div class="text-center font-serif">
+              <p class="text-[11px] font-bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+              <p class="text-[10px] font-semibold text-stone-700">Độc lập - Tự do - Hạnh phúc</p>
+              <p class="text-[10px] text-stone-400 mt-0.5">---------------------</p>
+            </div>
+          </div>
+
+          <!-- Tiêu đề văn bản -->
+          <div class="text-center py-2">
+            <h2 class="text-base sm:text-lg font-bold uppercase tracking-tight text-stone-900 font-serif">
+              BẢNG TỔNG HỢP ĐIỂM NGƯỜI DÙNG (BẢNG VINH DANH)
+            </h2>
+            <p class="text-[11px] text-stone-600 mt-1 italic" id="print-sheet-date">
+              Cập nhật ngày 09 tháng 11 năm 2026 • Hệ thống CTU Lost &amp; Found
+            </p>
+          </div>
+
+          <!-- Bảng số liệu chi tiết -->
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-stone-300 text-[11px]">
+              <thead>
+                <tr class="bg-stone-100 text-stone-800 font-bold border-b border-stone-300 text-center">
+                  <th class="border border-stone-300 py-2 px-2 w-10">STT</th>
+                  <th class="border border-stone-300 py-2 px-3 text-left">MSSV / Mã</th>
+                  <th class="border border-stone-300 py-2 px-3 text-left">Họ và tên</th>
+                  <th class="border border-stone-300 py-2 px-3 text-left">Đơn vị / Khoa</th>
+                  <th class="border border-stone-300 py-2 px-2">Đồ đã trả</th>
+                  <th class="border border-stone-300 py-2 px-2">Điểm</th>
+                </tr>
+              </thead>
+              <tbody id="print-table-rows" class="divide-y divide-stone-200">
+                <!-- Đổ danh sách sinh viên động -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Chữ ký xác nhận -->
+          <div class="pt-6 grid grid-cols-2 text-center text-[11px] font-serif">
+            <div>
+              <p class="font-bold">NGƯỜI LẬP BIỂU</p>
+              <p class="text-[10px] text-stone-500 mt-1">(Ký và ghi rõ họ tên)</p>
+              <div class="h-16"></div>
+              <p class="font-semibold text-stone-800">Quản trị viên (admin991)</p>
+            </div>
+            <div>
+              <p class="font-bold">TRƯỞNG PHÒNG CÔNG TÁC SINH VIÊN</p>
+              <p class="text-[10px] text-stone-500 mt-1">(Ký, đóng dấu)</p>
+              <div class="h-16"></div>
+              <p class="font-semibold text-stone-800">TS. Trần Văn Hùng</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modal Footer with action buttons -->
+      <div class="px-6 py-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between shrink-0 bg-stone-50 dark:bg-stone-900/60">
+        <button type="button" onclick="closePrintScoreModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+          Đóng
+        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="exportScoreCSV();" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-[#1b1c1c] dark:text-white hover:bg-stone-100 transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">file_download</span>
+            <span>Tải file Excel / CSV</span>
+          </button>
+          <button type="button" onclick="triggerNativePrint();" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white shadow-sm transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">print</span>
+            <span>In ngay (Print / PDF)</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL THÊM TÀI KHOẢN MỚI                                                  -->
+  <!-- ========================================================================= -->
+  <div id="modal-add-account" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-lg w-full p-5 sm:p-6 text-left space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800">
+        <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white flex items-center gap-2">
+          <span class="material-symbols-outlined text-[20px] text-[#35483d] dark:text-emerald-400">person_add</span>
+          Thêm tài khoản người dùng
+        </h3>
+        <button type="button" onclick="closeAddAccountModal();" class="w-7 h-7 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <form id="add-account-form" onsubmit="event.preventDefault(); submitNewAccount();" class="space-y-3 text-xs sm:text-sm">
+        <div>
+          <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Họ và tên *</label>
+          <input type="text" id="new-acc-name" required placeholder="VD: Nguyễn Văn An" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Mã định danh (MSSV/CB) *</label>
+            <input type="text" id="new-acc-id" required placeholder="VD: B2301234" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Điểm khởi tạo</label>
+            <input type="number" id="new-acc-score" value="10" min="0" max="100" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none font-mono">
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Đơn vị / Khoa</label>
+          <input type="text" id="new-acc-dept" placeholder="VD: Khoa Công nghệ Thông tin & Truyền thông" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Email CTU</label>
+            <input type="email" id="new-acc-email" placeholder="anb2301234@student.ctu.edu.vn" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Số điện thoại</label>
+            <input type="text" id="new-acc-phone" placeholder="09xxxxxxxx" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+          </div>
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-2 border-t border-stone-100 dark:border-stone-800">
+          <button type="button" onclick="closeAddAccountModal();" class="px-4 py-2 rounded-xl font-semibold bg-stone-100 dark:bg-stone-800 text-[#1b1c1c] dark:text-white hover:bg-stone-200 transition-colors cursor-pointer">
+            Hủy
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-xl font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
+            Lưu tài khoản
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- TOAST NOTIFICATION CONTAINER (UI/UX Pro Max) -->
+  <div id="toast-container" class="fixed top-5 right-5 z-[150] flex flex-col gap-2.5 pointer-events-none no-print"></div>
+
+  <!-- BẢN IN NGUYÊN BẢN (Dành cho print engine) -->
+  <div id="print-area" class="hidden"></div>
+
+  <!-- Footer chuẩn dự án -->
+  <app-footer class="no-print"></app-footer>
+
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC DÀNH CHO TRANG QUẢN TRỊ VIÊN                            -->
+  <!-- ========================================================================= -->
+  <script>
+    // -----------------------------------------------------------------------
+    // 1. DỮ LIỆU BAN ĐẦU: KHÔNG CẦN DUYỆT - HỖ TRỢ BÁO CÁO & ẨN BÀI ĐĂNG
+    // -----------------------------------------------------------------------
+    const INITIAL_POSTS = [
+      {
+        id: "POST-101",
+        title: "Ví da màu đen",
+        category: "Ví tiền / Bóp da",
+        type: "found",
+        reporterName: "Phan Minh Khang",
+        reporterId: "B2404991",
+        location: "Nhà học C1, Tầng 2",
+        time: "Hôm nay, 09:30",
+        status: "active", // active | reported | hidden | returned
+        storage: "Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành C1",
+        photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y",
+        note: "Nhặt được tại dãy bàn tự học Tầng 2 Nhà học C1. Bên trong có thẻ sinh viên và giấy tờ tùy thân.",
+        question: "Mã số in trên thẻ sinh viên hoặc tên giấy tờ kẹp trong ví là gì?"
+      },
+      {
+        id: "POST-102",
+        title: "Bình nước giữ nhiệt Lock&Lock",
+        category: "Đồ dùng cá nhân",
+        type: "found",
+        reporterName: "Lê Hoàng Nam",
+        reporterId: "B2105432",
+        location: "Thư viện Trung tâm",
+        time: "Hôm nay, 08:15",
+        status: "active",
+        storage: "Bàn trực tiếp tân - Tầng trệt Thư viện Trung tâm",
+        photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo",
+        note: "Bỏ quên tại Tầng 3 Thư viện. Bình còn rất mới, màu xanh pastel có dán sticker mèo CTU.",
+        question: "Thương hiệu của bình nước hoặc sticker nhận dạng là gì?"
+      },
+      {
+        id: "POST-103",
+        title: "Tai nghe AirPods Pro 2",
+        category: "Thiết bị điện tử",
+        type: "lost",
+        reporterName: "Nguyễn Thị Mai",
+        reporterId: "B2203112",
+        location: "Hội trường Rùa",
+        time: "Hôm qua, 17:20",
+        status: "reported", // BÀI ĐĂNG BỊ BÁO CÁO
+        reportReason: "Có dấu hiệu đòi phí chuộc cao bất thường và không cung cấp đúng bằng chứng sở hữu",
+        reportCount: 3,
+        reportedBy: "Sinh viên B2108899 & 2 người khác",
+        storage: "Đang yêu cầu giải trình",
+        photo: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=800&q=80",
+        note: "Mình làm rơi hộp tai nghe trong buổi sinh hoạt đầu khóa tại Hội trường Rùa. Vỏ nhám đen Spigen có vết xước nhỏ ở góc.",
+        question: "Tên Bluetooth kết nối với AirPods là gì?"
+      },
+      {
+        id: "POST-104",
+        title: "Chìa khóa xe Honda Smartkey",
+        category: "Chìa khóa / Thẻ xe",
+        type: "found",
+        reporterName: "Chú Năm (Bảo vệ)",
+        reporterId: "BV004",
+        location: "Bãi xe Cổng A (Đường 3/2)",
+        time: "Hôm qua, 11:30",
+        status: "active",
+        storage: "Chốt bảo vệ Bãi xe Cổng A",
+        photo: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=800&q=80",
+        note: "Nhặt được ở khu vực để xe sinh viên dãy E. Khóa bọc silicon đen, kèm móc khóa gấu bông nhỏ.",
+        question: "Biển số xe tương ứng hoặc loại gấu bông móc kèm là gì?"
+      },
+      {
+        id: "POST-105",
+        title: "Ô dù gấp xanh navy",
+        category: "Đồ dùng cá nhân",
+        type: "found",
+        reporterName: "Trần Quốc Bảo",
+        reporterId: "B2301982",
+        location: "Hội trường Rùa",
+        time: "Hôm qua, 16:45",
+        status: "returned", // ĐÃ TRAO TRẢ
+        storage: "Văn phòng Đoàn Thanh niên - Hội Sinh viên",
+        photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCpdOuyKsYtvg9mAaVicAmfVTVepKtUBgVUHlvsIx1a6Pl5bcWe5Sy4ZslVX1Ya_XFiHra5FJF1LfhCMblxZgkU9xCtxZh03d_rxMaObOG70tNrNyjQUeOD705F_hW2JRkKd2UAlj32OrS5hwtcXy9JmNKZCqX_MJ8_hlQpEO2VZkfjtuDz3DIfABZFGS5xGQTgqfTxjqw7eBRmyyX3EIFIeO0YyLxmw6d_NkT-V9P2UoEZsKBjr_en",
+        note: "Đã bàn giao lại cho bạn Thúy Vy (B2309876) sau khi đối chiếu ảnh chụp lúc nhận ô.",
+        question: "Dù có hoa văn bên trong hay trơn?"
+      },
+      {
+        id: "POST-106",
+        title: "Laptop Dell XPS 13 Silver",
+        category: "Thiết bị điện tử",
+        type: "lost",
+        reporterName: "Phạm Đức Trọng",
+        reporterId: "B2004556",
+        location: "Khoa CNTT&TT, Phòng Lab 202",
+        time: "2 ngày trước",
+        status: "active",
+        storage: "Đang lưu ý tìm kiếm tại khoa",
+        photo: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80",
+        note: "Bỏ quên balo đựng máy tính sau giờ thực hành Mạng máy tính. Máy có dán sticker GitHub và Docker.",
+        question: "Tên user đăng nhập Windows là gì?"
+      },
+      {
+        id: "POST-107",
+        title: "Balo chống nước màu xám ghi",
+        category: "Balo / Túi xách",
+        type: "found",
+        reporterName: "Đặng Thùy Dung",
+        reporterId: "B2207890",
+        location: "Nhà học B1, Phòng 204",
+        time: "Hôm nay, 10:00",
+        status: "active",
+        storage: "Gửi bàn trực giám thị Tầng 1 B1",
+        photo: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+        note: "Balo để quên dưới hộc bàn cuối lớp. Bên trong có sách Giải tích và máy tính cầm tay Casio 580.",
+        question: "Màu sắc của máy tính Casio bên trong là gì?"
+      },
+      {
+        id: "POST-108",
+        title: "Thẻ sinh viên & Thẻ ngân hàng Agribank",
+        category: "Giấy tờ tùy thân",
+        type: "found",
+        reporterName: "Cán bộ PCTSV",
+        reporterId: "CB012",
+        location: "Nhà điều hành C1",
+        time: "3 ngày trước",
+        status: "returned",
+        storage: "Bàn trực tiếp nhận PCTSV",
+        photo: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
+        note: "Đã trao trả nguyên vẹn cho sinh viên sau khi kiểm tra CCCD bản gốc.",
+        question: "Họ tên in trên thẻ là gì?"
+      },
+      {
+        id: "POST-109",
+        title: "Tài liệu ôn thi trắc nghiệm tiếng Anh",
+        category: "Sách & Giáo trình",
+        type: "lost",
+        reporterName: "Vũ Hoàng Long",
+        reporterId: "B1901111",
+        location: "Nhà học C2",
+        time: "4 ngày trước",
+        status: "hidden", // BÀI ĐĂNG BỊ ẨN
+        hiddenReason: "Chèn liên kết rao vặt thương mại trái phép vào nội dung",
+        hiddenAt: "Hôm qua, 14:00",
+        storage: "Đã ẩn khỏi giao diện",
+        photo: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80",
+        note: "Nội dung bài đăng bị ẩn do vi phạm quy định diễn đàn.",
+        question: "Không khả dụng"
+      },
+      {
+        id: "POST-110",
+        title: "Giày thể thao Nike Air Force 1",
+        category: "Đồ dùng cá nhân",
+        type: "found",
+        reporterName: "Nguyễn Hữu Tài",
+        reporterId: "B2305544",
+        location: "Sân bóng rổ Khu II",
+        time: "Hôm qua, 18:30",
+        status: "reported", // BÀI ĐĂNG BỊ BÁO CÁO
+        reportReason: "Hình ảnh sao chép từ mạng internet, địa điểm không có thật",
+        reportCount: 2,
+        reportedBy: "Sinh viên B2209911 & B2301122",
+        storage: "Cần kiểm tra lại hiện vật",
+        photo: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+        note: "Nhặt được ở khán đài sân bóng rổ chiều qua.",
+        question: "Size giày là bao nhiêu?"
+      },
+      {
+        id: "POST-111",
+        title: "Đồng hồ thông minh Apple Watch SE",
+        category: "Thiết bị điện tử",
+        type: "lost",
+        reporterName: "Trương Mỹ Linh",
+        reporterId: "B2201122",
+        location: "Thư viện Tầng 2",
+        time: "5 ngày trước",
+        status: "hidden", // BÀI ĐĂNG BỊ ẨN
+        hiddenReason: "Người đăng đã tự tìm lại được đồ vật và yêu cầu ẩn bài",
+        hiddenAt: "3 ngày trước",
+        storage: "Đã đóng tin",
+        photo: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+        note: "Đã nhận lại được đồng hồ để quên tại phòng đọc.",
+        question: "Dây đeo màu gì?"
+      }
+    ];
+
+    // DỮ LIỆU TÀI KHOẢN VỚI ĐIỂM (KHỚP CHÍNH XÁC BẢNG VINH DANH)
+    // Chỉ có người dùng (sinh viên) có điểm tương ứng số lần trao trả, cán bộ/bảo vệ hiển thị "-"
+    const INITIAL_ACCOUNTS = [
+      {
+        id: "ACC-01",
+        code: "B2105432",
+        name: "Nguyễn Hoàng Long",
+        role: "student",
+        dept: "Khoa CNTT & TT",
+        email: "longb2105432@student.ctu.edu.vn",
+        phone: "0912345678",
+        points: 24,
+        returnedCount: 24,
+        status: "active"
+      },
+      {
+        id: "ACC-02",
+        code: "B2201988",
+        name: "Đặng Thu Thảo",
+        role: "student",
+        dept: "Khoa Kinh tế",
+        email: "thaob2201988@student.ctu.edu.vn",
+        phone: "0987654321",
+        points: 19,
+        returnedCount: 19,
+        status: "active"
+      },
+      {
+        id: "ACC-03",
+        code: "B2103456",
+        name: "Trần Bảo Nam",
+        role: "student",
+        dept: "Khoa Nông nghiệp",
+        email: "namb2103456@student.ctu.edu.vn",
+        phone: "0939112233",
+        points: 16,
+        returnedCount: 16,
+        status: "active"
+      },
+      {
+        id: "ACC-04",
+        code: "B2207788",
+        name: "Lê Thị Phương Uyên",
+        role: "student",
+        dept: "Khoa Luật",
+        email: "uyenb2207788@student.ctu.edu.vn",
+        phone: "0977889900",
+        points: 14,
+        returnedCount: 14,
+        status: "active"
+      },
+      {
+        id: "ACC-05",
+        code: "B2304567",
+        name: "Huỳnh Gia Huy",
+        role: "student",
+        dept: "Khoa Công nghệ",
+        email: "huyb2304567@student.ctu.edu.vn",
+        phone: "0944556677",
+        points: 12,
+        returnedCount: 12,
+        status: "active"
+      },
+      {
+        id: "ACC-06",
+        code: "B2108899",
+        name: "Phạm Minh Triết",
+        role: "student",
+        dept: "Khoa Thủy sản",
+        email: "trietb2108899@student.ctu.edu.vn",
+        phone: "0909123456",
+        points: 11,
+        returnedCount: 11,
+        status: "active"
+      },
+      {
+        id: "ACC-07",
+        code: "B2206655",
+        name: "Võ Ngọc Trâm",
+        role: "student",
+        dept: "Khoa Sư phạm",
+        email: "tramb2206655@student.ctu.edu.vn",
+        phone: "0966778899",
+        points: 9,
+        returnedCount: 9,
+        status: "active"
+      },
+      {
+        id: "ACC-08",
+        code: "B2301122",
+        name: "Bùi Quốc An",
+        role: "student",
+        dept: "Khoa Ngoại ngữ",
+        email: "anb2301122@student.ctu.edu.vn",
+        phone: "0911223344",
+        points: 8,
+        returnedCount: 8,
+        status: "active"
+      },
+      {
+        id: "ACC-09",
+        code: "B2404991",
+        name: "Phan Minh Khang",
+        role: "student",
+        dept: "Khoa CNTT & Truyền thông",
+        email: "khangb2404991@student.ctu.edu.vn",
+        phone: "0968686868",
+        points: 5,
+        returnedCount: 5,
+        status: "active"
+      },
+      {
+        id: "ACC-10",
+        code: "CB0018",
+        name: "TS. Trần Văn Hùng",
+        role: "staff",
+        dept: "Phòng Công tác Sinh viên (PCTSV)",
+        email: "hungtv@ctu.edu.vn",
+        phone: "02923832663",
+        points: null,
+        returnedCount: 0,
+        status: "active"
+      },
+      {
+        id: "ACC-11",
+        code: "BV004",
+        name: "Chú Năm (Bảo vệ)",
+        role: "security",
+        dept: "Đội Bảo vệ - Bãi xe Cổng A",
+        email: "bv_baixe@ctu.edu.vn",
+        phone: "0939112233",
+        points: null,
+        returnedCount: 0,
+        status: "active"
+      }
+    ];
+
+    // State lưu trong LocalStorage
+    let adminPosts = [];
+    try {
+      const stored = localStorage.getItem("ctu_admin_posts_v2");
+      adminPosts = stored ? JSON.parse(stored) : INITIAL_POSTS;
+    } catch (e) {
+      adminPosts = INITIAL_POSTS;
+    }
+
+    let adminAccounts = [];
+    try {
+      const stored = localStorage.getItem("ctu_admin_accounts_v3");
+      adminAccounts = stored ? JSON.parse(stored) : INITIAL_ACCOUNTS;
+    } catch (e) {
+      adminAccounts = INITIAL_ACCOUNTS;
+    }
+
+    function savePosts() {
+      localStorage.setItem("ctu_admin_posts_v2", JSON.stringify(adminPosts));
+    }
+    function saveAccounts() {
+      localStorage.setItem("ctu_admin_accounts_v3", JSON.stringify(adminAccounts));
+    }
+
+    // -----------------------------------------------------------------------
+    // 2. CHUYỂN TAB CHÍNH (ĐỒNG BỘ HEADER & SEGMENTED TABS)
+    // -----------------------------------------------------------------------
+    window.switchAdminTab = function(tabName) {
+      const tabPosts = document.getElementById("tab-content-posts");
+      const tabAccounts = document.getElementById("tab-content-accounts");
+      const btnPosts = document.getElementById("tab-btn-posts");
+      const btnAccounts = document.getElementById("tab-btn-accounts");
+
+      // Desktop nav links in Header
+      const navPosts = document.getElementById("admin-nav-posts");
+      const navAccounts = document.getElementById("admin-nav-accounts");
+
+      // Mobile bottom nav links in Header
+      const mobPosts = document.getElementById("admin-mobile-tab-posts");
+      const mobAccounts = document.getElementById("admin-mobile-tab-accounts");
+
+      if (tabName === "posts") {
+        if (tabPosts) tabPosts.classList.remove("hidden");
+        if (tabAccounts) tabAccounts.classList.add("hidden");
+
+        if (btnPosts) {
+          btnPosts.className = "tab-btn-active px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer";
+        }
+        if (btnAccounts) {
+          btnAccounts.className = "px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4a4746] dark:text-stone-300 hover:text-[#1b1c1c] dark:hover:text-white flex items-center gap-2 transition-all cursor-pointer";
+        }
+
+        if (navPosts) {
+          navPosts.className = "header-nav-link header-nav-active flex items-center h-full text-sm font-semibold border-b-2";
+        }
+        if (navAccounts) {
+          navAccounts.className = "header-nav-link flex items-center h-full text-sm font-medium transition-colors";
+        }
+
+        if (mobPosts) {
+          mobPosts.className = "flex flex-col items-center justify-center flex-1 py-1 text-[var(--theme-accent,#1f3227)] dark:text-emerald-400 font-bold";
+        }
+        if (mobAccounts) {
+          mobAccounts.className = "flex flex-col items-center justify-center flex-1 py-1 text-[#777771] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white";
+        }
+      } else {
+        if (tabPosts) tabPosts.classList.add("hidden");
+        if (tabAccounts) tabAccounts.classList.remove("hidden");
+
+        if (btnPosts) {
+          btnPosts.className = "px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4a4746] dark:text-stone-300 hover:text-[#1b1c1c] dark:hover:text-white flex items-center gap-2 transition-all cursor-pointer";
+        }
+        if (btnAccounts) {
+          btnAccounts.className = "tab-btn-active px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer";
+        }
+
+        if (navPosts) {
+          navPosts.className = "header-nav-link flex items-center h-full text-sm font-medium transition-colors";
+        }
+        if (navAccounts) {
+          navAccounts.className = "header-nav-link header-nav-active flex items-center h-full text-sm font-semibold border-b-2";
+        }
+
+        if (mobPosts) {
+          mobPosts.className = "flex flex-col items-center justify-center flex-1 py-1 text-[#777771] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white";
+        }
+        if (mobAccounts) {
+          mobAccounts.className = "flex flex-col items-center justify-center flex-1 py-1 text-[var(--theme-accent,#1f3227)] dark:text-emerald-400 font-bold";
+        }
+      }
+
+      const url = new URL(window.location);
+      url.searchParams.set("tab", tabName);
+      window.history.replaceState({}, "", url);
+    };
+
+    // -----------------------------------------------------------------------
+    // 3. TOAST NOTIFICATIONS TINH TẾ (UI/UX Pro Max)
+    // -----------------------------------------------------------------------
+    function showToast(message, type = "success") {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+
+      const toast = document.createElement("div");
+      toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-semibold border transition-all duration-300 translate-y-2 opacity-0 ${
+        type === "success"
+          ? "bg-stone-900 text-white border-stone-700 dark:bg-stone-100 dark:text-stone-900"
+          : type === "warning"
+          ? "bg-amber-950 text-amber-100 border-amber-800"
+          : type === "error"
+          ? "bg-rose-950 text-rose-100 border-rose-800"
+          : "bg-stone-900 text-white border-stone-700"
+      }`;
+
+      const iconName = type === "success" ? "check_circle" : type === "warning" ? "warning" : type === "error" ? "error" : "info";
+      toast.innerHTML = `
+        <span class="material-symbols-outlined text-[18px] shrink-0 text-amber-400">${iconName}</span>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove("translate-y-2", "opacity-0");
+      });
+
+      setTimeout(() => {
+        toast.classList.add("translate-y-2", "opacity-0");
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // -----------------------------------------------------------------------
+    // 4. CẬP NHẬT CHỈ SỐ KPI TỐI GIẢN
+    // -----------------------------------------------------------------------
+    function updateMetrics() {
+      const totalPosts = adminPosts.length;
+      const reportedPosts = adminPosts.filter(p => p.status === "reported").length;
+      const hiddenPosts = adminPosts.filter(p => p.status === "hidden").length;
+      const activePosts = adminPosts.filter(p => p.status === "active").length;
+      const returnedPosts = adminPosts.filter(p => p.status === "returned").length;
+
+      const totalAccounts = adminAccounts.length;
+      const studentAccounts = adminAccounts.filter(a => a.points !== null && a.points !== undefined);
+      const topScore = studentAccounts.length > 0 ? Math.max(...studentAccounts.map(a => a.points)) : 0;
+
+      document.getElementById("stat-total-posts").innerText = totalPosts;
+      document.getElementById("stat-reported-posts").innerText = reportedPosts;
+      document.getElementById("stat-hidden-posts").innerText = hiddenPosts;
+      document.getElementById("stat-total-accounts").innerText = totalAccounts;
+      const statTopEl = document.getElementById("stat-top-score");
+      if (statTopEl) statTopEl.innerText = `${topScore} điểm`;
+
+      document.getElementById("tab-badge-posts").innerText = totalPosts;
+      document.getElementById("tab-badge-accounts").innerText = totalAccounts;
+
+      // Cập nhật số lượng trên các nút sub-filter
+      document.getElementById("count-all").innerText = totalPosts;
+      document.getElementById("count-active").innerText = activePosts;
+      document.getElementById("count-reported").innerText = reportedPosts;
+      document.getElementById("count-hidden").innerText = hiddenPosts;
+      document.getElementById("count-returned").innerText = returnedPosts;
+    }
+
+    // -----------------------------------------------------------------------
+    // 5. QUẢN LÝ BÀI ĐĂNG (SUB-FILTERS & RENDER)
+    // -----------------------------------------------------------------------
+    let currentPostSubFilter = "all";
+
+    function setPostSubFilter(filterName) {
+      currentPostSubFilter = filterName;
+      const buttons = ["all", "active", "reported", "hidden", "returned"];
+      buttons.forEach(b => {
+        const btn = document.getElementById(`subfilter-${b}`);
+        if (!btn) return;
+        if (b === filterName) {
+          btn.className = "subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer flex items-center gap-1";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1";
+        }
+      });
+      filterPosts();
+    }
+
+    function getPostStatusBadge(post) {
+      if (post.status === "reported") {
+        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200/80 dark:border-rose-900/60">
+          <span class="material-symbols-outlined text-[13px]">flag</span>
+          Bị báo cáo (${post.reportCount || 1})
+        </span>`;
+      }
+      if (post.status === "hidden") {
+        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300 border border-stone-300/80 dark:border-stone-700">
+          <span class="material-symbols-outlined text-[13px]">visibility_off</span>
+          Đã bị ẩn
+        </span>`;
+      }
+      if (post.status === "returned") {
+        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200/80 dark:border-blue-900/60">
+          <span class="material-symbols-outlined text-[13px]">task_alt</span>
+          Đã trao trả
+        </span>`;
+      }
+      return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-900/60">
+        <span class="material-symbols-outlined text-[13px]">public</span>
+        Công khai
+      </span>`;
+    }
+
+    function renderPosts(postsToRender) {
+      const tbody = document.getElementById("posts-table-body");
+      const mobileList = document.getElementById("posts-mobile-list");
+      const emptyState = document.getElementById("posts-empty-state");
+
+      if (!tbody || !mobileList) return;
+
+      tbody.innerHTML = "";
+      mobileList.innerHTML = "";
+
+      if (postsToRender.length === 0) {
+        if (emptyState) emptyState.classList.remove("hidden");
+        return;
+      }
+      if (emptyState) emptyState.classList.add("hidden");
+
+      postsToRender.forEach(post => {
+        const typeBadge = post.type === "found"
+          ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-200 dark:border-stone-700">Nhặt được</span>`
+          : `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-200 dark:border-stone-700">Báo mất</span>`;
+
+        // Thao tác cho từng loại trạng thái bài đăng
+        let actionButtons = "";
+        if (post.status === "hidden") {
+          actionButtons = `
+            <button type="button" onclick="unhidePost('${post.id}');" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer" title="Bỏ ẩn bài đăng">
+              Hiện lại
+            </button>
+            <button type="button" onclick="deletePost('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài">
+              <span class="material-symbols-outlined text-[16px]">delete</span>
+            </button>
+          `;
+        } else if (post.status === "reported") {
+          actionButtons = `
+            <button type="button" onclick="openHidePostModal('${post.id}');" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer" title="Ẩn bài do vi phạm">
+              Ẩn bài
+            </button>
+            <button type="button" onclick="dismissReport('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Bác bỏ báo cáo (Giữ bài)">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+            </button>
+            <button type="button" onclick="viewPostDetail('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem báo cáo">
+              <span class="material-symbols-outlined text-[16px]">visibility</span>
+            </button>
+          `;
+        } else {
+          actionButtons = `
+            <button type="button" onclick="openHidePostModal('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Ẩn bài đăng">
+              <span class="material-symbols-outlined text-[16px]">visibility_off</span>
+            </button>
+            <button type="button" onclick="viewPostDetail('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem chi tiết">
+              <span class="material-symbols-outlined text-[16px]">visibility</span>
+            </button>
+            <button type="button" onclick="deletePost('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài">
+              <span class="material-symbols-outlined text-[16px]">delete</span>
+            </button>
+          `;
+        }
+
+        // 1. Desktop Row
+        const tr = document.createElement("tr");
+        tr.className = `hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors ${post.status === 'hidden' ? 'opacity-70' : ''}`;
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono font-bold text-xs text-[#797675] dark:text-stone-400">${post.id}</td>
+          <td class="py-3 px-4 text-center">
+            <img src="${post.photo}" alt="${post.title}" class="w-9 h-9 rounded-lg object-cover mx-auto border border-stone-200 dark:border-stone-700">
+          </td>
+          <td class="py-3 px-4">
+            <div class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1.5">
+              <span>${post.title}</span>
+              ${post.status === 'reported' ? '<span class="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">[Có báo cáo]</span>' : ''}
+            </div>
+            <div class="text-[11px] text-[#797675] dark:text-stone-400">${post.category}</div>
+          </td>
+          <td class="py-3 px-4">${typeBadge}</td>
+          <td class="py-3 px-4">
+            <div class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.reporterName}</div>
+            <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${post.reporterId}</div>
+          </td>
+          <td class="py-3 px-4 text-xs">${post.location}</td>
+          <td class="py-3 px-4">${getPostStatusBadge(post)}</td>
+          <td class="py-3 px-4 text-right">
+            <div class="inline-flex items-center gap-1.5 justify-end">
+              ${actionButtons}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        // 2. Mobile Card
+        const mCard = document.createElement("div");
+        mCard.className = `bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-3 ${post.status === 'hidden' ? 'opacity-70' : ''}`;
+        mCard.innerHTML = `
+          <div class="flex items-start gap-3">
+            <img src="${post.photo}" alt="${post.title}" class="w-12 h-12 rounded-lg object-cover border border-stone-200 dark:border-stone-700 shrink-0">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-1">
+                <span class="font-mono text-[11px] font-bold text-[#797675] dark:text-stone-400">${post.id}</span>
+                ${getPostStatusBadge(post)}
+              </div>
+              <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white truncate mt-0.5">${post.title}</h4>
+              <p class="text-xs text-[#797675] dark:text-stone-400 line-clamp-1">${post.location}</p>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs">
+            <span class="text-[#797675] dark:text-stone-400">Đăng bởi: <strong class="text-[#1b1c1c] dark:text-stone-200">${post.reporterName}</strong></span>
+            <div class="flex items-center gap-1.5">
+              ${actionButtons}
+            </div>
+          </div>
+        `;
+        mobileList.appendChild(mCard);
+      });
+    }
+
+    function filterPosts() {
+      const query = (document.getElementById("post-search-input")?.value || "").toLowerCase().trim();
+
+      const filtered = adminPosts.filter(post => {
+        const matchesQuery = !query || 
+          post.title.toLowerCase().includes(query) ||
+          post.id.toLowerCase().includes(query) ||
+          post.reporterName.toLowerCase().includes(query) ||
+          post.reporterId.toLowerCase().includes(query) ||
+          post.location.toLowerCase().includes(query);
+
+        let matchesSubFilter = true;
+        if (currentPostSubFilter === "active") matchesSubFilter = post.status === "active";
+        else if (currentPostSubFilter === "reported") matchesSubFilter = post.status === "reported";
+        else if (currentPostSubFilter === "hidden") matchesSubFilter = post.status === "hidden";
+        else if (currentPostSubFilter === "returned") matchesSubFilter = post.status === "returned";
+
+        return matchesQuery && matchesSubFilter;
+      });
+
+      renderPosts(filtered);
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. THAO TÁC ẨN BÀI / BỎ ẨN / XỬ LÝ BÁO CÁO BÀI ĐĂNG
+    // -----------------------------------------------------------------------
+    let hidingPostId = null;
+
+    function openHidePostModal(postId) {
+      hidingPostId = postId;
+      document.getElementById("hide-post-code").innerText = `Mã tin: ${postId}`;
+      document.getElementById("modal-hide-post").classList.remove("hidden");
+    }
+
+    function closeHidePostModal() {
+      hidingPostId = null;
+      document.getElementById("modal-hide-post").classList.add("hidden");
+    }
+
+    function confirmHidePost() {
+      if (!hidingPostId) return;
+      const post = adminPosts.find(p => p.id === hidingPostId);
+      if (post) {
+        const reason = document.getElementById("hide-reason-select").value;
+        post.status = "hidden";
+        post.hiddenReason = reason;
+        post.hiddenAt = "Vừa xong";
+        savePosts();
+        updateMetrics();
+        filterPosts();
+        closeHidePostModal();
+        showToast(`Đã ẩn bài đăng ${hidingPostId} ("${post.title}")`, "success");
+      }
+    }
+
+    function unhidePost(postId) {
+      const post = adminPosts.find(p => p.id === postId);
+      if (post) {
+        post.status = "active";
+        delete post.hiddenReason;
+        savePosts();
+        updateMetrics();
+        filterPosts();
+        showToast(`Đã bỏ ẩn, đưa bài đăng ${postId} trở lại công khai`, "success");
+      }
+    }
+
+    function dismissReport(postId) {
+      const post = adminPosts.find(p => p.id === postId);
+      if (post) {
+        post.status = "active";
+        delete post.reportReason;
+        delete post.reportCount;
+        delete post.reportedBy;
+        savePosts();
+        updateMetrics();
+        filterPosts();
+        showToast(`Đã bác bỏ báo cáo cho bài đăng ${postId}`, "success");
+      }
+    }
+
+    function deletePost(postId) {
+      if (confirm(`Bạn có chắc chắn muốn xóa bài đăng ${postId}? Thao tác này không thể hoàn tác.`)) {
+        adminPosts = adminPosts.filter(p => p.id !== postId);
+        savePosts();
+        updateMetrics();
+        filterPosts();
+        showToast(`Đã xóa bài đăng ${postId} khỏi hệ thống`, "error");
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. MODAL XEM CHI TIẾT & BÁO CÁO BÀI ĐĂNG
+    // -----------------------------------------------------------------------
+    function viewPostDetail(postId) {
+      const post = adminPosts.find(p => p.id === postId);
+      if (!post) return;
+
+      document.getElementById("modal-post-title").innerText = `${post.title} (${post.id})`;
+      const content = document.getElementById("modal-post-content");
+      const leftActions = document.getElementById("modal-post-left-actions");
+
+      let reportSection = "";
+      if (post.status === "reported") {
+        reportSection = `
+          <div class="p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-900/60 space-y-1">
+            <span class="font-bold text-rose-900 dark:text-rose-300 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px] text-rose-600">flag</span>
+              Chi tiết báo cáo từ người dùng (${post.reportCount || 1} lượt báo cáo):
+            </span>
+            <p class="text-rose-800 dark:text-rose-200 font-medium">${post.reportReason || 'Nội dung nghi vấn cần kiểm tra'}</p>
+            <p class="text-[11px] text-rose-600/80 dark:text-rose-400">Người báo cáo: ${post.reportedBy || 'Người dùng ẩn danh'}</p>
+          </div>
+        `;
+      } else if (post.status === "hidden") {
+        reportSection = `
+          <div class="p-3 bg-stone-100 dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700">
+            <span class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">visibility_off</span>
+              Lý do bài đăng đang bị ẩn:
+            </span>
+            <p class="text-[#4a4746] dark:text-stone-300 mt-0.5">${post.hiddenReason || 'Tạm ẩn theo yêu cầu quản trị'}</p>
+          </div>
+        `;
+      }
+
+      content.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <img src="${post.photo}" alt="${post.title}" class="w-full h-44 sm:h-52 object-cover rounded-xl border border-stone-200 dark:border-stone-700">
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Trạng thái:</span>
+              ${getPostStatusBadge(post)}
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Danh mục:</span>
+              <p class="font-bold text-[#1b1c1c] dark:text-white">${post.category}</p>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Địa điểm:</span>
+              <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.location}</p>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Người đăng:</span>
+              <p class="font-bold text-[#1b1c1c] dark:text-white">${post.reporterName} <span class="font-mono text-xs text-[#797675]">(${post.reporterId})</span></p>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Nơi bảo quản:</span>
+              <p class="text-emerald-700 dark:text-emerald-400 font-semibold">${post.storage || 'Đang cập nhật'}</p>
+            </div>
+          </div>
+        </div>
+
+        ${reportSection}
+
+        <div class="p-3 bg-stone-50 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700">
+          <span class="font-bold text-[#1b1c1c] dark:text-white block mb-0.5">Mô tả bài đăng:</span>
+          <p class="text-[#4a4746] dark:text-stone-300 italic">${post.note || 'Không có mô tả chi tiết.'}</p>
+        </div>
+      `;
+
+      // Nút hành động phía dưới modal
+      if (post.status === "reported") {
+        leftActions.innerHTML = `
+          <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+            Ẩn bài viết này
+          </button>
+          <button type="button" onclick="dismissReport('${post.id}'); closePostDetailModal();" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+            Bác bỏ báo cáo
+          </button>
+        `;
+      } else if (post.status === "hidden") {
+        leftActions.innerHTML = `
+          <button type="button" onclick="unhidePost('${post.id}'); closePostDetailModal();" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
+            Bỏ ẩn / Khôi phục hiển thị
+          </button>
+        `;
+      } else {
+        leftActions.innerHTML = `
+          <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+            Ẩn bài viết
+          </button>
+        `;
+      }
+
+      document.getElementById("modal-post-detail").classList.remove("hidden");
+    }
+
+    function closePostDetailModal() {
+      document.getElementById("modal-post-detail").classList.add("hidden");
+    }
+
+
+    // -----------------------------------------------------------------------
+    // 8. QUẢN LÝ TÀI KHOẢN, ĐIỂM NGƯỜI DÙNG & LỌC CAO/THẤP
+    // -----------------------------------------------------------------------
+    function renderAccounts(accountsToRender) {
+      const tbody = document.getElementById("accounts-table-body");
+      const mobileList = document.getElementById("accounts-mobile-list");
+      const emptyState = document.getElementById("accounts-empty-state");
+
+      if (!tbody || !mobileList) return;
+
+      tbody.innerHTML = "";
+      mobileList.innerHTML = "";
+
+      if (accountsToRender.length === 0) {
+        if (emptyState) emptyState.classList.remove("hidden");
+        return;
+      }
+      if (emptyState) emptyState.classList.add("hidden");
+
+      accountsToRender.forEach(acc => {
+        const isLocked = acc.status === "locked";
+
+        const statusBadge = isLocked
+          ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200 dark:border-rose-900">Tạm khóa</span>`
+          : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900">Hoạt động</span>`;
+
+        // Điểm hiển thị (Chỉ người dùng sinh viên có điểm theo bảng vinh danh, cán bộ hiển thị '-')
+        const pointsDisplay = (acc.points !== null && acc.points !== undefined) 
+          ? `<span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points}</span>` 
+          : `<span class="text-stone-400 font-normal">-</span>`;
+
+        // Desktop Row
+        const tr = document.createElement("tr");
+        tr.className = `hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors ${isLocked ? 'opacity-70' : ''}`;
+        tr.innerHTML = `
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-bold flex items-center justify-center shrink-0 text-xs">
+                ${acc.name.charAt(0)}
+              </div>
+              <div>
+                <div class="font-bold text-[#1b1c1c] dark:text-white">${acc.name}</div>
+                <div class="text-[11px] font-mono text-[#797675] dark:text-stone-400">${acc.code}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3 px-4 text-xs font-medium text-[#4a4746] dark:text-stone-300">${acc.dept}</td>
+          <td class="py-3 px-4">
+            <div class="text-xs text-[#1b1c1c] dark:text-stone-200">${acc.email}</div>
+            <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${acc.phone}</div>
+          </td>
+          <td class="py-3 px-4 text-center">
+            ${pointsDisplay}
+          </td>
+          <td class="py-3 px-4 text-center font-mono font-semibold">${acc.returnedCount || 0}</td>
+          <td class="py-3 px-4">${statusBadge}</td>
+          <td class="py-3 px-4 text-right">
+            <div class="inline-flex items-center gap-1.5 justify-end">
+              <button type="button" onclick="toggleLockAccount('${acc.id}');" class="px-2.5 py-1 rounded-lg text-xs font-semibold ${isLocked ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400' : 'bg-stone-100 hover:bg-rose-50 text-stone-700 hover:text-rose-700 dark:bg-stone-800'} transition-colors cursor-pointer">
+                ${isLocked ? 'Mở khóa' : 'Khóa'}
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        // Mobile Card
+        const mCard = document.createElement("div");
+        mCard.className = `bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-2.5 ${isLocked ? 'opacity-70' : ''}`;
+        mCard.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-bold flex items-center justify-center text-xs">
+                ${acc.name.charAt(0)}
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.name}</h4>
+                <span class="font-mono text-[11px] text-[#797675]">${acc.code}</span>
+              </div>
+            </div>
+            ${statusBadge}
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-[#797675]">Điểm:</span>
+            <span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points !== null && acc.points !== undefined ? acc.points : '-'}</span>
+          </div>
+          <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs">
+            <span class="text-[#797675]">Đã trao trả: <strong>${acc.returnedCount || 0} món</strong></span>
+            <button type="button" onclick="toggleLockAccount('${acc.id}');" class="px-3 py-1 rounded-md font-bold text-xs ${isLocked ? 'bg-emerald-600 text-white' : 'bg-stone-100 text-stone-700'}">
+              ${isLocked ? 'Mở khóa' : 'Khóa tài khoản'}
+            </button>
+          </div>
+        `;
+        mobileList.appendChild(mCard);
+      });
+    }
+
+    function filterAccounts() {
+      const query = (document.getElementById("account-search-input")?.value || "").toLowerCase().trim();
+      const sortScore = document.getElementById("account-sort-score")?.value || "desc";
+      const scoreTier = document.getElementById("account-filter-score-tier")?.value || "all";
+
+      let filtered = adminAccounts.filter(acc => {
+        const matchesQuery = !query ||
+          acc.name.toLowerCase().includes(query) ||
+          acc.code.toLowerCase().includes(query) ||
+          acc.email.toLowerCase().includes(query) ||
+          acc.dept.toLowerCase().includes(query);
+
+        let matchesScoreTier = true;
+        const pts = acc.points !== null && acc.points !== undefined ? acc.points : -1;
+        if (scoreTier === "top") matchesScoreTier = pts >= 15;
+        else if (scoreTier === "high") matchesScoreTier = pts >= 10 && pts < 15;
+        else if (scoreTier === "mid") matchesScoreTier = pts >= 5 && pts < 10;
+        else if (scoreTier === "low") matchesScoreTier = pts >= 0 && pts < 5;
+
+        return matchesQuery && matchesScoreTier;
+      });
+
+      // SẮP XẾP CAO / THẤP THEO ĐIỂM
+      filtered.sort((a, b) => {
+        const scoreA = a.points !== null && a.points !== undefined ? a.points : -1;
+        const scoreB = b.points !== null && b.points !== undefined ? b.points : -1;
+        return sortScore === "desc" ? scoreB - scoreA : scoreA - scoreB;
+      });
+
+      renderAccounts(filtered);
+    }
+
+    function toggleLockAccount(accId) {
+      const acc = adminAccounts.find(a => a.id === accId);
+      if (!acc) return;
+
+      if (acc.status === "active") {
+        acc.status = "locked";
+        showToast(`Đã tạm khóa tài khoản ${acc.name} (${acc.code})`, "warning");
+      } else {
+        acc.status = "active";
+        showToast(`Đã mở khóa tài khoản ${acc.name} (${acc.code})`, "success");
+      }
+      saveAccounts();
+      updateMetrics();
+      filterAccounts();
+    }
+
+    // Modal Thêm Tài Khoản
+    function openAddAccountModal() {
+      document.getElementById("modal-add-account").classList.remove("hidden");
+    }
+    function closeAddAccountModal() {
+      document.getElementById("modal-add-account").classList.add("hidden");
+    }
+    function submitNewAccount() {
+      const name = document.getElementById("new-acc-name").value.trim();
+      const code = document.getElementById("new-acc-id").value.trim();
+      const scoreVal = document.getElementById("new-acc-score").value.trim();
+      const points = scoreVal !== "" ? Math.max(0, parseInt(scoreVal) || 0) : null;
+      const dept = document.getElementById("new-acc-dept").value.trim() || "Trường Đại học Cần Thơ";
+      const email = document.getElementById("new-acc-email").value.trim() || `${code.toLowerCase()}@student.ctu.edu.vn`;
+      const phone = document.getElementById("new-acc-phone").value.trim() || "Chưa cập nhật";
+
+      const newAcc = {
+        id: `ACC-${String(adminAccounts.length + 1).padStart(2, '0')}`,
+        code: code,
+        name: name,
+        role: "student",
+        dept: dept,
+        email: email,
+        phone: phone,
+        points: points,
+        returnedCount: points || 0,
+        status: "active"
+      };
+
+      adminAccounts.unshift(newAcc);
+      saveAccounts();
+      updateMetrics();
+      filterAccounts();
+      closeAddAccountModal();
+      document.getElementById("add-account-form").reset();
+      showToast(`Đã thêm thành công tài khoản ${name} (${code})!`, "success");
+    }
+
+
+    // -----------------------------------------------------------------------
+    // 9. CHỨC NĂNG IN FILE ĐIỂM (PRINT SCORE REPORT & CSV EXPORT)
+    // -----------------------------------------------------------------------
+    function openPrintScoreModal() {
+      // 1. Sắp xếp danh sách theo thiết lập hiện thời
+      const sortScore = document.getElementById("account-sort-score")?.value || "desc";
+      const listToPrint = [...adminAccounts].sort((a, b) => {
+        const scoreA = a.points !== null && a.points !== undefined ? a.points : -1;
+        const scoreB = b.points !== null && b.points !== undefined ? b.points : -1;
+        return sortScore === "desc" ? scoreB - scoreA : scoreA - scoreB;
+      });
+
+      // 2. Render dòng vào bảng in
+      const printTbody = document.getElementById("print-table-rows");
+      printTbody.innerHTML = "";
+
+      listToPrint.forEach((acc, idx) => {
+        const tr = document.createElement("tr");
+        const ptsDisplay = acc.points !== null && acc.points !== undefined ? acc.points : "-";
+        tr.innerHTML = `
+          <td class="border border-stone-300 py-1.5 px-2 text-center font-mono">${idx + 1}</td>
+          <td class="border border-stone-300 py-1.5 px-3 font-mono font-bold">${acc.code}</td>
+          <td class="border border-stone-300 py-1.5 px-3 font-semibold text-stone-900">${acc.name}</td>
+          <td class="border border-stone-300 py-1.5 px-3">${acc.dept}</td>
+          <td class="border border-stone-300 py-1.5 px-2 text-center font-mono">${acc.returnedCount || 0}</td>
+          <td class="border border-stone-300 py-1.5 px-2 text-center font-mono font-bold">${ptsDisplay}</td>
+        `;
+        printTbody.appendChild(tr);
+      });
+
+      // 3. Cập nhật ngày in thực tế
+      const today = new Date();
+      document.getElementById("print-sheet-date").innerText = 
+        `Cập nhật ngày ${today.getDate()} tháng ${today.getMonth() + 1} năm ${today.getFullYear()} • Bảng vinh danh CTU Lost & Found`;
+
+      document.getElementById("modal-print-score").classList.remove("hidden");
+    }
+
+    function closePrintScoreModal() {
+      document.getElementById("modal-print-score").classList.add("hidden");
+    }
+
+    function triggerNativePrint() {
+      // Sao chép nội dung tờ in vào #print-area và kích hoạt window.print()
+      const printSheet = document.getElementById("print-sheet");
+      const printArea = document.getElementById("print-area");
+      printArea.innerHTML = printSheet.innerHTML;
+      printArea.classList.remove("hidden");
+
+      window.print();
+
+      setTimeout(() => {
+        printArea.classList.add("hidden");
+      }, 500);
+    }
+
+    function exportScoreCSV() {
+      const sortScore = document.getElementById("account-sort-score")?.value || "desc";
+      const listToPrint = [...adminAccounts].sort((a, b) => {
+        const scoreA = a.points !== null && a.points !== undefined ? a.points : -1;
+        const scoreB = b.points !== null && b.points !== undefined ? b.points : -1;
+        return sortScore === "desc" ? scoreB - scoreA : scoreA - scoreB;
+      });
+
+      let csv = "\uFEFFSTT,Mã định danh,Họ và tên,Khoa/Đơn vị,Email,Đồ đã trao trả,Điểm\n";
+      listToPrint.forEach((acc, idx) => {
+        const ptsDisplay = acc.points !== null && acc.points !== undefined ? acc.points : "-";
+        csv += `"${idx + 1}","${acc.code}","${acc.name}","${acc.dept}","${acc.email}","${acc.returnedCount || 0}","${ptsDisplay}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `CTU_LostFound_Bang_Diem_Vinh_Danh_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast("Đã tải xuống file CSV Điểm người dùng (Bảng vinh danh)!", "success");
+    }
+
+    function refreshAdminData() {
+      updateMetrics();
+      filterPosts();
+      filterAccounts();
+      showToast("Đã làm mới dữ liệu hệ thống!", "info");
+    }
+
+    // -----------------------------------------------------------------------
+    // 10. KHỞI CHẠY TRANG
+    // -----------------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Kiểm tra quyền truy cập (Route Guard bảo vệ)
+      const isLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
+      const userRole = localStorage.getItem("ctu_user_role");
+      if (!isLoggedIn || userRole !== "admin") {
+        window.location.href = "login.html";
+        return;
+      }
+
+      // 2. Cập nhật chỉ số & Render
+      updateMetrics();
+      filterPosts();
+      filterAccounts();
+
+      // 3. Tab query param
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam === "accounts") {
+        switchAdminTab("accounts");
+      } else {
+        switchAdminTab("posts");
+      }
+    });
+  </script>
+
+</body>
+</html>

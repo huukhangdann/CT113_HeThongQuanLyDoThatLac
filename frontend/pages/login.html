@@ -436,7 +436,7 @@
               <label class="block text-xs font-semibold text-[#1b1c1c] uppercase tracking-wider mb-1.5">
                 Email / Số điện thoại / Mã số SV
               </label>
-              <input type="text" required placeholder="Mã số SV hoặc @sv.edu.vn" value="B2404991" class="w-full px-4 py-2.5 rounded-lg text-sm bg-white text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 transition-all outline-none placeholder:text-[#797675]/60">
+              <input id="username-input" type="text" required placeholder="Mã số SV hoặc @sv.edu.vn" value="B2404991" class="w-full px-4 py-2.5 rounded-lg text-sm bg-white text-[#1b1c1c] border border-[#e7e1df] focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/15 transition-all outline-none placeholder:text-[#797675]/60">
             </div>
 
             <!-- Input 2: Mật khẩu với icon con mắt -->
@@ -496,6 +496,17 @@
                 <span>Đăng nhập bằng Google (@sv.edu.vn)</span>
               </button>
             </div>
+
+            <!-- Gợi ý tài khoản quản trị thử nghiệm -->
+            <div class="mt-3 p-2.5 rounded-xl bg-[#f6f4f2] border border-[#e7e1df] flex items-center justify-between text-xs text-[#4a4746]">
+              <span class="flex items-center gap-1.5 font-medium">
+                <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Tài khoản Admin: <strong class="text-[#1b1c1c]">admin991</strong> / <strong class="text-[#1b1c1c]">abcd</strong>
+              </span>
+              <button type="button" onclick="document.getElementById('username-input').value='admin991'; document.getElementById('password-input').value='abcd';" class="text-xs text-[#35483d] font-semibold hover:underline cursor-pointer">
+                Điền nhanh
+              </button>
+            </div>
           </form>
         </div>
 
@@ -530,10 +541,28 @@
     // Khi đang ở trang đăng nhập (trạng thái đăng xuất)
     // Đảm bảo ctu_user_logged_in là 'false' để khi bấm Về trang chủ, Header hiển thị trạng thái chưa đăng nhập
     localStorage.setItem('ctu_user_logged_in', 'false');
+    localStorage.removeItem('ctu_user_role');
 
     function handleLogin() {
+      const usernameInput = document.getElementById('username-input');
+      const passwordInput = document.getElementById('password-input');
+      const username = usernameInput ? usernameInput.value.trim() : '';
+      const password = passwordInput ? passwordInput.value : '';
+
+      if (username === 'admin991' && password === 'abcd') {
+        localStorage.setItem('ctu_user_logged_in', 'true');
+        localStorage.setItem('ctu_user_role', 'admin');
+        localStorage.setItem('ctu_user_name', 'Quản trị viên');
+        localStorage.setItem('ctu_user_id', 'admin991');
+        window.location.href = 'admin.html';
+        return;
+      }
+
       // Khi người dùng bấm Đăng nhập thành công -> lưu trạng thái đăng nhập
       localStorage.setItem('ctu_user_logged_in', 'true');
+      localStorage.setItem('ctu_user_role', 'user');
+      localStorage.setItem('ctu_user_name', 'Phan Minh Khang');
+      localStorage.setItem('ctu_user_id', username || 'B2404991');
       window.location.href = 'index.html';
     }
   </script>

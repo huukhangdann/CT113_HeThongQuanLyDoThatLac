@@ -80,10 +80,20 @@ class AppHeader extends HTMLElement {
 
     // Kiểm tra trạng thái đăng nhập từ localStorage
     const isLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
+    const userRole = localStorage.getItem("ctu_user_role") || "user";
+    const userName = localStorage.getItem("ctu_user_name") || (userRole === "admin" ? "Quản trị viên" : "Phan Minh Khang");
+    const userId = localStorage.getItem("ctu_user_id") || (userRole === "admin" ? "admin991" : "B2404991");
+    const isAdmin = userRole === "admin" || currentPath === "admin.html";
 
     // 10. Sau khi ở trạng thái đăng xuất chỉ có thể truy cập trang chủ còn nếu cố click vào các trang khác hay card, đăng tin thì lập tức nhảy sang trang đăng nhập
     const allowedGuestPages = ["index.html", "login.html", "register.html", ""];
     if (!isLoggedIn && !allowedGuestPages.includes(currentPath)) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Bảo vệ trang quản trị: Phải đăng nhập và có quyền admin
+    if (currentPath === "admin.html" && (!isLoggedIn || userRole !== "admin")) {
       window.location.href = "login.html";
       return;
     }
@@ -256,9 +266,9 @@ class AppHeader extends HTMLElement {
 
         <!-- User Avatar & Popup Dropdown -->
         <div class="relative flex items-center">
-          <button id="user-menu-btn" type="button" class="hidden md:flex header-action-btn items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors" title="Tài khoản: Phan Minh Khang">
-            <span class="material-symbols-outlined text-[22px]">account_circle</span>
-            <span>Phan Minh Khang</span>
+          <button id="user-menu-btn" type="button" class="hidden md:flex header-action-btn items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors" title="Tài khoản: ${userName}">
+            <span class="material-symbols-outlined text-[22px] ${userRole === 'admin' ? 'text-amber-500' : ''}">${userRole === 'admin' ? 'shield_person' : 'account_circle'}</span>
+            <span>${userName}</span>
           </button>
 
           <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-[280px] z-50 bg-white dark:bg-[#1e1f22] text-[#1b1c1c] dark:text-[#dbdee1] rounded-2xl border border-[#e7e1df] dark:border-[#35363c] shadow-2xl text-left">
@@ -270,8 +280,11 @@ class AppHeader extends HTMLElement {
             </div>
             <div class="px-4 py-3.5 bg-white dark:bg-[#1e1f22] border-b border-[#f0edec] dark:border-[#2e3035] rounded-t-2xl flex items-center justify-between">
               <div>
-                <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Phan Minh Khang</h3>
-                <p class="text-xs font-medium text-[#797675] dark:text-stone-400 mt-0.5">MSSV: B2404991</p>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">${userName}</h3>
+                  ${userRole === 'admin' ? '<span class="px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300 rounded">ADMIN</span>' : ''}
+                </div>
+                <p class="text-xs font-medium text-[#797675] dark:text-stone-400 mt-0.5">${userRole === 'admin' ? 'Mã: admin991' : 'MSSV: ' + (userId || 'B2404991')}</p>
               </div>
               <button type="button" id="close-user-menu-btn" class="w-7 h-7 rounded-full hover:bg-[#f0edec] dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:text-stone-400 dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Đóng">
                 <span class="material-symbols-outlined text-[18px]">close</span>
@@ -282,13 +295,15 @@ class AppHeader extends HTMLElement {
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
-                <span class="truncate">khangb2404991@student.ctu.edu.vn</span>
+                <span class="truncate">${userRole === 'admin' ? 'admin991@ctu.edu.vn' : 'khangb2404991@student.ctu.edu.vn'}</span>
               </div>
               <div class="flex items-center gap-3 p-2 text-xs text-[#4a4746] dark:text-stone-300 rounded-md">
                 <svg class="w-4 h-4 text-[#797675] dark:text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  ${userRole === 'admin' 
+                    ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>' 
+                    : '<path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>'}
                 </svg>
-                <span>09 6868 6868</span>
+                <span>${userRole === 'admin' ? 'Phòng Công tác Sinh viên (PCTSV)' : '09 6868 6868'}</span>
               </div>
             </div>
             <div class="p-2">
@@ -329,7 +344,7 @@ class AppHeader extends HTMLElement {
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 flex items-center justify-between h-16 md:h-20">
           
           <!-- Logo Brand -->
-          <a href="index.html" class="flex items-center gap-2 group shrink-0">
+          <a href="${currentPath === 'admin.html' ? 'admin.html' : 'index.html'}" class="flex items-center gap-2 group shrink-0">
             <div class="w-8 h-8 flex items-center justify-center header-brand-icon transition-transform group-hover:scale-105">
               <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"></path>
@@ -339,12 +354,19 @@ class AppHeader extends HTMLElement {
           </a>
 
           <!-- Navigation Links (Desktop: md:flex) -->
+          ${currentPath === 'admin.html' ? `
+          <nav class="hidden md:flex items-center gap-8 h-full">
+            <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('posts');" id="admin-nav-posts" class="header-nav-link header-nav-active flex items-center h-full text-sm font-semibold border-b-2">Quản lý bài đăng</a>
+            <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('accounts');" id="admin-nav-accounts" class="header-nav-link flex items-center h-full text-sm font-medium transition-colors">Quản lý tài khoản</a>
+          </nav>
+          ` : `
           <nav class="hidden md:flex items-center gap-8 h-full">
             <a href="index.html" class="${getLinkClass("index.html")}">Trang chủ</a>
             <a href="${isLoggedIn ? 'find.html' : 'login.html'}" class="${getLinkClass("find.html")}">Tìm đồ</a>
             <a href="${isLoggedIn ? 'post.html' : 'login.html'}" class="${getLinkClass(["post.html", "post-lost.html", "post-found.html"])}">Đăng tin</a>
             <a href="${isLoggedIn ? 'notifications.html' : 'login.html'}" class="${getLinkClass(["notifications.html", "requests.html", "match-detail.html", "request-detail.html", "claim.html"])}">Thông báo</a>
           </nav>
+          `}
 
           <!-- User Info & Action Cluster -->
           <div class="flex items-center gap-3">
@@ -355,6 +377,18 @@ class AppHeader extends HTMLElement {
       </header>
 
       <!-- Bottom Tab Bar (ở dưới cùng màn hình điện thoại md:hidden) -->
+      ${currentPath === 'admin.html' ? `
+      <nav id="mobile-bottom-tab-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#18191c]/95 backdrop-blur-md border-t border-[#E6E4DE] dark:border-[#35363c] flex md:hidden items-center justify-around h-16 px-4 shadow-lg transition-colors">
+        <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('posts');" id="admin-mobile-tab-posts" class="flex flex-col items-center justify-center flex-1 py-1 text-[var(--theme-accent,#1f3227)] dark:text-emerald-400 font-bold" title="Quản lý bài đăng">
+          <span class="material-symbols-outlined text-[24px]">article</span>
+          <span class="text-[10px] font-medium mt-0.5">Bài đăng</span>
+        </a>
+        <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('accounts');" id="admin-mobile-tab-accounts" class="flex flex-col items-center justify-center flex-1 py-1 text-[#777771] hover:text-[#1b1c1b] dark:text-stone-400 dark:hover:text-white" title="Quản lý tài khoản">
+          <span class="material-symbols-outlined text-[24px]">manage_accounts</span>
+          <span class="text-[10px] font-medium mt-0.5">Tài khoản</span>
+        </a>
+      </nav>
+      ` : `
       <nav id="mobile-bottom-tab-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#18191c]/95 backdrop-blur-md border-t border-[#E6E4DE] dark:border-[#35363c] flex md:hidden items-center justify-around h-16 px-1 shadow-lg transition-colors">
         <a href="index.html" class="flex flex-col items-center justify-center flex-1 py-1 ${getMobileTabClass('index.html')}" title="Trang chủ">
           <span class="material-symbols-outlined text-[24px]">home</span>
@@ -376,6 +410,7 @@ class AppHeader extends HTMLElement {
           <span class="text-[10px] font-medium mt-0.5">Thông báo</span>
         </a>
       </nav>
+      `}
 
       <!-- AssistiveTouch Floating Button trên Mobile (kéo thả tự do khắp màn hình như AssistiveTouch iPhone) -->
       <div id="assistive-touch-container" class="fixed z-50 md:hidden select-none" style="top: 240px; right: 12px; touch-action: none;">
@@ -385,12 +420,13 @@ class AppHeader extends HTMLElement {
           <span id="assistive-touch-icon" class="material-symbols-outlined text-[22px] transition-transform duration-200">chevron_left</span>
         </button>
 
-        <!-- Menu 3 chức năng popup của AssistiveTouch (Theme, Thông báo, Tài khoản) -->
+        <!-- Menu chức năng popup của AssistiveTouch (Theme, Thông báo, Tài khoản) -->
         <div id="assistive-touch-menu" class="hidden absolute right-0 top-14 bg-[#1e1f22]/95 backdrop-blur-md p-2 rounded-2xl border border-white/20 shadow-2xl flex flex-col gap-1.5 min-w-[155px] z-50">
           <button type="button" id="mobile-action-theme" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-white hover:bg-white/10 transition-colors w-full text-left cursor-pointer">
             <span class="material-symbols-outlined text-[19px] text-emerald-400">palette</span>
             <span>Giao diện</span>
           </button>
+          ${currentPath === 'admin.html' ? '' : `
           <button type="button" id="mobile-action-notif" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-white hover:bg-white/10 transition-colors w-full text-left relative cursor-pointer">
             <div class="relative flex items-center">
               <span class="material-symbols-outlined text-[19px] text-amber-400">notifications</span>
@@ -398,8 +434,9 @@ class AppHeader extends HTMLElement {
             </div>
             <span>Thông báo</span>
           </button>
+          `}
           <button type="button" id="mobile-action-user" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-white hover:bg-white/10 transition-colors w-full text-left cursor-pointer">
-            <span class="material-symbols-outlined text-[19px] text-blue-400">account_circle</span>
+            <span class="material-symbols-outlined text-[19px] text-blue-400">${userRole === 'admin' ? 'shield_person' : 'account_circle'}</span>
             <span>Tài khoản</span>
           </button>
         </div>
@@ -1024,6 +1061,9 @@ class AppHeader extends HTMLElement {
     if (logoutBtn) {
       logoutBtn.addEventListener("click", () => {
         localStorage.setItem("ctu_user_logged_in", "false");
+        localStorage.removeItem("ctu_user_role");
+        localStorage.removeItem("ctu_user_name");
+        localStorage.removeItem("ctu_user_id");
       });
     }
 
@@ -1031,6 +1071,9 @@ class AppHeader extends HTMLElement {
     if (switchAccountBtn) {
       switchAccountBtn.addEventListener("click", () => {
         localStorage.setItem("ctu_user_logged_in", "false");
+        localStorage.removeItem("ctu_user_role");
+        localStorage.removeItem("ctu_user_name");
+        localStorage.removeItem("ctu_user_id");
       });
     }
 
