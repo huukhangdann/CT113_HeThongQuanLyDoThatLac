@@ -2,929 +2,1098 @@
 <html lang="vi">
 
 <head>
+  <!-- Favicon / Chrome Tab Logo (Owl Mascot) -->
+  <link rel="icon" type="image/svg+xml" href="../mascot/assets/owl-logo.svg" />
+  <link rel="icon" type="image/png" href="../mascot/assets/owl-logo-32.png" />
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Báo Mất Đồ - CTU Lost & Found | Đại học Cần Thơ</title>
+  <title>Đăng tin báo mất đồ | CTU Lost & Found - Đại học Cần Thơ</title>
 
-  <!-- Google Fonts: Be Vietnam Pro -->
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <!-- Google Fonts: Be Vietnam Pro & Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
     rel="stylesheet" />
-
-  <link href="../css/index.css" rel="stylesheet" />
-
-  <!-- Material Symbols Outlined -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS v3 via CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <style>
-    select {
-      background-image: none !important;
-    }
-  </style>
-  <script id="tailwind-config">
+  <script>
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "primary-fixed-dim": "#b6ccbd",
-            "on-background": "#1b1c1c",
-            "surface-container-high": "#eae7e7",
-            "outline-variant": "#c3c8c2",
-            "on-surface-variant": "#424844",
-            "on-secondary-fixed": "#1b1c18",
-            "on-error": "#ffffff",
-            "tertiary-container": "#3f4541",
-            "surface-container-highest": "#e4e2e1",
-            "surface-container": "#f0eded",
-            "surface-bright": "#fcf9f8",
-            "on-primary": "#ffffff",
-            primary: "#1f3227",
-            "error-container": "#ffdad6",
-            "on-secondary-container": "#64655f",
-            "on-primary-fixed": "#0d1f16",
-            error: "#ba1a1a",
-            "on-primary-container": "#a1b6a8",
-            "tertiary-fixed-dim": "#c2c8c2",
-            "on-tertiary-container": "#acb2ad",
-            "on-secondary-fixed-variant": "#474742",
-            "primary-container": "#35483d",
-            "secondary-fixed": "#e4e3db",
-            "on-tertiary": "#171d19",
-            "surface-container-lowest": "#ffffff",
-            "on-secondary": "#ffffff",
-            "on-primary-fixed-variant": "#384b40",
-            "on-surface": "#1b1c1c",
-            "inverse-on-surface": "#f3f0ef",
-            "on-error-container": "#93000a",
-            "tertiary-fixed": "#dee4de",
-            "secondary-container": "#e4e3db",
-            secondary: "#5e5f59",
-            "surface-variant": "#e4e2e1",
-            "on-tertiary": "#ffffff",
-            "surface-dim": "#dcd9d9",
-            "surface-tint": "#4f6357",
-            background: "#fcf9f8",
-            surface: "#fcf9f8",
-            "inverse-surface": "#303030",
-            "secondary-fixed-dim": "#c8c7c0",
-            "inverse-primary": "#b6ccbd",
-            outline: "#737874",
-            "on-tertiary-fixed-variant": "#424844",
-            "surface-container-low": "#f6f3f2",
-            tertiary: "#292f2b",
-            "primary-fixed": "#d2e8d9",
-          },
-          borderRadius: {
-            DEFAULT: "0.25rem",
-            lg: "0.5rem",
-            xl: "0.75rem",
-            "2xl": "1rem",
-            full: "9999px",
+            ctu: {
+              primary: "#1f3227",
+              container: "#35483d",
+              amber: "#d97706",
+              darkAmber: "#92400e",
+              surface: "#fcf9f8",
+              border: "#e7e1df",
+              subtle: "#f6f3f2"
+            }
           },
           fontFamily: {
-            "headline-section": ["Be Vietnam Pro"],
-            "label-action": ["Be Vietnam Pro"],
-            "body-default": ["Be Vietnam Pro"],
-            "caption-meta": ["Be Vietnam Pro"],
-            "body-compact": ["Be Vietnam Pro"],
-            "title-item": ["Be Vietnam Pro"],
-            "headline-hero": ["Be Vietnam Pro"],
-          },
-          fontSize: {
-            "headline-section": [
-              "24px",
-              {
-                lineHeight: "32px",
-                letterSpacing: "-0.015em",
-                fontWeight: "600",
-              },
-            ],
-            "label-action": [
-              "13px",
-              {
-                lineHeight: "18px",
-                letterSpacing: "0.01em",
-                fontWeight: "600",
-              },
-            ],
-            "body-default": [
-              "15px",
-              { lineHeight: "24px", fontWeight: "400" },
-            ],
-            "caption-meta": [
-              "12px",
-              { lineHeight: "16px", fontWeight: "400" },
-            ],
-            "body-compact": [
-              "14px",
-              { lineHeight: "22px", fontWeight: "400" },
-            ],
-            "title-item": [
-              "16px",
-              {
-                lineHeight: "24px",
-                letterSpacing: "-0.005em",
-                fontWeight: "600",
-              },
-            ],
-            "headline-hero": [
-              "44px",
-              {
-                lineHeight: "52px",
-                letterSpacing: "-0.02em",
-                fontWeight: "700",
-              },
-            ],
-          },
-        },
-      },
+            sans: ["'Be Vietnam Pro'", "sans-serif"],
+          }
+        }
+      }
     };
   </script>
 
+  <!-- Lucian UX/UI Prompt #318 Scoped Tokens & Styles (Horizontal Stepper Adaptation) -->
+  <!-- Lucian UX/UI Prompt #318 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#318 -->
   <style>
+    :root {
+      --ux-surface: #ffffff;
+      --ux-ink: #16151B;
+      --ux-ink-2: #57535F;
+      --ux-ink-3: #8E8A97;
+      --ux-line: rgba(22, 21, 27, 0.12);
+      --ux-line-2: rgba(22, 21, 27, 0.2);
+      --ux-accent: #b45309;
+      --ux-accent-ink: #ffffff;
+      --ux-spring: cubic-bezier(.34, 1.45, .64, 1);
+      --ux-shadow-strong: rgba(180, 83, 9, 0.15);
+    }
+    .dark {
+      --ux-surface: #1e1f22;
+      --ux-ink: #F4F0E8;
+      --ux-ink-2: rgba(244, 240, 232, 0.68);
+      --ux-ink-3: rgba(244, 240, 232, 0.42);
+      --ux-line: rgba(255, 255, 255, 0.1);
+      --ux-line-2: rgba(255, 255, 255, 0.2);
+      --ux-accent: #fbbf24;
+      --ux-accent-ink: #1c1917;
+      --ux-shadow-strong: rgba(0, 0, 0, 0.4);
+    }
+
+    /* Lucian #318 Horizontal Timeline Stepper */
+    .u318-horizontal {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      background: var(--ux-surface);
+      box-shadow: 0 0 0 1px var(--ux-line), 0 10px 25px -10px var(--ux-shadow-strong);
+      padding: 18px 20px 16px;
+      margin-bottom: 24px;
+    }
+    .u318-hd {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .u318-hd b {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ux-ink);
+    }
+    .u318-hd span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ux-ink-3);
+      margin-top: 2px;
+    }
+    .u318-track {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .u318-track svg {
+      width: 100%;
+      height: 44px;
+      overflow: visible;
+      display: block;
+    }
+    .u318-guide {
+      fill: none;
+      stroke: var(--ux-line-2);
+      stroke-width: 3;
+      stroke-dasharray: 4 6;
+      stroke-linecap: round;
+    }
+    .u318-route {
+      fill: none;
+      stroke: var(--ux-accent);
+      stroke-width: 4;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.45s var(--ux-spring);
+    }
+    .u318-dot {
+      fill: var(--ux-surface);
+      stroke: var(--ux-line-2);
+      stroke-width: 3;
+      transition: stroke 0.3s, fill 0.3s;
+      cursor: pointer;
+    }
+    .u318-dot.on {
+      stroke: var(--ux-accent);
+    }
+    .u318-dot.done {
+      fill: var(--ux-accent);
+      stroke: var(--ux-accent);
+    }
+    .u318-dotc {
+      fill: var(--ux-accent);
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      transform: scale(0);
+      transition: transform 0.4s var(--ux-spring);
+      pointer-events: none;
+    }
+    .u318-dotc.on {
+      transform: scale(1);
+    }
+    .u318-dot-txt {
+      font-size: 11px;
+      font-weight: 700;
+      fill: var(--ux-ink-2);
+      text-anchor: middle;
+      dominant-baseline: central;
+      pointer-events: none;
+      font-family: inherit;
+    }
+    .u318-dot-txt.done {
+      fill: var(--ux-accent-ink);
+    }
+
+    /* Labels under each vertex */
+    .u318-labels {
+      display: flex;
+      justify-content: space-between;
+      max-width: 640px;
+      margin: 4px auto 0;
+      padding: 0 4px;
+    }
+    .u318-step-lbl {
+      width: 25%;
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--ux-ink-3);
+      transition: color 0.3s, font-weight 0.3s;
+      cursor: pointer;
+    }
+    .u318-step-lbl.on {
+      color: var(--ux-accent);
+      font-weight: 700;
+    }
+
+    /* Step Panels Visibility & Transition */
+    .step-panel {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .step-panel.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body {
+      background-color: var(--theme-bg-page, #fcf9f8);
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
     .material-symbols-outlined {
-      font-variation-settings:
-        "FILL" 0,
-        "wght" 400,
-        "GRAD" 0,
-        "opsz" 24;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      display: inline-block;
+      vertical-align: middle;
       line-height: 1;
     }
+    input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid #b45309;
+      outline-offset: 1px;
+    }
   </style>
+
+  <!-- Shared Global Components & Styles -->
+  <link href="../css/index.css" rel="stylesheet" />
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>
-
-  <!-- Mascot Đồng hành (Module độc lập) -->
-  <link rel="stylesheet" href="../mascot/mascot.css" />
-  <script src="../mascot/mascot.js"></script>
 </head>
 
-<body
-  class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-default text-body-default selection:bg-primary-fixed selection:text-on-primary-fixed">
-  <!-- TOP NAV BAR -->
+<body class="min-h-screen flex flex-col text-[#1b1c1c] antialiased selection:bg-amber-600 selection:text-white">
+  <!-- Top Global Navbar (Web Component: Active 'Đăng tin') -->
   <app-header></app-header>
 
-  <!-- MAIN CANVAS -->
-  <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-6">
-    <!-- Central Form Container -->
-    <div
-      class="bg-surface-container-lowest rounded-2xl border border-outline-variant/70 shadow-sm p-6 lg:p-8 max-w-7xl mx-auto">
-      <!-- Header Form -->
-      <div class="border-b border-outline-variant/40 pb-4 mb-6">
-        <h1 class="text-xl sm:text-2xl font-bold text-on-surface">
-          Thông tin đồ thất lạc
+  <!-- Main Canvas Container -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- Breadcrumb & Mode Selector Header -->
+    <div class="mb-5 pb-4 border-b border-[#e7e1df] dark:border-stone-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <nav class="flex items-center gap-1.5 text-xs text-[#727873] dark:text-stone-400 mb-1" aria-label="Breadcrumb">
+          <a href="index.html" class="hover:text-[#1b1c1c] dark:hover:text-white transition-colors">Trang chủ</a>
+          <span class="text-[10px]">/</span>
+          <a href="post.html" class="hover:text-[#1b1c1c] dark:hover:text-white transition-colors">Đăng tin</a>
+          <span class="text-[10px]">/</span>
+          <span class="text-[#1b1c1c] dark:text-stone-200 font-semibold">Báo mất đồ</span>
+        </nav>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-[#1b1c1c] dark:text-stone-100">
+          Đăng Tin Báo Mất Đồ
         </h1>
       </div>
 
-      <!-- Form Body -->
-      <form class="space-y-6" onsubmit="event.preventDefault()">
-        <!-- KHU VỰC 2 CỘT NGANG -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <!-- CỘT TRÁI (7 Cột): THÔNG TIN VĂN BẢN -->
-          <div class="lg:col-span-7 space-y-4">
-            <!-- Tiêu đề bài đăng -->
-            <div>
-              <label class="block text-label-action text-on-surface mb-1.5" for="post-title">
-                Tiêu đề bài đăng <span class="text-error font-bold">*</span>
-              </label>
-              <input
-                class="w-full h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all"
-                id="post-title" name="post-title" placeholder="VD: Bị rơi ví da nam màu nâu đậm tại C1..." required
-                type="text" value="" />
-            </div>
+      <!-- Tab chuyển đổi giữa Báo mất & Báo nhặt -->
+      <div class="inline-flex p-1 bg-[#f0eded] dark:bg-stone-800 rounded-xl border border-[#e7e1df] dark:border-stone-700 self-start sm:self-auto shrink-0">
+        <a href="post-found.html" class="px-3 py-1 rounded-lg text-xs font-medium text-[#5e5f59] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px]">volunteer_activism</span>
+          <span>Báo nhặt đồ</span>
+        </a>
+        <span class="px-3 py-1 rounded-lg bg-white dark:bg-stone-900 text-xs font-semibold text-[#b45309] dark:text-amber-400 shadow-xs flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px]">search</span>
+          <span>Báo mất đồ</span>
+        </span>
+      </div>
+    </div>
 
-            <!-- Loại đồ vật & Màu sắc -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-label-action text-on-surface mb-1.5" for="item-category">
-                  Loại đồ vật <span class="text-error font-bold text-red-600">*</span>
-                </label>
-                <div class="relative">
-                  <select
-                    class="w-full h-10 px-3 pr-8 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all appearance-none cursor-pointer"
-                    id="item-category" name="item-category" required>
-                    <option value="" disabled selected>-- Chọn loại đồ vật --</option>
-                    <option value="wallet">Ví tiền / Bóp da</option>
-                    <option value="student_card">
-                      Thẻ sinh viên / Thẻ thư viện
-                    </option>
-                    <option value="electronic">
-                      Đồ điện tử (Laptop, Điện thoại...)
-                    </option>
-                    <option value="keys">Chìa khóa xe / Phòng trọ</option>
-                    <option value="documents">
-                      Giấy tờ tùy thân (CCCD, Bằng lái)
-                    </option>
-                    <option value="other">Tài sản khác</option>
-                  </select>
-                  <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-secondary">
-                    <span class="material-symbols-outlined">expand_more</span>
-                  </div>
-                </div>
-              </div>
+    <!-- ================= LUCIAN UX/UI #318 HORIZONTAL STEPPER ================= -->
+    <div class="u318-horizontal">
+      <div class="u318-hd">
+        <b>Quy trình đăng bài</b>
+        <span id="u318-step-subtitle">Bước 1 trên 4: Nhập hình ảnh minh họa</span>
+      </div>
 
-              <!-- Color Filter (Dropdown Popover giống find.html) -->
-              <div class="relative" id="color-filter-wrapper">
-                <label class="block text-label-action text-on-surface mb-1.5 flex items-center gap-1.5">
-                  <span class="material-symbols-outlined text-[16px] text-secondary">palette</span>
-                  <span>Màu sắc <span class="text-error font-bold text-red-600">*</span></span>
-                </label>
+      <div class="u318-track">
+        <svg viewBox="0 0 600 44" aria-label="Quy trình đăng bài báo mất step-by-step">
+          <!-- Guide line (nét đứt xám) -->
+          <path id="u318-guide" class="u318-guide" d="M 60 22 L 540 22" />
+          <!-- Route line (nét vẽ màu tiến độ) -->
+          <path id="u318-route" class="u318-route" d="M 60 22 L 540 22" />
+          <!-- Dots at 4 stops (x = 60, 220, 380, 540) -->
+          <g id="u318-dots-group">
+            <!-- Step 1 Dot -->
+            <circle class="u318-dot on" data-step="1" cx="60" cy="22" r="13" />
+            <circle class="u318-dotc on" data-step="1" cx="60" cy="22" r="6" />
+            <text class="u318-dot-txt done" data-step="1" x="60" y="22">1</text>
 
-                <!-- Nút kích hoạt dropdown màu sắc -->
-                <button type="button" id="color-filter-trigger"
-                  class="w-full h-10 flex items-center justify-between px-3.5 bg-surface-container-lowest hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white transition-all outline-none cursor-pointer font-medium">
-                  <div class="flex items-center gap-2 truncate">
-                    <span id="color-trigger-swatch"
-                      class="w-4 h-4 rounded-full border border-slate-300 bg-slate-200 shrink-0 shadow-xs"></span>
-                    <span id="color-trigger-text" class="truncate text-xs sm:text-sm">Chọn màu sắc</span>
-                  </div>
-                  <span id="color-trigger-arrow"
-                    class="material-symbols-outlined text-[18px] text-[#727873] transition-transform shrink-0">expand_more</span>
-                </button>
+            <!-- Step 2 Dot -->
+            <circle class="u318-dot" data-step="2" cx="220" cy="22" r="13" />
+            <circle class="u318-dotc" data-step="2" cx="220" cy="22" r="6" />
+            <text class="u318-dot-txt" data-step="2" x="220" y="22">2</text>
 
-                <!-- Input ẩn lưu giá trị màu để submit -->
-                <input type="hidden" id="primary-color" name="primary-color" value="" />
+            <!-- Step 3 Dot -->
+            <circle class="u318-dot" data-step="3" cx="380" cy="22" r="13" />
+            <circle class="u318-dotc" data-step="3" cx="380" cy="22" r="6" />
+            <text class="u318-dot-txt" data-step="3" x="380" y="22">3</text>
 
-                <!-- POPOVER CARD MÀU SẮC (Chỉ hiện HEX, nền đồng bộ trang web) -->
-                <div id="color-picker-popover"
-                  class="hidden absolute left-0 right-0 sm:left-auto sm:right-0 top-full mt-2 z-40 w-full sm:w-84 bg-[#fcf9f8] border border-[#e7e1df] rounded-2xl p-4 shadow-xl space-y-3">
-                  <div class="flex items-center justify-between pb-2 border-b border-[#e7e1df]">
-                    <span class="text-xs font-bold text-[#1b1c1b] uppercase tracking-wider flex items-center gap-1.5">
-                      <span class="material-symbols-outlined text-[16px] text-[#35483d]">palette</span>
-                      Màu chủ đạo
-                    </span>
-                    <button type="button" id="color-popover-close-btn"
-                      class="text-[#727873] hover:text-[#1b1c1b] p-1 rounded-full hover:bg-[#f6f3f2] cursor-pointer transition-colors"
-                      title="Đóng">
-                      <span class="material-symbols-outlined text-[18px]">close</span>
-                    </button>
-                  </div>
+            <!-- Step 4 Dot -->
+            <circle class="u318-dot" data-step="4" cx="540" cy="22" r="13" />
+            <circle class="u318-dotc" data-step="4" cx="540" cy="22" r="6" />
+            <text class="u318-dot-txt" data-step="4" x="540" y="22">4</text>
+          </g>
+        </svg>
+      </div>
 
-                  <!-- Khung swatch màu lớn ở trên -->
-                  <div id="primary-color-swatch"
-                    class="h-20 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner bg-[#f6f3f2]"
-                    title="Nhấp để chọn màu chủ đạo">
-                    <span id="primary-swatch-placeholder"
-                      class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
-                      <span class="material-symbols-outlined text-[18px] text-[#35483d]">palette</span>
-                      <span>Nhấp để chọn màu</span>
-                    </span>
-                    <div id="primary-swatch-edit-icon"
-                      class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
-                      <span class="material-symbols-outlined text-[13px]">edit</span>
-                    </div>
-                  </div>
+      <div class="u318-labels">
+        <div class="u318-step-lbl on" data-step="1">Step 1: Hình ảnh</div>
+        <div class="u318-step-lbl" data-step="2">Step 2: Mô tả đồ vật</div>
+        <div class="u318-step-lbl" data-step="3">Step 3: Địa chỉ & Thời gian</div>
+        <div class="u318-step-lbl" data-step="4">Step 4: Liên hệ & Xác nhận</div>
+      </div>
+    </div>
 
-                  <!-- Ẩn input color -->
-                  <input type="color" id="primary-color-input" class="sr-only" />
+    <!-- ================= FORM CHÍNH: CHỈ HIỂN THỊ STEP HIỆN TẠI ================= -->
+    <form id="lost-post-form" onsubmit="event.preventDefault()">
 
-                  <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
-                  <div
-                    class="flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
-                    <span class="text-[#35483d] font-bold text-xs uppercase tracking-wider">HEX</span>
-                    <span id="primary-hex-val" class="text-[#1b1c1b] font-bold tracking-wider text-sm">Chưa chọn</span>
-                  </div>
-
-                  <!-- Thêm màu phụ (ràng buộc chọn xong màu trước mới cộng tiếp) -->
-                  <div class="pt-2 border-t border-[#e7e1df]">
-                    <div class="flex items-center justify-between mb-2">
-                      <span class="text-[11px] font-semibold text-[#1b1c1b]">Màu phụ (tối đa 3 màu):</span>
-                      <button type="button" id="add-sec-color-btn" disabled
-                        class="text-xs font-semibold text-[#35483d] hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:no-underline"
-                        title="Vui lòng chọn Màu chủ đạo trước">
-                        <span class="material-symbols-outlined text-[15px]">add_circle</span>
-                        <span id="add-sec-color-btn-text">Thêm màu phụ</span>
-                      </button>
-                    </div>
-
-                    <!-- Container các card màu phụ -->
-                    <div id="sec-colors-container" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar"></div>
-                  </div>
-
-                  <!-- Nút hoàn tất -->
-                  <div class="flex items-center justify-end pt-2 border-t border-[#e7e1df]">
-                    <button type="button" id="color-popover-done-btn"
-                      class="px-3.5 py-1.5 bg-[#35483d] hover:bg-[#233229] text-white text-xs font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
-                      Xong
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mô tả chi tiết -->
-            <div>
-              <label class="block text-label-action text-on-surface mb-1.5" for="item-description">
-                Mô tả chi tiết đặc điểm nhận dạng
-                <span class="text-error font-bold">*</span>
-              </label>
-              <textarea
-                class="w-full p-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all resize-none"
-                id="item-description" name="item-description" placeholder="Mô tả vết xước, giấy tờ bên trong..."
-                required rows="3"></textarea>
-            </div>
-
-            <!-- Ô NHẬP ĐỊA ĐIỂM NGHI MẤT ĐỒNG BỘ: Chọn khoa -> Chọn tầng mấy -> Chọn phòng (có option hội trường) -->
-            <div class="space-y-3 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/60"
-              id="location-cascade-group">
-              <div class="flex items-center justify-between">
-                <label class="block text-label-action text-on-surface font-semibold text-xs">
-                  Địa điểm nghi mất <span class="text-error font-bold text-red-600">*</span>
-                </label>
-                <span class="text-[11px] text-secondary">Chọn tuần tự</span>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                <!-- Bước 1: Chọn Khoa (Luôn hiển thị) -->
-                <div class="space-y-1" id="loc-step-1-wrapper">
-                  <span class="text-[11px] font-medium text-secondary block">1. Chọn Khoa / Khu</span>
-                  <div class="relative">
-                    <select id="loc-faculty" required
-                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer">
-                      <option value="" disabled selected>-- Chọn Khoa --</option>
-                      <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
-                      <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
-                      <option value="Nhà học C2">Nhà học C2</option>
-                      <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
-                      <option value="Khoa Kinh tế">Khoa Kinh tế</option>
-                      <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
-                      <option value="Khoa Luật">Khoa Luật</option>
-                      <option value="Khoa Sư phạm">Khoa Sư phạm</option>
-                      <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
-                      <option value="Khu vực khác">Khu vực khác</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
-                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Bước 2: Chọn Tầng mấy (Chỉ mở khóa sau khi đã chọn Khoa/Khu) -->
-                <div class="space-y-1" id="loc-step-2-wrapper">
-                  <span class="text-[11px] font-medium text-secondary block">2. Chọn Tầng mấy</span>
-                  <div class="relative">
-                    <select id="loc-floor" disabled
-                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:bg-stone-100 disabled:cursor-not-allowed">
-                      <option value="" disabled selected>-- Chọn tầng --</option>
-                      <option value="1">Tầng 1</option>
-                      <option value="2">Tầng 2</option>
-                      <option value="3">Tầng 3</option>
-                      <option value="4">Tầng 4</option>
-                      <option value="5">Tầng 5</option>
-                      <option value="trệt">Tầng trệt</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
-                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Bước 3: Chọn Phòng học / Hội trường (Chỉ mở khóa sau khi đã chọn Tầng) -->
-                <div class="space-y-1" id="loc-step-3-wrapper">
-                  <span class="text-[11px] font-medium text-secondary block">3. Phòng học / Hội trường</span>
-                  <div class="relative">
-                    <select id="loc-room" disabled
-                      class="w-full h-9 px-2.5 pr-7 bg-surface-container-lowest border border-outline-variant rounded-lg text-xs text-on-surface focus:border-primary-container outline-none transition-all appearance-none cursor-pointer disabled:opacity-50 disabled:bg-stone-100 disabled:cursor-not-allowed">
-                      <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center px-1.5 pointer-events-none text-secondary">
-                      <span class="material-symbols-outlined text-[16px]">expand_more</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Input ẩn lưu giá trị địa điểm đầy đủ gửi form -->
-              <input type="hidden" id="item-location" name="item-location" required value="" />
-
-              <!-- Chỉ hiện chữ sau khi chọn xong, không đặt trong khối tô màu -->
-              <p id="loc-summary" class="hidden text-xs text-on-surface font-medium pt-1">
-                Địa điểm: <strong id="loc-summary-text" class="text-primary font-bold"></strong>
-              </p>
-            </div>
-
-            <!-- Ngày mất & Khung giờ (Hỗ trợ click vào toàn bộ ô để mở picker) -->
-            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-              <div class="sm:col-span-6">
-                <label class="block text-label-action text-on-surface mb-1.5 font-semibold text-xs" for="item-date">
-                  Ngày mất <span class="text-error font-bold text-red-600">*</span>
-                </label>
-                <div class="relative">
-                  <input
-                    class="w-full h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs cursor-pointer"
-                    id="item-date" required type="date" value="" onclick="try{this.showPicker()}catch(e){}" />
-                </div>
-              </div>
-
-              <div class="sm:col-span-6">
-                <label class="block text-label-action text-on-surface mb-1.5 font-semibold text-xs" for="item-time">
-                  Khung giờ nghi mất
-                </label>
-                <div class="relative">
-                  <input
-                    class="w-full h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface focus:border-primary-container outline-none transition-all text-xs cursor-pointer"
-                    id="item-time" type="time" value="" onclick="try{this.showPicker()}catch(e){}" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Thông tin liên hệ -->
-            <div class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50">
-              <label class="block text-label-action text-on-surface mb-1" for="contact-info">
-                Thông tin liên hệ xác minh
-                <span class="text-error font-bold">*</span>
-              </label>
-              <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
-                  <span class="material-symbols-outlined text-[18px]">contact_phone</span>
-                </span>
-                <input
-                  class="w-full h-10 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-compact text-on-surface placeholder:text-secondary/60 focus:border-primary-container outline-none transition-all"
-                  id="contact-info" placeholder="VD: 0912 345 678 (Nguyễn Văn A - K48 CNTT)..." required type="text"
-                  value="" />
-              </div>
-            </div>
+      <!-- ================= STEP 1: NHẬP HÌNH ẢNH MINH HỌA ================= -->
+      <section id="step-panel-1" class="step-panel active bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100 flex items-center gap-1.5">
+              <span>Hình ảnh minh họa đồ vật bị mất</span>
+            </h2>
+            <span class="text-xs text-[#727873]">Tùy chọn (Tối đa 4 ảnh)</span>
           </div>
+          <p class="text-xs text-[#5e5f59] dark:text-stone-400 mt-0.5">
+            Nếu có ảnh chụp trước đây hoặc ảnh tương tự của món đồ, hãy tải lên để người nhặt dễ nhận biết.
+          </p>
+        </div>
 
-          <!-- CỘT PHẢI (5 Cột): HÌNH ẢNH MINH HỌA VÀ MASCOT -->
-          <div class="lg:col-span-5 flex flex-col justify-between">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
-                <label class="block text-label-action text-on-surface">
-                  Hình ảnh minh họa đồ vật
-                </label>
-                <span class="text-caption-meta text-secondary">Tối đa 4 ảnh</span>
-              </div>
+        <input type="file" id="file-upload-input" accept="image/*" multiple class="hidden" />
 
-              <!-- 6. KÉO THẢ ẢNH THAO TÁC ĐƯỢC VỀ MẶT FRONTEND -->
-              <input type="file" id="file-upload-input" accept="image/*" multiple class="hidden" />
+        <!-- Vùng kéo thả ảnh nét đứt (theo Ảnh 1) -->
+        <div id="drop-zone"
+          class="border-2 border-dashed border-[#c3c8c2] dark:border-stone-700 hover:border-[#b45309] rounded-2xl p-8 text-center bg-[#fcf9f8] dark:bg-stone-800/40 transition-colors cursor-pointer group">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-amber-100 dark:bg-amber-950 text-[#b45309] dark:text-amber-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+          </div>
+          <p class="text-sm font-semibold text-[#1b1c1c] dark:text-stone-100">
+            Kéo thả hình ảnh vào đây, hoặc <span class="text-[#b45309] underline underline-offset-2">chọn từ thiết bị</span>
+          </p>
+          <p class="text-xs text-[#727873] dark:text-stone-400 max-w-md mx-auto mt-1 leading-relaxed">
+            Định dạng PNG, JPG dưới 5MB. Có thể bỏ qua nếu bạn không có sẵn ảnh đồ vật.
+          </p>
+        </div>
 
-              <!-- Drag and Drop Zone -->
-              <div id="drop-zone"
-                class="border-2 border-dashed border-outline-variant hover:border-primary-container transition-all duration-200 rounded-xl p-4 bg-surface-container-low/40 flex flex-col items-center justify-center text-center cursor-pointer group">
-                <div
-                  class="w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/60 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform mb-1.5">
-                  <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
-                </div>
-                <p class="text-xs font-medium text-on-surface">
-                  Kéo thả ảnh hoặc
-                  <span class="text-primary-container underline font-semibold">chọn tệp từ máy</span>
-                </p>
-                <p class="text-[11px] text-secondary mt-0.5">
-                  PNG, JPG dưới 5MB (Tối đa 4 ảnh)
-                </p>
-              </div>
-
-              <!-- Khung tải ảnh 4 slot xem trước -->
-              <div class="grid grid-cols-2 gap-2.5 pt-1" id="image-slots-grid">
-                <!-- Slot 1 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
-                  data-index="0">
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 1</span>
-                </div>
-                <!-- Slot 2 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
-                  data-index="1">
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 2</span>
-                </div>
-                <!-- Slot 3 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
-                  data-index="2">
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 3</span>
-                </div>
-                <!-- Slot 4 -->
-                <div
-                  class="image-slot relative border border-dashed border-outline-variant/80 rounded-lg h-24 flex flex-col items-center justify-center text-secondary/60 hover:border-outline hover:text-secondary cursor-pointer transition-colors bg-surface-container-low/20 overflow-hidden"
-                  data-index="3">
-                  <span class="material-symbols-outlined text-[20px]">add</span>
-                  <span class="text-[11px] mt-0.5">Thêm ảnh 4</span>
-                </div>
-              </div>
-
-              <!-- Checkbox tùy chọn thông báo -->
-              <div class="bg-surface-container-low/60 p-3 rounded-xl border border-outline-variant/50 mt-3">
-                <label class="flex items-start gap-2.5 cursor-pointer group">
-                  <input type="checkbox" name="notify-match" checked
-                    class="mt-0.5 w-4 h-4 rounded border-outline-variant text-primary-container focus:ring-primary-container cursor-pointer" />
-                  <span class="text-xs text-on-surface font-medium group-hover:text-primary transition-colors">
-                    Nhận thông báo khi có bài đăng báo nhặt khớp với tin này
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Mascot Đồng hành (Module độc lập - Vị trí thử nghiệm) -->
-            <div id="ctu-mascot-app" class="mascot-post-lost-container"></div>
+        <!-- Lưới 4 ô xem trước ảnh (theo Ảnh 1) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-1" id="image-slots-grid">
+          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#b45309] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="0">
+            <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+            <span class="text-xs font-medium">Thêm ảnh 1</span>
+          </div>
+          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#b45309] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="1">
+            <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+            <span class="text-xs font-medium">Thêm ảnh 2</span>
+          </div>
+          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#b45309] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="2">
+            <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+            <span class="text-xs font-medium">Thêm ảnh 3</span>
+          </div>
+          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#b45309] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="3">
+            <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+            <span class="text-xs font-medium">Thêm ảnh 4</span>
           </div>
         </div>
 
-        <!-- KHU VỰC NÚT HÀNH ĐỘNG (CĂN GIỮA PHÍA DƯỚI 2 CỘT) -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="post.html"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl border border-outline-variant text-on-surface-variant text-sm font-medium hover:bg-surface-container-high transition-colors">
-            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
-            <span>Hủy</span>
+        <!-- Điều hướng Step 1 -->
+        <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
+          <a href="post.html" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors">
+            Hủy
           </a>
-
-          <button
-            class="w-full sm:w-64 inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-primary-container text-on-primary text-sm font-semibold hover:bg-primary transition-all duration-150 active:scale-[0.98] shadow-sm"
-            type="submit">
-            <span>Gửi bài báo mất</span>
-            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          <button type="button" id="btn-next-step-1" class="px-6 py-2.5 rounded-xl bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+            <span>Tiếp tục sang Bước 2</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
           </button>
         </div>
-      </form>
-    </div>
-  </main>
+      </section>
 
-  <!-- FOOTER -->
-  <app-footer></app-footer>
+      <!-- ================= STEP 2: MÔ TẢ ĐỒ VẬT BỊ MẤT (THEO ẢNH 2) ================= -->
+      <section id="step-panel-2" class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100">
+            Thông Tin Món Đồ Bị Thất Lạc
+          </h2>
+          <p class="text-xs text-[#5e5f59] dark:text-stone-400 mt-0.5">
+            Điền chi tiết các đặc điểm nhận dạng để hệ thống đối chiếu với kho đồ nhặt được.
+          </p>
+        </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // ==========================================
-      // TIỆN ÍCH CHUYỂN ĐỔI MÀU SẮC (HEX -> RGB, HSL)
-      // ==========================================
-      const hexToRgb = (hex) => {
-        let c = hex.replace('#', '');
-        if (c.length === 3) c = c.split('').map(x => x + x).join('');
-        const num = parseInt(c, 16);
-        const r = (num >> 16) & 255;
-        const g = (num >> 8) & 255;
-        const b = num & 255;
-        return { r, g, b, str: `${r}, ${g}, ${b}` };
-      };
+        <!-- Row 1: Loại đồ vật & Màu sắc (theo Ảnh 2) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Loại đồ vật -->
+          <div class="space-y-1.5">
+            <label for="item-category" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+              Loại đồ vật <span class="text-[#ba1a1a] font-bold">*</span>
+            </label>
+            <div class="relative">
+              <select id="item-category" required
+                class="w-full h-10 px-3 pr-8 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#b45309] appearance-none cursor-pointer">
+                <option value="" disabled selected>-- Chọn loại đồ vật --</option>
+                <option value="wallet">Ví tiền / Bóp da</option>
+                <option value="student_card">Thẻ sinh viên / Thẻ thư viện</option>
+                <option value="electronic">Đồ điện tử (Laptop, Điện thoại...)</option>
+                <option value="keys">Chìa khóa xe / Phòng trọ</option>
+                <option value="documents">Giấy tờ tùy thân (CCCD, Bằng lái)</option>
+                <option value="apparel">Trang phục / Mũ bảo hiểm / Áo khoác</option>
+                <option value="other">Tài sản khác</option>
+              </select>
+              <span class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
+            </div>
+          </div>
 
-      const hexToHsl = (hex) => {
-        const { r, g, b } = hexToRgb(hex);
-        const rNorm = r / 255, gNorm = g / 255, bNorm = b / 255;
-        const max = Math.max(rNorm, gNorm, bNorm), min = Math.min(rNorm, gNorm, bNorm);
-        let h = 0, s = 0, l = (max + min) / 2;
+          <!-- Màu sắc -->
+          <div class="space-y-1.5">
+            <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px] text-[#727873]">palette</span>
+              <span>Màu sắc <span class="text-[#ba1a1a] font-bold">*</span></span>
+            </label>
+            <input type="hidden" id="primary-color" name="primary-color" value="" required />
 
-        if (max !== min) {
-          const d = max - min;
-          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-          switch (max) {
-            case rNorm: h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0); break;
-            case gNorm: h = (bNorm - rNorm) / d + 2; break;
-            case bNorm: h = (rNorm - gNorm) / d + 4; break;
-          }
-          h /= 6;
-        }
-        return `${Math.round(h * 360)}°, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
-      };
+            <div class="flex items-center gap-2">
+              <button type="button" id="color-picker-trigger"
+                class="flex-1 h-10 px-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 flex items-center justify-between cursor-pointer hover:bg-stone-50">
+                <div class="flex items-center gap-2 truncate">
+                  <span id="primary-swatch-circle" class="w-4 h-4 rounded-full border border-stone-300 bg-stone-200 shrink-0"></span>
+                  <span id="primary-color-text" class="text-xs font-medium">Chọn màu sắc</span>
+                </div>
+                <span class="material-symbols-outlined text-[18px] text-[#727873]">expand_more</span>
+              </button>
+              <input type="color" id="primary-color-input" class="sr-only" value="#b45309" />
 
-      // ==========================================
-      // 2. Ô CHỌN MÀU SẮC DROPDOWN POPOVER (GIỐNG FIND.HTML)
-      // ==========================================
-      const colorFilterTrigger = document.getElementById("color-filter-trigger");
-      const colorTriggerSwatch = document.getElementById("color-trigger-swatch");
-      const colorTriggerText = document.getElementById("color-trigger-text");
-      const colorTriggerArrow = document.getElementById("color-trigger-arrow");
-      const colorPickerPopover = document.getElementById("color-picker-popover");
-      const colorPopoverCloseBtn = document.getElementById("color-popover-close-btn");
-      const colorPopoverDoneBtn = document.getElementById("color-popover-done-btn");
-
-      const primaryColorHidden = document.getElementById("primary-color");
-      const primaryColorInput = document.getElementById("primary-color-input");
-      const primarySwatch = document.getElementById("primary-color-swatch");
-      const primaryPlaceholder = document.getElementById("primary-swatch-placeholder");
-      const primaryEditIcon = document.getElementById("primary-swatch-edit-icon");
-      const primaryHexVal = document.getElementById("primary-hex-val");
-      const addSecColorBtn = document.getElementById("add-sec-color-btn");
-      const addSecColorBtnText = document.getElementById("add-sec-color-btn-text");
-      const secColorsContainer = document.getElementById("sec-colors-container");
-
-      let hasPrimaryColor = false;
-      let secColors = []; // [{ id, hex, isChosen }]
-
-      const toggleColorPopover = (open) => {
-        if (!colorPickerPopover) return;
-        const isHidden = colorPickerPopover.classList.contains("hidden");
-        const shouldOpen = open !== undefined ? open : isHidden;
-        if (shouldOpen) {
-          colorPickerPopover.classList.remove("hidden");
-          if (colorTriggerArrow) colorTriggerArrow.classList.add("rotate-180");
-        } else {
-          colorPickerPopover.classList.add("hidden");
-          if (colorTriggerArrow) colorTriggerArrow.classList.remove("rotate-180");
-        }
-      };
-
-      if (colorFilterTrigger) {
-        colorFilterTrigger.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleColorPopover();
-        });
-      }
-
-      if (colorPopoverCloseBtn) {
-        colorPopoverCloseBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleColorPopover(false);
-        });
-      }
-
-      if (colorPopoverDoneBtn) {
-        colorPopoverDoneBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleColorPopover(false);
-        });
-      }
-
-      if (colorPickerPopover) {
-        colorPickerPopover.addEventListener("click", (e) => e.stopPropagation());
-      }
-
-      document.addEventListener("click", () => {
-        if (colorPickerPopover && !colorPickerPopover.classList.contains("hidden")) {
-          toggleColorPopover(false);
-        }
-      });
-
-      const syncTriggerDisplay = () => {
-        if (!colorTriggerSwatch || !colorTriggerText) return;
-        if (!hasPrimaryColor) {
-          colorTriggerSwatch.style.backgroundColor = "#e2e8f0";
-          colorTriggerText.textContent = "Chọn màu sắc";
-          if (primaryColorHidden) primaryColorHidden.value = "";
-          return;
-        }
-        const hex = primaryColorInput.value.toUpperCase();
-        colorTriggerSwatch.style.backgroundColor = hex;
-        if (primaryColorHidden) primaryColorHidden.value = hex;
-
-        const chosenSecs = secColors.filter(s => s.isChosen);
-        if (chosenSecs.length > 0) {
-          colorTriggerText.textContent = `${hex} (+${chosenSecs.length} màu phụ)`;
-        } else {
-          colorTriggerText.textContent = hex;
-        }
-      };
-
-      const updateAddSecBtnState = () => {
-        if (!addSecColorBtn) return;
-        if (!hasPrimaryColor) {
-          addSecColorBtn.disabled = true;
-          addSecColorBtn.title = "Vui lòng chọn Màu chủ đạo trước";
-          if (addSecColorBtnText) addSecColorBtnText.textContent = "Thêm màu phụ";
-          return;
-        }
-        if (secColors.length >= 3) {
-          addSecColorBtn.disabled = true;
-          addSecColorBtn.title = "Đã đạt tối đa 3 màu phụ";
-          return;
-        }
-        if (secColors.length > 0) {
-          const lastSec = secColors[secColors.length - 1];
-          if (!lastSec.isChosen) {
-            addSecColorBtn.disabled = true;
-            addSecColorBtn.title = `Vui lòng chọn Màu phụ ${secColors.length} trước`;
-            if (addSecColorBtnText) addSecColorBtnText.textContent = `Thêm màu phụ (${secColors.length} trước)`;
-            return;
-          }
-        }
-        addSecColorBtn.disabled = false;
-        addSecColorBtn.title = "Thêm màu phụ";
-        if (addSecColorBtnText) addSecColorBtnText.textContent = "Thêm màu phụ";
-      };
-
-      if (primarySwatch && primaryColorInput) {
-        primarySwatch.addEventListener("click", () => primaryColorInput.click());
-
-        primaryColorInput.addEventListener("input", (e) => {
-          const hex = e.target.value.toUpperCase();
-          hasPrimaryColor = true;
-          primarySwatch.style.backgroundColor = hex;
-          if (primaryPlaceholder) primaryPlaceholder.style.display = "none";
-          if (primaryEditIcon) primaryEditIcon.classList.remove("hidden");
-          if (primaryHexVal) primaryHexVal.textContent = hex;
-          updateAddSecBtnState();
-          syncTriggerDisplay();
-        });
-      }
-
-      const renderSecColors = () => {
-        if (!secColorsContainer) return;
-        secColorsContainer.innerHTML = "";
-
-        secColors.forEach((sec, idx) => {
-          const card = document.createElement("div");
-          card.className = "bg-[#fcf9f8] border border-[#e7e1df] rounded-xl p-2.5 shadow-sm relative";
-          const hexText = sec.isChosen ? sec.hex : "Chưa chọn";
-          const swatchBg = sec.isChosen ? sec.hex : "#f6f3f2";
-
-          card.innerHTML = `
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-semibold text-[#1b1c1b]">Màu phụ ${idx + 1}</span>
-              <button type="button" class="remove-sec-btn text-[#727873] hover:text-red-600 p-0.5 cursor-pointer">
-                <span class="material-symbols-outlined text-[15px]">close</span>
+              <button type="button" id="add-sec-color-btn" title="Thêm màu phụ"
+                class="h-10 px-2.5 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs font-medium text-[#1b1c1c] dark:text-stone-200 flex items-center gap-1 cursor-pointer">
+                <span class="material-symbols-outlined text-[16px]">add</span>
+                <span class="hidden sm:inline">Phụ</span>
               </button>
             </div>
-            <div class="sec-swatch h-10 w-full rounded-lg cursor-pointer border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] transition-transform" style="background-color: ${swatchBg}">
-              <span class="sec-placeholder text-[10px] text-[#727873] font-medium flex items-center gap-1 select-none" style="display: ${sec.isChosen ? 'none' : 'flex'}">
-                <span class="material-symbols-outlined text-[14px] text-[#35483d]">palette</span>
-                <span>Chọn màu</span>
-              </span>
-              <div class="sec-edit-icon ${sec.isChosen ? '' : 'hidden'} absolute top-1 right-1 w-4 h-4 rounded-full bg-black/60 text-white flex items-center justify-center pointer-events-none">
-                <span class="material-symbols-outlined text-[10px]">edit</span>
+
+            <!-- Chip màu phụ -->
+            <div id="sec-colors-container" class="flex flex-wrap gap-1.5 pt-1"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: Tên món đồ bị mất (theo Ảnh 2) -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label for="item-title" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+              Tên món đồ bị mất <span class="text-[#ba1a1a] font-bold">*</span>
+            </label>
+            <span class="text-[11px] text-[#727873]">Ngắn gọn</span>
+          </div>
+          <input type="text" id="item-title" required
+            class="w-full h-10 px-3.5 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#b45309]"
+            placeholder="VD: Mất ví da nam màu nâu tại Giảng đường B1..." />
+        </div>
+
+        <!-- Row 3: Mô tả chi tiết đặc điểm nhận dạng (theo Ảnh 2) -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label for="item-description" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+              Mô tả chi tiết đặc điểm nhận dạng <span class="text-[#ba1a1a] font-bold">*</span>
+            </label>
+            <span id="char-counter" class="text-[11px] text-[#727873]">0/500 ký tự</span>
+          </div>
+          <textarea id="item-description" rows="4" maxlength="500" required
+            class="w-full p-3.5 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#b45309] leading-relaxed resize-none"
+            placeholder="Mô tả vết xước, giấy tờ bên trong ví (CCCD tên ai), nhãn hiệu, móc khóa kèm theo, đặc điểm sticker nhận diện..."></textarea>
+        </div>
+
+        <!-- Điều hướng Step 2 -->
+        <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
+          <button type="button" id="btn-back-step-2" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span>Quay lại Bước 1</span>
+          </button>
+          <button type="button" id="btn-next-step-2" class="px-6 py-2.5 rounded-xl bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+            <span>Tiếp tục sang Bước 3</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= STEP 3: ĐỊA CHỈ & THỜI GIAN NGHI MẤT (THEO ẢNH 4) ================= -->
+      <section id="step-panel-3" class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100">
+            Địa Chỉ & Mốc Thời Gian Nghi Thất Lạc
+          </h2>
+          <p class="text-xs text-[#5e5f59] dark:text-stone-400 mt-0.5">
+            Xác định khu vực trong trường nơi bạn nghi ngờ đã bỏ quên hoặc đánh rơi đồ.
+          </p>
+        </div>
+
+        <!-- Hộp Địa điểm nghi mất (3 cấp tuần tự theo Ảnh 4) -->
+        <div class="space-y-3 bg-[#fcf9f8] dark:bg-stone-800/40 p-4 rounded-xl border border-[#e7e1df] dark:border-stone-700">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+              Địa điểm nghi mất <span class="text-[#ba1a1a] font-bold">*</span>
+            </label>
+            <span class="text-[11px] text-[#727873]">Chọn tuần tự</span>
+          </div>
+
+          <input type="hidden" id="item-location" name="item-location" required value="" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- 1. Chọn Khoa / Khu -->
+            <div class="space-y-1">
+              <span class="text-[11px] font-medium text-[#5e5f59] dark:text-stone-400">1. Chọn Khoa / Khu</span>
+              <div class="relative">
+                <select id="loc-faculty" required
+                  class="w-full h-10 px-2.5 pr-7 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-lg text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#b45309] appearance-none cursor-pointer">
+                  <option value="" disabled selected>-- Chọn Khoa --</option>
+                  <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
+                  <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
+                  <option value="Nhà học C2">Nhà học C2</option>
+                  <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
+                  <option value="Khoa Kinh tế">Khoa Kinh tế</option>
+                  <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
+                  <option value="Khoa Luật">Khoa Luật</option>
+                  <option value="Khoa Sư phạm">Khoa Sư phạm</option>
+                  <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
+                  <option value="Khu vực khác">Khu vực khác</option>
+                </select>
+                <span class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
               </div>
             </div>
-            <input type="color" class="sec-input sr-only" value="${sec.hex || "#3b82f6"}" />
-            <div class="mt-1.5 flex items-center justify-between font-mono py-1 px-2 bg-[#f6f3f2] rounded border border-[#e7e1df] text-[10px]">
-              <span class="text-[#35483d] font-bold">HEX</span>
-              <span class="sec-hex-val text-[#1b1c1b] font-bold">${hexText}</span>
+
+            <!-- 2. Chọn Tầng mấy -->
+            <div class="space-y-1">
+              <span class="text-[11px] font-medium text-[#5e5f59] dark:text-stone-400">2. Chọn Tầng mấy</span>
+              <div class="relative">
+                <select id="loc-floor" disabled
+                  class="w-full h-10 px-2.5 pr-7 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-lg text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#b45309] appearance-none cursor-pointer disabled:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <option value="" disabled selected>-- Chọn tầng --</option>
+                  <option value="1">Tầng 1</option>
+                  <option value="2">Tầng 2</option>
+                  <option value="3">Tầng 3</option>
+                  <option value="4">Tầng 4</option>
+                  <option value="5">Tầng 5</option>
+                  <option value="trệt">Tầng trệt</option>
+                </select>
+                <span class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
+              </div>
             </div>
-          `;
 
-          const swatch = card.querySelector(".sec-swatch");
-          const input = card.querySelector(".sec-input");
-          const rmBtn = card.querySelector(".remove-sec-btn");
-          const hexValSpan = card.querySelector(".sec-hex-val");
-          const placeholder = swatch.querySelector(".sec-placeholder");
-          const editIcon = swatch.querySelector(".sec-edit-icon");
+            <!-- 3. Phòng học / Hội trường -->
+            <div class="space-y-1">
+              <span class="text-[11px] font-medium text-[#5e5f59] dark:text-stone-400">3. Phòng học / Hội trường</span>
+              <div class="relative">
+                <select id="loc-room" disabled
+                  class="w-full h-10 px-2.5 pr-7 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-lg text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#b45309] appearance-none cursor-pointer disabled:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
+                </select>
+                <span class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
+              </div>
+            </div>
+          </div>
 
-          swatch.addEventListener("click", () => input.click());
+          <p id="loc-summary" class="hidden text-xs text-[#b45309] dark:text-amber-400 font-medium pt-1">
+            Địa điểm: <strong id="loc-summary-text" class="font-bold"></strong>
+          </p>
+        </div>
 
-          input.addEventListener("input", (e) => {
-            const hex = e.target.value.toUpperCase();
-            sec.hex = hex;
-            sec.isChosen = true;
-            swatch.style.backgroundColor = hex;
-            if (placeholder) placeholder.style.display = "none";
-            if (editIcon) editIcon.classList.remove("hidden");
-            if (hexValSpan) hexValSpan.textContent = hex;
-            updateAddSecBtnState();
-            syncTriggerDisplay();
-          });
+        <!-- Hàng: Ngày mất & Khung giờ (theo Ảnh 4) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="item-date" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+              Ngày mất <span class="text-[#ba1a1a] font-bold">*</span>
+            </label>
+            <input type="date" id="item-date" required
+              class="w-full h-10 px-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#b45309] cursor-pointer" />
+          </div>
 
-          rmBtn.addEventListener("click", () => {
-            secColors = secColors.filter(s => s.id !== sec.id);
-            renderSecColors();
-            updateAddSecBtnState();
-            syncTriggerDisplay();
-          });
+          <div class="space-y-1.5">
+            <label for="item-time" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+              Khung giờ nghi mất
+            </label>
+            <input type="time" id="item-time"
+              class="w-full h-10 px-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#b45309] cursor-pointer" />
+          </div>
+        </div>
 
-          secColorsContainer.appendChild(card);
-        });
+        <!-- Điều hướng Step 3 -->
+        <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
+          <button type="button" id="btn-back-step-3" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span>Quay lại Bước 2</span>
+          </button>
+          <button type="button" id="btn-next-step-3" class="px-6 py-2.5 rounded-xl bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+            <span>Tiếp tục sang Liên hệ & Xác nhận</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
+        </div>
+      </section>
 
-        updateAddSecBtnState();
-      };
+      <!-- ================= STEP 4: THÔNG TIN LIÊN HỆ & XÁC NHẬN TIN BÁO MẤT ================= -->
+      <section id="step-panel-4" class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#b45309] text-2xl">contact_phone</span>
+            <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100">
+              Thông Tin Liên Hệ & Xác Nhận Báo Mất
+            </h2>
+          </div>
+          <p class="text-xs text-[#5e5f59] dark:text-stone-400 mt-1">
+            Cung cấp phương thức liên lạc để người nhặt được đồ có thể liên hệ trả lại cho bạn.
+          </p>
+        </div>
 
-      if (addSecColorBtn) {
-        addSecColorBtn.addEventListener("click", () => {
-          if (!hasPrimaryColor || secColors.length >= 3) return;
-          if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) return;
+        <!-- Ô nhập thông tin liên hệ -->
+        <div class="space-y-1.5">
+          <label for="contact-info" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+            Số điện thoại & Tên người nhận liên hệ <span class="text-[#ba1a1a] font-bold">*</span>
+          </label>
+          <div class="relative">
+            <span class="material-symbols-outlined text-[18px] text-[#727873] absolute left-3 top-2.5 pointer-events-none">contact_phone</span>
+            <input type="text" id="contact-info" required
+              class="w-full h-10 pl-9 pr-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#b45309]"
+              placeholder="VD: 0912 345 678 (Nguyễn Văn A - K48 CNTT)" />
+          </div>
+        </div>
 
-          secColors.push({
-            id: Date.now() + Math.random(),
-            hex: null,
-            isChosen: false
-          });
+        <!-- Tùy chọn nhận thông báo ghép đôi -->
+        <div class="p-3.5 rounded-xl bg-[#fcf9f8] dark:bg-stone-800/50 border border-[#e7e1df] dark:border-stone-700">
+          <label class="flex items-start gap-2.5 cursor-pointer">
+            <input type="checkbox" id="notify-match" name="notify-match" checked
+              class="mt-0.5 w-4 h-4 rounded border-[#c3c8c2] text-[#b45309] focus:ring-[#b45309] cursor-pointer" />
+            <div>
+              <span class="text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 block">
+                Nhận thông báo khi có bài đăng báo nhặt khớp với tin này
+              </span>
+              <span class="text-[11px] text-[#5e5f59] dark:text-stone-400 block mt-0.5">
+                Hệ thống sẽ gửi chuông thông báo ngay khi có bài đăng cùng danh mục hoặc địa điểm bạn tìm kiếm.
+              </span>
+            </div>
+          </label>
+        </div>
 
-          renderSecColors();
-        });
+        <!-- Điều hướng Step 4: Gửi bài báo mất -->
+        <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
+          <button type="button" id="btn-back-step-4" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span>Quay lại Bước 3</span>
+          </button>
+          <button type="submit" id="btn-submit-post" class="px-8 py-2.5 rounded-xl bg-[#b45309] hover:bg-[#92400e] text-white text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer shadow-sm">
+            <span class="material-symbols-outlined text-[18px]">send</span>
+            <span>Gửi bài báo mất đồ</span>
+          </button>
+        </div>
+      </section>
+
+    </form>
+  </main>
+
+  <!-- MODAL THÔNG BÁO GỬI THÀNH CÔNG -->
+  <div id="success-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
+      <div class="w-12 h-12 mx-auto rounded-full bg-amber-50 text-[#b45309] dark:bg-amber-950 dark:text-amber-400 flex items-center justify-center">
+        <span class="material-symbols-outlined text-3xl">check_circle</span>
+      </div>
+      <div>
+        <h3 id="modal-title" class="text-lg font-bold text-[#1b1c1c] dark:text-stone-100">Đã Gửi Tin Báo Mất!</h3>
+        <p class="text-xs text-[#5e5f59] dark:text-stone-400 mt-1">
+          Tin báo mất của bạn đã được lưu lên sảnh Tìm đồ. Hệ thống sẽ báo chuông cho bạn ngay khi có người nhặt được đồ vật phù hợp.
+        </p>
+      </div>
+      <div class="flex items-center justify-center gap-2 pt-2">
+        <a href="index.html" class="w-full py-2 rounded-lg border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50">
+          Về trang chủ
+        </a>
+        <a href="find.html" class="w-full py-2 rounded-lg bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-semibold">
+          Xem sảnh tìm đồ
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer (Web Component) -->
+  <app-footer></app-footer>
+
+  <!-- ================= JAVASCRIPT: LUCIAN #318 HORIZONTAL STEPPER & FORM CONTROLLER ================= -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+    // XỬ LÝ CHẾ ĐỘ CHỈNH SỬA (MODE=EDIT)
+    const urlParams = new URLSearchParams(window.location.search);
+    const isEditMode = urlParams.get("mode") === "edit";
+
+    if (isEditMode) {
+      // Ẩn cụm toggle [Báo nhặt đồ / Báo mất đồ]
+      const modeToggle = document.querySelector("main .inline-flex.p-1");
+      if (modeToggle) modeToggle.style.display = "none";
+
+      // 1. Ẩn Stepper Timeline
+      const stepper = document.querySelector(".u318-horizontal");
+      if (stepper) stepper.style.display = "none";
+
+      // 2. Ẩn toàn bộ multi-step form cũ
+      const oldForm = document.getElementById("lost-post-form");
+      if (oldForm) oldForm.style.display = "none";
+
+      // 3. Cập nhật tiêu đề trang và breadcrumb
+      document.title = "Chỉnh sửa bài đăng báo mất | CTU Lost & Found";
+      const heading = document.querySelector("h1");
+      if (heading) heading.textContent = "Chỉnh Sửa Bài Đăng Báo Mất";
+
+      // 4. Tạo và hiển thị Form 2 cột độc lập (Khớp 100% Ảnh 10 người dùng gửi, bỏ mascot con cú)
+      const editContainer = document.createElement("div");
+      editContainer.id = "edit-mode-container";
+      editContainer.className = "bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 p-6 md:p-8 shadow-sm space-y-6";
+      editContainer.innerHTML = `
+        <div class="border-b border-stone-100 dark:border-stone-800 pb-4">
+          <h2 class="text-xl md:text-2xl font-bold text-[#1b1c1c] dark:text-white">Thông tin đồ thất lạc</h2>
+          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Cập nhật thông tin chi tiết để hệ thống đối chiếu ghép nối chuẩn xác hơn</p>
+        </div>
+
+        <form id="edit-lost-form" onsubmit="return handleUpdateLostPost(event)" class="space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- CỘT TRÁI (7 CỘT): CÁC TRƯỜNG THÔNG TIN NHẬP LIỆU -->
+            <div class="lg:col-span-7 space-y-4">
+              <!-- Tiêu đề -->
+              <div>
+                <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">
+                  Tiêu đề bài đăng <span class="text-rose-600">*</span>
+                </label>
+                <input type="text" id="edit-title" required value="Bị rơi ví da nam màu nâu đậm tại C1" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-sm font-medium focus:outline-none focus:border-[#35483d] transition-colors" />
+              </div>
+
+              <!-- Loại đồ vật & Màu sắc -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Loại đồ vật <span class="text-rose-600">*</span></label>
+                    <span class="text-[11px] text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded font-medium">✨ AI gợi ý</span>
+                  </div>
+                  <select id="edit-category" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]">
+                    <option value="wallet" selected>Ví tiền / Bóp da</option>
+                    <option value="tech">Thiết bị điện tử</option>
+                    <option value="card">Giấy tờ tùy thân / Thẻ SV</option>
+                    <option value="backpack">Balo / Túi xách</option>
+                    <option value="other">Đồ dùng khác</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Màu sắc <span class="text-rose-600">*</span></label>
+                  <select id="edit-color" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]">
+                    <option value="brown" selected>Nâu</option>
+                    <option value="black">Đen</option>
+                    <option value="blue">Xanh dương</option>
+                    <option value="white">Trắng</option>
+                    <option value="other">Màu khác</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Mô tả chi tiết -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Mô tả chi tiết đặc điểm nhận dạng <span class="text-rose-600">*</span></label>
+                  <span class="text-[11px] text-[#797675] font-mono">148/500 ký tự</span>
+                </div>
+                <textarea id="edit-desc" rows="3" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs leading-relaxed focus:outline-none focus:border-[#35483d] transition-colors resize-none">Ví da nam màu nâu đậm, gập đôi, hiệu Pedro, hơi sờn góc nhẹ. Bên trong có thẻ SV Nguyễn Văn A (B2105432) và một ít tiền mặt.</textarea>
+              </div>
+
+              <!-- Địa điểm nghi mất (3 cấp tuần tự) -->
+              <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-stone-800/40 border border-stone-200 dark:border-stone-700/80 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Địa điểm nghi mất <span class="text-rose-600">*</span></span>
+                  <span class="text-[11px] text-[#797675]">Chọn tuần tự</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                  <div>
+                    <span class="text-[10px] text-[#797675] block mb-1">1. Khoa / Khu</span>
+                    <select class="w-full px-2.5 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                      <option selected>Khoa CNTT&amp;TT (C1)</option>
+                      <option>Nhà học B1</option>
+                      <option>Thư viện Trung tâm</option>
+                    </select>
+                  </div>
+                  <div>
+                    <span class="text-[10px] text-[#797675] block mb-1">2. Tầng mấy</span>
+                    <select class="w-full px-2.5 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                      <option selected>Tầng 2</option>
+                      <option>Tầng 1</option>
+                      <option>Tầng 3</option>
+                    </select>
+                  </div>
+                  <div>
+                    <span class="text-[10px] text-[#797675] block mb-1">3. Phòng học / Dãy bàn</span>
+                    <select class="w-full px-2.5 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                      <option selected>Phòng 204 (Dãy bàn tự học)</option>
+                      <option>Phòng 201</option>
+                      <option>Hành lang</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ngày mất & Giờ mất -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Ngày mất <span class="text-rose-600">*</span></label>
+                  <input type="date" value="2026-11-09" class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Khung giờ nghi mất <span class="text-rose-600">*</span></label>
+                  <input type="time" value="14:15" class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" />
+                </div>
+              </div>
+
+              <!-- Thông tin liên hệ xác minh -->
+              <div>
+                <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Thông tin liên hệ xác minh <span class="text-rose-600">*</span></label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3 top-2.5 text-[#797675] text-[18px]">contact_phone</span>
+                  <input type="text" value="0912 345 678 (Nguyễn Văn An - K48 CNTT)" required class="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" />
+                </div>
+              </div>
+            </div>
+
+            <!-- CỘT PHẢI (5 CỘT): HÌNH ẢNH MINH HỌA & TÙY CHỌN -->
+            <div class="lg:col-span-5 space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Hình ảnh minh họa đồ vật</label>
+                  <span class="text-[11px] text-[#797675]">Tối đa 4 ảnh</span>
+                </div>
+                
+                <!-- Khung ảnh chính đã có ảnh sẵn -->
+                <div class="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border-2 border-dashed border-[#35483d]/40 bg-[#fcf9f8] dark:bg-stone-800/50 p-2 flex items-center justify-center group">
+                  <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80" alt="Ảnh minh họa ví da" class="w-full h-full object-cover rounded-xl" />
+                  <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <button type="button" class="px-3 py-1.5 rounded-lg bg-white/90 text-[#1b1c1c] text-xs font-bold hover:bg-white flex items-center gap-1 cursor-pointer">
+                      <span class="material-symbols-outlined text-[15px]">change_circle</span>
+                      <span>Đổi ảnh</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 4 Ô Ảnh nhỏ bên dưới -->
+                <div class="grid grid-cols-2 gap-2.5 mt-3">
+                  <div class="h-20 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#35483d] transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30">
+                    <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 1</span>
+                  </div>
+                  <div class="h-20 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#35483d] transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30">
+                    <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 2</span>
+                  </div>
+                  <div class="h-20 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#35483d] transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30">
+                    <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 3</span>
+                  </div>
+                  <div class="h-20 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#35483d] transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30">
+                    <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 4</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Checkbox thông báo -->
+              <div class="p-3.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800/40 flex items-start gap-2.5">
+                <input type="checkbox" id="edit-notify" checked class="mt-0.5 w-4 h-4 rounded text-[#35483d] focus:ring-[#35483d]" />
+                <label for="edit-notify" class="text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 cursor-pointer">
+                  Nhận thông báo khi có bài đăng báo nhặt khớp với tin này
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- NÚT HÀNH ĐỘNG DƯỚI CÙNG (HỦY & CẬP NHẬT) -->
+          <div class="pt-5 border-t border-stone-100 dark:border-stone-800 flex items-center justify-end gap-3">
+            <button type="button" id="btn-cancel-edit-lost" class="px-5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs sm:text-sm font-semibold hover:bg-stone-100 dark:hover:bg-stone-800 text-[#4a4746] dark:text-stone-300 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+              <span>Hủy</span>
+            </button>
+            <button type="submit" id="btn-submit-edit-lost" class="px-8 py-2.5 rounded-xl bg-[#35483d] hover:bg-[#28372e] text-white text-xs sm:text-sm font-bold shadow-md transition-colors flex items-center gap-2 cursor-pointer">
+              <span class="material-symbols-outlined text-[18px]">check_circle</span>
+              <span>Cập nhật bài đăng</span>
+            </button>
+          </div>
+        </form>
+      `;
+
+      const mainContainer = document.querySelector("main");
+      if (mainContainer) {
+        mainContainer.appendChild(editContainer);
       }
 
-      // ==========================================
-      // 3 & 4. Ô NHẬP ĐỊA ĐIỂM: Khoa -> Tầng mấy -> Phòng (có option hội trường)
-      // Cả 3 ô đều hiện rõ ràng; Khóa disabled tuần tự Khoa -> Tầng -> Phòng
-      // ==========================================
-      const locFaculty = document.getElementById("loc-faculty");
-      const locFloor = document.getElementById("loc-floor");
-      const locRoom = document.getElementById("loc-room");
-      const itemLocationInput = document.getElementById("item-location");
-      const locSummary = document.getElementById("loc-summary");
-      const locSummaryText = document.getElementById("loc-summary-text");
+      // Đăng ký sự kiện submit và cancel cho form chỉnh sửa
+      const editLostForm = document.getElementById("edit-lost-form");
+      if (editLostForm) {
+        editLostForm.addEventListener("submit", window.handleUpdateLostPost);
+      }
 
-      // Khởi tạo trạng thái ban đầu: Tầng & Phòng bị khóa
-      if (locFloor) locFloor.disabled = !Boolean(locFaculty && locFaculty.value);
-      if (locRoom) locRoom.disabled = !Boolean(locFloor && locFloor.value && !locFloor.disabled);
+      const btnCancelLost = document.getElementById("btn-cancel-edit-lost");
+      if (btnCancelLost) {
+        btnCancelLost.addEventListener("click", () => {
+          const params = new URLSearchParams(window.location.search);
+          const targetUrl = params.get("returnUrl") || params.get("from") || "notifications.html";
+          window.location.href = targetUrl;
+        });
+      }
+    }
 
-      const updateLocationSummary = () => {
-        const faculty = locFaculty ? locFaculty.value : "";
-        const floor = locFloor && !locFloor.disabled ? locFloor.value : "";
-        const room = locRoom && !locRoom.disabled ? locRoom.value : "";
+    // Xử lý cập nhật bài đăng báo mất (mode=edit)
+    let isSubmittingLostUpdate = false;
+    window.handleUpdateLostPost = function(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (isSubmittingLostUpdate) return false;
+      isSubmittingLostUpdate = true;
 
-        const isComplete = Boolean(faculty && floor && room);
-        const fullLoc = isComplete
-          ? `${faculty} - ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor} - ${room}`
-          : "";
+      const toast = document.createElement("div");
+      toast.className = "fixed bottom-20 right-6 z-[9999] px-5 py-3.5 rounded-xl shadow-xl border bg-emerald-800 text-white border-emerald-700 text-xs font-bold flex items-center gap-2 animate-in fade-in duration-200";
+      toast.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Cập nhật bài đăng thành công! Đang chuyển hướng...</span>';
+      document.body.appendChild(toast);
 
-        if (itemLocationInput) itemLocationInput.value = fullLoc;
+      const params = new URLSearchParams(window.location.search);
+      const targetUrl = params.get("returnUrl") || params.get("from") || "notifications.html";
 
-        if (locSummary && locSummaryText) {
-          if (isComplete) {
-            locSummary.classList.remove("hidden");
-            locSummaryText.textContent = fullLoc;
-          } else {
-            locSummary.classList.add("hidden");
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 800);
+      return false;
+    };
+    function handleUpdateLostPost(e) {
+      return window.handleUpdateLostPost(e);
+    }
+
+      const TOTAL_STEPS = 4;
+      let currentStep = 1;
+
+      const stepSubtitles = [
+        "Bước 1 trên 4: Nhập hình ảnh minh họa",
+        "Bước 2 trên 4: Mô tả đồ vật",
+        "Bước 3 trên 4: Địa chỉ & Thời gian",
+        "Bước 4 trên 4: Liên hệ & Xác nhận"
+      ];
+
+      const u318Subtitle = document.getElementById("u318-step-subtitle");
+      const u318Route = document.getElementById("u318-route");
+      const u318Dots = document.querySelectorAll(".u318-dot");
+      const u318Dotcs = document.querySelectorAll(".u318-dotc");
+      const u318DotTexts = document.querySelectorAll(".u318-dot-txt");
+      const u318Labels = document.querySelectorAll(".u318-step-lbl");
+
+      const ROUTE_START_X = 60;
+      const ROUTE_END_X = 540;
+      const ROUTE_LENGTH = ROUTE_END_X - ROUTE_START_X; // 480px
+      if (u318Route) {
+        u318Route.style.strokeDasharray = `${ROUTE_LENGTH} ${ROUTE_LENGTH}`;
+      }
+
+      const goToStep = (stepNumber) => {
+        if (stepNumber < 1 || stepNumber > TOTAL_STEPS) return;
+        currentStep = stepNumber;
+
+        if (u318Subtitle) {
+          u318Subtitle.textContent = stepSubtitles[currentStep - 1];
+        }
+
+        const progressFraction = (currentStep - 1) / (TOTAL_STEPS - 1);
+        const drawnLength = progressFraction * ROUTE_LENGTH;
+        if (u318Route) {
+          u318Route.style.strokeDashoffset = `${ROUTE_LENGTH - drawnLength}`;
+        }
+
+        u318Dots.forEach(dot => {
+          const s = parseInt(dot.dataset.step, 10);
+          dot.classList.toggle("on", s <= currentStep);
+          dot.classList.toggle("done", s < currentStep);
+        });
+        u318Dotcs.forEach(dotc => {
+          const s = parseInt(dotc.dataset.step, 10);
+          dotc.classList.toggle("on", s === currentStep);
+        });
+        u318DotTexts.forEach(txt => {
+          const s = parseInt(txt.dataset.step, 10);
+          txt.classList.toggle("done", s < currentStep);
+        });
+        u318Labels.forEach(lbl => {
+          const s = parseInt(lbl.dataset.step, 10);
+          lbl.classList.toggle("on", s === currentStep);
+        });
+
+        for (let i = 1; i <= TOTAL_STEPS; i++) {
+          const panel = document.getElementById(`step-panel-${i}`);
+          if (panel) {
+            panel.classList.toggle("active", i === currentStep);
           }
+        }
+
+        const formTop = document.getElementById("lost-post-form");
+        if (formTop) {
+          formTop.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       };
 
-      if (locFaculty) {
-        locFaculty.addEventListener("change", () => {
-          if (locFaculty.value) {
-            if (locFloor) {
-              locFloor.disabled = false;
-              locFloor.selectedIndex = 0;
-            }
-          } else {
-            if (locFloor) {
-              locFloor.disabled = true;
-              locFloor.selectedIndex = 0;
-            }
+      u318Dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+          const targetStep = parseInt(dot.dataset.step, 10);
+          if (targetStep < currentStep) {
+            goToStep(targetStep);
           }
-          if (locRoom) {
-            locRoom.disabled = true;
-            locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
+        });
+      });
+      u318Labels.forEach(lbl => {
+        lbl.addEventListener("click", () => {
+          const targetStep = parseInt(lbl.dataset.step, 10);
+          if (targetStep < currentStep) {
+            goToStep(targetStep);
           }
-          updateLocationSummary();
+        });
+      });
+
+      // Điều hướng Next / Back
+      const btnNext1 = document.getElementById("btn-next-step-1");
+      const btnBack2 = document.getElementById("btn-back-step-2");
+      const btnNext2 = document.getElementById("btn-next-step-2");
+      const btnBack3 = document.getElementById("btn-back-step-3");
+      const btnNext3 = document.getElementById("btn-next-step-3");
+      const btnBack4 = document.getElementById("btn-back-step-4");
+
+      if (btnNext1) btnNext1.addEventListener("click", () => goToStep(2));
+      if (btnBack2) btnBack2.addEventListener("click", () => goToStep(1));
+
+      if (btnNext2) {
+        btnNext2.addEventListener("click", () => {
+          const cat = document.getElementById("item-category");
+          const title = document.getElementById("item-title");
+          const desc = document.getElementById("item-description");
+          const color = document.getElementById("primary-color");
+
+          if (!cat.value) {
+            alert("Vui lòng chọn Loại đồ vật.");
+            cat.focus();
+            return;
+          }
+          if (!color.value) {
+            alert("Vui lòng chọn Màu sắc chủ đạo.");
+            return;
+          }
+          if (!title.value.trim()) {
+            alert("Vui lòng nhập Tên món đồ bị mất.");
+            title.focus();
+            return;
+          }
+          if (!desc.value.trim()) {
+            alert("Vui lòng nhập Mô tả chi tiết.");
+            desc.focus();
+            return;
+          }
+          goToStep(3);
         });
       }
 
-      if (locFloor) {
-        locFloor.addEventListener("change", () => {
-          const floor = locFloor.value;
-          if (floor && !locFloor.disabled) {
-            if (locRoom) {
-              locRoom.disabled = false;
-              locRoom.innerHTML = `
-                <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
-                <optgroup label="Phòng học">
-                  <option value="Phòng ${floor === 'trệt' ? '001' : floor + '01'}">Phòng ${floor === 'trệt' ? '001' : floor + '01'}</option>
-                  <option value="Phòng ${floor === 'trệt' ? '002' : floor + '02'}">Phòng ${floor === 'trệt' ? '002' : floor + '02'}</option>
-                  <option value="Phòng ${floor === 'trệt' ? '003' : floor + '03'}">Phòng ${floor === 'trệt' ? '003' : floor + '03'}</option>
-                  <option value="Phòng ${floor === 'trệt' ? '004' : floor + '04'}">Phòng ${floor === 'trệt' ? '004' : floor + '04'}</option>
-                  <option value="Phòng Máy ${floor}">Phòng Máy ${floor}</option>
-                  <option value="Hành lang ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor}">Hành lang ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor}</option>
-                </optgroup>
-                <optgroup label="Hội trường">
-                  <option value="Hội trường Rùa">Hội trường Rùa</option>
-                  <option value="Hội trường Lớn">Hội trường Lớn</option>
-                  <option value="Hội trường C1">Hội trường C1</option>
-                  <option value="Hội trường Khoa">Hội trường Khoa</option>
-                  <option value="Hội trường 1">Hội trường 1</option>
-                  <option value="Hội trường 2">Hội trường 2</option>
-                </optgroup>
-              `;
-            }
-          } else {
-            if (locRoom) {
-              locRoom.disabled = true;
-              locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-            }
+      if (btnBack3) btnBack3.addEventListener("click", () => goToStep(2));
+
+      if (btnNext3) {
+        btnNext3.addEventListener("click", () => {
+          const loc = document.getElementById("item-location");
+          const date = document.getElementById("item-date");
+
+          if (!loc.value) {
+            alert("Vui lòng chọn đầy đủ 3 cấp địa điểm nghi mất (Khoa - Tầng - Phòng).");
+            return;
           }
-          updateLocationSummary();
+          if (!date.value) {
+            alert("Vui lòng chọn Ngày mất.");
+            date.focus();
+            return;
+          }
+          goToStep(4);
         });
       }
 
-      if (locRoom) {
-        locRoom.addEventListener("change", updateLocationSummary);
-      }
+      if (btnBack4) btnBack4.addEventListener("click", () => goToStep(3));
 
-      // ==========================================
-      // 6. KÉO THẢ ẢNH FRONTEND HOÀN CHỈNH
-      // ==========================================
+      // Logic Step 1: Kéo thả & Tải ảnh
       const dropZone = document.getElementById("drop-zone");
-      const fileInput = document.getElementById("file-upload-input");
-      const slots = document.querySelectorAll(".image-slot");
-      let uploadedImages = [];
+      const fileUploadInput = document.getElementById("file-upload-input");
+      const imageSlots = document.querySelectorAll(".image-slot");
+      let uploadedFiles = [];
 
       const renderSlots = () => {
-        slots.forEach((slot, idx) => {
-          if (uploadedImages[idx]) {
+        imageSlots.forEach((slot, idx) => {
+          if (uploadedFiles[idx]) {
             slot.innerHTML = `
-              <img src="${uploadedImages[idx]}" class="w-full h-full object-cover rounded-lg" alt="Ảnh ${idx + 1}" />
+              <img src="${uploadedFiles[idx]}" class="w-full h-full object-cover rounded-xl" alt="Ảnh ${idx + 1}" />
               <button type="button" class="remove-photo-btn absolute top-1 right-1 w-6 h-6 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" data-idx="${idx}" title="Xóa ảnh">
-                <span class="material-symbols-outlined text-[14px]">close</span>
+                <span class="material-symbols-outlined text-[13px]">close</span>
               </button>
             `;
-            const rmBtn = slot.querySelector(".remove-photo-btn");
-            if (rmBtn) {
-              rmBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                uploadedImages.splice(idx, 1);
-                renderSlots();
-              });
-            }
+            slot.querySelector(".remove-photo-btn").addEventListener("click", (e) => {
+              e.stopPropagation();
+              uploadedFiles.splice(idx, 1);
+              renderSlots();
+            });
           } else {
             slot.innerHTML = `
-              <span class="material-symbols-outlined text-[20px]">add</span>
-              <span class="text-[11px] mt-0.5">Thêm ảnh ${idx + 1}</span>
+              <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+              <span class="text-xs font-medium">Thêm ảnh ${idx + 1}</span>
             `;
           }
         });
@@ -932,11 +1101,11 @@
 
       const handleFiles = (files) => {
         Array.from(files).forEach(file => {
-          if (file.type.startsWith("image/") && uploadedImages.length < 4) {
+          if (file.type.startsWith("image/") && uploadedFiles.length < 4) {
             const reader = new FileReader();
             reader.onload = (e) => {
-              if (uploadedImages.length < 4) {
-                uploadedImages.push(e.target.result);
+              if (uploadedFiles.length < 4) {
+                uploadedFiles.push(e.target.result);
                 renderSlots();
               }
             };
@@ -945,47 +1114,203 @@
         });
       };
 
-      if (dropZone && fileInput) {
-        dropZone.addEventListener("click", () => fileInput.click());
+      if (dropZone && fileUploadInput) {
+        dropZone.addEventListener("click", () => fileUploadInput.click());
 
-        ["dragenter", "dragover"].forEach(eventName => {
-          dropZone.addEventListener(eventName, (e) => {
+        ["dragenter", "dragover"].forEach(evt => {
+          dropZone.addEventListener(evt, (e) => {
             e.preventDefault();
             e.stopPropagation();
-            dropZone.classList.add("border-primary", "bg-primary/5", "scale-[1.01]");
+            dropZone.classList.add("border-[#b45309]", "bg-amber-50/50");
           });
         });
 
-        ["dragleave", "drop"].forEach(eventName => {
-          dropZone.addEventListener(eventName, (e) => {
+        ["dragleave", "drop"].forEach(evt => {
+          dropZone.addEventListener(evt, (e) => {
             e.preventDefault();
             e.stopPropagation();
-            dropZone.classList.remove("border-primary", "bg-primary/5", "scale-[1.01]");
+            dropZone.classList.remove("border-[#b45309]", "bg-amber-50/50");
           });
         });
 
         dropZone.addEventListener("drop", (e) => {
-          const dt = e.dataTransfer;
-          if (dt && dt.files) {
-            handleFiles(dt.files);
-          }
+          if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files);
         });
 
-        fileInput.addEventListener("change", (e) => {
-          if (e.target.files) {
-            handleFiles(e.target.files);
+        fileUploadInput.addEventListener("change", (e) => {
+          if (e.target.files) handleFiles(e.target.files);
+        });
+      }
+
+      imageSlots.forEach(slot => {
+        slot.addEventListener("click", () => {
+          const idx = parseInt(slot.dataset.index, 10);
+          if (!uploadedFiles[idx] && fileUploadInput) fileUploadInput.click();
+        });
+      });
+
+      // Logic Step 2: Bộ đếm ký tự & Chọn màu
+      const descInput = document.getElementById("item-description");
+      const charCounter = document.getElementById("char-counter");
+      if (descInput && charCounter) {
+        descInput.addEventListener("input", (e) => {
+          charCounter.textContent = `${e.target.value.length}/500 ký tự`;
+        });
+      }
+
+      const colorPickerTrigger = document.getElementById("color-picker-trigger");
+      const primaryColorInput = document.getElementById("primary-color-input");
+      const primaryColorHidden = document.getElementById("primary-color");
+      const primaryColorText = document.getElementById("primary-color-text");
+      const primarySwatchCircle = document.getElementById("primary-swatch-circle");
+      const addSecColorBtn = document.getElementById("add-sec-color-btn");
+      const secColorsContainer = document.getElementById("sec-colors-container");
+      let secColors = [];
+
+      if (colorPickerTrigger && primaryColorInput) {
+        colorPickerTrigger.addEventListener("click", () => primaryColorInput.click());
+        primaryColorInput.addEventListener("input", (e) => {
+          const hex = e.target.value.toUpperCase();
+          primaryColorHidden.value = hex;
+          primaryColorText.textContent = hex;
+          primarySwatchCircle.style.backgroundColor = hex;
+        });
+      }
+
+      const renderSecColors = () => {
+        if (!secColorsContainer) return;
+        secColorsContainer.innerHTML = "";
+        secColors.forEach((color, idx) => {
+          const chip = document.createElement("div");
+          chip.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-[11px] font-mono";
+          chip.innerHTML = `
+            <span class="w-2.5 h-2.5 rounded-full border border-stone-300" style="background-color: ${color}"></span>
+            <span>${color}</span>
+            <button type="button" class="remove-sec-col text-stone-400 hover:text-red-600 p-0.5 cursor-pointer" title="Xóa màu này">
+              <span class="material-symbols-outlined text-[13px]">close</span>
+            </button>
+          `;
+          chip.querySelector(".remove-sec-col").addEventListener("click", () => {
+            secColors.splice(idx, 1);
+            renderSecColors();
+          });
+          secColorsContainer.appendChild(chip);
+        });
+      };
+
+      if (addSecColorBtn) {
+        addSecColorBtn.addEventListener("click", () => {
+          if (secColors.length >= 3) {
+            alert("Tối đa 3 màu phụ.");
+            return;
+          }
+          const defaultSecs = ["#EF4444", "#3B82F6", "#10B981", "#8B5CF6", "#64748B"];
+          const newColor = defaultSecs[secColors.length % defaultSecs.length];
+          secColors.push(newColor);
+          renderSecColors();
+        });
+      }
+
+      // Logic Step 3: Địa điểm CTU 3 cấp (Khoa ➔ Tầng ➔ Phòng)
+      const locFaculty = document.getElementById("loc-faculty");
+      const locFloor = document.getElementById("loc-floor");
+      const locRoom = document.getElementById("loc-room");
+      const itemLocationInput = document.getElementById("item-location");
+      const locSummary = document.getElementById("loc-summary");
+      const locSummaryText = document.getElementById("loc-summary-text");
+
+      const updateFullLocation = () => {
+        const fac = locFaculty ? locFaculty.value : "";
+        const fl = locFloor && !locFloor.disabled ? locFloor.value : "";
+        const rm = locRoom && !locRoom.disabled ? locRoom.value : "";
+
+        if (fac && fl && rm) {
+          const full = `${fac} - ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl} - ${rm}`;
+          if (itemLocationInput) itemLocationInput.value = full;
+          if (locSummary && locSummaryText) {
+            locSummary.classList.remove("hidden");
+            locSummaryText.textContent = full;
+          }
+        } else {
+          if (itemLocationInput) itemLocationInput.value = "";
+          if (locSummary) locSummary.classList.add("hidden");
+        }
+      };
+
+      if (locFaculty) {
+        locFaculty.addEventListener("change", () => {
+          if (locFaculty.value) {
+            locFloor.disabled = false;
+            locFloor.selectedIndex = 0;
+            locRoom.disabled = true;
+            locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
+          } else {
+            locFloor.disabled = true;
+            locRoom.disabled = true;
+          }
+          updateFullLocation();
+        });
+      }
+
+      if (locFloor) {
+        locFloor.addEventListener("change", () => {
+          const fl = locFloor.value;
+          if (fl) {
+            locRoom.disabled = false;
+            locRoom.innerHTML = `
+              <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
+              <optgroup label="Phòng học">
+                <option value="Phòng ${fl === 'trệt' ? '001' : fl + '01'}">Phòng ${fl === 'trệt' ? '001' : fl + '01'}</option>
+                <option value="Phòng ${fl === 'trệt' ? '002' : fl + '02'}">Phòng ${fl === 'trệt' ? '002' : fl + '02'}</option>
+                <option value="Phòng ${fl === 'trệt' ? '003' : fl + '03'}">Phòng ${fl === 'trệt' ? '003' : fl + '03'}</option>
+                <option value="Phòng Máy ${fl}">Phòng Máy ${fl}</option>
+                <option value="Hành lang ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl}">Hành lang ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl}</option>
+              </optgroup>
+              <optgroup label="Hội trường">
+                <option value="Hội trường Rùa">Hội trường Rùa</option>
+                <option value="Hội trường Lớn">Hội trường Lớn</option>
+                <option value="Hội trường C1">Hội trường C1</option>
+                <option value="Hội trường Khoa">Hội trường Khoa</option>
+              </optgroup>
+            `;
+          } else {
+            locRoom.disabled = true;
+          }
+          updateFullLocation();
+        });
+      }
+
+      if (locRoom) {
+        locRoom.addEventListener("change", updateFullLocation);
+      }
+
+      const itemDate = document.getElementById("item-date");
+      const itemTime = document.getElementById("item-time");
+      const now = new Date();
+      if (itemDate) itemDate.value = now.toISOString().split("T")[0];
+      if (itemTime) itemTime.value = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      // Submit Form Step 4
+      const lostForm = document.getElementById("lost-post-form");
+      const successModal = document.getElementById("success-modal");
+
+      if (lostForm) {
+        lostForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const contact = document.getElementById("contact-info");
+          if (!contact.value.trim()) {
+            alert("Vui lòng nhập Số điện thoại và tên liên hệ.");
+            contact.focus();
+            return;
+          }
+          if (successModal) {
+            successModal.classList.remove("hidden");
           }
         });
       }
 
-      slots.forEach(slot => {
-        slot.addEventListener("click", () => {
-          const idx = parseInt(slot.dataset.index, 10);
-          if (!uploadedImages[idx] && fileInput) {
-            fileInput.click();
-          }
-        });
-      });
+      // Khởi tạo Step 1 ban đầu
+      goToStep(1);
     });
   </script>
 </body>

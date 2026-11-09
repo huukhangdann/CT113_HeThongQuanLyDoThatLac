@@ -1,3 +1,66 @@
+// ================= CTU LOST & FOUND MASCOT OWL LOGO (SVG & TAB FAVICON) =================
+const CTU_OWL_WHITE_MASK_B64 = "iVBORw0KGgoAAAANSUhEUgAAAIAAAACeCAYAAAD64gIgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAZVSURBVHhe7ZDhrvMqDATP+7/0vao+VapmDRhD0lB7pPmzeA3J39/f339laiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocylBmUsJylxKUOZSgjKXEpS5lKDMpQRlLiUocynBrc7A7lOdhf2bleBSd8Ld33QX3HuDElzilfCuu7wa3neREmz1Tnj3Vd4N79+sBFv8JnzLTr8F37FRCZZ9AnzTqk+B79qgBEs+Cb4t6tPg+xaVIOxT4TtnfCp854IShHw6fK/Hp8P3BpVg2lW4z3IV7hu5A+6kO+DOgBJMGYV7ZozCPS1X4C6vUbgnoARuI3DHihG4g0bhnqgRuGNSCdzOwv4OI3DHyj72dzkL+xNK4HIGdnc7C/u79+xyBnYnlMClF/YsPbBjOQO7O/p0BOctZ2DXqQRDvbBHI3BHdN/ObnTPJ9wT2cmeUwmGemFvtt+DOyO7Iz3eF9nRgvsiu9lzKEFXL+x5+9HZmd6b2fkXvMu7Y3bO0gM7DiXo6oGdUZdzli04N5r/ZGb2Be8Y9TlHW3BuNP8JOw4l6OqBHU+P85YWnOnNWnhnud97D+ctLTjTmyXsDJSgqQd2Zrov2KMWnGnNrcD9M3ewZ2nBmdYcYWegBE09sOPtvWHX0oIzrbko3D27n11LwnNrxoKdgRI09cCO1bOyN+y2JDy3ZqJwb2Q3+y0Jz60ZwvmBEjQdwXmr08rfsN+S8NyaicK91u5W/ob9loTn1owFOx0laDqC81bHe+aR8NyaicCd1t5W/oLdnoTn1owFOx0laDqC81aH5ysSnlszEbiTe3m26mi3B3Y6StB0BOetDs9XJDy3ZiJwJ/fybNXRbg/sdJTA1AM7Vo/nKxKeWzMRuJN7ebbqaLcHdjpKYOqBHavH8xUJz62ZCNzJvTxbdbTbAzsdJTD1wI7V4/mKhOfWTATu5F6erTra7YGdjhKYemDH6vF8RcJzayYCd1p7eR6V8NyasWCnowSmXtizujyPSHhuzUThXms3z6MSnlszFux0lMDUC3tWl+cRCc+tmSjc29rP81ktONOaI+x0lMDUC3utLmdmJDxvza3A3a39nJmR8NyaacFeRwmaemCn1+WMRwvOtOZW4P7WPTz3asGZ1pwFex0laOqFvV6fMz0tONObJSvzox7nWrbg3GiesNdRgqZe2PP0OevpcW40/4bz3i5nVzq9HudG8xbsdpSg6QzsRnb04F7vHZy17MFZT2cG7o3uZ7+jBE1nYX9l1yfc5d3L2Z4tOOfpeOG+ld3sd5SgaQTuWNnHPu3BWY8tOEdnYZ/Owv5ACZpG4R7LHpy17MFZrz0427IF51pG4I6BEjRdgbt2OoLzM/bg7G6jcM9ACbquwF07HMH5WT2ws8MVuGugBF1X4b6oXtiL6IGdqDvgzoESdN0F93qdhf2IM7DrdRfc61CCrlfBe3bdyV0Ro3APvQLe4VCCoSfBt896Gny/QwmGngbfP+Np8P0OJRh6Gnz/jCfBtzuVwOVJ8O1eT4PvdyqBy9Pg+z2eBN8+oQQuT4PvH3kafP+EErg9Db6/52nw/RNK4PY0+P6Wp8H3TyrBlKfB91ueBt8/qQRTngbfT0+D7w8owbSnwff/6rc4lSDkafD9v/INASUIeRq/9v4FJQh7Gqe++wX//YISLFlcD//5ohIsWVwL//cGJVi2uA7+6w1KsMViP/zHm5Rgm8U++G83KsFWi3X4TzcrwVaLNfg/L1CC7RYx+B8vUoJLLObg/7tQCS61GMN/drESXG7Rhv/qBiW4xULhP7pJCW6z+Af/y81KcLuZ4b/4ghJ8xWzw+7+oBF81A/zmLyvBI/xF+I0PUYJH+Qvwmx6mBI/0RPgND1WCR/t0+N4DlOAYnwTfdpASHOnd8P6DleBn3Al3/5ASlLmUoMylBGUuJShzKUGZSwnKXEpQ5lKCMpcSlIn8H2Fnjy8I5HvIAAAAAElFTkSuQmCC";
+const CTU_OWL_DARK_MASK_B64 = "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";
+
+function getCtuOwlSvg(color = "currentColor", maskPrefix = "brand") {
+  return '<svg class="w-7 h-7 shrink-0" viewBox="0 0 128 158" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CTU Lost & Found Mascot Owl Logo">' +
+    '<defs>' +
+      '<mask id="' + maskPrefix + '-w-mask" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="158">' +
+        '<image href="data:image/png;base64,' + CTU_OWL_WHITE_MASK_B64 + '" width="128" height="158" />' +
+      '</mask>' +
+      '<mask id="' + maskPrefix + '-d-mask" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="158">' +
+        '<image href="data:image/png;base64,' + CTU_OWL_DARK_MASK_B64 + '" width="128" height="158" />' +
+      '</mask>' +
+    '</defs>' +
+    '<rect width="128" height="158" fill="#ffffff" mask="url(#' + maskPrefix + '-w-mask)" />' +
+    '<rect width="128" height="158" fill="' + color + '" mask="url(#' + maskPrefix + '-d-mask)" />' +
+  '</svg>';
+}
+
+function updateCtuTabFavicon(themeColor = "#1f3227") {
+  if (typeof document === "undefined") return;
+  try {
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "shortcut icon";
+      document.head.appendChild(link);
+    }
+    const svgCode = getCtuOwlSvg(themeColor, "tab-fav");
+    const svgDataUri = "data:image/svg+xml;utf8," + encodeURIComponent(svgCode);
+    link.type = "image/svg+xml";
+    link.href = svgDataUri;
+
+    // Rasterize 32x32 PNG fallback for browsers requiring PNG favicons
+    try {
+      const img = new Image();
+      img.onload = () => {
+        const cvs = document.createElement("canvas");
+        cvs.width = 32;
+        cvs.height = 32;
+        const ctx = cvs.getContext("2d");
+        ctx.clearRect(0, 0, 32, 32);
+        ctx.drawImage(img, 0, 0, 32, 32);
+        try {
+          const pngUri = cvs.toDataURL("image/png");
+          let pngLink = document.querySelector("link[data-ctu-fav='png']");
+          if (!pngLink) {
+            pngLink = document.createElement("link");
+            pngLink.rel = "icon";
+            pngLink.type = "image/png";
+            pngLink.setAttribute("data-ctu-fav", "png");
+            document.head.appendChild(pngLink);
+          }
+          pngLink.href = pngUri;
+        } catch (e) {}
+      };
+      img.src = svgDataUri;
+    } catch (e) {}
+  } catch (e) {
+    console.warn("Favicon update error:", e);
+  }
+}
+
 // Khởi tạo & đồng bộ Theme từ localStorage để đảm bảo giao diện luôn giữ đúng màu chủ đạo
 (function initGlobalTheme() {
   try {
@@ -9,7 +72,9 @@
       } catch (e) {}
     }
 
+    let initialColor = "#1f3227";
     if (theme) {
+      initialColor = theme.accent || (theme.headerText === "#ffffff" ? theme.top : theme.accent) || "#1f3227";
       if (theme.isLight) {
         document.documentElement.classList.remove("dark");
       } else {
@@ -42,6 +107,7 @@
   } catch (e) {
     console.warn("Theme init in components error:", e);
   }
+  updateCtuTabFavicon(typeof initialColor !== "undefined" ? initialColor : "#1f3227");
 })();
 
 class AppHeader extends HTMLElement {
@@ -52,14 +118,30 @@ class AppHeader extends HTMLElement {
     this.style.display = "block";
     this.style.width = "100%";
 
-    const currentPath =
+        const currentPath =
       window.location.pathname.split("/").pop() || "index.html";
+
+    // Phân tích nguồn xuất phát khi xem chi tiết để highlight đúng tab trên Navbar
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromParam = (urlParams.get("from") || "").toLowerCase();
+    let effectivePage = currentPath;
+    if (["claim.html", "match-detail.html", "request-detail.html"].includes(currentPath)) {
+      if (fromParam.includes("index") || fromParam === "home") {
+        effectivePage = "index.html";
+      } else if (fromParam.includes("find") || fromParam.includes("map")) {
+        effectivePage = "find.html";
+      } else if (fromParam.includes("post")) {
+        effectivePage = "post.html";
+      } else {
+        effectivePage = "notifications.html";
+      }
+    }
 
     const getLinkClass = (pageNames) => {
       const pages = Array.isArray(pageNames) ? pageNames : [pageNames];
       const isActive =
-        pages.includes(currentPath) ||
-        (currentPath === "" && pages.includes("index.html"));
+        pages.includes(effectivePage) ||
+        (effectivePage === "" && pages.includes("index.html"));
 
       if (isActive) {
         return "header-nav-link header-nav-active flex items-center h-full text-sm font-semibold border-b-2";
@@ -69,8 +151,8 @@ class AppHeader extends HTMLElement {
     const getMobileTabClass = (pageNames) => {
       const pages = Array.isArray(pageNames) ? pageNames : [pageNames];
       const isActive =
-        pages.includes(currentPath) ||
-        (currentPath === "" && pages.includes("index.html"));
+        pages.includes(effectivePage) ||
+        (effectivePage === "" && pages.includes("index.html"));
 
       if (isActive) {
         return "text-[var(--theme-accent,#1f3227)] dark:text-emerald-400 font-bold";
@@ -346,9 +428,7 @@ class AppHeader extends HTMLElement {
           <!-- Logo Brand -->
           <a href="${currentPath === 'admin.html' ? 'admin.html' : 'index.html'}" class="flex items-center gap-2 group shrink-0">
             <div class="w-8 h-8 flex items-center justify-center header-brand-icon transition-transform group-hover:scale-105">
-              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"></path>
-              </svg>
+              ${getCtuOwlSvg("currentColor", "header-brand")}
             </div>
             <span class="text-base sm:text-lg md:text-xl font-bold header-brand-text tracking-tight">CTU Lost & Found</span>
           </a>
@@ -364,7 +444,7 @@ class AppHeader extends HTMLElement {
             <a href="index.html" class="${getLinkClass("index.html")}">Trang chủ</a>
             <a href="${isLoggedIn ? 'find.html' : 'login.html'}" class="${getLinkClass("find.html")}">Tìm đồ</a>
             <a href="${isLoggedIn ? 'post.html' : 'login.html'}" class="${getLinkClass(["post.html", "post-lost.html", "post-found.html"])}">Đăng tin</a>
-            <a href="${isLoggedIn ? 'notifications.html' : 'login.html'}" class="${getLinkClass(["notifications.html", "requests.html", "match-detail.html", "request-detail.html", "claim.html"])}">Thông báo</a>
+            <a href="${isLoggedIn ? 'notifications.html' : 'login.html'}" class="${getLinkClass(["notifications.html", "requests.html"])}">Thông báo</a>
           </nav>
           `}
 
@@ -402,7 +482,7 @@ class AppHeader extends HTMLElement {
           <span class="material-symbols-outlined text-[24px]">add_circle</span>
           <span class="text-[10px] font-medium mt-0.5">Đăng tin</span>
         </a>
-        <a href="${isLoggedIn ? 'notifications.html' : 'login.html'}" class="flex flex-col items-center justify-center flex-1 py-1 relative ${getMobileTabClass(['notifications.html', 'requests.html', 'match-detail.html', 'request-detail.html', 'claim.html'])}" title="Thông báo">
+        <a href="${isLoggedIn ? 'notifications.html' : 'login.html'}" class="flex flex-col items-center justify-center flex-1 py-1 relative ${getMobileTabClass(['notifications.html', 'requests.html'])}" title="Thông báo">
           <div class="relative flex items-center justify-center">
             <span class="material-symbols-outlined text-[24px]">notifications</span>
             <span class="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-[#ba1a1a]"></span>
@@ -550,18 +630,78 @@ class AppHeader extends HTMLElement {
       }
     ];
 
+    const adminDefaultNotifs = [
+      {
+        id: 101,
+        title: "Báo cáo bài đăng mới",
+        time: "15 phút trước",
+        desc: "Sinh viên B2209911 đã gửi báo cáo về bài đăng #POST-103 có dấu hiệu đòi phí chuộc không hợp lệ.",
+        isUnread: true,
+        type: "report",
+        link: "admin.html?tab=posts",
+        section: "new"
+      },
+      {
+        id: 102,
+        title: "Tiếp nhận bàn giao đồ vật",
+        time: "45 phút trước",
+        desc: "Sinh viên Phan Minh Khang (B2404991) đã bàn giao Ví da nam màu đen về văn phòng PCTSV Nhà điều hành C1.",
+        isUnread: true,
+        type: "handover",
+        link: "admin.html?tab=posts",
+        section: "new"
+      },
+      {
+        id: 103,
+        title: "Cảnh báo bài đăng quá hạn 30 ngày",
+        time: "3 giờ trước",
+        desc: "Bài đăng #POST-105 đang xác minh quá 30 ngày, hệ thống đã tự động chuyển sang Đã được ẩn theo quy chế.",
+        isUnread: false,
+        type: "warning",
+        link: "admin.html?tab=posts",
+        section: "new"
+      },
+      {
+        id: 104,
+        title: "Hoàn tất thủ tục trao trả",
+        time: "Hôm qua, 15:00",
+        desc: "Đã xác nhận trao trả thành công Thẻ sinh viên cho bạn Trần Thị B tại bàn tiếp nhận PCTSV.",
+        isUnread: false,
+        type: "success",
+        link: "admin.html?tab=posts",
+        section: "earlier"
+      },
+      {
+        id: 105,
+        title: "Cập nhật điểm rèn luyện & vinh danh",
+        time: "Hôm qua, 09:30",
+        desc: "Hệ thống đã tự động ghi nhận điểm thưởng cho 8 sinh viên hoàn tất việc trao trả tài sản trong tuần này.",
+        isUnread: false,
+        type: "system",
+        link: "admin.html?tab=accounts",
+        section: "earlier"
+      }
+    ];
+
+    const notifsStorageKey = isAdmin ? "ctu_admin_notifications_v1" : "ctu_notifications_data_v2";
+    const initialNotifList = isAdmin ? adminDefaultNotifs : defaultNotifs;
+
     const getStoredNotifs = () => {
       try {
-        const stored = localStorage.getItem("ctu_notifications_data_v2");
+        const stored = localStorage.getItem(notifsStorageKey);
         if (stored) return JSON.parse(stored);
       } catch (e) {
         console.error("Lỗi đọc dữ liệu thông báo:", e);
       }
-      return defaultNotifs;
+      return initialNotifList;
     };
 
     const saveNotifs = (data) => {
-      localStorage.setItem("ctu_notifications_data_v2", JSON.stringify(data));
+      try {
+        localStorage.setItem(notifsStorageKey, JSON.stringify(data));
+      } catch (e) {
+        console.error("Lỗi lưu dữ liệu thông báo:", e);
+      }
     };
 
     let notifications = getStoredNotifs();
@@ -685,6 +825,30 @@ class AppHeader extends HTMLElement {
             </svg>
           </div>
         `;
+      } else if (item.type === "report") {
+        iconHtml = `
+          <div class="w-10 h-10 bg-rose-50 text-rose-700 border border-rose-200/80 flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
+      } else if (item.type === "warning") {
+        iconHtml = `
+          <div class="w-10 h-10 bg-amber-50 text-amber-700 border border-amber-200/80 flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
+      } else if (item.type === "success") {
+        iconHtml = `
+          <div class="w-10 h-10 bg-emerald-50 text-emerald-700 border border-emerald-200/80 flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        `;
       } else {
         iconHtml = `
           <div class="w-10 h-10 bg-neutral-100 text-[#797675] border border-[#e7e1df] flex items-center justify-center rounded-full flex-shrink-0 shadow-xs">
@@ -775,7 +939,7 @@ class AppHeader extends HTMLElement {
         if (resetBtn) {
           resetBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            notifications = JSON.parse(JSON.stringify(defaultNotifs));
+            notifications = JSON.parse(JSON.stringify(initialNotifList));
             saveNotifs(notifications);
             renderNotifications();
           });
@@ -866,7 +1030,7 @@ class AppHeader extends HTMLElement {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
           const id = Number(btn.dataset.id);
-          const target = notifications.find((n) => n.id === id);
+          const target = notifications.find((n) => String(n.id) === String(id));
           if (target) {
             target.isUnread = !target.isUnread;
             saveNotifs(notifications);
@@ -881,7 +1045,7 @@ class AppHeader extends HTMLElement {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
           const id = Number(btn.dataset.id);
-          notifications = notifications.filter((n) => n.id !== id);
+          notifications = notifications.filter((n) => String(n.id) !== String(id));
           saveNotifs(notifications);
           renderNotifications();
         });
@@ -896,7 +1060,7 @@ class AppHeader extends HTMLElement {
           }
           const id = Number(row.dataset.id);
           const link = row.dataset.link;
-          const target = notifications.find((n) => n.id === id);
+          const target = notifications.find((n) => String(n.id) === String(id));
           if (target && target.isUnread) {
             target.isUnread = false;
             saveNotifs(notifications);
@@ -1443,6 +1607,10 @@ class AppHeader extends HTMLElement {
         root.style.setProperty("--theme-custom-hue", presetObj.hue);
         root.style.setProperty("--slider-thumb-color", `hsl(${presetObj.hue}, 65%, 45%)`);
       }
+
+      // Cập nhật tab logo Chrome theo màu chủ đề mới
+      const activeThemeColor = presetObj.accent || presetObj.top || "#1f3227";
+      updateCtuTabFavicon(activeThemeColor);
 
       // Cập nhật nhanh màu nút custom khi đang kéo slider mà không hủy toàn bộ grid
       const customBtn = themePresetsGrid ? themePresetsGrid.querySelector("#theme-custom-btn") : null;
@@ -2030,4 +2198,18 @@ if (typeof window !== "undefined") {
   document.addEventListener("DOMContentLoaded", initDatePickers);
   window.addEventListener("load", initDatePickers);
   setTimeout(initDatePickers, 500);
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", () => {
+    try {
+      const rawData = localStorage.getItem("ctu_theme_data");
+      let theme = null;
+      if (rawData) {
+        try { theme = JSON.parse(rawData); } catch (e) {}
+      }
+      const activeColor = theme ? (theme.accent || theme.top || "#1f3227") : "#1f3227";
+      updateCtuTabFavicon(activeColor);
+    } catch (e) {}
+  });
 }

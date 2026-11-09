@@ -2,6 +2,9 @@
 <html lang="vi" class="light">
 
 <head>
+  <!-- Favicon / Chrome Tab Logo (Owl Mascot) -->
+  <link rel="icon" type="image/svg+xml" href="../mascot/assets/owl-logo.svg" />
+  <link rel="icon" type="image/png" href="../mascot/assets/owl-logo-32.png" />
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Gửi Yêu Cầu Xác Minh Nhận Đồ - CTU Lost &amp; Found</title>
@@ -89,10 +92,10 @@
   <div class="w-full bg-[#fcf9f8] border-b border-[#e7e1df]/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-xs">
       <div class="flex items-center gap-2 text-[#797675]">
-        <a id="backBtn" href="match-detail.html"
+        <a id="backBtn" href="match-detail.html?level=room&room=p204"
           class="hover:text-[#35483d] font-medium flex items-center gap-1 transition-colors">
           <span class="material-symbols-outlined text-base">chevron_left</span>
-          <span id="backBtnText">Quay lại kết quả ghép nối</span>
+          <span id="backBtnText">Quay lại sơ đồ phòng học</span>
         </a>
       </div>
     </div>
@@ -115,6 +118,11 @@
             <span class="material-symbols-outlined text-base text-[#35483d]">inventory_2</span>
             <span class="text-xs font-bold uppercase tracking-wider text-[#35483d]">Món đồ đối chiếu tương thích</span>
           </div>
+          <!-- Nút Báo Cáo Bài Đăng (Viền đỏ nổi bật theo yêu cầu) -->
+          <button type="button" onclick="openReportModal()" class="px-3 py-1.5 rounded-lg border-2 border-rose-600 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs">
+            <span class="material-symbols-outlined text-[16px] text-rose-600">flag</span>
+            <span>Báo cáo bài đăng</span>
+          </button>
         </div>
 
         <!-- KHU VỰC ẢNH (Ảnh thực tế của card 1 trong chi tiết kết quả ghép nối) -->
@@ -162,6 +170,10 @@
                 src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
             </button>
           </div>
+          <!-- Thời gian đăng bài (Dưới ảnh, nhỏ, không in đậm, không làm nổi bật) -->
+          <p class="text-[11px] text-[#797675] dark:text-stone-400 mt-2 font-normal select-none">
+            Thời gian đăng bài: <span id="postTimeDisplay">Hôm nay, 09:30</span>
+          </p>
         </div>
 
         <!-- KHU VỰC THÔNG TIN BÀI ĐĂNG (Phía dưới) -->
@@ -171,40 +183,49 @@
             Ví da nam màu nâu - Tòa C1
           </h1>
 
-          <!-- Danh sách Meta (Xếp dọc, icon xám) -->
-          <div class="space-y-2.5 text-xs text-[#1b1c1c]">
-            <div class="flex items-start gap-2.5">
-              <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">location_on</span>
-              <div class="text-xs">
-                <span class="font-bold text-[#1b1c1c] uppercase tracking-wider">Địa điểm người kia nhặt được:</span>
-                <span id="itemLocation" class="font-medium text-[#1b1c1c] ml-1">Khu II - Tòa C1 (Khoa CNTT&amp;TT)</span>
+          <!-- Danh sách Meta (Xếp dọc, icon trong ô vuông đồng bộ request-detail.html) -->
+          <div class="space-y-3 text-sm">
+            <!-- Địa điểm nhặt -->
+            <div class="flex items-center gap-3 text-[#4a4746] dark:text-stone-300">
+              <div class="w-8 h-8 rounded-lg bg-[#f0edec] dark:bg-stone-800 text-[#35483d] dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]">location_on</span>
+              </div>
+              <div>
+                <span class="text-xs text-[#797675] dark:text-stone-400 block uppercase tracking-wider font-semibold">Địa điểm người kia nhặt được:</span>
+                <span id="itemLocation" class="font-semibold text-[#1b1c1c] dark:text-white">Khu II - Tòa C1 (Khoa CNTT&amp;TT)</span>
               </div>
             </div>
-            <div class="flex items-start gap-2.5">
-              <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">schedule</span>
-              <div class="text-xs">
-                <span class="font-bold text-[#1b1c1c] uppercase tracking-wider">Thời gian đăng tin:</span>
-                <span id="itemTime" class="font-medium text-[#1b1c1c] ml-1">10 phút trước (Hôm nay, 14:25)</span>
+
+            <!-- Thời gian đăng tin -->
+            <div class="flex items-center gap-3 text-[#4a4746] dark:text-stone-300">
+              <div class="w-8 h-8 rounded-lg bg-[#f0edec] dark:bg-stone-800 text-[#35483d] dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]">schedule</span>
+              </div>
+              <div>
+                <span class="text-xs text-[#797675] dark:text-stone-400 block uppercase tracking-wider font-semibold">Thời gian đăng tin:</span>
+                <span id="itemTime" class="font-semibold text-[#1b1c1c] dark:text-white">10 phút trước (Hôm nay, 14:25)</span>
               </div>
             </div>
-            <div class="flex items-start gap-2.5">
-              <span class="material-symbols-outlined text-base text-[#797675] mt-0.5">apartment</span>
-              <div class="text-xs">
-                <span class="font-bold text-[#1b1c1c] uppercase tracking-wider">Nơi lưu giữ:</span>
-                <span id="itemStorage" class="font-medium text-[#1b1c1c] ml-1">Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành</span>
+
+            <!-- Nơi lưu giữ -->
+            <div class="flex items-center gap-3 text-[#4a4746] dark:text-stone-300">
+              <div class="w-8 h-8 rounded-lg bg-[#f0edec] dark:bg-stone-800 text-[#35483d] dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]">apartment</span>
+              </div>
+              <div>
+                <span class="text-xs text-[#797675] dark:text-stone-400 block uppercase tracking-wider font-semibold">Nơi lưu giữ:</span>
+                <span id="itemStorage" class="font-semibold text-[#1b1c1c] dark:text-white">Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành C1</span>
               </div>
             </div>
           </div>
 
-          <!-- Ghi chú mô tả của người nhặt (Tối giản chuẩn phong cách Apple) -->
-          <div class="mt-5 space-y-1.5">
-            <div class="text-xs font-bold text-[#1b1c1c] uppercase tracking-wider flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-base text-[#797675]">notes</span>
-              <span>Ghi chú mô tả của người nhặt:</span>
-            </div>
-            <p id="itemNote" class="text-sm text-[#1b1c1c] font-normal leading-relaxed">
-              "Mình nhặt được chiếc ví màu nâu ở khu vực dãy bàn tự học Tầng 2 Thư viện (khu tự học máy lạnh). Trong ví
-              có một số thẻ cá nhân và giấy tờ sinh viên, hiện đã chuyển giao bảo quản an toàn để tránh thất lạc."
+          <!-- Ghi chú mô tả của người nhặt: Khung bo góc nền xám nhạt đồng bộ -->
+          <div class="bg-[#fcf9f8] dark:bg-stone-800/40 p-4 rounded-xl border border-[#e7e1df] dark:border-stone-800 mt-5">
+            <span class="text-xs font-bold text-[#35483d] dark:text-emerald-400 uppercase tracking-wider block mb-1.5">
+              Ghi chú mô tả của người nhặt:
+            </span>
+            <p id="itemNote" class="text-sm text-[#4a4746] dark:text-stone-300 leading-relaxed italic">
+              "Mình nhặt được chiếc ví màu nâu ở khu vực dãy bàn tự học Tầng 2 Thư viện (khu tự học máy lạnh). Trong ví có một số thẻ cá nhân và giấy tờ sinh viên, hiện đã chuyển giao bảo quản an toàn để tránh thất lạc."
             </p>
           </div>
         </div>
@@ -529,9 +550,9 @@
         if (backBtn) backBtn.href = 'find.html';
         if (backBtnText) backBtnText.textContent = 'Quay lại trang tìm đồ';
       } else {
-        // Mặc định hoặc từ kết quả ghép nối
-        if (backBtn) backBtn.href = fromPage || 'match-detail.html';
-        if (backBtnText) backBtnText.textContent = 'Quay lại kết quả ghép nối';
+        // Mặc định hoặc từ kết quả ghép nối -> quay lại sơ đồ phòng học Level 3
+        if (backBtn) backBtn.href = 'match-detail.html?level=room&room=p204';
+        if (backBtnText) backBtnText.textContent = 'Quay lại sơ đồ phòng học';
       }
 
       // 2. Lấy dữ liệu item
@@ -611,6 +632,106 @@
       const answerInput = document.getElementById('answerInput');
       if (answerInput && item.answerPlaceholder) answerInput.placeholder = item.answerPlaceholder;
     });
+  </script>
+
+
+  <!-- =========================================================================
+       MODAL BÁO CÁO BÀI ĐĂNG (Dropdown lý do mẫu + Ô nhập riêng)
+       ========================================================================= -->
+  <div id="modal-report-post" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200 dark:border-stone-800 space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-2.5 text-rose-600">
+          <div class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/50 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">flag</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Báo cáo bài đăng vi phạm</h3>
+            <p class="text-xs text-[#797675] dark:text-stone-400">Giúp ban quản trị kiểm tra và giữ môi trường minh bạch</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeReportModal()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Lý do báo cáo <span class="text-rose-600">*</span></label>
+          <select id="report-reason-select" onchange="toggleCustomReportReason(this.value)" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-[#1b1c1c] dark:text-white focus:outline-none focus:border-[#35483d] dark:focus:border-emerald-500 font-medium">
+            <option value="">-- Chọn lý do phù hợp --</option>
+            <option value="fake">Đồ vật không đúng sự thật / Giả mạo</option>
+            <option value="wrong_info">Thông tin sai lệch địa điểm hoặc thời gian</option>
+            <option value="already_returned">Đã trao trả ngoài đời nhưng người đăng chưa đóng bài</option>
+            <option value="spam">Bài đăng trùng lặp (Spam)</option>
+            <option value="other">Khác (Tự nhập chi tiết)</option>
+          </select>
+        </div>
+
+        <div id="report-custom-reason-container" class="hidden space-y-1.5">
+          <label class="block font-bold text-[#1b1c1c] dark:text-stone-200">Mô tả lý do khác <span class="text-rose-600">*</span></label>
+          <textarea id="report-custom-reason-input" rows="3" placeholder="Nhập lý do chi tiết để ban quản trị đối chiếu..." class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-[#1b1c1c] dark:text-white focus:outline-none focus:border-[#35483d] text-xs resize-none"></textarea>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closeReportModal()" class="px-4 py-2 rounded-xl border border-stone-200 dark:border-stone-700 text-xs font-semibold hover:bg-stone-100 dark:hover:bg-stone-800 text-[#4a4746] dark:text-stone-300 transition-colors">
+          Hủy bỏ
+        </button>
+        <button type="button" onclick="submitReportPost()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">send</span>
+          <span>Gửi báo cáo</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openReportModal() {
+      document.getElementById("modal-report-post").classList.remove("hidden");
+    }
+    function closeReportModal() {
+      document.getElementById("modal-report-post").classList.add("hidden");
+      document.getElementById("report-reason-select").value = "";
+      document.getElementById("report-custom-reason-container").classList.add("hidden");
+      document.getElementById("report-custom-reason-input").value = "";
+    }
+    function toggleCustomReportReason(val) {
+      const container = document.getElementById("report-custom-reason-container");
+      if (val === "other") {
+        container.classList.remove("hidden");
+      } else {
+        container.classList.add("hidden");
+      }
+    }
+    function submitReportPost() {
+      const reasonVal = document.getElementById("report-reason-select").value;
+      if (!reasonVal) {
+        alert("Vui lòng chọn lý do báo cáo vi phạm.");
+        return;
+      }
+      if (reasonVal === "other") {
+        const customText = document.getElementById("report-custom-reason-input").value.trim();
+        if (!customText) {
+          alert("Vui lòng nhập mô tả chi tiết lý do báo cáo.");
+          return;
+        }
+      }
+      closeReportModal();
+      showToast("Cảm ơn bạn! Báo cáo bài đăng đã được gửi đến Ban Quản trị PCTSV để đối chiếu xử lý.", "success");
+    }
+    function showToast(msg, type = "success") {
+      const toast = document.createElement("div");
+      toast.className = "fixed bottom-20 right-6 z-50 px-4 py-3 rounded-xl shadow-lg border text-xs font-semibold flex items-center gap-2 " + 
+        (type === "success" ? "bg-emerald-800 text-white border-emerald-700" : "bg-rose-800 text-white border-rose-700");
+      toast.innerHTML = '<span class="material-symbols-outlined text-[18px]">' + (type === "success" ? "check_circle" : "info") + '</span><span>' + msg + '</span>';
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.transition = "opacity 0.3s ease";
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
   </script>
 
 </body>

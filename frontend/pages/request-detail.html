@@ -2,6 +2,9 @@
 <html lang="vi">
 
 <head>
+  <!-- Favicon / Chrome Tab Logo (Owl Mascot) -->
+  <link rel="icon" type="image/svg+xml" href="../mascot/assets/owl-logo.svg" />
+  <link rel="icon" type="image/png" href="../mascot/assets/owl-logo-32.png" />
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Chi Tiết Yêu Cầu Xác Minh - CTU Lost &amp; Found</title>
@@ -163,6 +166,10 @@
                 src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" />
             </button>
           </div>
+          <!-- Thời gian đăng bài (Dưới ảnh, nhỏ, không in đậm, không làm nổi bật) -->
+          <p class="text-[11px] text-[#797675] dark:text-stone-400 mt-2 font-normal select-none">
+            Thời gian đăng bài: <span>Hôm nay, 09:30</span>
+          </p>
         </div>
 
         <!-- Phân cách ngang mỏng -->
@@ -171,9 +178,11 @@
         <!-- KHU VỰC THÔNG TIN BÀI ĐĂNG (Phía dưới) -->
         <div>
           <!-- Tiêu đề: "Ví da nam màu nâu - Tòa C1" -->
-          <h1 class="font-bold text-2xl text-[#1b1c1c] tracking-tight mt-1 mb-4">
-            Ví da nam màu nâu - Tòa C1
-          </h1>
+          <div class="mt-1 mb-4">
+            <h1 class="font-bold text-2xl text-[#1b1c1c] tracking-tight">
+              Ví da nam màu nâu - Tòa C1
+            </h1>
+          </div>
 
           <!-- Danh sách Meta (Xếp dọc, có icon) -->
           <div class="space-y-3 text-sm">
@@ -353,6 +362,60 @@
   </main>
 
   <!-- =========================================================================
+       MODAL XÁC NHẬN CHẤP NHẬN YÊU CẦU (UI/UX PRO MAX)
+       ========================================================================= -->
+  <div id="modal-confirm-accept" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200 dark:border-stone-800 space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-2.5 text-[#35483d] dark:text-emerald-400">
+          <div class="w-10 h-10 rounded-xl bg-[#f0edec] dark:bg-stone-800 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[22px]">verified</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Xác nhận chấp nhận yêu cầu</h3>
+            <p class="text-xs text-[#797675] dark:text-stone-400">Tiến hành kết nối và xác minh quyền sở hữu</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeAcceptModal()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-[#fcf9f8] dark:bg-stone-800/40 border border-stone-200 dark:border-stone-700 space-y-2 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-[#797675]">Sinh viên yêu cầu:</span>
+          <span id="modal-accept-student" class="font-bold text-[#1b1c1c] dark:text-white"></span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-[#797675]">Mã số sinh viên:</span>
+          <span id="modal-accept-mssv" class="font-semibold text-[#1b1c1c] dark:text-stone-200 font-mono"></span>
+        </div>
+        <div class="pt-2 border-t border-stone-200/60 dark:border-stone-700/60">
+          <span class="text-[#797675] block mb-1">Minh chứng / Câu trả lời:</span>
+          <p id="modal-accept-proof" class="italic text-[#4a4746] dark:text-stone-300 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 flex items-start gap-2.5">
+        <span class="material-symbols-outlined text-amber-700 dark:text-amber-400 text-[18px] shrink-0 mt-0.5">info</span>
+        <p class="text-[11.5px] text-amber-900 dark:text-amber-200 leading-snug">
+          Sau khi chấp nhận, bài đăng sẽ chuyển sang trạng thái <strong>"Đang xác minh"</strong> để hai bên tiến hành hẹn gặp trao trả tại Phòng Công tác Sinh viên (PCTSV).
+        </p>
+      </div>
+
+      <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closeAcceptModal()" class="px-4 py-2 rounded-xl border border-stone-200 dark:border-stone-700 text-xs font-semibold hover:bg-stone-100 dark:hover:bg-stone-800 text-[#4a4746] dark:text-stone-300 transition-colors cursor-pointer">
+          Hủy bỏ
+        </button>
+        <button type="button" id="btn-confirm-accept-submit" class="px-4 py-2 rounded-xl bg-[#35483d] hover:bg-[#28372e] text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">check_circle</span>
+          <span>Xác nhận chấp nhận</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
        4. GLOBAL FOOTER (Web Component Footer chung của dự án)
        ========================================================================= -->
   <app-footer></app-footer>
@@ -408,42 +471,86 @@
       }, 4000);
     }
 
-    // Hàm xử lý nút Chấp nhận
+    let pendingAccept = null;
+
+    // Hàm xử lý nút Chấp nhận (Mở Modal Popup UI/UX Pro Max)
     function handleAccept(studentName, mssv, buttonEl) {
-      const confirmed = confirm(
-        `Bạn có chắc chắn muốn xác nhận ghép nối với ${studentName} (MSSV: ${mssv}) không?\n\n` +
-        `Sau khi chấp nhận, hệ thống sẽ gửi thông báo và thủ tục nhận lại đồ tại Phòng Công tác Sinh viên (PCTSV).`
-      );
+      const card = buttonEl.closest('.flex.flex-row');
+      const proofEl = card ? card.querySelector('.text-sm.text-\\[\\#4a4746\\]') : null;
+      const proofText = proofEl ? proofEl.textContent.trim() : '';
 
-      if (!confirmed) return;
+      pendingAccept = { studentName, mssv, buttonEl };
+      const studentEl = document.getElementById('modal-accept-student');
+      const mssvEl = document.getElementById('modal-accept-mssv');
+      const proofDisplayEl = document.getElementById('modal-accept-proof');
+      const modal = document.getElementById('modal-confirm-accept');
 
-      // Cập nhật trạng thái nút đã bấm
-      buttonEl.innerHTML = `
-        <span class="flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-          </svg>
-          Đã chấp nhận
-        </span>
-      `;
-      buttonEl.classList.remove('bg-[#35483d]', 'hover:bg-[#28372e]');
-      buttonEl.classList.add('bg-emerald-700', 'cursor-default');
-      buttonEl.disabled = true;
+      if (studentEl) studentEl.textContent = studentName;
+      if (mssvEl) mssvEl.textContent = mssv;
+      if (proofDisplayEl) proofDisplayEl.textContent = `"${proofText}"`;
+      if (modal) modal.classList.remove('hidden');
+    }
 
-      // Vô hiệu hóa các nút chấp nhận còn lại
-      const allButtons = document.querySelectorAll('.accept-btn');
-      allButtons.forEach((btn) => {
-        if (btn !== buttonEl) {
-          btn.disabled = true;
-          btn.classList.add('opacity-40', 'cursor-not-allowed');
-        }
+    function closeAcceptModal() {
+      const modal = document.getElementById('modal-confirm-accept');
+      if (modal) modal.classList.add('hidden');
+      pendingAccept = null;
+    }
+
+    function initAcceptModalListeners() {
+      const submitBtn = document.getElementById('btn-confirm-accept-submit');
+      if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+          if (!pendingAccept) return;
+          const { studentName, buttonEl } = pendingAccept;
+          closeAcceptModal();
+
+          // Cập nhật trạng thái nút đã bấm
+          buttonEl.innerHTML = `
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Đã chấp nhận
+            </span>
+          `;
+          buttonEl.classList.remove('bg-[#35483d]', 'hover:bg-[#28372e]');
+          buttonEl.classList.add('bg-emerald-700', 'cursor-default');
+          buttonEl.disabled = true;
+
+          // Vô hiệu hóa các nút chấp nhận còn lại
+          const allButtons = document.querySelectorAll('.accept-btn');
+          allButtons.forEach((btn) => {
+            if (btn !== buttonEl) {
+              btn.disabled = true;
+              btn.classList.add('opacity-40', 'cursor-not-allowed');
+            }
+          });
+
+          // Hiển thị thông báo Toast
+          showToast(
+            'Ghép nối thành công!',
+            `Đã xác nhận chủ sở hữu là ${studentName}. Bạn và bạn ấy có thể liên hệ nhận lại ví tại Phòng Công tác Sinh viên.`
+          );
+        });
+      }
+
+      const modal = document.getElementById('modal-confirm-accept');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeAcceptModal();
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAcceptModal();
       });
+    }
 
-      // Hiển thị thông báo Toast
-      showToast(
-        'Ghép nối thành công!',
-        `Đã xác nhận chủ sở hữu là ${studentName}. Bạn và bạn ấy có thể liên hệ nhận lại ví tại Phòng Công tác Sinh viên.`
-      );
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAcceptModalListeners);
+    } else {
+      initAcceptModalListeners();
     }
   </script>
 

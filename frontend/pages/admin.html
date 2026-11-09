@@ -2,6 +2,9 @@
 <html lang="vi">
 
 <head>
+  <!-- Favicon / Chrome Tab Logo (Owl Mascot) -->
+  <link rel="icon" type="image/svg+xml" href="../mascot/assets/owl-logo.svg" />
+  <link rel="icon" type="image/png" href="../mascot/assets/owl-logo-32.png" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bảng Điều Khiển Quản Trị Hệ Thống — CTU Lost & Found</title>
@@ -117,6 +120,10 @@
 
       <!-- Action buttons -->
       <div class="flex items-center gap-2.5 shrink-0">
+        <button type="button" onclick="openAddPctsvPostModal();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white shadow-sm transition-all cursor-pointer" title="Đăng bài chính thức từ PCTSV">
+          <span class="material-symbols-outlined text-[18px]">add_circle</span>
+          <span>Thêm bài đăng (PCTSV)</span>
+        </button>
         <button type="button" onclick="refreshAdminData();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/60 text-[#1b1c1c] dark:text-white shadow-2xs transition-colors cursor-pointer" title="Đồng bộ dữ liệu">
           <span class="material-symbols-outlined text-[18px]">sync</span>
           <span>Làm mới</span>
@@ -143,8 +150,8 @@
         </div>
       </div>
 
-      <!-- Card 2: Bài đăng bị báo cáo (Click vào để mở thẳng danh sách bị báo cáo) -->
-      <div onclick="switchAdminTab('posts'); setPostSubFilter('reported');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-rose-400 dark:hover:border-rose-700 hover:shadow-sm cursor-pointer group">
+      <!-- Card 2: Bài đăng bị báo cáo (Click vào để mở thẳng danh sách đang xác minh / bị báo cáo) -->
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('verifying');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-rose-400 dark:hover:border-rose-700 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
           <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài bị báo cáo</span>
           <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-rose-600 dark:text-rose-400 group-hover:scale-105 transition-transform">
@@ -195,63 +202,194 @@
 
     </div>
 
-    <!-- 3. MAIN TAB SWITCHER (Đồng bộ với Header: Quản lý bài đăng & Xem điểm thưởng) -->
-    <div class="flex items-center justify-between gap-3 border-b border-stone-200 dark:border-stone-800 pt-1">
-      <div class="inline-flex p-1 bg-stone-100 dark:bg-stone-800/90 rounded-xl" role="tablist">
-        
-        <!-- Tab 1 Button: Quản lý bài đăng -->
-        <button type="button" id="tab-btn-posts" onclick="switchAdminTab('posts');" role="tab" aria-selected="true" class="tab-btn-active px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer">
-          <span class="material-symbols-outlined text-[18px]">article</span>
-          <span>Quản lý bài đăng</span>
-          <span id="tab-badge-posts" class="px-2 py-0.5 text-[11px] font-mono font-bold rounded-full bg-stone-200 dark:bg-stone-700 text-[#1b1c1c] dark:text-white">0</span>
-        </button>
-
-        <!-- Tab 2 Button: Xem điểm thưởng -->
-        <button type="button" id="tab-btn-accounts" onclick="switchAdminTab('accounts');" role="tab" aria-selected="false" class="px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4a4746] dark:text-stone-300 hover:text-[#1b1c1c] dark:hover:text-white flex items-center gap-2 transition-all cursor-pointer">
-          <span class="material-symbols-outlined text-[18px]">workspace_premium</span>
-          <span>Xem điểm thưởng</span>
-          <span id="tab-badge-accounts" class="px-2 py-0.5 text-[11px] font-mono font-semibold rounded-full bg-stone-200 dark:bg-stone-700 text-[#1b1c1c] dark:text-white">0</span>
-        </button>
-
-      </div>
-    </div>
-
-
     <!-- ========================================================================= -->
     <!-- PHÂN HỆ 1: QUẢN LÝ BÀI ĐĂNG (POST MANAGEMENT TAB)                         -->
     <!-- ========================================================================= -->
     <section id="tab-content-posts" class="space-y-4">
       
-      <!-- Thanh chuyển đổi xem nhanh các nhóm bài đăng (Sub-filters) -->
-      <div class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#18191c] p-3 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs">
+      <!-- Thanh chuyển đổi xem nhanh các nhóm bài đăng (5 trạng thái chuẩn đặc tả & Thanh tìm kiếm kiểu sinh viên) -->
+      <div class="space-y-3 bg-white dark:bg-[#18191c] p-4 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs">
         
-        <!-- Các nút lọc nhóm trạng thái -->
-        <div class="flex flex-wrap items-center gap-1.5" id="subfilter-container">
+        <!-- Khung tìm kiếm & bộ lọc chuẩn 100% giao diện từ find.html -->
+        <div class="space-y-4">
+          <!-- Hàng 1: Primary Search Bar -->
+          <div class="relative flex items-center">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#727873] dark:text-stone-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <input id="post-search-input" type="text" oninput="filterPosts()"
+              placeholder="Nhập tên món đồ, mã thẻ SV, màu sắc hoặc đặc điểm nhận dạng..."
+              class="w-full pl-11 pr-24 py-3.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] focus:bg-white text-base text-[#1b1c1b] dark:text-white placeholder-[#727873] rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none font-normal" />
+            <button id="btn-clear-search-text" type="button" onclick="clearSearchInput()" title="Xóa nội dung nhập"
+              class="absolute right-3 px-2 py-1 text-xs font-medium text-[#727873] hover:text-[#1b1c1b] dark:hover:text-white hover:bg-[#e7e1df] dark:hover:bg-stone-700 rounded transition-colors cursor-pointer">
+              Xóa chữ
+            </button>
+          </div>
+
+          <!-- Hàng 2: Filters Grid (4 cột dropdown chuẩn find.html) -->
+          <div class="border-t border-[#e7e1df] dark:border-stone-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+            <!-- Cột 1: Loại đồ vật -->
+            <div>
+              <label for="filter-category" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Loại đồ vật</span>
+              </label>
+              <div class="relative">
+                <select id="filter-category" onchange="filterPosts()"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
+                  <option value="all" selected>Tất cả loại đồ vật</option>
+                  <option value="the-sv">Thẻ sinh viên / CCCD / Giấy tờ</option>
+                  <option value="vi">Ví tiền / Bóp da</option>
+                  <option value="dien-tu">Đồ điện tử (Tai nghe, Sạc, Điện thoại)</option>
+                  <option value="chia-khoa">Chùm chìa khóa xe / Thẻ từ</option>
+                  <option value="sach-vo">Sách vở / Tài liệu / Balo</option>
+                  <option value="khac">Vật dụng khác (Ô dù, Bình nước...)</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cột 2: Màu sắc (có chấm màu tròn + "Tất cả màu sắc") -->
+            <div class="relative">
+              <label for="filter-color" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 21a4 4 0 01-4-4 4 4 0 014-4c2 0 2 2 4 2 2.5 0 2.5-3 5-3a6.5 6.5 0 11-9 6z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Màu sắc</span>
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span id="color-trigger-swatch" class="w-4 h-4 rounded-full border border-slate-300 bg-slate-200 shrink-0 shadow-xs"></span>
+                </div>
+                <select id="filter-color" onchange="updateColorFilterSwatch(); filterPosts();"
+                  class="w-full appearance-none pl-9 pr-8 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
+                  <option value="all" selected>Tất cả màu sắc</option>
+                  <option value="Đen">Đen</option>
+                  <option value="Nâu">Nâu</option>
+                  <option value="Xanh">Xanh / Pastel</option>
+                  <option value="Trắng">Trắng / Bạc</option>
+                  <option value="Đỏ">Đỏ / Cam / Vàng</option>
+                  <option value="Xám">Xám / Ghi</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cột 3: Thời gian nhặt -->
+            <div>
+              <label for="filter-time" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Thời gian nhặt</span>
+              </label>
+              <div class="relative">
+                <select id="filter-time" onchange="filterPosts()"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
+                  <option value="all" selected>Mọi thời điểm</option>
+                  <option value="today">Hôm nay (24 giờ qua)</option>
+                  <option value="week">Trong tuần này (7 ngày qua)</option>
+                  <option value="month">Trong tháng này</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cột 4: Địa điểm nhặt -->
+            <div>
+              <label for="loc-faculty" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Địa điểm nhặt</span>
+              </label>
+              <div class="relative">
+                <select id="loc-faculty" onchange="filterPosts()"
+                  class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
+                  <option value="" selected>Tất cả khu vực tại CTU</option>
+                  <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
+                  <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
+                  <option value="Nhà học C2">Nhà học C2</option>
+                  <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
+                  <option value="Khoa Kinh tế">Khoa Kinh tế</option>
+                  <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
+                  <option value="Khoa Luật">Khoa Luật</option>
+                  <option value="Khoa Sư phạm">Khoa Sư phạm</option>
+                  <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
+                  <option value="Hội trường Rùa">Hội trường Rùa</option>
+                  <option value="Bãi xe Cổng A">Bãi xe Cổng A</option>
+                  <option value="Khu vực khác">Khu vực khác</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hàng 3: Action Buttons (canh phải) -->
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="button" onclick="clearFilters()"
+              class="px-4 py-2.5 rounded-lg border border-[#e7e1df] dark:border-stone-700 hover:bg-[#f6f3f2] dark:hover:bg-stone-800 text-sm font-medium text-[#727873] hover:text-[#1b1c1b] dark:hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+              <span>Xóa bộ lọc</span>
+            </button>
+
+            <button type="button" onclick="filterPosts()"
+              class="px-6 py-2.5 rounded-lg bg-[#35483d] hover:bg-[#233229] active:scale-[0.98] text-white text-sm font-semibold tracking-wide transition-all shadow-sm flex items-center gap-2 cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+              <span>Tìm kiếm</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Các nút lọc 5 trạng thái chuẩn đặc tả -->
+        <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-stone-100 dark:border-stone-800" id="subfilter-container">
           <button type="button" onclick="setPostSubFilter('all');" id="subfilter-all" class="subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
             Tất cả (<span id="count-all">0</span>)
           </button>
-          <button type="button" onclick="setPostSubFilter('active');" id="subfilter-active" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
-            Đang công khai (<span id="count-active">0</span>)
+          <button type="button" onclick="setPostSubFilter('student_holding');" id="subfilter-student_holding" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+            <span>Sinh viên đang giữ (<span id="count-student_holding">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('reported');" id="subfilter-reported" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-all cursor-pointer flex items-center gap-1">
-            <span class="material-symbols-outlined text-[15px]">flag</span>
-            <span>Bị báo cáo (<span id="count-reported">0</span>)</span>
+          <button type="button" onclick="setPostSubFilter('pctsv_holding');" id="subfilter-pctsv_holding" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+            <span>PCTSV đang giữ (<span id="count-pctsv_holding">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('hidden');" id="subfilter-hidden" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1">
-            <span class="material-symbols-outlined text-[15px]">visibility_off</span>
-            <span>Đã bị ẩn (<span id="count-hidden">0</span>)</span>
+          <button type="button" onclick="setPostSubFilter('verifying');" id="subfilter-verifying" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span>Đang xác minh (<span id="count-verifying">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('returned');" id="subfilter-returned" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
-            Đã trao trả (<span id="count-returned">0</span>)
+          <button type="button" onclick="setPostSubFilter('returned');" id="subfilter-returned" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Đã trao trả (<span id="count-returned">0</span>)</span>
           </button>
-        </div>
-
-        <!-- Ô tìm kiếm bài đăng tức thời -->
-        <div class="relative w-full sm:w-72">
-          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#797675] dark:text-stone-400">search</span>
-          <input type="text" id="post-search-input" oninput="filterPosts();" placeholder="Tìm tên đồ vật, mã tin, người đăng..." class="w-full pl-9 pr-8 py-1.5 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white placeholder:text-[#797675]/70 focus:outline-none focus:ring-1 focus:ring-[#35483d] transition-all">
-          <button type="button" onclick="document.getElementById('post-search-input').value=''; filterPosts();" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white cursor-pointer">
-            <span class="material-symbols-outlined text-[15px]">close</span>
+          <button type="button" onclick="setPostSubFilter('hidden');" id="subfilter-hidden" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+            <span>Đã được ẩn (<span id="count-hidden">0</span>)</span>
           </button>
         </div>
 
@@ -411,12 +549,16 @@
         <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-300">
           Lý do ẩn bài đăng:
         </label>
-        <select id="hide-reason-select" class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+        <select id="hide-reason-select" onchange="toggleCustomHideReason()" class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none cursor-pointer">
           <option value="Bài đăng có dấu hiệu gian lận / thông tin sai lệch">Có dấu hiệu gian lận / thông tin sai lệch</option>
           <option value="Người đăng yêu cầu tạm ẩn bài">Người đăng yêu cầu tạm ẩn bài</option>
           <option value="Bài đăng chứa hình ảnh hoặc nội dung không phù hợp">Chứa hình ảnh hoặc nội dung không phù hợp</option>
           <option value="Nội dung vi phạm quy định diễn đàn CTU Lost & Found">Vi phạm quy định diễn đàn</option>
+          <option value="other">Khác (Tự nhập lý do)</option>
         </select>
+        <div id="hide-reason-custom-wrapper" class="hidden mt-2">
+          <input type="text" id="hide-reason-custom" placeholder="Nhập lý do ẩn cụ thể..." class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none" />
+        </div>
       </div>
 
       <div class="pt-2 flex items-center justify-end gap-2 border-t border-stone-100 dark:border-stone-800">
@@ -642,8 +784,43 @@
   <!-- ========================================================================= -->
   <script>
     // -----------------------------------------------------------------------
-    // 1. DỮ LIỆU BAN ĐẦU: KHÔNG CẦN DUYỆT - HỖ TRỢ BÁO CÁO & ẨN BÀI ĐĂNG
+    // 1. DỮ LIỆU BAN ĐẦU: 5 TRẠNG THÁI CHUẨN ĐẶC TẢ & BÀI ĐĂNG PCTSV CÓ TÍCH XANH
     // -----------------------------------------------------------------------
+    const POST_STATUS_CONFIG = {
+      student_holding: {
+        label: "Sinh viên đang giữ",
+        dotClass: "bg-orange-500",
+        filterId: "subfilter-student_holding"
+      },
+      pctsv_holding: {
+        label: "PCTSV đang giữ",
+        dotClass: "bg-purple-500",
+        filterId: "subfilter-pctsv_holding"
+      },
+      verifying: {
+        label: "Đang xác minh",
+        dotClass: "bg-amber-400",
+        filterId: "subfilter-verifying"
+      },
+      returned: {
+        label: "Đã trao trả",
+        dotClass: "bg-emerald-500",
+        filterId: "subfilter-returned"
+      },
+      hidden: {
+        label: "Đã được ẩn",
+        dotClass: "bg-rose-500",
+        filterId: "subfilter-hidden"
+      }
+    };
+
+    function normalizePostStatus(status) {
+      if (status === "active") return "student_holding";
+      if (status === "reported") return "verifying";
+      if (POST_STATUS_CONFIG[status]) return status;
+      return "student_holding";
+    }
+
     const INITIAL_POSTS = [
       {
         id: "POST-101",
@@ -652,10 +829,11 @@
         type: "found",
         reporterName: "Phan Minh Khang",
         reporterId: "B2404991",
+        isPctsv: false,
         location: "Nhà học C1, Tầng 2",
         time: "Hôm nay, 09:30",
-        status: "active", // active | reported | hidden | returned
-        storage: "Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành C1",
+        status: "student_holding",
+        storage: "Sinh viên đang giữ tại KTX Khu B",
         photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBtL_SjaI7GO6-5N7J12TlynqHnFP2EVglpRHEdfzQSuLCVmkUSyrnK_jaHwhgHC6ivNlNDuTIpjpgEvQ68USBKsJPN1V1y-H-qtY-0-IQ2cQnaCwPTkqPZ4fJsCFE_hhyT0Uw9A5tZUFnCEA1OTLYI6bSyenhUeIqGV_fp0aNHIyIZST_BbeBwvnek5n0XDsfgPcqs29rF0nvKFtjqpG1BJiE6WT0eOzBWTIp08C8kxtYXZ36Ew78y",
         note: "Nhặt được tại dãy bàn tự học Tầng 2 Nhà học C1. Bên trong có thẻ sinh viên và giấy tờ tùy thân.",
         question: "Mã số in trên thẻ sinh viên hoặc tên giấy tờ kẹp trong ví là gì?"
@@ -667,9 +845,10 @@
         type: "found",
         reporterName: "Lê Hoàng Nam",
         reporterId: "B2105432",
+        isPctsv: false,
         location: "Thư viện Trung tâm",
         time: "Hôm nay, 08:15",
-        status: "active",
+        status: "student_holding",
         storage: "Bàn trực tiếp tân - Tầng trệt Thư viện Trung tâm",
         photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuAwAuANaxWvnChrFVac0ee-gXZxCXsYRUA0uw3ZSfVu4Xes7cj2Q7TaevVD8aCcPuHKqnVEo-mF3LnKBQTw59gqCGJ-w732epbnzZjiFa2YYRk5G_5hbrtwCjlLno-YEBmEEZN_DW7KBOhG3iaJWh9siU8kePgXsbAoRk5l2NHirvXsyE9jAbLpaoxMlSQXp-eEPsdgrxKS6cHvaamlWgwc7Gv5a-SOeOSTUA8TyEWUkodeUx2XrqSo",
         note: "Bỏ quên tại Tầng 3 Thư viện. Bình còn rất mới, màu xanh pastel có dán sticker mèo CTU.",
@@ -682,9 +861,10 @@
         type: "lost",
         reporterName: "Nguyễn Thị Mai",
         reporterId: "B2203112",
+        isPctsv: false,
         location: "Hội trường Rùa",
         time: "Hôm qua, 17:20",
-        status: "reported", // BÀI ĐĂNG BỊ BÁO CÁO
+        status: "verifying",
         reportReason: "Có dấu hiệu đòi phí chuộc cao bất thường và không cung cấp đúng bằng chứng sở hữu",
         reportCount: 3,
         reportedBy: "Sinh viên B2108899 & 2 người khác",
@@ -700,9 +880,10 @@
         type: "found",
         reporterName: "Chú Năm (Bảo vệ)",
         reporterId: "BV004",
+        isPctsv: false,
         location: "Bãi xe Cổng A (Đường 3/2)",
         time: "Hôm qua, 11:30",
-        status: "active",
+        status: "student_holding",
         storage: "Chốt bảo vệ Bãi xe Cổng A",
         photo: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=800&q=80",
         note: "Nhặt được ở khu vực để xe sinh viên dãy E. Khóa bọc silicon đen, kèm móc khóa gấu bông nhỏ.",
@@ -715,9 +896,10 @@
         type: "found",
         reporterName: "Trần Quốc Bảo",
         reporterId: "B2301982",
+        isPctsv: false,
         location: "Hội trường Rùa",
         time: "Hôm qua, 16:45",
-        status: "returned", // ĐÃ TRAO TRẢ
+        status: "returned",
         storage: "Văn phòng Đoàn Thanh niên - Hội Sinh viên",
         photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCpdOuyKsYtvg9mAaVicAmfVTVepKtUBgVUHlvsIx1a6Pl5bcWe5Sy4ZslVX1Ya_XFiHra5FJF1LfhCMblxZgkU9xCtxZh03d_rxMaObOG70tNrNyjQUeOD705F_hW2JRkKd2UAlj32OrS5hwtcXy9JmNKZCqX_MJ8_hlQpEO2VZkfjtuDz3DIfABZFGS5xGQTgqfTxjqw7eBRmyyX3EIFIeO0YyLxmw6d_NkT-V9P2UoEZsKBjr_en",
         note: "Đã bàn giao lại cho bạn Thúy Vy (B2309876) sau khi đối chiếu ảnh chụp lúc nhận ô.",
@@ -730,9 +912,10 @@
         type: "lost",
         reporterName: "Phạm Đức Trọng",
         reporterId: "B2004556",
+        isPctsv: false,
         location: "Khoa CNTT&TT, Phòng Lab 202",
         time: "2 ngày trước",
-        status: "active",
+        status: "verifying",
         storage: "Đang lưu ý tìm kiếm tại khoa",
         photo: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80",
         note: "Bỏ quên balo đựng máy tính sau giờ thực hành Mạng máy tính. Máy có dán sticker GitHub và Docker.",
@@ -745,9 +928,10 @@
         type: "found",
         reporterName: "Đặng Thùy Dung",
         reporterId: "B2207890",
+        isPctsv: false,
         location: "Nhà học B1, Phòng 204",
         time: "Hôm nay, 10:00",
-        status: "active",
+        status: "student_holding",
         storage: "Gửi bàn trực giám thị Tầng 1 B1",
         photo: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
         note: "Balo để quên dưới hộc bàn cuối lớp. Bên trong có sách Giải tích và máy tính cầm tay Casio 580.",
@@ -759,13 +943,14 @@
         category: "Giấy tờ tùy thân",
         type: "found",
         reporterName: "Cán bộ PCTSV",
-        reporterId: "CB012",
+        reporterId: "CB0018",
+        isPctsv: true,
         location: "Nhà điều hành C1",
         time: "3 ngày trước",
-        status: "returned",
-        storage: "Bàn trực tiếp nhận PCTSV",
+        status: "pctsv_holding",
+        storage: "Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành C1",
         photo: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
-        note: "Đã trao trả nguyên vẹn cho sinh viên sau khi kiểm tra CCCD bản gốc.",
+        note: "Cán bộ PCTSV tiếp nhận và đang niêm phong bảo quản an toàn chờ sinh viên đến đối chiếu thẻ.",
         question: "Họ tên in trên thẻ là gì?"
       },
       {
@@ -775,9 +960,10 @@
         type: "lost",
         reporterName: "Vũ Hoàng Long",
         reporterId: "B1901111",
+        isPctsv: false,
         location: "Nhà học C2",
         time: "4 ngày trước",
-        status: "hidden", // BÀI ĐĂNG BỊ ẨN
+        status: "hidden",
         hiddenReason: "Chèn liên kết rao vặt thương mại trái phép vào nội dung",
         hiddenAt: "Hôm qua, 14:00",
         storage: "Đã ẩn khỏi giao diện",
@@ -792,9 +978,10 @@
         type: "found",
         reporterName: "Nguyễn Hữu Tài",
         reporterId: "B2305544",
+        isPctsv: false,
         location: "Sân bóng rổ Khu II",
         time: "Hôm qua, 18:30",
-        status: "reported", // BÀI ĐĂNG BỊ BÁO CÁO
+        status: "verifying",
         reportReason: "Hình ảnh sao chép từ mạng internet, địa điểm không có thật",
         reportCount: 2,
         reportedBy: "Sinh viên B2209911 & B2301122",
@@ -810,9 +997,10 @@
         type: "lost",
         reporterName: "Trương Mỹ Linh",
         reporterId: "B2201122",
+        isPctsv: false,
         location: "Thư viện Tầng 2",
         time: "5 ngày trước",
-        status: "hidden", // BÀI ĐĂNG BỊ ẨN
+        status: "hidden",
         hiddenReason: "Người đăng đã tự tìm lại được đồ vật và yêu cầu ẩn bài",
         hiddenAt: "3 ngày trước",
         storage: "Đã đóng tin",
@@ -948,11 +1136,18 @@
       }
     ];
 
-    // State lưu trong LocalStorage
+    // State lưu trong LocalStorage (hỗ trợ đồng bộ v3 và v2)
     let adminPosts = [];
     try {
-      const stored = localStorage.getItem("ctu_admin_posts_v2");
-      adminPosts = stored ? JSON.parse(stored) : INITIAL_POSTS;
+      const stored = localStorage.getItem("ctu_admin_posts_v3") || localStorage.getItem("ctu_admin_posts_v2");
+      if (stored) {
+        adminPosts = JSON.parse(stored).map(p => ({
+          ...p,
+          status: normalizePostStatus(p.status)
+        }));
+      } else {
+        adminPosts = INITIAL_POSTS;
+      }
     } catch (e) {
       adminPosts = INITIAL_POSTS;
     }
@@ -966,14 +1161,23 @@
     }
 
     function savePosts() {
-      localStorage.setItem("ctu_admin_posts_v2", JSON.stringify(adminPosts));
+      try {
+        localStorage.setItem("ctu_admin_posts_v3", JSON.stringify(adminPosts));
+        localStorage.setItem("ctu_admin_posts_v2", JSON.stringify(adminPosts));
+      } catch (e) {
+        console.error("Lỗi lưu posts:", e);
+      }
     }
     function saveAccounts() {
-      localStorage.setItem("ctu_admin_accounts_v4", JSON.stringify(adminAccounts));
+      try {
+        localStorage.setItem("ctu_admin_accounts_v4", JSON.stringify(adminAccounts));
+      } catch (e) {
+        console.error("Lỗi lưu accounts:", e);
+      }
     }
 
     // -----------------------------------------------------------------------
-    // 2. CHUYỂN TAB CHÍNH (ĐỒNG BỘ HEADER & SEGMENTED TABS)
+    // 2. CHUYỂN TAB CHÍNH (ĐIỀU HƯỚNG QUA HEADER TABS & DỌN DẸP BODY TABS)
     // -----------------------------------------------------------------------
     window.switchAdminTab = function(tabName) {
       const tabPosts = document.getElementById("tab-content-posts");
@@ -1047,9 +1251,16 @@
     // -----------------------------------------------------------------------
     // 3. TOAST NOTIFICATIONS TINH TẾ (UI/UX Pro Max)
     // -----------------------------------------------------------------------
-    function showToast(message, type = "success") {
+    function showToast(titleOrMessage, typeOrMessage = "success") {
       const container = document.getElementById("toast-container");
       if (!container) return;
+
+      let message = titleOrMessage;
+      let type = typeOrMessage;
+      if (typeOrMessage && !["success", "warning", "error", "info"].includes(typeOrMessage)) {
+        message = `${titleOrMessage}: ${typeOrMessage}`;
+        type = "warning";
+      }
 
       const toast = document.createElement("div");
       toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-semibold border transition-all duration-300 translate-y-2 opacity-0 ${
@@ -1063,8 +1274,9 @@
       }`;
 
       const iconName = type === "success" ? "check_circle" : type === "warning" ? "warning" : type === "error" ? "error" : "info";
+      const iconColor = type === "success" ? "text-emerald-400" : type === "warning" ? "text-amber-400" : type === "error" ? "text-rose-400" : "text-blue-400";
       toast.innerHTML = `
-        <span class="material-symbols-outlined text-[18px] shrink-0 text-amber-400">${iconName}</span>
+        <span class="material-symbols-outlined text-[18px] shrink-0 ${iconColor}">${iconName}</span>
         <span>${message}</span>
       `;
 
@@ -1081,80 +1293,117 @@
     }
 
     // -----------------------------------------------------------------------
-    // 4. CẬP NHẬT CHỈ SỐ KPI TỐI GIẢN
+    // 4. CẬP NHẬT CHỈ SỐ KPI TỐI GIẢN & GUARDED COUNTERS
     // -----------------------------------------------------------------------
     function updateMetrics() {
       const totalPosts = adminPosts.length;
-      const reportedPosts = adminPosts.filter(p => p.status === "reported").length;
-      const hiddenPosts = adminPosts.filter(p => p.status === "hidden").length;
-      const activePosts = adminPosts.filter(p => p.status === "active").length;
-      const returnedPosts = adminPosts.filter(p => p.status === "returned").length;
+      const studentHolding = adminPosts.filter(p => normalizePostStatus(p.status) === "student_holding").length;
+      const pctsvHolding = adminPosts.filter(p => normalizePostStatus(p.status) === "pctsv_holding").length;
+      const verifying = adminPosts.filter(p => normalizePostStatus(p.status) === "verifying").length;
+      const returned = adminPosts.filter(p => normalizePostStatus(p.status) === "returned").length;
+      const hidden = adminPosts.filter(p => normalizePostStatus(p.status) === "hidden").length;
 
       const totalAccounts = adminAccounts.length;
       const studentAccounts = adminAccounts.filter(a => a.points !== null && a.points !== undefined);
       const topScore = studentAccounts.length > 0 ? Math.max(...studentAccounts.map(a => a.points)) : 0;
 
-      document.getElementById("stat-total-posts").innerText = totalPosts;
-      document.getElementById("stat-reported-posts").innerText = reportedPosts;
-      document.getElementById("stat-hidden-posts").innerText = hiddenPosts;
-      document.getElementById("stat-total-accounts").innerText = totalAccounts;
+      const statTotal = document.getElementById("stat-total-posts");
+      if (statTotal) statTotal.innerText = totalPosts;
+
+      const statReported = document.getElementById("stat-reported-posts");
+      if (statReported) statReported.innerText = verifying;
+
+      const statHidden = document.getElementById("stat-hidden-posts");
+      if (statHidden) statHidden.innerText = hidden;
+
+      const statAccounts = document.getElementById("stat-total-accounts");
+      if (statAccounts) statAccounts.innerText = totalAccounts;
+
       const statTopEl = document.getElementById("stat-top-score");
       if (statTopEl) statTopEl.innerText = `${topScore} điểm`;
 
-      document.getElementById("tab-badge-posts").innerText = totalPosts;
-      document.getElementById("tab-badge-accounts").innerText = totalAccounts;
+      // Safe guards for tab badge counters (tabs removed from body to Header)
+      const tabBadgePosts = document.getElementById("tab-badge-posts");
+      if (tabBadgePosts) tabBadgePosts.innerText = totalPosts;
 
-      // Cập nhật số lượng trên các nút sub-filter
-      document.getElementById("count-all").innerText = totalPosts;
-      document.getElementById("count-active").innerText = activePosts;
-      document.getElementById("count-reported").innerText = reportedPosts;
-      document.getElementById("count-hidden").innerText = hiddenPosts;
-      document.getElementById("count-returned").innerText = returnedPosts;
+      const tabBadgeAccounts = document.getElementById("tab-badge-accounts");
+      if (tabBadgeAccounts) tabBadgeAccounts.innerText = totalAccounts;
+
+      // Sub-filter counts with exact matching element IDs
+      const cAll = document.getElementById("count-all");
+      if (cAll) cAll.innerText = totalPosts;
+
+      const cStudent = document.getElementById("count-student_holding");
+      if (cStudent) cStudent.innerText = studentHolding;
+
+      const cPctsv = document.getElementById("count-pctsv_holding");
+      if (cPctsv) cPctsv.innerText = pctsvHolding;
+
+      const cVerifying = document.getElementById("count-verifying");
+      if (cVerifying) cVerifying.innerText = verifying;
+
+      const cReturned = document.getElementById("count-returned");
+      if (cReturned) cReturned.innerText = returned;
+
+      const cHidden = document.getElementById("count-hidden");
+      if (cHidden) cHidden.innerText = hidden;
     }
 
     // -----------------------------------------------------------------------
-    // 5. QUẢN LÝ BÀI ĐĂNG (SUB-FILTERS & RENDER)
+    // 5. QUẢN LÝ BÀI ĐĂNG (SUB-FILTERS, 5 TRẠNG THÁI DOT & 3 NÚT THAO TÁC)
     // -----------------------------------------------------------------------
     let currentPostSubFilter = "all";
 
     function setPostSubFilter(filterName) {
+      if (filterName === "reported") filterName = "verifying";
+      if (filterName === "active") filterName = "student_holding";
       currentPostSubFilter = filterName;
-      const buttons = ["all", "active", "reported", "hidden", "returned"];
+
+      const buttons = ["all", "student_holding", "pctsv_holding", "verifying", "returned", "hidden"];
       buttons.forEach(b => {
         const btn = document.getElementById(`subfilter-${b}`);
         if (!btn) return;
         if (b === filterName) {
-          btn.className = "subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer flex items-center gap-1";
+          btn.className = "subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer flex items-center gap-1.5";
         } else {
-          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1";
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5";
         }
       });
       filterPosts();
     }
 
     function getPostStatusBadge(post) {
-      if (post.status === "reported") {
-        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200/80 dark:border-rose-900/60">
-          <span class="material-symbols-outlined text-[13px]">flag</span>
-          Bị báo cáo (${post.reportCount || 1})
-        </span>`;
-      }
-      if (post.status === "hidden") {
-        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300 border border-stone-300/80 dark:border-stone-700">
-          <span class="material-symbols-outlined text-[13px]">visibility_off</span>
-          Đã bị ẩn
-        </span>`;
-      }
-      if (post.status === "returned") {
-        return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200/80 dark:border-blue-900/60">
-          <span class="material-symbols-outlined text-[13px]">task_alt</span>
-          Đã trao trả
-        </span>`;
-      }
-      return `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-900/60">
-        <span class="material-symbols-outlined text-[13px]">public</span>
-        Công khai
-      </span>`;
+      const normStatus = normalizePostStatus(post.status);
+      const cfg = POST_STATUS_CONFIG[normStatus] || { label: "Không xác định", dotClass: "bg-stone-400" };
+      return `
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full ${cfg.dotClass} shrink-0"></span>
+            <span class="text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 whitespace-nowrap">${cfg.label}</span>
+          </div>
+          ${normStatus === 'hidden' && post.hiddenReason ? `
+            <span class="text-[10px] text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1 max-w-[140px]" title="${post.hiddenReason}">
+              Lý do: ${post.hiddenReason}
+            </span>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function getPostActionButtons(post) {
+      const normStatus = normalizePostStatus(post.status);
+      const isHidden = normStatus === "hidden";
+      return `
+        <button type="button" onclick="viewPostDetail('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem chi tiết bài đăng">
+          <span class="material-symbols-outlined text-[16px]">visibility</span>
+        </button>
+        <button type="button" onclick="${isHidden ? `unhidePost('${post.id}')` : `openHidePostModal('${post.id}')`};" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="${isHidden ? 'Bỏ ẩn bài đăng' : 'Ẩn bài đăng'}">
+          <span class="material-symbols-outlined text-[16px]">${isHidden ? 'visibility' : 'visibility_off'}</span>
+        </button>
+        <button type="button" onclick="openDeletePostModal('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài đăng">
+          <span class="material-symbols-outlined text-[16px]">delete</span>
+        </button>
+      `;
     }
 
     function renderPosts(postsToRender) {
@@ -1174,50 +1423,25 @@
       if (emptyState) emptyState.classList.add("hidden");
 
       postsToRender.forEach(post => {
+        const normStatus = normalizePostStatus(post.status);
+        const isHidden = normStatus === "hidden";
+        const isPctsv = post.isPctsv || post.reporterName === "Cán bộ PCTSV" || (post.reporterId && post.reporterId.startsWith("CB"));
+
         const typeBadge = post.type === "found"
           ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-200 dark:border-stone-700">Nhặt được</span>`
           : `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-200 dark:border-stone-700">Báo mất</span>`;
 
-        // Thao tác cho từng loại trạng thái bài đăng
-        let actionButtons = "";
-        if (post.status === "hidden") {
-          actionButtons = `
-            <button type="button" onclick="unhidePost('${post.id}');" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer" title="Bỏ ẩn bài đăng">
-              Hiện lại
-            </button>
-            <button type="button" onclick="deletePost('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài">
-              <span class="material-symbols-outlined text-[16px]">delete</span>
-            </button>
-          `;
-        } else if (post.status === "reported") {
-          actionButtons = `
-            <button type="button" onclick="openHidePostModal('${post.id}');" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer" title="Ẩn bài do vi phạm">
-              Ẩn bài
-            </button>
-            <button type="button" onclick="dismissReport('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Bác bỏ báo cáo (Giữ bài)">
-              <span class="material-symbols-outlined text-[16px]">check</span>
-            </button>
-            <button type="button" onclick="viewPostDetail('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem báo cáo">
-              <span class="material-symbols-outlined text-[16px]">visibility</span>
-            </button>
-          `;
-        } else {
-          actionButtons = `
-            <button type="button" onclick="openHidePostModal('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Ẩn bài đăng">
-              <span class="material-symbols-outlined text-[16px]">visibility_off</span>
-            </button>
-            <button type="button" onclick="viewPostDetail('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem chi tiết">
-              <span class="material-symbols-outlined text-[16px]">visibility</span>
-            </button>
-            <button type="button" onclick="deletePost('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài">
-              <span class="material-symbols-outlined text-[16px]">delete</span>
-            </button>
-          `;
-        }
+        const pctsvBadge = isPctsv ? `
+          <span class="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-[#1d9bf0] text-white shrink-0" title="Chính thức từ PCTSV">
+            <svg class="w-2 h-2 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </span>
+        ` : '';
+
+        const actionButtons = getPostActionButtons(post);
 
         // 1. Desktop Row
         const tr = document.createElement("tr");
-        tr.className = `hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors ${post.status === 'hidden' ? 'opacity-70' : ''}`;
+        tr.className = `hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors ${isHidden ? 'opacity-70' : ''}`;
         tr.innerHTML = `
           <td class="py-3 px-4 font-mono font-bold text-xs text-[#797675] dark:text-stone-400">${post.id}</td>
           <td class="py-3 px-4 text-center">
@@ -1226,13 +1450,17 @@
           <td class="py-3 px-4">
             <div class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1.5">
               <span>${post.title}</span>
-              ${post.status === 'reported' ? '<span class="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">[Có báo cáo]</span>' : ''}
+              ${pctsvBadge}
+              ${normStatus === 'verifying' && post.reportCount ? '<span class="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">[Có báo cáo]</span>' : ''}
             </div>
             <div class="text-[11px] text-[#797675] dark:text-stone-400">${post.category}</div>
           </td>
           <td class="py-3 px-4">${typeBadge}</td>
           <td class="py-3 px-4">
-            <div class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.reporterName}</div>
+            <div class="font-medium text-[#1b1c1c] dark:text-stone-200 flex items-center gap-1">
+              <span>${post.reporterName}</span>
+              ${isPctsv ? pctsvBadge : ''}
+            </div>
             <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${post.reporterId}</div>
           </td>
           <td class="py-3 px-4 text-xs">${post.location}</td>
@@ -1247,7 +1475,7 @@
 
         // 2. Mobile Card
         const mCard = document.createElement("div");
-        mCard.className = `bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-3 ${post.status === 'hidden' ? 'opacity-70' : ''}`;
+        mCard.className = `bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-3 ${isHidden ? 'opacity-70' : ''}`;
         mCard.innerHTML = `
           <div class="flex items-start gap-3">
             <img src="${post.photo}" alt="${post.title}" class="w-12 h-12 rounded-lg object-cover border border-stone-200 dark:border-stone-700 shrink-0">
@@ -1256,7 +1484,10 @@
                 <span class="font-mono text-[11px] font-bold text-[#797675] dark:text-stone-400">${post.id}</span>
                 ${getPostStatusBadge(post)}
               </div>
-              <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white truncate mt-0.5">${post.title}</h4>
+              <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white truncate mt-0.5 flex items-center gap-1.5">
+                <span class="truncate">${post.title}</span>
+                ${pctsvBadge}
+              </h4>
               <p class="text-xs text-[#797675] dark:text-stone-400 line-clamp-1">${post.location}</p>
             </div>
           </div>
@@ -1271,50 +1502,184 @@
       });
     }
 
+    function updateColorFilterSwatch() {
+      const swatch = document.getElementById("color-trigger-swatch");
+      const colVal = document.getElementById("filter-color")?.value || "all";
+      if (!swatch) return;
+      const colorMap = {
+        "all": "#cbd5e1",
+        "Đen": "#18181b",
+        "Nâu": "#78350f",
+        "Xanh": "#0284c7",
+        "Trắng": "#f8fafc",
+        "Đỏ": "#e11d48",
+        "Xám": "#64748b"
+      };
+      swatch.style.backgroundColor = colorMap[colVal] || "#cbd5e1";
+    }
+
+    function clearSearchInput() {
+      const searchInput = document.getElementById("post-search-input");
+      if (searchInput) searchInput.value = "";
+      filterPosts();
+    }
+
+    function clearFilters() {
+      const searchInput = document.getElementById("post-search-input");
+      if (searchInput) searchInput.value = "";
+      const catFilter = document.getElementById("filter-category");
+      if (catFilter) catFilter.value = "all";
+      const colFilter = document.getElementById("filter-color");
+      if (colFilter) colFilter.value = "all";
+      const timeFilter = document.getElementById("filter-time");
+      if (timeFilter) timeFilter.value = "all";
+      const locFilter = document.getElementById("loc-faculty");
+      if (locFilter) locFilter.value = "";
+      updateColorFilterSwatch();
+      setPostSubFilter("all");
+    }
+
     function filterPosts() {
       const query = (document.getElementById("post-search-input")?.value || "").toLowerCase().trim();
+      const categoryFilter = document.getElementById("filter-category")?.value || "all";
+      const colorFilter = document.getElementById("filter-color")?.value || "all";
+      const timeFilter = document.getElementById("filter-time")?.value || "all";
+      const facultyFilter = document.getElementById("loc-faculty")?.value || "";
 
       const filtered = adminPosts.filter(post => {
+        const normStatus = normalizePostStatus(post.status);
+
+        // 1. Text search
         const matchesQuery = !query || 
           post.title.toLowerCase().includes(query) ||
           post.id.toLowerCase().includes(query) ||
           post.reporterName.toLowerCase().includes(query) ||
           post.reporterId.toLowerCase().includes(query) ||
-          post.location.toLowerCase().includes(query);
+          post.location.toLowerCase().includes(query) ||
+          (post.note && post.note.toLowerCase().includes(query));
 
+        // 2. Subfilter (5 canonical statuses + all)
         let matchesSubFilter = true;
-        if (currentPostSubFilter === "active") matchesSubFilter = post.status === "active";
-        else if (currentPostSubFilter === "reported") matchesSubFilter = post.status === "reported";
-        else if (currentPostSubFilter === "hidden") matchesSubFilter = post.status === "hidden";
-        else if (currentPostSubFilter === "returned") matchesSubFilter = post.status === "returned";
+        if (currentPostSubFilter !== "all") {
+          matchesSubFilter = normStatus === currentPostSubFilter;
+        }
 
-        return matchesQuery && matchesSubFilter;
+        // 3. Category filter (supporting both find.html slugs and full category names)
+        let matchesCategory = true;
+        if (categoryFilter !== "all") {
+          const postCat = (post.category || "").toLowerCase();
+          if (categoryFilter === "the-sv") {
+            matchesCategory = postCat.includes("giấy tờ") || postCat.includes("thẻ") || postCat.includes("cccd");
+          } else if (categoryFilter === "vi") {
+            matchesCategory = postCat.includes("ví") || postCat.includes("bóp");
+          } else if (categoryFilter === "dien-tu") {
+            matchesCategory = postCat.includes("điện tử") || postCat.includes("tai nghe") || postCat.includes("sạc") || postCat.includes("laptop") || postCat.includes("apple");
+          } else if (categoryFilter === "chia-khoa") {
+            matchesCategory = postCat.includes("chìa") || postCat.includes("khóa") || postCat.includes("thẻ xe");
+          } else if (categoryFilter === "sach-vo") {
+            matchesCategory = postCat.includes("sách") || postCat.includes("giáo trình") || postCat.includes("tài liệu") || postCat.includes("balo");
+          } else if (categoryFilter === "khac") {
+            matchesCategory = postCat.includes("cá nhân") || postCat.includes("khác") || postCat.includes("ô dù");
+          } else {
+            matchesCategory = postCat.includes(categoryFilter.toLowerCase());
+          }
+        }
+
+        // 4. Color filter
+        let matchesColor = true;
+        if (colorFilter !== "all") {
+          const colLower = colorFilter.toLowerCase();
+          const titleLower = (post.title || "").toLowerCase();
+          const noteLower = (post.note || "").toLowerCase();
+          if (colLower.includes("xanh")) {
+            matchesColor = titleLower.includes("xanh") || noteLower.includes("xanh") || noteLower.includes("pastel") || titleLower.includes("navy");
+          } else if (colLower === "đen") {
+            matchesColor = titleLower.includes("đen") || noteLower.includes("đen");
+          } else if (colLower === "nâu") {
+            matchesColor = titleLower.includes("nâu") || noteLower.includes("nâu");
+          } else if (colLower.includes("trắng") || colLower.includes("bạc")) {
+            matchesColor = titleLower.includes("trắng") || noteLower.includes("trắng") || titleLower.includes("silver") || noteLower.includes("bạc");
+          } else if (colLower.includes("đỏ") || colLower.includes("vàng") || colLower.includes("cam")) {
+            matchesColor = titleLower.includes("đỏ") || noteLower.includes("đỏ") || titleLower.includes("cam") || titleLower.includes("vàng");
+          } else if (colLower.includes("xám") || colLower.includes("ghi")) {
+            matchesColor = titleLower.includes("xám") || noteLower.includes("xám") || titleLower.includes("ghi") || noteLower.includes("ghi");
+          } else {
+            matchesColor = titleLower.includes(colLower) || noteLower.includes(colLower);
+          }
+        }
+
+        // 5. Time filter
+        let matchesDate = true;
+        if (timeFilter !== "all") {
+          const timeLower = (post.time || "").toLowerCase();
+          if (timeFilter === "today") {
+            matchesDate = timeLower.includes("hôm nay") || timeLower.includes("vừa xong") || timeLower.includes("phút") || timeLower.includes("giờ");
+          } else if (timeFilter === "week") {
+            matchesDate = timeLower.includes("hôm nay") || timeLower.includes("vừa xong") || timeLower.includes("hôm qua") || timeLower.includes("ngày trước");
+          } else if (timeFilter === "month") {
+            matchesDate = !timeLower.includes("tháng trước");
+          }
+        }
+
+        // 6. Faculty / Location filter
+        let matchesFaculty = true;
+        if (facultyFilter && facultyFilter !== "" && facultyFilter !== "all") {
+          matchesFaculty = (post.location || "").toLowerCase().includes(facultyFilter.toLowerCase()) ||
+            facultyFilter.toLowerCase().includes((post.location || "").toLowerCase());
+        }
+
+        return matchesQuery && matchesSubFilter && matchesCategory && matchesColor && matchesDate && matchesFaculty;
       });
 
       renderPosts(filtered);
     }
 
     // -----------------------------------------------------------------------
-    // 6. THAO TÁC ẨN BÀI / BỎ ẨN / XỬ LÝ BÁO CÁO BÀI ĐĂNG
+    // 6. THAO TÁC ẨN BÀI / BỎ ẨN / XỬ LÝ BÁO CÁO & XÓA BÀI ĐĂNG
     // -----------------------------------------------------------------------
     let hidingPostId = null;
 
     function openHidePostModal(postId) {
       hidingPostId = postId;
-      document.getElementById("hide-post-code").innerText = `Mã tin: ${postId}`;
-      document.getElementById("modal-hide-post").classList.remove("hidden");
+      const codeEl = document.getElementById("hide-post-code");
+      if (codeEl) codeEl.innerText = `Mã tin: ${postId}`;
+      const sel = document.getElementById("hide-reason-select");
+      if (sel) sel.value = "Bài đăng có dấu hiệu gian lận / thông tin sai lệch";
+      const customWrapper = document.getElementById("hide-reason-custom-wrapper");
+      if (customWrapper) customWrapper.classList.add("hidden");
+      const customInput = document.getElementById("hide-reason-custom");
+      if (customInput) customInput.value = "";
+      document.getElementById("modal-hide-post")?.classList.remove("hidden");
     }
 
     function closeHidePostModal() {
       hidingPostId = null;
-      document.getElementById("modal-hide-post").classList.add("hidden");
+      document.getElementById("modal-hide-post")?.classList.add("hidden");
+    }
+
+    function toggleCustomHideReason() {
+      const sel = document.getElementById("hide-reason-select");
+      const wrapper = document.getElementById("hide-reason-custom-wrapper");
+      if (sel && wrapper) {
+        if (sel.value === "other") {
+          wrapper.classList.remove("hidden");
+          document.getElementById("hide-reason-custom")?.focus();
+        } else {
+          wrapper.classList.add("hidden");
+        }
+      }
     }
 
     function confirmHidePost() {
       if (!hidingPostId) return;
       const post = adminPosts.find(p => p.id === hidingPostId);
       if (post) {
-        const reason = document.getElementById("hide-reason-select").value;
+        const sel = document.getElementById("hide-reason-select");
+        let reason = sel ? sel.value : "";
+        if (reason === "other") {
+          const customInput = document.getElementById("hide-reason-custom");
+          reason = (customInput && customInput.value.trim()) ? customInput.value.trim() : "Lý do khác do Quản trị viên chỉ định";
+        }
         post.status = "hidden";
         post.hiddenReason = reason;
         post.hiddenAt = "Vừa xong";
@@ -1322,15 +1687,16 @@
         updateMetrics();
         filterPosts();
         closeHidePostModal();
-        showToast(`Đã ẩn bài đăng ${hidingPostId} ("${post.title}")`, "success");
+        showToast(`Đã ẩn bài đăng ${hidingPostId} ("${post.title}"). Lý do: ${reason}`, "success");
       }
     }
 
     function unhidePost(postId) {
       const post = adminPosts.find(p => p.id === postId);
       if (post) {
-        post.status = "active";
+        post.status = "student_holding";
         delete post.hiddenReason;
+        delete post.hiddenAt;
         savePosts();
         updateMetrics();
         filterPosts();
@@ -1341,7 +1707,7 @@
     function dismissReport(postId) {
       const post = adminPosts.find(p => p.id === postId);
       if (post) {
-        post.status = "active";
+        post.status = "student_holding";
         delete post.reportReason;
         delete post.reportCount;
         delete post.reportedBy;
@@ -1352,14 +1718,495 @@
       }
     }
 
-    function deletePost(postId) {
-      if (confirm(`Bạn có chắc chắn muốn xóa bài đăng ${postId}? Thao tác này không thể hoàn tác.`)) {
-        adminPosts = adminPosts.filter(p => p.id !== postId);
-        savePosts();
-        updateMetrics();
-        filterPosts();
-        showToast(`Đã xóa bài đăng ${postId} khỏi hệ thống`, "error");
+    // Modal Xóa bài đăng với popup xác nhận chuẩn UI/UX Pro Max (không cần nhập lý do)
+    let deletingPostId = null;
+    function openDeletePostModal(postId) {
+      deletingPostId = postId;
+      const post = adminPosts.find(p => p.id === postId);
+      const msgEl = document.getElementById("confirm-delete-msg");
+      if (msgEl) {
+        msgEl.innerHTML = `Bạn có chắc chắn muốn xóa vĩnh viễn bài đăng <strong>${postId}</strong> (${post ? post.title : ''}) khỏi hệ thống? Thao tác này không cần nhập lý do và không thể hoàn tác.`;
       }
+      document.getElementById("modal-confirm-delete")?.classList.remove("hidden");
+    }
+
+    function closeDeletePostModal() {
+      deletingPostId = null;
+      document.getElementById("modal-confirm-delete")?.classList.add("hidden");
+    }
+
+    function executeDeletePost() {
+      if (!deletingPostId) return;
+      const post = adminPosts.find(p => p.id === deletingPostId);
+      const title = post ? post.title : deletingPostId;
+      adminPosts = adminPosts.filter(p => p.id !== deletingPostId);
+      savePosts();
+      updateMetrics();
+      filterPosts();
+      closeDeletePostModal();
+      showToast(`Đã xóa bài đăng ${deletingPostId} ("${title}") khỏi hệ thống`, "success");
+    }
+
+    function deletePost(postId) {
+      openDeletePostModal(postId);
+    }
+
+    // Modal Thêm bài đăng chính thức từ PCTSV
+    function updatePctsvFloorLockState() {
+      const facEl = document.getElementById("pctsv-loc-faculty");
+      const floorEl = document.getElementById("pctsv-loc-floor");
+      if (!floorEl) return;
+      const hasFaculty = !!(facEl && facEl.value && facEl.value.trim() !== "");
+      if (hasFaculty) {
+        floorEl.disabled = false;
+        floorEl.classList.remove("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
+        floorEl.classList.add("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
+      } else {
+        floorEl.disabled = true;
+        floorEl.value = "";
+        floorEl.classList.remove("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
+        floorEl.classList.add("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
+      }
+    }
+
+    function resetPctsvModalState() {
+      const form = document.getElementById("form-add-pctsv-post");
+      if (form) form.reset();
+      updatePctsvFloorLockState();
+      const previewContainer = document.getElementById("pctsv-preview-container");
+      const emptyPlaceholder = document.getElementById("pctsv-empty-placeholder");
+      const previewImg = document.getElementById("pctsv-preview-img");
+      if (previewContainer) previewContainer.classList.add("hidden");
+      if (emptyPlaceholder) emptyPlaceholder.classList.remove("hidden");
+      if (previewImg) previewImg.src = "";
+      
+      for (let i = 1; i <= 4; i++) {
+        const thumb = document.getElementById(`pctsv-thumb-${i}`);
+        if (thumb) {
+          thumb.innerHTML = `
+            <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+            <span class="text-[10px] font-medium mt-0.5">Thêm ảnh ${i}</span>
+          `;
+        }
+      }
+    }
+
+    function openAddPctsvPostModal() {
+      resetPctsvModalState();
+      document.getElementById("modal-add-pctsv-post")?.classList.remove("hidden");
+    }
+
+    function closeAddPctsvPostModal() {
+      document.getElementById("modal-add-pctsv-post")?.classList.add("hidden");
+    }
+
+    function syncPctsvLocation() {
+      updatePctsvFloorLockState();
+      const fac = document.getElementById("pctsv-loc-faculty")?.value || "";
+      const floor = document.getElementById("pctsv-loc-floor")?.value || "";
+      const room = document.getElementById("pctsv-loc-room")?.value.trim() || "";
+      const parts = [fac, floor, room].filter(Boolean);
+      const locInput = document.getElementById("pctsv-location");
+      if (locInput) {
+        locInput.value = parts.join(", ");
+      }
+    }
+
+    let currentThumbIndex = 1;
+    function triggerPctsvThumbnail(index) {
+      currentThumbIndex = index;
+      document.getElementById("pctsv-thumb-input")?.click();
+    }
+
+    function handlePctsvThumbFileSelect(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const thumb = document.getElementById(`pctsv-thumb-${currentThumbIndex}`);
+          if (thumb) {
+            thumb.innerHTML = `<img src="${e.target.result}" alt="Ảnh phụ ${currentThumbIndex}" class="w-full h-full object-cover rounded-xl">`;
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function handlePctsvFileSelect(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPctsvPreview(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function handlePctsvDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const dropZone = document.getElementById("pctsv-drop-zone");
+      if (dropZone) dropZone.classList.add("border-[#1f3227]", "bg-stone-100/80");
+    }
+
+    function handlePctsvDragLeave(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const dropZone = document.getElementById("pctsv-drop-zone");
+      if (dropZone) dropZone.classList.remove("border-[#1f3227]", "bg-stone-100/80");
+    }
+
+    function handlePctsvDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const dropZone = document.getElementById("pctsv-drop-zone");
+      if (dropZone) dropZone.classList.remove("border-[#1f3227]", "bg-stone-100/80");
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const file = e.dataTransfer.files[0];
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          setPctsvPreview(evt.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function setPctsvPreview(src) {
+      const previewContainer = document.getElementById("pctsv-preview-container");
+      const emptyPlaceholder = document.getElementById("pctsv-empty-placeholder");
+      const previewImg = document.getElementById("pctsv-preview-img");
+      if (previewImg) previewImg.src = src;
+      if (previewContainer) previewContainer.classList.remove("hidden");
+      if (emptyPlaceholder) emptyPlaceholder.classList.add("hidden");
+    }
+
+    // -----------------------------------------------------------------------
+    // INTERACTIVE CIRCULAR CLOCK TIME PICKER CHO #pctsv-time
+    // -----------------------------------------------------------------------
+    let clockPickerHour = 14;
+    let clockPickerMinute = 15;
+    let clockPickerMode = "hour"; // "hour" | "minute"
+    let isClockDialDragging = false;
+
+    function openPctsvClockPicker() {
+      const timeInput = document.getElementById("pctsv-time");
+      const currentVal = timeInput?.value.trim() || "";
+      const match = currentVal.match(/^(\d{1,2})[:h](\d{2})/i);
+      if (match) {
+        clockPickerHour = Math.min(23, Math.max(0, parseInt(match[1], 10)));
+        clockPickerMinute = Math.min(59, Math.max(0, parseInt(match[2], 10)));
+      } else {
+        const now = new Date();
+        clockPickerHour = now.getHours();
+        clockPickerMinute = Math.floor(now.getMinutes() / 5) * 5;
+      }
+      clockPickerMode = "hour";
+      updateClockPickerUI();
+      initClockPickerEvents();
+      document.getElementById("modal-pctsv-clock-picker")?.classList.remove("hidden");
+    }
+
+    function closePctsvClockPicker() {
+      document.getElementById("modal-pctsv-clock-picker")?.classList.add("hidden");
+    }
+
+    function confirmPctsvClockPicker() {
+      const hh = String(clockPickerHour).padStart(2, "0");
+      const mm = String(clockPickerMinute).padStart(2, "0");
+      const timeInput = document.getElementById("pctsv-time");
+      if (timeInput) {
+        timeInput.value = `${hh}:${mm}`;
+        timeInput.dispatchEvent(new Event("input", { bubbles: true }));
+        timeInput.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      closePctsvClockPicker();
+    }
+
+    function setClockPickerMode(mode) {
+      clockPickerMode = mode;
+      updateClockPickerUI();
+    }
+
+    function setClockPreset(h, m) {
+      clockPickerHour = h;
+      clockPickerMinute = m;
+      updateClockPickerUI();
+    }
+
+    function updateClockPickerUI() {
+      const hourBtn = document.getElementById("clock-btn-hour");
+      const minuteBtn = document.getElementById("clock-btn-minute");
+      const modeLabel = document.getElementById("clock-mode-label");
+      
+      const hhStr = String(clockPickerHour).padStart(2, "0");
+      const mmStr = String(clockPickerMinute).padStart(2, "0");
+
+      if (hourBtn) hourBtn.textContent = hhStr;
+      if (minuteBtn) minuteBtn.textContent = mmStr;
+
+      if (clockPickerMode === "hour") {
+        if (hourBtn) {
+          hourBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105";
+        }
+        if (minuteBtn) {
+          minuteBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200";
+        }
+        if (modeLabel) {
+          modeLabel.textContent = "Đang chọn: Giờ (Nhấp hoặc xoay kim để chọn)";
+        }
+      } else {
+        if (hourBtn) {
+          hourBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200";
+        }
+        if (minuteBtn) {
+          minuteBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105";
+        }
+        if (modeLabel) {
+          modeLabel.textContent = "Đang chọn: Phút (Nhấp hoặc xoay kim để chọn)";
+        }
+      }
+
+      renderClockDialFace();
+    }
+
+    function renderClockDialFace() {
+      const numbersContainer = document.getElementById("clock-dial-numbers");
+      const handLine = document.getElementById("clock-hand-line");
+      const handKnob = document.getElementById("clock-hand-knob");
+      if (!numbersContainer || !handLine || !handKnob) return;
+
+      numbersContainer.innerHTML = "";
+      const cx = 130;
+      const cy = 130;
+      let handRadius = 96;
+      let handAngleDeg = 0;
+
+      if (clockPickerMode === "hour") {
+        const isInner = clockPickerHour === 0 || clockPickerHour >= 13;
+        handRadius = isInner ? 62 : 96;
+        const displayH = clockPickerHour % 12;
+        handAngleDeg = (displayH * 30 - 90 + 360) % 360;
+
+        // Render Outer Numbers (1..12)
+        for (let h = 1; h <= 12; h++) {
+          const angle = ((h * 30 - 90) * Math.PI) / 180;
+          const x = cx + 96 * Math.cos(angle);
+          const y = cy + 96 * Math.sin(angle);
+          const isSelected = !isInner && (clockPickerHour === h || (h === 12 && clockPickerHour === 12));
+
+          const numEl = document.createElement("div");
+          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${
+            isSelected
+              ? "text-white font-bold z-10"
+              : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
+          }`;
+          numEl.style.left = `${x}px`;
+          numEl.style.top = `${y}px`;
+          numEl.textContent = String(h);
+          numEl.onclick = (e) => {
+            e.stopPropagation();
+            clockPickerHour = h;
+            updateClockPickerUI();
+            setTimeout(() => setClockPickerMode("minute"), 200);
+          };
+          numbersContainer.appendChild(numEl);
+        }
+
+        // Render Inner Numbers (13..23, 00)
+        for (let h = 13; h <= 24; h++) {
+          const val = h === 24 ? 0 : h;
+          const angle = ((h * 30 - 90) * Math.PI) / 180;
+          const x = cx + 62 * Math.cos(angle);
+          const y = cy + 62 * Math.sin(angle);
+          const isSelected = isInner && clockPickerHour === val;
+
+          const numEl = document.createElement("div");
+          numEl.className = `absolute w-6 h-6 -ml-3 -mt-3 flex items-center justify-center rounded-full text-[10px] font-medium cursor-pointer select-none transition-colors pointer-events-auto ${
+            isSelected
+              ? "text-white font-bold z-10"
+              : "text-stone-500 dark:text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400"
+          }`;
+          numEl.style.left = `${x}px`;
+          numEl.style.top = `${y}px`;
+          numEl.textContent = val === 0 ? "00" : String(val);
+          numEl.onclick = (e) => {
+            e.stopPropagation();
+            clockPickerHour = val;
+            updateClockPickerUI();
+            setTimeout(() => setClockPickerMode("minute"), 200);
+          };
+          numbersContainer.appendChild(numEl);
+        }
+
+      } else {
+        // Minute mode
+        handRadius = 96;
+        handAngleDeg = (clockPickerMinute * 6 - 90 + 360) % 360;
+
+        const minuteLabels = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+        minuteLabels.forEach((m) => {
+          const angle = ((m * 6 - 90) * Math.PI) / 180;
+          const x = cx + 96 * Math.cos(angle);
+          const y = cy + 96 * Math.sin(angle);
+          const isSelected = clockPickerMinute === m;
+
+          const numEl = document.createElement("div");
+          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${
+            isSelected
+              ? "text-white font-bold z-10"
+              : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
+          }`;
+          numEl.style.left = `${x}px`;
+          numEl.style.top = `${y}px`;
+          numEl.textContent = String(m).padStart(2, "0");
+          numEl.onclick = (e) => {
+            e.stopPropagation();
+            clockPickerMinute = m;
+            updateClockPickerUI();
+          };
+          numbersContainer.appendChild(numEl);
+        });
+      }
+
+      // Update Hand position
+      const rad = (handAngleDeg * Math.PI) / 180;
+      const targetX = cx + handRadius * Math.cos(rad);
+      const targetY = cy + handRadius * Math.sin(rad);
+
+      handLine.setAttribute("x2", String(targetX));
+      handLine.setAttribute("y2", String(targetY));
+      handKnob.setAttribute("cx", String(targetX));
+      handKnob.setAttribute("cy", String(targetY));
+      handKnob.setAttribute("r", String(handRadius === 62 ? 14 : 16));
+    }
+
+    function initClockPickerEvents() {
+      const dialEl = document.getElementById("clock-dial-face");
+      if (!dialEl || dialEl._clockPickerInitialized) return;
+      dialEl._clockPickerInitialized = true;
+
+      function handleDialInteraction(e, isRelease = false) {
+        const rect = dialEl.getBoundingClientRect();
+        const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+        const clientY = e.clientY || (e.touches && e.touches[0]?.clientY);
+        if (clientX === undefined || clientY === undefined) return;
+
+        const dx = clientX - (rect.left + rect.width / 2);
+        const dy = clientY - (rect.top + rect.height / 2);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const angleDeg = (Math.atan2(dy, dx) * 180 / Math.PI + 90 + 360) % 360;
+
+        if (clockPickerMode === "hour") {
+          let rawStep = Math.round(angleDeg / 30) % 12;
+          let h12 = rawStep === 0 ? 12 : rawStep;
+          if (dist < 79) {
+            clockPickerHour = h12 === 12 ? 0 : h12 + 12;
+          } else {
+            clockPickerHour = h12;
+          }
+          updateClockPickerUI();
+          if (isRelease) {
+            setTimeout(() => setClockPickerMode("minute"), 200);
+          }
+        } else {
+          let rawMin = Math.round(angleDeg / 6) % 60;
+          clockPickerMinute = rawMin;
+          updateClockPickerUI();
+        }
+      }
+
+      dialEl.addEventListener("pointerdown", (e) => {
+        isClockDialDragging = true;
+        dialEl.setPointerCapture?.(e.pointerId);
+        handleDialInteraction(e, false);
+      });
+
+      dialEl.addEventListener("pointermove", (e) => {
+        if (!isClockDialDragging) return;
+        handleDialInteraction(e, false);
+      });
+
+      const endHandler = (e) => {
+        if (!isClockDialDragging) return;
+        isClockDialDragging = false;
+        handleDialInteraction(e, true);
+      };
+
+      dialEl.addEventListener("pointerup", endHandler);
+      dialEl.addEventListener("pointercancel", endHandler);
+    }
+
+    function handleCreatePctsvPost(e) {
+      e.preventDefault();
+      const title = document.getElementById("pctsv-title")?.value.trim() || "";
+      const category = document.getElementById("pctsv-category")?.value || "Khác";
+      const color = document.getElementById("pctsv-color")?.value.trim() || "";
+      const location = document.getElementById("pctsv-location")?.value.trim() || "Phòng Công tác Sinh viên (PCTSV)";
+      const dateVal = document.getElementById("pctsv-date")?.value.trim() || "";
+      const timeVal = document.getElementById("pctsv-time")?.value.trim() || "";
+      const storage = document.getElementById("pctsv-storage")?.value.trim() || "Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành C1";
+      const note = document.getElementById("pctsv-note")?.value.trim() || "";
+      const question = document.getElementById("pctsv-question")?.value.trim() || "";
+
+      // Validate: At least 1 image uploaded (Min 1, Max 5: 1 main + 4 thumbnails)
+      const previewImg = document.getElementById("pctsv-preview-img");
+      const previewContainer = document.getElementById("pctsv-preview-container");
+      const hasMainImg = previewImg && previewImg.src && !previewContainer?.classList.contains("hidden") && (previewImg.src.startsWith("data:") || previewImg.src.startsWith("http") || previewImg.src.startsWith("blob:"));
+
+      const thumbnails = [];
+      for (let i = 1; i <= 4; i++) {
+        const thumbEl = document.querySelector(`#pctsv-thumb-${i} img`);
+        if (thumbEl && thumbEl.src && (thumbEl.src.startsWith("data:") || thumbEl.src.startsWith("http") || thumbEl.src.startsWith("blob:"))) {
+          thumbnails.push(thumbEl.src);
+        }
+      }
+
+      if (!hasMainImg && thumbnails.length === 0) {
+        showToast("Thiếu hình ảnh", "Vui lòng tải lên ít nhất 1 hình ảnh đồ vật để đăng tin!");
+        return;
+      }
+
+      const photoUrl = hasMainImg ? previewImg.src : thumbnails[0];
+
+      // Readable time formatting
+      let timeDisplay = "Vừa xong";
+      if (timeVal && dateVal) {
+        timeDisplay = `${dateVal} (${timeVal})`;
+      } else if (timeVal) {
+        timeDisplay = timeVal.toLowerCase().includes("hôm") ? timeVal : `Hôm nay, ${timeVal}`;
+      } else if (dateVal) {
+        timeDisplay = dateVal;
+      }
+
+      const newPost = {
+        id: `POST-${String(100 + adminPosts.length + 1).padStart(3, '0')}`,
+        title: title,
+        category: category,
+        color: color,
+        date: dateVal,
+        time: timeDisplay,
+        timeDetail: timeVal,
+        type: "found",
+        reporterName: "Cán bộ PCTSV",
+        reporterId: "CB0018",
+        isPctsv: true,
+        location: location,
+        status: "pctsv_holding",
+        storage: storage,
+        photo: photoUrl,
+        thumbnails: thumbnails,
+        note: color ? `[Màu sắc: ${color}] ${note}` : note,
+        question: question
+      };
+
+      adminPosts.unshift(newPost);
+      savePosts();
+      updateMetrics();
+      filterPosts();
+      closeAddPctsvPostModal();
+      resetPctsvModalState();
+      showToast(`Đã thêm thành công bài đăng chính thức của PCTSV (có tích xanh trên bảng)!`, "success");
     }
 
     // -----------------------------------------------------------------------
@@ -1369,12 +2216,30 @@
       const post = adminPosts.find(p => p.id === postId);
       if (!post) return;
 
-      document.getElementById("modal-post-title").innerText = `${post.title} (${post.id})`;
+      const normStatus = normalizePostStatus(post.status);
+      const isPctsv = post.isPctsv || post.reporterName === "Cán bộ PCTSV" || (post.reporterId && post.reporterId.startsWith("CB"));
+      const pctsvBadge = isPctsv ? `
+        <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#1d9bf0] text-white shrink-0 ml-1.5" title="Chính thức từ PCTSV">
+          <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </span>
+      ` : '';
+
+      const modalTitleEl = document.getElementById("modal-post-title");
+      if (modalTitleEl) {
+        modalTitleEl.innerHTML = `
+          <span class="flex items-center gap-1.5 flex-wrap">
+            <span>${post.title}</span>
+            ${pctsvBadge}
+            <span class="text-xs font-mono font-normal text-stone-500">(${post.id})</span>
+          </span>
+        `;
+      }
+
       const content = document.getElementById("modal-post-content");
       const leftActions = document.getElementById("modal-post-left-actions");
 
       let reportSection = "";
-      if (post.status === "reported") {
+      if (normStatus === "verifying" && post.reportReason) {
         reportSection = `
           <div class="p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-900/60 space-y-1">
             <span class="font-bold text-rose-900 dark:text-rose-300 flex items-center gap-1.5">
@@ -1385,7 +2250,7 @@
             <p class="text-[11px] text-rose-600/80 dark:text-rose-400">Người báo cáo: ${post.reportedBy || 'Người dùng ẩn danh'}</p>
           </div>
         `;
-      } else if (post.status === "hidden") {
+      } else if (normStatus === "hidden") {
         reportSection = `
           <div class="p-3 bg-stone-100 dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700">
             <span class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1.5">
@@ -1397,72 +2262,107 @@
         `;
       }
 
-      content.innerHTML = `
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <img src="${post.photo}" alt="${post.title}" class="w-full h-44 sm:h-52 object-cover rounded-xl border border-stone-200 dark:border-stone-700">
+      if (content) {
+        content.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <img src="${post.photo}" alt="${post.title}" class="w-full h-44 sm:h-52 object-cover rounded-xl border border-stone-200 dark:border-stone-700">
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Trạng thái:</span>
+                ${getPostStatusBadge(post)}
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Danh mục:</span>
+                <p class="font-bold text-[#1b1c1c] dark:text-white">${post.category}</p>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Địa điểm:</span>
+                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.location}</p>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Người đăng:</span>
+                <p class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1">
+                  <span>${post.reporterName}</span>
+                  ${isPctsv ? pctsvBadge : ''}
+                  <span class="font-mono text-xs text-[#797675]">(${post.reporterId})</span>
+                </p>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Nơi bảo quản:</span>
+                <p class="text-emerald-700 dark:text-emerald-400 font-semibold">${post.storage || 'Đang cập nhật'}</p>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Thời gian nhặt / đăng:</span>
+                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.time || post.date || 'Hôm nay'}</p>
+              </div>
+              ${post.color ? `
+              <div>
+                <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Màu sắc:</span>
+                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.color}</p>
+              </div>` : ''}
+            </div>
           </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Trạng thái:</span>
-              ${getPostStatusBadge(post)}
+
+          ${post.thumbnails && post.thumbnails.length > 0 ? `
+            <div class="space-y-1.5 pt-1">
+              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Hình ảnh phụ trợ:</span>
+              <div class="grid grid-cols-4 gap-2">
+                ${post.thumbnails.map((t, idx) => `<img src="${t}" alt="Ảnh phụ ${idx + 1}" class="w-full h-16 object-cover rounded-xl border border-stone-200 dark:border-stone-700">`).join('')}
+              </div>
             </div>
-            <div>
-              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Danh mục:</span>
-              <p class="font-bold text-[#1b1c1c] dark:text-white">${post.category}</p>
-            </div>
-            <div>
-              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Địa điểm:</span>
-              <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.location}</p>
-            </div>
-            <div>
-              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Người đăng:</span>
-              <p class="font-bold text-[#1b1c1c] dark:text-white">${post.reporterName} <span class="font-mono text-xs text-[#797675]">(${post.reporterId})</span></p>
-            </div>
-            <div>
-              <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Nơi bảo quản:</span>
-              <p class="text-emerald-700 dark:text-emerald-400 font-semibold">${post.storage || 'Đang cập nhật'}</p>
-            </div>
+          ` : ''}
+
+          ${reportSection}
+
+          <div class="p-3 bg-stone-50 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700">
+            <span class="font-bold text-[#1b1c1c] dark:text-white block mb-0.5">Mô tả bài đăng:</span>
+            <p class="text-[#4a4746] dark:text-stone-300 italic">${post.note || 'Không có mô tả chi tiết.'}</p>
           </div>
-        </div>
-
-        ${reportSection}
-
-        <div class="p-3 bg-stone-50 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700">
-          <span class="font-bold text-[#1b1c1c] dark:text-white block mb-0.5">Mô tả bài đăng:</span>
-          <p class="text-[#4a4746] dark:text-stone-300 italic">${post.note || 'Không có mô tả chi tiết.'}</p>
-        </div>
-      `;
-
-      // Nút hành động phía dưới modal
-      if (post.status === "reported") {
-        leftActions.innerHTML = `
-          <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
-            Ẩn bài viết này
-          </button>
-          <button type="button" onclick="dismissReport('${post.id}'); closePostDetailModal();" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
-            Bác bỏ báo cáo
-          </button>
-        `;
-      } else if (post.status === "hidden") {
-        leftActions.innerHTML = `
-          <button type="button" onclick="unhidePost('${post.id}'); closePostDetailModal();" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
-            Bỏ ẩn / Khôi phục hiển thị
-          </button>
-        `;
-      } else {
-        leftActions.innerHTML = `
-          <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
-            Ẩn bài viết
-          </button>
         `;
       }
 
-      document.getElementById("modal-post-detail").classList.remove("hidden");
+      // Nút hành động phía dưới modal
+      if (leftActions) {
+        if (normStatus === "verifying" && post.reportReason) {
+          leftActions.innerHTML = `
+            <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+              Ẩn bài viết này
+            </button>
+            <button type="button" onclick="dismissReport('${post.id}'); closePostDetailModal();" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+              Bác bỏ báo cáo
+            </button>
+            <button type="button" onclick="closePostDetailModal(); openDeletePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+              Xóa bài
+            </button>
+          `;
+        } else if (normStatus === "hidden") {
+          leftActions.innerHTML = `
+            <button type="button" onclick="unhidePost('${post.id}'); closePostDetailModal();" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
+              Bỏ ẩn / Khôi phục hiển thị
+            </button>
+            <button type="button" onclick="closePostDetailModal(); openDeletePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+              Xóa bài đăng
+            </button>
+          `;
+        } else {
+          leftActions.innerHTML = `
+            <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+              Ẩn bài viết
+            </button>
+            <button type="button" onclick="closePostDetailModal(); openDeletePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+              Xóa bài đăng
+            </button>
+          `;
+        }
+      }
+
+      document.getElementById("modal-post-detail")?.classList.remove("hidden");
     }
 
     function closePostDetailModal() {
-      document.getElementById("modal-post-detail").classList.add("hidden");
+      document.getElementById("modal-post-detail")?.classList.add("hidden");
     }
 
 
@@ -1705,6 +2605,57 @@
       showToast("Đã làm mới dữ liệu hệ thống!", "info");
     }
 
+    // Đăng ký các hàm ra window để các inline handler (onclick, onchange, oninput, onsubmit) luôn khả dụng
+    window.switchAdminTab = switchAdminTab;
+    window.filterPosts = filterPosts;
+    window.clearSearchInput = clearSearchInput;
+    window.clearFilters = clearFilters;
+    window.updateColorFilterSwatch = updateColorFilterSwatch;
+    window.setPostSubFilter = setPostSubFilter;
+    window.viewPostDetail = viewPostDetail;
+    window.closePostDetailModal = closePostDetailModal;
+    window.openHidePostModal = openHidePostModal;
+    window.closeHidePostModal = closeHidePostModal;
+    window.toggleCustomHideReason = toggleCustomHideReason;
+    window.confirmHidePost = confirmHidePost;
+    window.unhidePost = unhidePost;
+    window.dismissReport = dismissReport;
+    window.deletePost = deletePost;
+    window.openDeletePostModal = openDeletePostModal;
+    window.closeDeletePostModal = closeDeletePostModal;
+    window.executeDeletePost = executeDeletePost;
+    window.openAddPctsvPostModal = openAddPctsvPostModal;
+    window.openAddPctsvModal = openAddPctsvPostModal;
+    window.closeAddPctsvPostModal = closeAddPctsvPostModal;
+    window.closeAddPctsvModal = closeAddPctsvPostModal;
+    window.handleCreatePctsvPost = handleCreatePctsvPost;
+    window.resetPctsvModalState = resetPctsvModalState;
+    window.syncPctsvLocation = syncPctsvLocation;
+    window.updatePctsvFloorLockState = updatePctsvFloorLockState;
+    window.openPctsvClockPicker = openPctsvClockPicker;
+    window.closePctsvClockPicker = closePctsvClockPicker;
+    window.confirmPctsvClockPicker = confirmPctsvClockPicker;
+    window.setClockPickerMode = setClockPickerMode;
+    window.setClockPreset = setClockPreset;
+    window.triggerPctsvThumbnail = triggerPctsvThumbnail;
+    window.handlePctsvThumbFileSelect = handlePctsvThumbFileSelect;
+    window.handlePctsvFileSelect = handlePctsvFileSelect;
+    window.handlePctsvDragOver = handlePctsvDragOver;
+    window.handlePctsvDragLeave = handlePctsvDragLeave;
+    window.handlePctsvDrop = handlePctsvDrop;
+    window.handlePctsvUrlChange = handlePctsvUrlChange;
+    window.setPctsvPreview = setPctsvPreview;
+    window.updateMetrics = updateMetrics;
+    window.refreshAdminData = refreshAdminData;
+    window.openAddAccountModal = openAddAccountModal;
+    window.closeAddAccountModal = closeAddAccountModal;
+    window.submitNewAccount = submitNewAccount;
+    window.openPrintScoreModal = openPrintScoreModal;
+    window.closePrintScoreModal = closePrintScoreModal;
+    window.triggerNativePrint = triggerNativePrint;
+    window.exportScoreCSV = exportScoreCSV;
+    window.filterAccounts = filterAccounts;
+
     // -----------------------------------------------------------------------
     // 10. KHỞI CHẠY TRANG
     // -----------------------------------------------------------------------
@@ -1732,6 +2683,354 @@
       }
     });
   </script>
+
+
+  <!-- MODAL XÁC NHẬN XÓA BÀI ĐĂNG (CHỈ CẦN CLICK XÁC NHẬN, KHÔNG CẦN NHẬP LÝ DO) -->
+  <div id="modal-confirm-delete" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-md w-full p-6 text-left space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-[24px]">delete_forever</span>
+        </div>
+        <div>
+          <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Xác nhận xóa bài đăng</h3>
+          <p class="text-xs text-[#797675] dark:text-stone-400">Thao tác này sẽ xóa vĩnh viễn dữ liệu</p>
+        </div>
+      </div>
+      <p id="confirm-delete-msg" class="text-xs text-[#4a4746] dark:text-stone-300 leading-relaxed">
+        Bạn có chắc chắn muốn xóa vĩnh viễn bài đăng này khỏi hệ thống? Thao tác này không thể hoàn tác.
+      </p>
+      <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closeDeletePostModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+          Hủy bỏ
+        </button>
+        <button type="button" onclick="executeDeletePost();" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <span class="material-symbols-outlined text-[16px]">delete</span>
+          <span>Xác nhận xóa</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL THÊM BÀI ĐĂNG PHÒNG CÔNG TÁC SINH VIÊN (PCTSV) -->
+  <div id="modal-add-pctsv-post" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-7 text-left space-y-5 animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header (KHÔNG có tích xanh trong form nhập liệu) -->
+      <div class="flex items-center justify-between pb-4 border-b border-stone-100 dark:border-stone-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center shadow-xs">
+            <span class="material-symbols-outlined text-[22px]">post_add</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">
+              Thêm bài đăng tiếp nhận (PCTSV)
+            </h3>
+            <p class="text-xs text-[#797675] dark:text-stone-400 mt-0.5">Tiếp nhận và quản lý đồ vật thất lạc tại Phòng Công tác Sinh viên</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeAddPctsvPostModal();" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Form 2 Cột hoàn chỉnh chuẩn UI/UX Pro Max (Mirroring edit-form layout) -->
+      <form id="form-add-pctsv-post" onsubmit="handleCreatePctsvPost(event);" class="space-y-5 text-xs">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- CỘT TRÁI (7 CỘT): CÁC TRƯỜNG THÔNG TIN ĐỒ VẬT -->
+          <div class="lg:col-span-7 space-y-3.5">
+            
+            <!-- 1. Tiêu đề -->
+            <div>
+              <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                Tiêu đề bài đăng <span class="text-rose-600">*</span>
+              </label>
+              <input type="text" id="pctsv-title" required placeholder="Nhập tiêu đề đồ vật tiếp nhận..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+            </div>
+
+            <!-- 2. Loại đồ vật & Màu sắc (2 cột) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                  Loại đồ vật <span class="text-rose-600">*</span>
+                </label>
+                <select id="pctsv-category" required class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+                  <option value="" disabled selected>-- Chọn loại đồ vật --</option>
+                  <option value="Ví tiền / Bóp da">Ví tiền / Bóp da</option>
+                  <option value="Thiết bị điện tử">Thiết bị điện tử</option>
+                  <option value="Giấy tờ tùy thân / Thẻ SV">Giấy tờ tùy thân / Thẻ SV</option>
+                  <option value="Đồ dùng cá nhân">Đồ dùng cá nhân</option>
+                  <option value="Balo / Túi xách">Balo / Túi xách</option>
+                  <option value="Chìa khóa / Thẻ xe">Chìa khóa / Thẻ xe</option>
+                  <option value="Sách vở / Tài liệu">Sách vở / Tài liệu</option>
+                  <option value="Khác">Khác</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                  Màu sắc <span class="text-rose-600">*</span>
+                </label>
+                <select id="pctsv-color" required class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+                  <option value="" disabled selected>-- Chọn màu sắc --</option>
+                  <option value="Đen">Đen</option>
+                  <option value="Nâu">Nâu</option>
+                  <option value="Xanh dương">Xanh dương</option>
+                  <option value="Trắng">Trắng</option>
+                  <option value="Đỏ">Đỏ</option>
+                  <option value="Vàng">Vàng</option>
+                  <option value="Xám">Xám</option>
+                  <option value="Màu khác">Màu khác</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 3. Mô tả chi tiết đặc điểm -->
+            <div>
+              <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                Mô tả đặc điểm nhận dạng <span class="text-rose-600">*</span>
+              </label>
+              <textarea id="pctsv-note" rows="3" required placeholder="Ghi chú chi tiết đặc điểm nhận dạng, tình trạng hiện tại của đồ vật..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs leading-relaxed focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 resize-none transition-colors"></textarea>
+            </div>
+
+            <!-- 4. Địa điểm nhặt (theo khoa / tòa nhà / tầng / phòng) -->
+            <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-stone-800/40 border border-stone-200 dark:border-stone-700/80 space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Địa điểm nhặt được <span class="text-rose-600">*</span></label>
+                <span class="text-[10px] text-[#797675] dark:text-stone-400">Khoa / Tòa nhà / Tầng / Phòng</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                <div>
+                  <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">1. Khoa / Khu</span>
+                  <select id="pctsv-loc-faculty" onchange="syncPctsvLocation()" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                    <option value="" selected>-- Chọn khoa --</option>
+                    <option value="Khoa CNTT&TT (C1)">Khoa CNTT&TT (C1)</option>
+                    <option value="Nhà học B1">Nhà học B1</option>
+                    <option value="Nhà học C2">Nhà học C2</option>
+                    <option value="Khoa Kinh tế">Khoa Kinh tế</option>
+                    <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
+                    <option value="Hội trường Rùa">Hội trường Rùa</option>
+                    <option value="Thư viện Trung tâm">Thư viện Trung tâm</option>
+                    <option value="Khu hiệu bộ">Khu hiệu bộ</option>
+                    <option value="Bãi xe Cổng A">Bãi xe Cổng A</option>
+                    <option value="Bãi xe Cổng B">Bãi xe Cổng B</option>
+                  </select>
+                </div>
+                <div>
+                  <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">2. Tầng</span>
+                  <select id="pctsv-loc-floor" disabled onchange="syncPctsvLocation()" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800/40 text-stone-400 dark:text-stone-500 font-medium text-xs cursor-not-allowed">
+                    <option value="" selected>-- Chọn tầng --</option>
+                    <option value="Tầng trệt">Tầng trệt</option>
+                    <option value="Tầng 1">Tầng 1</option>
+                    <option value="Tầng 2">Tầng 2</option>
+                    <option value="Tầng 3">Tầng 3</option>
+                    <option value="Tầng 4">Tầng 4</option>
+                  </select>
+                </div>
+                <div>
+                  <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">3. Phòng / Vị trí</span>
+                  <input type="text" id="pctsv-loc-room" oninput="syncPctsvLocation()" placeholder="VD: Phòng 204..." class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                </div>
+              </div>
+              <input type="text" id="pctsv-location" required placeholder="Địa điểm tổng hợp (VD: Nhà học C1, Tầng 2, Phòng 204)..." class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+            </div>
+
+            <!-- 5. Ngày nhặt & Thời gian nhặt / Khoảng giờ nhặt -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                  Ngày nhặt <span class="text-rose-600">*</span>
+                </label>
+                <input type="date" id="pctsv-date" required value="" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+              </div>
+              <div>
+                <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                  Thời gian / Khoảng giờ nhặt <span class="text-rose-600">*</span>
+                </label>
+                <div class="relative">
+                  <input type="text" id="pctsv-time" required placeholder="VD: 14:15" value="" onclick="openPctsvClockPicker()" class="w-full px-3 py-2.5 pr-10 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors cursor-pointer">
+                  <button type="button" onclick="openPctsvClockPicker()" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400 p-1 transition-colors cursor-pointer" title="Mở đồng hồ chọn giờ">
+                    <span class="material-symbols-outlined text-[18px]">schedule</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Vị trí lưu giữ tại PCTSV -->
+            <div>
+              <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                Vị trí lưu giữ tại PCTSV <span class="text-rose-600">*</span>
+              </label>
+              <input type="text" id="pctsv-storage" required placeholder="VD: Bàn tiếp nhận PCTSV - Tủ A1, Nhà điều hành C1..." value="" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+            </div>
+
+            <!-- 7. Câu hỏi bảo mật -->
+            <div>
+              <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
+                Câu hỏi bảo mật xác minh quyền sở hữu
+              </label>
+              <input type="text" id="pctsv-question" placeholder="VD: Mã số in trên thẻ sinh viên hoặc đặc điểm nhận dạng riêng biệt là gì?" value="" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+            </div>
+
+          </div>
+
+          <!-- CỘT PHẢI (5 CỘT): HÌNH ẢNH MINH HỌA (KÉO THẢ + 4 THUMBNAIL PHỤ TRỢ) -->
+          <div class="lg:col-span-5 space-y-3.5">
+            <div>
+              <div class="mb-1.5">
+                <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200 leading-snug">
+                  Hình ảnh đồ vật nhặt được <span class="text-rose-600">*</span> <span class="text-[11px] font-normal text-[#797675] dark:text-stone-400 block sm:inline mt-0.5 sm:mt-0">(Tối thiểu 1 ảnh, tối đa 5 ảnh, PNG, JPG &lt; 5MB)</span>
+                </label>
+              </div>
+
+              <!-- Vùng kéo thả upload ảnh chính -->
+              <input type="file" id="pctsv-file-input" accept="image/*" class="hidden" onchange="handlePctsvFileSelect(this)">
+              <div id="pctsv-drop-zone"
+                onclick="document.getElementById('pctsv-file-input').click();"
+                ondragover="handlePctsvDragOver(event);"
+                ondragleave="handlePctsvDragLeave(event);"
+                ondrop="handlePctsvDrop(event);"
+                class="border-2 border-dashed border-[#c3c8c2] dark:border-stone-700 hover:border-[#1f3227] dark:hover:border-emerald-500 rounded-2xl p-6 text-center bg-[#fcf9f8] dark:bg-stone-800/40 transition-all cursor-pointer group relative overflow-hidden min-h-[190px] flex flex-col items-center justify-center">
+                
+                <!-- Preview khi có ảnh -->
+                <div id="pctsv-preview-container" class="hidden absolute inset-0 bg-stone-900/10 flex items-center justify-center">
+                  <img id="pctsv-preview-img" src="" alt="Ảnh xem trước" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/95 text-[#1b1c1c] text-xs font-bold shadow flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px]">change_circle</span>
+                      <span>Đổi ảnh khác</span>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Trạng thái trống ban đầu -->
+                <div id="pctsv-empty-placeholder" class="space-y-2">
+                  <div class="w-12 h-12 mx-auto rounded-full bg-stone-200 dark:bg-stone-700 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">add_a_photo</span>
+                  </div>
+                  <p class="text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 leading-tight">
+                    Kéo thả hình ảnh vào đây, hoặc <span class="text-[#1f3227] dark:text-emerald-400 underline underline-offset-2">chọn từ thiết bị</span>
+                  </p>
+                  <p class="text-[11px] text-[#797675] dark:text-stone-400">Hỗ trợ JPG, PNG, WEBP (&lt; 5MB)</p>
+                </div>
+              </div>
+
+              <!-- 4 ô thumbnail phụ trợ nhỏ -->
+              <div class="mt-3.5">
+                <span class="text-[11px] font-medium text-[#797675] dark:text-stone-400 block mb-1.5">Ảnh phụ trợ (4 góc chụp khác nhau):</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="pctsv-thumbnails-grid">
+                  <div onclick="triggerPctsvThumbnail(1)" id="pctsv-thumb-1" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                    <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 1</span>
+                  </div>
+                  <div onclick="triggerPctsvThumbnail(2)" id="pctsv-thumb-2" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                    <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 2</span>
+                  </div>
+                  <div onclick="triggerPctsvThumbnail(3)" id="pctsv-thumb-3" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                    <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 3</span>
+                  </div>
+                  <div onclick="triggerPctsvThumbnail(4)" id="pctsv-thumb-4" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                    <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 4</span>
+                  </div>
+                </div>
+                <input type="file" id="pctsv-thumb-input" accept="image/*" class="hidden" onchange="handlePctsvThumbFileSelect(this)">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Nút hành động dưới cùng -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-100 dark:border-stone-800">
+          <button type="button" onclick="closeAddPctsvPostModal();" class="px-5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-[#4a4746] dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+            Hủy
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-bold shadow-sm flex items-center gap-2 cursor-pointer transition-colors">
+            <span class="material-symbols-outlined text-[18px]">publish</span>
+            <span>Đăng bài tiếp nhận</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- POPUP / MODAL CHỌN GIỜ KIM XOAY TRÒN (CLOCK TIME PICKER) -->
+  <div id="modal-pctsv-clock-picker" onclick="if(event.target === this) closePctsvClockPicker();" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/50 backdrop-blur-2xs select-none no-print">
+    <div class="bg-white dark:bg-[#1f2125] rounded-3xl border border-stone-200 dark:border-stone-800 shadow-2xl p-5 sm:p-6 w-full max-w-[340px] text-center space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Header: Title & Close -->
+      <div class="flex items-center justify-between pb-2 border-b border-stone-100 dark:border-stone-800">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1f3227] dark:text-emerald-400 text-[20px]">schedule</span>
+          <span class="text-xs font-bold text-[#1b1c1c] dark:text-white uppercase tracking-wider">Chọn giờ nhặt</span>
+        </div>
+        <button type="button" onclick="closePctsvClockPicker()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <!-- Time Display (Giờ : Phút) with Mode Toggle Buttons -->
+      <div class="flex items-center justify-center gap-1.5 py-1">
+        <button type="button" id="clock-btn-hour" onclick="setClockPickerMode('hour')" class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105">
+          14
+        </button>
+        <span class="text-2xl font-black text-stone-400 select-none animate-pulse">:</span>
+        <button type="button" id="clock-btn-minute" onclick="setClockPickerMode('minute')" class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200">
+          00
+        </button>
+      </div>
+
+      <!-- Mode indicator text -->
+      <div class="text-[11px] font-medium text-stone-500 dark:text-stone-400">
+        <span id="clock-mode-label">Đang chọn: Giờ (Nhấp hoặc xoay kim để chọn)</span>
+      </div>
+
+      <!-- Interactive Clock Face Dial (260px x 260px) -->
+      <div class="relative w-[260px] h-[260px] mx-auto rounded-full bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700/80 shadow-inner flex items-center justify-center cursor-pointer select-none touch-none" id="clock-dial-face">
+        
+        <!-- SVG for Clock Hand (Kim đồng hồ) -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 260 260">
+          <!-- Center Pivot -->
+          <circle cx="130" cy="130" r="5" fill="#1f3227" class="dark:fill-emerald-400" />
+          <!-- Hand Line -->
+          <line id="clock-hand-line" x1="130" y1="130" x2="130" y2="34" stroke="#1f3227" stroke-width="2.5" class="dark:stroke-emerald-400" />
+          <!-- End Knob -->
+          <circle id="clock-hand-knob" cx="130" cy="34" r="16" fill="#1f3227" fill-opacity="0.95" class="dark:fill-emerald-500" />
+        </svg>
+
+        <!-- Dynamic Numbers Container (DOM elements positioned over dial) -->
+        <div id="clock-dial-numbers" class="absolute inset-0 pointer-events-none">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+
+      <!-- Quick Preset Chips -->
+      <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1">
+        <button type="button" onclick="setClockPreset(8, 0)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">08:00</button>
+        <button type="button" onclick="setClockPreset(10, 30)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">10:30</button>
+        <button type="button" onclick="setClockPreset(11, 45)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">11:45</button>
+        <button type="button" onclick="setClockPreset(14, 15)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">14:15</button>
+        <button type="button" onclick="setClockPreset(16, 30)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">16:30</button>
+      </div>
+
+      <!-- Footer Buttons: Hủy & Xác nhận -->
+      <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closePctsvClockPicker()" class="px-4 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+          Hủy
+        </button>
+        <button type="button" onclick="confirmPctsvClockPicker()" class="px-5 py-2 rounded-xl bg-[#1f3227] hover:bg-[#142018] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white text-xs font-bold shadow transition-colors flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">check</span>
+          <span>Xác nhận</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
