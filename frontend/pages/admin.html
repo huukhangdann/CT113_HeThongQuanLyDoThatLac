@@ -91,7 +91,7 @@
 
 <body class="bg-ivory dark:bg-[#121316] text-soft-black dark:text-stone-100 min-h-screen flex flex-col selection:bg-stone-200 dark:selection:bg-stone-800">
 
-  <!-- Header của hệ thống (Đã cấu hình chỉ hiển thị đúng 2 tab: Quản lý bài đăng & Quản lý tài khoản) -->
+  <!-- Header của hệ thống (Đã cấu hình chỉ hiển thị đúng 2 tab: Quản lý bài đăng & Xem điểm thưởng) -->
   <app-header class="no-print"></app-header>
 
   <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-8 space-y-6 no-print">
@@ -177,10 +177,10 @@
         </div>
       </div>
 
-      <!-- Card 4: Tổng tài khoản & Điểm vinh danh -->
+      <!-- Card 4: Tổng số người dùng & Xem điểm thưởng -->
       <div onclick="switchAdminTab('accounts');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Tài khoản người dùng</span>
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Xem điểm thưởng</span>
           <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#35483d] dark:text-emerald-400 group-hover:scale-105 transition-transform">
             <span class="material-symbols-outlined text-[20px]">workspace_premium</span>
           </div>
@@ -195,7 +195,7 @@
 
     </div>
 
-    <!-- 3. MAIN TAB SWITCHER (Đồng bộ với Header: Quản lý bài đăng & Quản lý tài khoản) -->
+    <!-- 3. MAIN TAB SWITCHER (Đồng bộ với Header: Quản lý bài đăng & Xem điểm thưởng) -->
     <div class="flex items-center justify-between gap-3 border-b border-stone-200 dark:border-stone-800 pt-1">
       <div class="inline-flex p-1 bg-stone-100 dark:bg-stone-800/90 rounded-xl" role="tablist">
         
@@ -206,10 +206,10 @@
           <span id="tab-badge-posts" class="px-2 py-0.5 text-[11px] font-mono font-bold rounded-full bg-stone-200 dark:bg-stone-700 text-[#1b1c1c] dark:text-white">0</span>
         </button>
 
-        <!-- Tab 2 Button: Quản lý tài khoản -->
+        <!-- Tab 2 Button: Xem điểm thưởng -->
         <button type="button" id="tab-btn-accounts" onclick="switchAdminTab('accounts');" role="tab" aria-selected="false" class="px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4a4746] dark:text-stone-300 hover:text-[#1b1c1c] dark:hover:text-white flex items-center gap-2 transition-all cursor-pointer">
-          <span class="material-symbols-outlined text-[18px]">manage_accounts</span>
-          <span>Quản lý tài khoản</span>
+          <span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+          <span>Xem điểm thưởng</span>
           <span id="tab-badge-accounts" class="px-2 py-0.5 text-[11px] font-mono font-semibold rounded-full bg-stone-200 dark:bg-stone-700 text-[#1b1c1c] dark:text-white">0</span>
         </button>
 
@@ -298,7 +298,7 @@
 
 
     <!-- ========================================================================= -->
-    <!-- PHÂN HỆ 2: QUẢN LÝ TÀI KHOẢN (ACCOUNT & SCORE MANAGEMENT TAB)             -->
+    <!-- PHÂN HỆ 2: XEM ĐIỂM THƯỞNG (REWARD POINTS TAB)                            -->
     <!-- ========================================================================= -->
     <section id="tab-content-accounts" class="hidden space-y-4">
       
@@ -350,19 +350,17 @@
 
       </div>
 
-      <!-- Bảng tài khoản & Điểm người dùng Desktop -->
+      <!-- Bảng xem điểm thưởng Desktop (Đã xóa chức năng khóa tài khoản) -->
       <div class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
               <tr class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
-                <th class="py-3 px-4 min-w-[200px]">Sinh viên / Cán bộ</th>
-                <th class="py-3 px-4 min-w-[170px]">Đơn vị / Khoa</th>
-                <th class="py-3 px-4 min-w-[190px]">Email &amp; SĐT</th>
-                <th class="py-3 px-4 w-28 text-center">Điểm</th>
-                <th class="py-3 px-4 w-28 text-center">Đồ đã trả</th>
-                <th class="py-3 px-4 w-32">Trạng thái</th>
-                <th class="py-3 px-4 w-36 text-right">Thao tác</th>
+                <th class="py-3 px-4 min-w-[220px]">Sinh viên / Cán bộ</th>
+                <th class="py-3 px-4 min-w-[180px]">Đơn vị / Khoa</th>
+                <th class="py-3 px-4 min-w-[200px]">Email &amp; SĐT</th>
+                <th class="py-3 px-4 w-32 text-center">Điểm</th>
+                <th class="py-3 px-4 w-32 text-center">Đồ đã trả</th>
               </tr>
             </thead>
             <tbody id="accounts-table-body" class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
@@ -375,7 +373,7 @@
           <div class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
             <span class="material-symbols-outlined text-[24px]">person_off</span>
           </div>
-          <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không tìm thấy tài khoản nào</h3>
+          <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không tìm thấy người dùng nào</h3>
           <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Vui lòng điều chỉnh lại bộ lọc điểm hoặc từ khóa tìm kiếm.</p>
         </div>
       </div>
@@ -579,7 +577,7 @@
       <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800">
         <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white flex items-center gap-2">
           <span class="material-symbols-outlined text-[20px] text-[#35483d] dark:text-emerald-400">person_add</span>
-          Thêm tài khoản người dùng
+          Thêm người dùng vào danh sách điểm thưởng
         </h3>
         <button type="button" onclick="closeAddAccountModal();" class="w-7 h-7 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
           <span class="material-symbols-outlined text-[18px]">close</span>
@@ -836,8 +834,7 @@
         email: "longb2105432@student.ctu.edu.vn",
         phone: "0912345678",
         points: 24,
-        returnedCount: 24,
-        status: "active"
+        returnedCount: 24
       },
       {
         id: "ACC-02",
@@ -848,8 +845,7 @@
         email: "thaob2201988@student.ctu.edu.vn",
         phone: "0987654321",
         points: 19,
-        returnedCount: 19,
-        status: "active"
+        returnedCount: 19
       },
       {
         id: "ACC-03",
@@ -860,8 +856,7 @@
         email: "namb2103456@student.ctu.edu.vn",
         phone: "0939112233",
         points: 16,
-        returnedCount: 16,
-        status: "active"
+        returnedCount: 16
       },
       {
         id: "ACC-04",
@@ -872,8 +867,7 @@
         email: "uyenb2207788@student.ctu.edu.vn",
         phone: "0977889900",
         points: 14,
-        returnedCount: 14,
-        status: "active"
+        returnedCount: 14
       },
       {
         id: "ACC-05",
@@ -884,8 +878,7 @@
         email: "huyb2304567@student.ctu.edu.vn",
         phone: "0944556677",
         points: 12,
-        returnedCount: 12,
-        status: "active"
+        returnedCount: 12
       },
       {
         id: "ACC-06",
@@ -896,8 +889,7 @@
         email: "trietb2108899@student.ctu.edu.vn",
         phone: "0909123456",
         points: 11,
-        returnedCount: 11,
-        status: "active"
+        returnedCount: 11
       },
       {
         id: "ACC-07",
@@ -908,8 +900,7 @@
         email: "tramb2206655@student.ctu.edu.vn",
         phone: "0966778899",
         points: 9,
-        returnedCount: 9,
-        status: "active"
+        returnedCount: 9
       },
       {
         id: "ACC-08",
@@ -920,8 +911,7 @@
         email: "anb2301122@student.ctu.edu.vn",
         phone: "0911223344",
         points: 8,
-        returnedCount: 8,
-        status: "active"
+        returnedCount: 8
       },
       {
         id: "ACC-09",
@@ -932,8 +922,7 @@
         email: "khangb2404991@student.ctu.edu.vn",
         phone: "0968686868",
         points: 5,
-        returnedCount: 5,
-        status: "active"
+        returnedCount: 5
       },
       {
         id: "ACC-10",
@@ -944,8 +933,7 @@
         email: "hungtv@ctu.edu.vn",
         phone: "02923832663",
         points: null,
-        returnedCount: 0,
-        status: "active"
+        returnedCount: 0
       },
       {
         id: "ACC-11",
@@ -956,8 +944,7 @@
         email: "bv_baixe@ctu.edu.vn",
         phone: "0939112233",
         points: null,
-        returnedCount: 0,
-        status: "active"
+        returnedCount: 0
       }
     ];
 
@@ -972,7 +959,7 @@
 
     let adminAccounts = [];
     try {
-      const stored = localStorage.getItem("ctu_admin_accounts_v3");
+      const stored = localStorage.getItem("ctu_admin_accounts_v4");
       adminAccounts = stored ? JSON.parse(stored) : INITIAL_ACCOUNTS;
     } catch (e) {
       adminAccounts = INITIAL_ACCOUNTS;
@@ -982,7 +969,7 @@
       localStorage.setItem("ctu_admin_posts_v2", JSON.stringify(adminPosts));
     }
     function saveAccounts() {
-      localStorage.setItem("ctu_admin_accounts_v3", JSON.stringify(adminAccounts));
+      localStorage.setItem("ctu_admin_accounts_v4", JSON.stringify(adminAccounts));
     }
 
     // -----------------------------------------------------------------------
@@ -1480,7 +1467,7 @@
 
 
     // -----------------------------------------------------------------------
-    // 8. QUẢN LÝ TÀI KHOẢN, ĐIỂM NGƯỜI DÙNG & LỌC CAO/THẤP
+    // 8. XEM ĐIỂM THƯỞNG & LỌC CAO/THẤP
     // -----------------------------------------------------------------------
     function renderAccounts(accountsToRender) {
       const tbody = document.getElementById("accounts-table-body");
@@ -1499,20 +1486,14 @@
       if (emptyState) emptyState.classList.add("hidden");
 
       accountsToRender.forEach(acc => {
-        const isLocked = acc.status === "locked";
-
-        const statusBadge = isLocked
-          ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200 dark:border-rose-900">Tạm khóa</span>`
-          : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900">Hoạt động</span>`;
-
         // Điểm hiển thị (Chỉ người dùng sinh viên có điểm theo bảng vinh danh, cán bộ hiển thị '-')
         const pointsDisplay = (acc.points !== null && acc.points !== undefined) 
           ? `<span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points}</span>` 
           : `<span class="text-stone-400 font-normal">-</span>`;
 
-        // Desktop Row
+        // Desktop Row (Không có chức năng khóa tài khoản)
         const tr = document.createElement("tr");
-        tr.className = `hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors ${isLocked ? 'opacity-70' : ''}`;
+        tr.className = "hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors";
         tr.innerHTML = `
           <td class="py-3 px-4">
             <div class="flex items-center gap-3">
@@ -1534,20 +1515,12 @@
             ${pointsDisplay}
           </td>
           <td class="py-3 px-4 text-center font-mono font-semibold">${acc.returnedCount || 0}</td>
-          <td class="py-3 px-4">${statusBadge}</td>
-          <td class="py-3 px-4 text-right">
-            <div class="inline-flex items-center gap-1.5 justify-end">
-              <button type="button" onclick="toggleLockAccount('${acc.id}');" class="px-2.5 py-1 rounded-lg text-xs font-semibold ${isLocked ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400' : 'bg-stone-100 hover:bg-rose-50 text-stone-700 hover:text-rose-700 dark:bg-stone-800'} transition-colors cursor-pointer">
-                ${isLocked ? 'Mở khóa' : 'Khóa'}
-              </button>
-            </div>
-          </td>
         `;
         tbody.appendChild(tr);
 
-        // Mobile Card
+        // Mobile Card (Gọn gàng, đã xóa nút khóa tài khoản)
         const mCard = document.createElement("div");
-        mCard.className = `bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-2.5 ${isLocked ? 'opacity-70' : ''}`;
+        mCard.className = "bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-2.5";
         mCard.innerHTML = `
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -1559,17 +1532,14 @@
                 <span class="font-mono text-[11px] text-[#797675]">${acc.code}</span>
               </div>
             </div>
-            ${statusBadge}
+            <div class="text-right">
+              <span class="text-[11px] text-[#797675] block">Điểm thưởng</span>
+              <span class="font-mono font-bold text-base text-[#1b1c1c] dark:text-white">${acc.points !== null && acc.points !== undefined ? acc.points : '-'}</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between pt-1">
-            <span class="text-xs text-[#797675]">Điểm:</span>
-            <span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points !== null && acc.points !== undefined ? acc.points : '-'}</span>
-          </div>
-          <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs">
-            <span class="text-[#797675]">Đã trao trả: <strong>${acc.returnedCount || 0} món</strong></span>
-            <button type="button" onclick="toggleLockAccount('${acc.id}');" class="px-3 py-1 rounded-md font-bold text-xs ${isLocked ? 'bg-emerald-600 text-white' : 'bg-stone-100 text-stone-700'}">
-              ${isLocked ? 'Mở khóa' : 'Khóa tài khoản'}
-            </button>
+          <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs text-[#797675] dark:text-stone-400">
+            <span>${acc.dept}</span>
+            <span>Đã trao trả: <strong class="text-stone-900 dark:text-white">${acc.returnedCount || 0} món</strong></span>
           </div>
         `;
         mobileList.appendChild(mCard);
@@ -1608,23 +1578,7 @@
       renderAccounts(filtered);
     }
 
-    function toggleLockAccount(accId) {
-      const acc = adminAccounts.find(a => a.id === accId);
-      if (!acc) return;
-
-      if (acc.status === "active") {
-        acc.status = "locked";
-        showToast(`Đã tạm khóa tài khoản ${acc.name} (${acc.code})`, "warning");
-      } else {
-        acc.status = "active";
-        showToast(`Đã mở khóa tài khoản ${acc.name} (${acc.code})`, "success");
-      }
-      saveAccounts();
-      updateMetrics();
-      filterAccounts();
-    }
-
-    // Modal Thêm Tài Khoản
+    // Modal Thêm Tài Khoản / Người dùng vào danh sách điểm thưởng
     function openAddAccountModal() {
       document.getElementById("modal-add-account").classList.remove("hidden");
     }
@@ -1649,8 +1603,7 @@
         email: email,
         phone: phone,
         points: points,
-        returnedCount: points || 0,
-        status: "active"
+        returnedCount: points || 0
       };
 
       adminAccounts.unshift(newAcc);

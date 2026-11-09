@@ -357,7 +357,7 @@ class AppHeader extends HTMLElement {
           ${currentPath === 'admin.html' ? `
           <nav class="hidden md:flex items-center gap-8 h-full">
             <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('posts');" id="admin-nav-posts" class="header-nav-link header-nav-active flex items-center h-full text-sm font-semibold border-b-2">Quản lý bài đăng</a>
-            <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('accounts');" id="admin-nav-accounts" class="header-nav-link flex items-center h-full text-sm font-medium transition-colors">Quản lý tài khoản</a>
+            <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('accounts');" id="admin-nav-accounts" class="header-nav-link flex items-center h-full text-sm font-medium transition-colors">Xem điểm thưởng</a>
           </nav>
           ` : `
           <nav class="hidden md:flex items-center gap-8 h-full">
@@ -383,9 +383,9 @@ class AppHeader extends HTMLElement {
           <span class="material-symbols-outlined text-[24px]">article</span>
           <span class="text-[10px] font-medium mt-0.5">Bài đăng</span>
         </a>
-        <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('accounts');" id="admin-mobile-tab-accounts" class="flex flex-col items-center justify-center flex-1 py-1 text-[#777771] hover:text-[#1b1c1b] dark:text-stone-400 dark:hover:text-white" title="Quản lý tài khoản">
-          <span class="material-symbols-outlined text-[24px]">manage_accounts</span>
-          <span class="text-[10px] font-medium mt-0.5">Tài khoản</span>
+        <a href="javascript:void(0)" onclick="if(window.switchAdminTab) window.switchAdminTab('accounts');" id="admin-mobile-tab-accounts" class="flex flex-col items-center justify-center flex-1 py-1 text-[#777771] hover:text-[#1b1c1b] dark:text-stone-400 dark:hover:text-white" title="Xem điểm thưởng">
+          <span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+          <span class="text-[10px] font-medium mt-0.5">Điểm thưởng</span>
         </a>
       </nav>
       ` : `
