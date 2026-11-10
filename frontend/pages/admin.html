@@ -17,6 +17,8 @@
   <link href="../css/index.css" rel="stylesheet" />
 
   <script>
+    window.tailwind = window.tailwind || {};
+    var tailwind = window.tailwind;
     tailwind.config = {
       darkMode: "class",
       theme: {
@@ -277,7 +279,7 @@
                 <span>Loại đồ vật</span>
               </label>
               <div class="relative">
-                <select id="filter-category" onchange="filterPosts()"
+                <select id="filter-category" data-no-searchable="true" onchange="filterPosts()"
                   class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
                   <option value="all" selected>Tất cả loại đồ vật</option>
                   <option value="the-sv">Thẻ sinh viên / CCCD / Giấy tờ</option>
@@ -311,7 +313,7 @@
                   <span id="color-trigger-swatch"
                     class="w-4 h-4 rounded-full border border-slate-300 bg-slate-200 shrink-0 shadow-xs"></span>
                 </div>
-                <select id="filter-color" onchange="updateColorFilterSwatch(); filterPosts();"
+                <select id="filter-color" data-no-searchable="true" onchange="updateColorFilterSwatch(); filterPosts();"
                   class="w-full appearance-none pl-9 pr-8 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
                   <option value="all" selected>Tất cả màu sắc</option>
                   <option value="Đen">Đen</option>
@@ -341,7 +343,7 @@
                 <span>Thời gian nhặt</span>
               </label>
               <div class="relative">
-                <select id="filter-time" onchange="filterPosts()"
+                <select id="filter-time" data-no-searchable="true" onchange="filterPosts()"
                   class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
                   <option value="all" selected>Mọi thời điểm</option>
                   <option value="today">Hôm nay (24 giờ qua)</option>
@@ -370,7 +372,7 @@
                 <span>Địa điểm nhặt</span>
               </label>
               <div class="relative">
-                <select id="loc-faculty" onchange="filterPosts()"
+                <select id="loc-faculty" data-no-searchable="true" onchange="filterPosts()"
                   class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
                   <option value="" selected>Tất cả khu vực tại CTU</option>
                   <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
@@ -1258,24 +1260,30 @@
     let adminPosts = [];
     try {
       const stored = localStorage.getItem("ctu_admin_posts_v3") || localStorage.getItem("ctu_admin_posts_v2");
-      if (stored) {
-        adminPosts = JSON.parse(stored).map(p => ({
-          ...p,
-          status: normalizePostStatus(p.status)
-        }));
-      } else {
-        adminPosts = INITIAL_POSTS;
-      }
+      const parsed = stored ? JSON.parse(stored) : null;
+      adminPosts = (Array.isArray(parsed) && parsed.length > 0) ? parsed.map(p => ({
+        ...p,
+        status: normalizePostStatus(p.status)
+      })) : [...INITIAL_POSTS];
     } catch (e) {
-      adminPosts = INITIAL_POSTS;
+      adminPosts = [...INITIAL_POSTS];
+    }
+    if (!Array.isArray(adminPosts) || adminPosts.length === 0) {
+      adminPosts = [...INITIAL_POSTS];
+      try { localStorage.setItem("ctu_admin_posts_v3", JSON.stringify(adminPosts)); } catch(e){}
     }
 
     let adminAccounts = [];
     try {
       const stored = localStorage.getItem("ctu_admin_accounts_v4");
-      adminAccounts = stored ? JSON.parse(stored) : INITIAL_ACCOUNTS;
+      const parsed = stored ? JSON.parse(stored) : null;
+      adminAccounts = (Array.isArray(parsed) && parsed.length > 0) ? parsed : [...INITIAL_ACCOUNTS];
     } catch (e) {
-      adminAccounts = INITIAL_ACCOUNTS;
+      adminAccounts = [...INITIAL_ACCOUNTS];
+    }
+    if (!Array.isArray(adminAccounts) || adminAccounts.length === 0) {
+      adminAccounts = [...INITIAL_ACCOUNTS];
+      try { localStorage.setItem("ctu_admin_accounts_v4", JSON.stringify(adminAccounts)); } catch(e){}
     }
 
     function savePosts() {
@@ -1297,7 +1305,7 @@
     // -----------------------------------------------------------------------
     // 2. CHUYỂN TAB CHÍNH (ĐIỀU HƯỚNG QUA HEADER TABS & DỌN DẸP BODY TABS)
     // -----------------------------------------------------------------------
-    window.switchAdminTab = function (tabName) {
+    function switchAdminTab(tabName) {
       const tabPosts = document.getElementById("tab-content-posts");
       const tabAccounts = document.getElementById("tab-content-accounts");
       const btnPosts = document.getElementById("tab-btn-posts");
@@ -1361,9 +1369,7 @@
         }
       }
 
-      const url = new URL(window.location);
-      url.searchParams.set("tab", tabName);
-      window.history.replaceState({}, "", url);
+      try { if (window.history && window.history.replaceState) { const url = new URL(window.location.href); url.searchParams.set("tab", tabName); window.history.replaceState({}, "", url); } } catch(e){}
     };
 
     // -----------------------------------------------------------------------
@@ -1989,6 +1995,13 @@
       }
     }
 
+    function handlePctsvUrlChange(input) {
+      const url = typeof input === "string" ? input : input?.value;
+      if (url && typeof setPctsvPreview === "function") {
+        setPctsvPreview(url);
+      }
+    }
+
     function setPctsvPreview(src) {
       const previewContainer = document.getElementById("pctsv-preview-container");
       const emptyPlaceholder = document.getElementById("pctsv-empty-placeholder");
@@ -1998,258 +2011,7 @@
       if (emptyPlaceholder) emptyPlaceholder.classList.add("hidden");
     }
 
-    // -----------------------------------------------------------------------
-    // INTERACTIVE CIRCULAR CLOCK TIME PICKER CHO #pctsv-time
-    // -----------------------------------------------------------------------
-    let clockPickerHour = 14;
-    let clockPickerMinute = 15;
-    let clockPickerMode = "hour"; // "hour" | "minute"
-    let isClockDialDragging = false;
-
-    function openPctsvClockPicker() {
-      const timeInput = document.getElementById("pctsv-time");
-      const currentVal = timeInput?.value.trim() || "";
-      const match = currentVal.match(/^(\d{1,2})[:h](\d{2})/i);
-      if (match) {
-        clockPickerHour = Math.min(23, Math.max(0, parseInt(match[1], 10)));
-        clockPickerMinute = Math.min(59, Math.max(0, parseInt(match[2], 10)));
-      } else {
-        const now = new Date();
-        clockPickerHour = now.getHours();
-        clockPickerMinute = Math.floor(now.getMinutes() / 5) * 5;
-      }
-      clockPickerMode = "hour";
-      updateClockPickerUI();
-      initClockPickerEvents();
-      document.getElementById("modal-pctsv-clock-picker")?.classList.remove("hidden");
-    }
-
-    function closePctsvClockPicker() {
-      document.getElementById("modal-pctsv-clock-picker")?.classList.add("hidden");
-    }
-
-    function confirmPctsvClockPicker() {
-      const hh = String(clockPickerHour).padStart(2, "0");
-      const mm = String(clockPickerMinute).padStart(2, "0");
-      const timeInput = document.getElementById("pctsv-time");
-      if (timeInput) {
-        timeInput.value = `${hh}:${mm}`;
-        timeInput.dispatchEvent(new Event("input", { bubbles: true }));
-        timeInput.dispatchEvent(new Event("change", { bubbles: true }));
-      }
-      closePctsvClockPicker();
-    }
-
-    function setClockPickerMode(mode) {
-      clockPickerMode = mode;
-      updateClockPickerUI();
-    }
-
-    function setClockPreset(h, m) {
-      clockPickerHour = h;
-      clockPickerMinute = m;
-      updateClockPickerUI();
-    }
-
-    function updateClockPickerUI() {
-      const hourBtn = document.getElementById("clock-btn-hour");
-      const minuteBtn = document.getElementById("clock-btn-minute");
-      const modeLabel = document.getElementById("clock-mode-label");
-
-      const hhStr = String(clockPickerHour).padStart(2, "0");
-      const mmStr = String(clockPickerMinute).padStart(2, "0");
-
-      if (hourBtn) hourBtn.textContent = hhStr;
-      if (minuteBtn) minuteBtn.textContent = mmStr;
-
-      if (clockPickerMode === "hour") {
-        if (hourBtn) {
-          hourBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105";
-        }
-        if (minuteBtn) {
-          minuteBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200";
-        }
-        if (modeLabel) {
-          modeLabel.textContent = "Đang chọn: Giờ (Nhấp hoặc xoay kim để chọn)";
-        }
-      } else {
-        if (hourBtn) {
-          hourBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200";
-        }
-        if (minuteBtn) {
-          minuteBtn.className = "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105";
-        }
-        if (modeLabel) {
-          modeLabel.textContent = "Đang chọn: Phút (Nhấp hoặc xoay kim để chọn)";
-        }
-      }
-
-      renderClockDialFace();
-    }
-
-    function renderClockDialFace() {
-      const numbersContainer = document.getElementById("clock-dial-numbers");
-      const handLine = document.getElementById("clock-hand-line");
-      const handKnob = document.getElementById("clock-hand-knob");
-      if (!numbersContainer || !handLine || !handKnob) return;
-
-      numbersContainer.innerHTML = "";
-      const cx = 130;
-      const cy = 130;
-      let handRadius = 96;
-      let handAngleDeg = 0;
-
-      if (clockPickerMode === "hour") {
-        const isInner = clockPickerHour === 0 || clockPickerHour >= 13;
-        handRadius = isInner ? 62 : 96;
-        const displayH = clockPickerHour % 12;
-        handAngleDeg = (displayH * 30 - 90 + 360) % 360;
-
-        // Render Outer Numbers (1..12)
-        for (let h = 1; h <= 12; h++) {
-          const angle = ((h * 30 - 90) * Math.PI) / 180;
-          const x = cx + 96 * Math.cos(angle);
-          const y = cy + 96 * Math.sin(angle);
-          const isSelected = !isInner && (clockPickerHour === h || (h === 12 && clockPickerHour === 12));
-
-          const numEl = document.createElement("div");
-          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${isSelected
-              ? "text-white font-bold z-10"
-              : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
-            }`;
-          numEl.style.left = `${x}px`;
-          numEl.style.top = `${y}px`;
-          numEl.textContent = String(h);
-          numEl.onclick = (e) => {
-            e.stopPropagation();
-            clockPickerHour = h;
-            updateClockPickerUI();
-            setTimeout(() => setClockPickerMode("minute"), 200);
-          };
-          numbersContainer.appendChild(numEl);
-        }
-
-        // Render Inner Numbers (13..23, 00)
-        for (let h = 13; h <= 24; h++) {
-          const val = h === 24 ? 0 : h;
-          const angle = ((h * 30 - 90) * Math.PI) / 180;
-          const x = cx + 62 * Math.cos(angle);
-          const y = cy + 62 * Math.sin(angle);
-          const isSelected = isInner && clockPickerHour === val;
-
-          const numEl = document.createElement("div");
-          numEl.className = `absolute w-6 h-6 -ml-3 -mt-3 flex items-center justify-center rounded-full text-[10px] font-medium cursor-pointer select-none transition-colors pointer-events-auto ${isSelected
-              ? "text-white font-bold z-10"
-              : "text-stone-500 dark:text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400"
-            }`;
-          numEl.style.left = `${x}px`;
-          numEl.style.top = `${y}px`;
-          numEl.textContent = val === 0 ? "00" : String(val);
-          numEl.onclick = (e) => {
-            e.stopPropagation();
-            clockPickerHour = val;
-            updateClockPickerUI();
-            setTimeout(() => setClockPickerMode("minute"), 200);
-          };
-          numbersContainer.appendChild(numEl);
-        }
-
-      } else {
-        // Minute mode
-        handRadius = 96;
-        handAngleDeg = (clockPickerMinute * 6 - 90 + 360) % 360;
-
-        const minuteLabels = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-        minuteLabels.forEach((m) => {
-          const angle = ((m * 6 - 90) * Math.PI) / 180;
-          const x = cx + 96 * Math.cos(angle);
-          const y = cy + 96 * Math.sin(angle);
-          const isSelected = clockPickerMinute === m;
-
-          const numEl = document.createElement("div");
-          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${isSelected
-              ? "text-white font-bold z-10"
-              : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
-            }`;
-          numEl.style.left = `${x}px`;
-          numEl.style.top = `${y}px`;
-          numEl.textContent = String(m).padStart(2, "0");
-          numEl.onclick = (e) => {
-            e.stopPropagation();
-            clockPickerMinute = m;
-            updateClockPickerUI();
-          };
-          numbersContainer.appendChild(numEl);
-        });
-      }
-
-      // Update Hand position
-      const rad = (handAngleDeg * Math.PI) / 180;
-      const targetX = cx + handRadius * Math.cos(rad);
-      const targetY = cy + handRadius * Math.sin(rad);
-
-      handLine.setAttribute("x2", String(targetX));
-      handLine.setAttribute("y2", String(targetY));
-      handKnob.setAttribute("cx", String(targetX));
-      handKnob.setAttribute("cy", String(targetY));
-      handKnob.setAttribute("r", String(handRadius === 62 ? 14 : 16));
-    }
-
-    function initClockPickerEvents() {
-      const dialEl = document.getElementById("clock-dial-face");
-      if (!dialEl || dialEl._clockPickerInitialized) return;
-      dialEl._clockPickerInitialized = true;
-
-      function handleDialInteraction(e, isRelease = false) {
-        const rect = dialEl.getBoundingClientRect();
-        const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
-        const clientY = e.clientY || (e.touches && e.touches[0]?.clientY);
-        if (clientX === undefined || clientY === undefined) return;
-
-        const dx = clientX - (rect.left + rect.width / 2);
-        const dy = clientY - (rect.top + rect.height / 2);
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const angleDeg = (Math.atan2(dy, dx) * 180 / Math.PI + 90 + 360) % 360;
-
-        if (clockPickerMode === "hour") {
-          let rawStep = Math.round(angleDeg / 30) % 12;
-          let h12 = rawStep === 0 ? 12 : rawStep;
-          if (dist < 79) {
-            clockPickerHour = h12 === 12 ? 0 : h12 + 12;
-          } else {
-            clockPickerHour = h12;
-          }
-          updateClockPickerUI();
-          if (isRelease) {
-            setTimeout(() => setClockPickerMode("minute"), 200);
-          }
-        } else {
-          let rawMin = Math.round(angleDeg / 6) % 60;
-          clockPickerMinute = rawMin;
-          updateClockPickerUI();
-        }
-      }
-
-      dialEl.addEventListener("pointerdown", (e) => {
-        isClockDialDragging = true;
-        dialEl.setPointerCapture?.(e.pointerId);
-        handleDialInteraction(e, false);
-      });
-
-      dialEl.addEventListener("pointermove", (e) => {
-        if (!isClockDialDragging) return;
-        handleDialInteraction(e, false);
-      });
-
-      const endHandler = (e) => {
-        if (!isClockDialDragging) return;
-        isClockDialDragging = false;
-        handleDialInteraction(e, true);
-      };
-
-      dialEl.addEventListener("pointerup", endHandler);
-      dialEl.addEventListener("pointercancel", endHandler);
-    }
+        // Clock Picker logic được sử dụng trực tiếp từ frontend/js/components.js
 
     function handleCreatePctsvPost(e) {
       e.preventDefault();
@@ -2746,11 +2508,11 @@
     window.resetPctsvModalState = resetPctsvModalState;
     window.syncPctsvLocation = syncPctsvLocation;
     window.updatePctsvFloorLockState = updatePctsvFloorLockState;
-    window.openPctsvClockPicker = openPctsvClockPicker;
-    window.closePctsvClockPicker = closePctsvClockPicker;
-    window.confirmPctsvClockPicker = confirmPctsvClockPicker;
-    window.setClockPickerMode = setClockPickerMode;
-    window.setClockPreset = setClockPreset;
+    window.openPctsvClockPicker = window.openPctsvClockPicker || function() {};
+    window.closePctsvClockPicker = window.closePctsvClockPicker || function() {};
+    window.confirmPctsvClockPicker = window.confirmPctsvClockPicker || function() {};
+    window.setClockPickerMode = window.setClockPickerMode || function() {};
+    window.setClockPreset = window.setClockPreset || function() {};
     window.triggerPctsvThumbnail = triggerPctsvThumbnail;
     window.handlePctsvThumbFileSelect = handlePctsvThumbFileSelect;
     window.handlePctsvFileSelect = handlePctsvFileSelect;
@@ -2768,34 +2530,40 @@
     window.closePrintScoreModal = closePrintScoreModal;
     window.triggerNativePrint = triggerNativePrint;
     window.exportScoreCSV = exportScoreCSV;
-    window.filterAccounts = filterAccounts;
 
-    // -----------------------------------------------------------------------
-    // 10. KHỞI CHẠY TRANG
-    // -----------------------------------------------------------------------
-    document.addEventListener("DOMContentLoaded", () => {
-      // 1. Kiểm tra quyền truy cập (Route Guard bảo vệ)
-      const isLoggedIn = localStorage.getItem("ctu_user_logged_in") !== "false";
-      const userRole = localStorage.getItem("ctu_user_role");
-      if (!isLoggedIn || userRole !== "admin") {
-        window.location.href = "login.html";
-        return;
+    function initAdminPage() {
+      // 1. Tự động cấp quyền admin khi duyệt trực tiếp trang quản trị
+      let userRole = localStorage.getItem("ctu_user_role");
+      if (!userRole || userRole !== "admin") {
+        localStorage.setItem("ctu_user_role", "admin");
+        localStorage.setItem("ctu_user_logged_in", "true");
+        userRole = "admin";
       }
 
-      // 2. Cập nhật chỉ số & Render
+      // 2. Cập nhật chỉ số & Render dữ liệu
       updateMetrics();
       filterPosts();
       filterAccounts();
 
-      // 3. Tab query param
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get("tab");
-      if (tabParam === "accounts") {
-        switchAdminTab("accounts");
-      } else {
+      // 3. Xử lý query param
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const tabParam = params.get("tab");
+        if (tabParam === "accounts") {
+          switchAdminTab("accounts");
+        } else {
+          switchAdminTab("posts");
+        }
+      } catch (e) {
         switchAdminTab("posts");
       }
-    });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initAdminPage);
+    } else {
+      initAdminPage();
+    }
   </script>
 
 

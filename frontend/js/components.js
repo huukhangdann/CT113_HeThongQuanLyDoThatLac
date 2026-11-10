@@ -2180,24 +2180,732 @@ class AppFooter extends HTMLElement {
 customElements.define("app-header", AppHeader);
 customElements.define("app-footer", AppFooter);
 
-// 7. Ở các ô nhập liệu khi click vào ô thì bắt đầu cho nhập (ví dụ ngày và giờ)
-if (typeof window !== "undefined") {
-  const initDatePickers = () => {
-    document.querySelectorAll('input[type="date"], input[type="time"]').forEach(input => {
-      input.style.cursor = 'pointer';
-      if (!input.dataset.hasPickerHandler) {
-        input.dataset.hasPickerHandler = "true";
-        input.addEventListener('click', function () {
-          if (typeof this.showPicker === 'function') {
-            try { this.showPicker(); } catch (e) { }
+// =========================================================================
+// REUSABLE SEARCHABLE DROPDOWN COMPONENT (Toàn hệ thống CTU Lost & Found)
+// =========================================================================
+
+function removeVietnameseTones(str) {
+  if (!str) return "";
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase();
+}
+
+function makeSearchableDropdown(selectEl) {
+  if (!selectEl || selectEl._searchableDropdownInstance) return;
+  // Bỏ qua nếu select nằm trong custom popover màu sắc hoặc có cờ bỏ qua
+  if (
+    selectEl.closest("#color-filter-wrapper") ||
+    selectEl.dataset.noSearchable === "true" ||
+    selectEl.dataset.customDropdown === "ignore" ||
+    selectEl.classList.contains("no-custom-dropdown")
+  ) {
+    return;
+  }
+
+  // Đánh dấu đã khởi tạo
+  selectEl._searchableDropdownInstance = true;
+
+  // Giữ select gốc trong DOM nhưng ẩn khỏi mắt người dùng
+  selectEl.style.position = "absolute";
+  selectEl.style.opacity = "0";
+  selectEl.style.pointerEvents = "none";
+  selectEl.style.width = "1px";
+  selectEl.style.height = "1px";
+  selectEl.style.margin = "-1px";
+  selectEl.style.clip = "rect(0, 0, 0, 0)";
+  selectEl.tabIndex = -1;
+
+  // Ẩn icon mũi tên mặc định của khung chứa nếu có (để tránh double arrow)
+  if (selectEl.parentElement) {
+    const siblingArrows = selectEl.parentElement.querySelectorAll(
+      ".pointer-events-none, [class*='right-0'] svg, [class*='right-0'] span.material-symbols-outlined"
+    );
+    siblingArrows.forEach((arr) => {
+      if (arr.closest("#color-filter-wrapper")) return;
+      arr.style.display = "none";
+    });
+  }
+
+  // Khung wrapper custom dropdown
+  const wrapper = document.createElement("div");
+  wrapper.className = "ctu-searchable-dropdown-wrapper relative w-full font-sans select-none";
+  wrapper.style.minWidth = "0";
+
+  // Trigger button đồng bộ CSS hệ thống
+  const triggerBtn = document.createElement("button");
+  triggerBtn.type = "button";
+  triggerBtn.className =
+    "ctu-dropdown-trigger w-full flex items-center justify-between pl-3.5 pr-9 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] dark:bg-stone-800/80 dark:hover:bg-stone-800 text-sm text-[#1b1c1b] dark:text-stone-100 rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] dark:focus:border-emerald-500 focus:bg-white dark:focus:bg-stone-800 outline-none cursor-pointer font-medium transition-all text-left shadow-2xs";
+
+  const labelSpan = document.createElement("span");
+  labelSpan.className = "ctu-dropdown-label truncate text-xs sm:text-sm";
+  triggerBtn.appendChild(labelSpan);
+
+  const arrowSpan = document.createElement("span");
+  arrowSpan.className =
+    "material-symbols-outlined text-[18px] text-[#727873] dark:text-stone-400 absolute right-3 pointer-events-none transition-transform duration-200";
+  arrowSpan.textContent = "expand_more";
+  triggerBtn.appendChild(arrowSpan);
+
+  // Popover menu
+  const popover = document.createElement("div");
+  popover.className =
+    "ctu-dropdown-popover hidden absolute left-0 right-0 top-full mt-1.5 z-50 bg-[#fcf9f8] dark:bg-[#1f2125] border border-[#e7e1df] dark:border-stone-700 rounded-xl shadow-xl p-2 space-y-1.5 min-w-[200px] animate-in fade-in zoom-in-95 duration-150";
+
+  // Search input ở trên cùng của popover
+  const searchWrapper = document.createElement("div");
+  searchWrapper.className = "relative px-0.5 pt-0.5";
+  searchWrapper.innerHTML = `
+    <span class="material-symbols-outlined text-[16px] text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
+    <input type="text" class="ctu-dropdown-search w-full pl-8 pr-2.5 py-1.5 text-xs bg-white dark:bg-stone-800 border border-[#e7e1df] dark:border-stone-700 rounded-lg outline-none focus:border-[#35483d] dark:focus:border-emerald-500 text-[#1b1c1c] dark:text-white placeholder-stone-400 font-sans transition-colors" placeholder="Tìm kiếm nhanh..." />
+  `;
+  popover.appendChild(searchWrapper);
+
+  const searchInput = searchWrapper.querySelector("input");
+
+  // Options container
+  const optionsList = document.createElement("div");
+  optionsList.className = "ctu-dropdown-options max-h-56 overflow-y-auto space-y-0.5 text-xs pt-1 custom-scrollbar";
+  popover.appendChild(optionsList);
+
+  const noResults = document.createElement("div");
+  noResults.className = "hidden py-3 text-center text-xs text-stone-400 italic";
+  noResults.textContent = "Không tìm thấy kết quả";
+  optionsList.appendChild(noResults);
+
+  // Chèn wrapper vào DOM cạnh select gốc
+  selectEl.parentNode.insertBefore(wrapper, selectEl.nextSibling);
+  wrapper.appendChild(selectEl);
+  wrapper.appendChild(triggerBtn);
+  wrapper.appendChild(popover);
+
+  function syncOptions() {
+    const oldItems = optionsList.querySelectorAll(".ctu-dropdown-option, .ctu-optgroup-wrapper");
+    oldItems.forEach((el) => el.remove());
+
+    const children = Array.from(selectEl.children);
+    children.forEach((child) => {
+      if (child.tagName === "OPTGROUP") {
+        const grpWrapper = document.createElement("div");
+        grpWrapper.className = "ctu-optgroup-wrapper space-y-0.5";
+
+        const grpLabel = document.createElement("div");
+        grpLabel.className =
+          "ctu-optgroup-label px-2.5 pt-2 pb-0.5 text-[10px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500";
+        grpLabel.textContent = child.label;
+        grpWrapper.appendChild(grpLabel);
+
+        Array.from(child.children).forEach((opt) => {
+          if (opt.tagName === "OPTION") {
+            grpWrapper.appendChild(createOptionElement(opt));
           }
         });
+        optionsList.insertBefore(grpWrapper, noResults);
+      } else if (child.tagName === "OPTION") {
+        optionsList.insertBefore(createOptionElement(child), noResults);
       }
     });
+
+    updateTriggerState();
+  }
+
+  function createOptionElement(opt) {
+    const isSelected = opt.selected;
+    const isOptDisabled = opt.disabled;
+
+    const optEl = document.createElement("div");
+    optEl.className = `ctu-dropdown-option px-3 py-2 rounded-lg cursor-pointer flex items-center justify-between transition-colors ${
+      isOptDisabled
+        ? "opacity-40 cursor-not-allowed pointer-events-none text-stone-400"
+        : "hover:bg-[#f6f3f2] dark:hover:bg-stone-800 text-[#1b1c1c] dark:text-stone-200"
+    } ${
+      isSelected
+        ? "bg-stone-100 dark:bg-stone-800/90 font-bold text-[#1f3227] dark:text-emerald-400"
+        : ""
+    }`;
+    optEl.dataset.value = opt.value;
+
+    const textSpan = document.createElement("span");
+    textSpan.className = "truncate";
+    textSpan.textContent = opt.textContent;
+    optEl.appendChild(textSpan);
+
+    if (isSelected && !isOptDisabled) {
+      const checkIcon = document.createElement("span");
+      checkIcon.className =
+        "material-symbols-outlined text-[15px] text-[#35483d] dark:text-emerald-400 shrink-0 ml-2";
+      checkIcon.textContent = "check";
+      optEl.appendChild(checkIcon);
+    }
+
+    if (!isOptDisabled) {
+      optEl.addEventListener("click", (e) => {
+        e.stopPropagation();
+        selectEl.value = opt.value;
+        selectEl.dispatchEvent(new Event("input", { bubbles: true }));
+        selectEl.dispatchEvent(new Event("change", { bubbles: true }));
+        updateTriggerState();
+        closeMenu();
+      });
+    }
+
+    return optEl;
+  }
+
+  function updateTriggerState() {
+    const selectedOpt = selectEl.options[selectEl.selectedIndex];
+    labelSpan.textContent = selectedOpt ? selectedOpt.textContent : "-- Chọn --";
+
+    if (selectEl.disabled) {
+      triggerBtn.disabled = true;
+      triggerBtn.classList.add(
+        "bg-stone-100",
+        "dark:bg-stone-800/40",
+        "opacity-50",
+        "cursor-not-allowed",
+        "pointer-events-none"
+      );
+      triggerBtn.classList.remove("hover:bg-[#f6f3f2]", "cursor-pointer");
+    } else {
+      triggerBtn.disabled = false;
+      triggerBtn.classList.remove(
+        "bg-stone-100",
+        "dark:bg-stone-800/40",
+        "opacity-50",
+        "cursor-not-allowed",
+        "pointer-events-none"
+      );
+      triggerBtn.classList.add("hover:bg-[#f6f3f2]", "cursor-pointer");
+    }
+
+    optionsList.querySelectorAll(".ctu-dropdown-option").forEach((optEl) => {
+      const isCur = optEl.dataset.value === selectEl.value;
+      if (isCur) {
+        optEl.classList.add("bg-stone-100", "dark:bg-stone-800/90", "font-bold", "text-[#1f3227]", "dark:text-emerald-400");
+        if (!optEl.querySelector(".material-symbols-outlined")) {
+          const chk = document.createElement("span");
+          chk.className = "material-symbols-outlined text-[15px] text-[#35483d] dark:text-emerald-400 shrink-0 ml-2";
+          chk.textContent = "check";
+          optEl.appendChild(chk);
+        }
+      } else {
+        optEl.classList.remove("bg-stone-100", "dark:bg-stone-800/90", "font-bold", "text-[#1f3227]", "dark:text-emerald-400");
+        const chk = optEl.querySelector(".material-symbols-outlined");
+        if (chk) chk.remove();
+      }
+    });
+  }
+
+  function openMenu() {
+    document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
+      if (p !== popover) p.classList.add("hidden");
+    });
+    document.querySelectorAll(".ctu-dropdown-trigger .material-symbols-outlined").forEach((arr) => {
+      arr.classList.remove("rotate-180");
+    });
+
+    popover.classList.remove("hidden");
+    arrowSpan.classList.add("rotate-180");
+    searchInput.value = "";
+    filterOptions("");
+    setTimeout(() => searchInput.focus(), 50);
+  }
+
+  function closeMenu() {
+    popover.classList.add("hidden");
+    arrowSpan.classList.remove("rotate-180");
+  }
+
+  function filterOptions(query) {
+    const q = removeVietnameseTones(query.trim());
+    let matchCount = 0;
+
+    const allOptions = optionsList.querySelectorAll(".ctu-dropdown-option");
+    allOptions.forEach((optEl) => {
+      const text = removeVietnameseTones(optEl.textContent || "");
+      if (!q || text.includes(q)) {
+        optEl.style.display = "";
+        matchCount++;
+      } else {
+        optEl.style.display = "none";
+      }
+    });
+
+    const allGroups = optionsList.querySelectorAll(".ctu-optgroup-wrapper");
+    allGroups.forEach((grp) => {
+      const visible = grp.querySelectorAll('.ctu-dropdown-option:not([style*="display: none"])');
+      grp.style.display = visible.length > 0 ? "" : "none";
+    });
+
+    noResults.classList.toggle("hidden", matchCount > 0);
+  }
+
+  searchInput.addEventListener("input", (e) => {
+    filterOptions(e.target.value);
+  });
+
+  triggerBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (selectEl.disabled) return;
+    if (popover.classList.contains("hidden")) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  selectEl.addEventListener("change", updateTriggerState);
+
+  const observer = new MutationObserver(() => {
+    syncOptions();
+  });
+  observer.observe(selectEl, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["disabled"],
+  });
+
+  syncOptions();
+}
+
+function initSearchableDropdowns() {
+  if (typeof document === "undefined") return;
+  const selects = document.querySelectorAll("select");
+  selects.forEach((sel) => {
+    makeSearchableDropdown(sel);
+  });
+}
+
+// =========================================================================
+// UNIFIED INTERACTIVE CIRCULAR CLOCK TIME PICKER (Toàn hệ thống)
+// =========================================================================
+
+let clockPickerHour = 14;
+let clockPickerMinute = 15;
+let clockPickerMode = "hour"; // "hour" | "minute"
+let isClockDialDragging = false;
+let activeClockTargetInput = null;
+
+function ensureClockPickerModalExists() {
+  if (typeof document === "undefined") return;
+  let modal = document.getElementById("modal-pctsv-clock-picker");
+  if (modal) return modal;
+
+  modal = document.createElement("div");
+  modal.id = "modal-pctsv-clock-picker";
+  modal.className =
+    "hidden fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/50 backdrop-blur-2xs select-none no-print";
+  modal.onclick = function (e) {
+    if (e.target === modal) closePctsvClockPicker();
   };
-  document.addEventListener("DOMContentLoaded", initDatePickers);
-  window.addEventListener("load", initDatePickers);
-  setTimeout(initDatePickers, 500);
+
+  modal.innerHTML = `
+    <div class="bg-white dark:bg-[#1f2125] rounded-3xl border border-stone-200 dark:border-stone-800 shadow-2xl p-5 sm:p-6 w-full max-w-[340px] text-center space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between pb-2 border-b border-stone-100 dark:border-stone-800">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1f3227] dark:text-emerald-400 text-[20px]">schedule</span>
+          <span class="text-xs font-bold text-[#1b1c1c] dark:text-white uppercase tracking-wider">Chọn giờ</span>
+        </div>
+        <button type="button" onclick="closePctsvClockPicker()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-center gap-1.5 py-1">
+        <button type="button" id="clock-btn-hour" onclick="setClockPickerMode('hour')" class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105">
+          14
+        </button>
+        <span class="text-2xl font-black text-stone-400 select-none animate-pulse">:</span>
+        <button type="button" id="clock-btn-minute" onclick="setClockPickerMode('minute')" class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200">
+          00
+        </button>
+      </div>
+
+      <div class="text-[11px] font-medium text-stone-500 dark:text-stone-400">
+        <span id="clock-mode-label">Đang chọn: Giờ (Nhấp hoặc xoay kim để chọn)</span>
+      </div>
+
+      <div class="relative w-[260px] h-[260px] mx-auto rounded-full bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700/80 shadow-inner flex items-center justify-center cursor-pointer select-none touch-none" id="clock-dial-face">
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 260 260">
+          <circle cx="130" cy="130" r="5" fill="#1f3227" class="dark:fill-emerald-400" />
+          <line id="clock-hand-line" x1="130" y1="130" x2="130" y2="34" stroke="#1f3227" stroke-width="2.5" class="dark:stroke-emerald-400" />
+          <circle id="clock-hand-knob" cx="130" cy="34" r="16" fill="#1f3227" fill-opacity="0.95" class="dark:fill-emerald-500" />
+        </svg>
+        <div id="clock-dial-numbers" class="absolute inset-0 pointer-events-none"></div>
+      </div>
+
+      <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1">
+        <button type="button" onclick="setClockPreset(8, 0)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">08:00</button>
+        <button type="button" onclick="setClockPreset(10, 30)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">10:30</button>
+        <button type="button" onclick="setClockPreset(11, 45)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">11:45</button>
+        <button type="button" onclick="setClockPreset(14, 15)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">14:15</button>
+        <button type="button" onclick="setClockPreset(16, 30)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">16:30</button>
+      </div>
+
+      <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closePctsvClockPicker()" class="px-4 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+          Hủy
+        </button>
+        <button type="button" onclick="confirmPctsvClockPicker()" class="px-5 py-2 rounded-xl bg-[#1f3227] hover:bg-[#142018] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white text-xs font-bold shadow transition-colors flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">check</span>
+          <span>Xác nhận</span>
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+}
+
+function openPctsvClockPicker(targetInput = null) {
+  ensureClockPickerModalExists();
+  if (targetInput && targetInput instanceof HTMLElement) {
+    activeClockTargetInput = targetInput;
+  } else if (!activeClockTargetInput) {
+    activeClockTargetInput = document.getElementById("pctsv-time") || document.querySelector('input[type="time"]');
+  }
+
+  const currentVal = activeClockTargetInput?.value?.trim() || "";
+  const match = currentVal.match(/^(\d{1,2})[:h](\d{2})/i);
+  if (match) {
+    clockPickerHour = Math.min(23, Math.max(0, parseInt(match[1], 10)));
+    clockPickerMinute = Math.min(59, Math.max(0, parseInt(match[2], 10)));
+  } else {
+    const now = new Date();
+    clockPickerHour = now.getHours();
+    clockPickerMinute = Math.floor(now.getMinutes() / 5) * 5;
+  }
+
+  clockPickerMode = "hour";
+  updateClockPickerUI();
+  initClockPickerEvents();
+  document.getElementById("modal-pctsv-clock-picker")?.classList.remove("hidden");
+}
+
+function closePctsvClockPicker() {
+  document.getElementById("modal-pctsv-clock-picker")?.classList.add("hidden");
+}
+
+function confirmPctsvClockPicker() {
+  const hh = String(clockPickerHour).padStart(2, "0");
+  const mm = String(clockPickerMinute).padStart(2, "0");
+  const timeStr = `${hh}:${mm}`;
+
+  if (activeClockTargetInput) {
+    activeClockTargetInput.value = timeStr;
+    activeClockTargetInput.dispatchEvent(new Event("input", { bubbles: true }));
+    activeClockTargetInput.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  const pctsvInput = document.getElementById("pctsv-time");
+  if (pctsvInput && activeClockTargetInput === pctsvInput) {
+    pctsvInput.value = timeStr;
+    pctsvInput.dispatchEvent(new Event("input", { bubbles: true }));
+    pctsvInput.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  closePctsvClockPicker();
+}
+
+function setClockPickerMode(mode) {
+  clockPickerMode = mode;
+  updateClockPickerUI();
+}
+
+function setClockPreset(h, m) {
+  clockPickerHour = h;
+  clockPickerMinute = m;
+  updateClockPickerUI();
+}
+
+function updateClockPickerUI() {
+  const hourBtn = document.getElementById("clock-btn-hour");
+  const minuteBtn = document.getElementById("clock-btn-minute");
+  const modeLabel = document.getElementById("clock-mode-label");
+
+  const hhStr = String(clockPickerHour).padStart(2, "0");
+  const mmStr = String(clockPickerMinute).padStart(2, "0");
+
+  if (hourBtn) hourBtn.textContent = hhStr;
+  if (minuteBtn) minuteBtn.textContent = mmStr;
+
+  if (clockPickerMode === "hour") {
+    if (hourBtn) {
+      hourBtn.className =
+        "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105";
+    }
+    if (minuteBtn) {
+      minuteBtn.className =
+        "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200";
+    }
+    if (modeLabel) {
+      modeLabel.textContent = "Đang chọn: Giờ (Nhấp hoặc xoay kim để chọn)";
+    }
+  } else {
+    if (hourBtn) {
+      hourBtn.className =
+        "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200";
+    }
+    if (minuteBtn) {
+      minuteBtn.className =
+        "px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105";
+    }
+    if (modeLabel) {
+      modeLabel.textContent = "Đang chọn: Phút (Nhấp hoặc xoay kim để chọn)";
+    }
+  }
+
+  renderClockDialFace();
+}
+
+function renderClockDialFace() {
+  const numbersContainer = document.getElementById("clock-dial-numbers");
+  const handLine = document.getElementById("clock-hand-line");
+  const handKnob = document.getElementById("clock-hand-knob");
+  if (!numbersContainer || !handLine || !handKnob) return;
+
+  numbersContainer.innerHTML = "";
+  const cx = 130;
+  const cy = 130;
+  let handRadius = 96;
+  let handAngleDeg = 0;
+
+  if (clockPickerMode === "hour") {
+    const isInner = clockPickerHour === 0 || clockPickerHour >= 13;
+    handRadius = isInner ? 62 : 96;
+    const displayH = clockPickerHour % 12;
+    handAngleDeg = (displayH * 30 - 90 + 360) % 360;
+
+    for (let h = 1; h <= 12; h++) {
+      const angle = ((h * 30 - 90) * Math.PI) / 180;
+      const x = cx + 96 * Math.cos(angle);
+      const y = cy + 96 * Math.sin(angle);
+      const isSelected = !isInner && (clockPickerHour === h || (h === 12 && clockPickerHour === 12));
+
+      const numEl = document.createElement("div");
+      numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${
+        isSelected
+          ? "text-white font-bold z-10"
+          : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
+      }`;
+      numEl.style.left = `${x}px`;
+      numEl.style.top = `${y}px`;
+      numEl.textContent = String(h);
+      numEl.onclick = (e) => {
+        e.stopPropagation();
+        clockPickerHour = h;
+        updateClockPickerUI();
+        setTimeout(() => setClockPickerMode("minute"), 200);
+      };
+      numbersContainer.appendChild(numEl);
+    }
+
+    for (let h = 13; h <= 24; h++) {
+      const val = h === 24 ? 0 : h;
+      const angle = ((h * 30 - 90) * Math.PI) / 180;
+      const x = cx + 62 * Math.cos(angle);
+      const y = cy + 62 * Math.sin(angle);
+      const isSelected = isInner && clockPickerHour === val;
+
+      const numEl = document.createElement("div");
+      numEl.className = `absolute w-6 h-6 -ml-3 -mt-3 flex items-center justify-center rounded-full text-[10px] font-medium cursor-pointer select-none transition-colors pointer-events-auto ${
+        isSelected
+          ? "text-white font-bold z-10"
+          : "text-stone-500 dark:text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400"
+      }`;
+      numEl.style.left = `${x}px`;
+      numEl.style.top = `${y}px`;
+      numEl.textContent = val === 0 ? "00" : String(val);
+      numEl.onclick = (e) => {
+        e.stopPropagation();
+        clockPickerHour = val;
+        updateClockPickerUI();
+        setTimeout(() => setClockPickerMode("minute"), 200);
+      };
+      numbersContainer.appendChild(numEl);
+    }
+  } else {
+    handRadius = 96;
+    handAngleDeg = (clockPickerMinute * 6 - 90 + 360) % 360;
+
+    const minuteLabels = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+    minuteLabels.forEach((m) => {
+      const angle = ((m * 6 - 90) * Math.PI) / 180;
+      const x = cx + 96 * Math.cos(angle);
+      const y = cy + 96 * Math.sin(angle);
+      const isSelected = clockPickerMinute === m;
+
+      const numEl = document.createElement("div");
+      numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${
+        isSelected
+          ? "text-white font-bold z-10"
+          : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
+      }`;
+      numEl.style.left = `${x}px`;
+      numEl.style.top = `${y}px`;
+      numEl.textContent = String(m).padStart(2, "0");
+      numEl.onclick = (e) => {
+        e.stopPropagation();
+        clockPickerMinute = m;
+        updateClockPickerUI();
+      };
+      numbersContainer.appendChild(numEl);
+    });
+  }
+
+  const rad = (handAngleDeg * Math.PI) / 180;
+  const targetX = cx + handRadius * Math.cos(rad);
+  const targetY = cy + handRadius * Math.sin(rad);
+
+  handLine.setAttribute("x2", String(targetX));
+  handLine.setAttribute("y2", String(targetY));
+  handKnob.setAttribute("cx", String(targetX));
+  handKnob.setAttribute("cy", String(targetY));
+  handKnob.setAttribute("r", String(handRadius === 62 ? 14 : 16));
+}
+
+function initClockPickerEvents() {
+  const dialEl = document.getElementById("clock-dial-face");
+  if (!dialEl || dialEl._clockPickerInitialized) return;
+  dialEl._clockPickerInitialized = true;
+
+  function handleDialInteraction(e, isRelease = false) {
+    const rect = dialEl.getBoundingClientRect();
+    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0]?.clientY);
+    if (clientX === undefined || clientY === undefined) return;
+
+    const dx = clientX - (rect.left + rect.width / 2);
+    const dy = clientY - (rect.top + rect.height / 2);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const angleDeg = ((Math.atan2(dy, dx) * 180) / Math.PI + 90 + 360) % 360;
+
+    if (clockPickerMode === "hour") {
+      let rawStep = Math.round(angleDeg / 30) % 12;
+      let h12 = rawStep === 0 ? 12 : rawStep;
+      if (dist < 79) {
+        clockPickerHour = h12 === 12 ? 0 : h12 + 12;
+      } else {
+        clockPickerHour = h12;
+      }
+      updateClockPickerUI();
+      if (isRelease) {
+        setTimeout(() => setClockPickerMode("minute"), 200);
+      }
+    } else {
+      let rawMin = Math.round(angleDeg / 6) % 60;
+      clockPickerMinute = rawMin;
+      updateClockPickerUI();
+    }
+  }
+
+  dialEl.addEventListener("pointerdown", (e) => {
+    isClockDialDragging = true;
+    dialEl.setPointerCapture?.(e.pointerId);
+    handleDialInteraction(e, false);
+  });
+
+  dialEl.addEventListener("pointermove", (e) => {
+    if (!isClockDialDragging) return;
+    handleDialInteraction(e, false);
+  });
+
+  const endHandler = (e) => {
+    if (!isClockDialDragging) return;
+    isClockDialDragging = false;
+    handleDialInteraction(e, true);
+  };
+
+  dialEl.addEventListener("pointerup", endHandler);
+  dialEl.addEventListener("pointercancel", endHandler);
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".ctu-searchable-dropdown-wrapper")) {
+      document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
+        p.classList.add("hidden");
+      });
+      document.querySelectorAll(".ctu-dropdown-trigger .material-symbols-outlined").forEach((arr) => {
+        arr.classList.remove("rotate-180");
+      });
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
+        p.classList.add("hidden");
+      });
+      document.querySelectorAll(".ctu-dropdown-trigger .material-symbols-outlined").forEach((arr) => {
+        arr.classList.remove("rotate-180");
+      });
+      closePctsvClockPicker();
+    }
+  });
+}
+
+function initTimeAndDatePickers() {
+  if (typeof document === "undefined") return;
+
+  document.querySelectorAll('input[type="date"]').forEach((input) => {
+    input.style.cursor = "pointer";
+    if (!input.dataset.hasDatePickerHandler) {
+      input.dataset.hasDatePickerHandler = "true";
+      input.addEventListener("click", function () {
+        if (typeof this.showPicker === "function") {
+          try { this.showPicker(); } catch (e) {}
+        }
+      });
+    }
+  });
+
+  const timeInputs = document.querySelectorAll(
+    'input[type="time"], input[data-clock-picker], .clock-picker-input, #pctsv-time'
+  );
+  timeInputs.forEach((input) => {
+    input.style.cursor = "pointer";
+    if (!input.dataset.hasClockPickerHandler) {
+      input.dataset.hasClockPickerHandler = "true";
+      input.addEventListener("click", (e) => {
+        e.preventDefault();
+        openPctsvClockPicker(input);
+      });
+      input.addEventListener("focus", (e) => {
+        e.preventDefault();
+        openPctsvClockPicker(input);
+      });
+    }
+  });
+}
+
+if (typeof window !== "undefined") {
+  window.openPctsvClockPicker = openPctsvClockPicker;
+  window.openSystemClockPicker = openPctsvClockPicker;
+  window.closePctsvClockPicker = closePctsvClockPicker;
+  window.confirmPctsvClockPicker = confirmPctsvClockPicker;
+  window.setClockPickerMode = setClockPickerMode;
+  window.setClockPreset = setClockPreset;
+  window.makeSearchableDropdown = makeSearchableDropdown;
+  window.initSearchableDropdowns = initSearchableDropdowns;
+
+  const runAllComponentsInit = () => {
+    initSearchableDropdowns();
+    initTimeAndDatePickers();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", runAllComponentsInit);
+  } else {
+    runAllComponentsInit();
+  }
+  window.addEventListener("load", runAllComponentsInit);
+  setTimeout(runAllComponentsInit, 400);
 }
 
 if (typeof document !== "undefined") {

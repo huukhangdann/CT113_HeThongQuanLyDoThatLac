@@ -123,7 +123,7 @@
         </div>
 
         <!-- Filters Grid -->
-        <div class="border-t border-[#e7e1df] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        <div class="border-t border-[#e7e1df] grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
           <!-- Category -->
           <div>
             <label for="filter-category"
@@ -280,58 +280,50 @@
             </div>
           </div>
 
-          <!-- Location (Bước 1: Chọn Khoa / Khu - Sau khi chọn mới hiện các bước sau) -->
-          <div>
-            <label for="loc-faculty"
-              class="block text-xs font-semibold text-[#1b1c1b] mb-1.5 flex items-center gap-1.5">
-              <svg class="w-3.5 h-3.5 text-[#727873]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2"></path>
-              </svg>
-              <span>Địa điểm nhặt</span>
-            </label>
-            <div class="relative">
-              <select id="loc-faculty"
-                class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
-                <option value="" selected>Tất cả khu vực tại CTU</option>
-                <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
-                <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
-                <option value="Nhà học C2">Nhà học C2</option>
-                <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
-                <option value="Khoa Kinh tế">Khoa Kinh tế</option>
-                <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
-                <option value="Khoa Luật">Khoa Luật</option>
-                <option value="Khoa Sư phạm">Khoa Sư phạm</option>
-                <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
-                <option value="Khu vực khác">Khu vực khác</option>
-              </select>
-              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <!-- CÁC BƯỚC ĐỊA ĐIỂM TIẾP THEO (Ràng buộc: sau khi chọn khoa tòa nhà thì mới hiện ra chứ không hiện sẵn) -->
-        <div id="loc-cascade-container" class="hidden pt-3 border-t border-[#e7e1df]">
+        <!-- CỤM ĐỊA ĐIỂM NHẶT (3 CỘT ĐỀU NHAU, HIỂN THỊ SẴN, CHỌN TUẦN TỰ) -->
+        <div id="loc-cascade-container" class="pt-3 border-t border-[#e7e1df]">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-semibold text-[#1b1c1b] flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[16px] text-primary">near_me</span>
-              Chi tiết vị trí nhặt (chọn tuần tự):
+              <span class="material-symbols-outlined text-[16px] text-[#35483d]">near_me</span>
+              Địa điểm nhặt (chọn tuần tự):
             </span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl">
-            <!-- Bước 2: Chọn Tầng mấy (Ẩn ban đầu, chỉ hiện sau khi chọn Khoa, không có option hội trường) -->
-            <div id="loc-step-2-wrapper" class="space-y-1 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- 1. Chọn Khoa / Khu (Hiển thị sẵn, enabled) -->
+            <div id="loc-step-1-wrapper" class="space-y-1">
+              <span class="text-[11px] font-medium text-[#727873] block">1. Khoa / Khu vực</span>
+              <div class="relative">
+                <select id="loc-faculty"
+                  class="w-full appearance-none pl-3.5 pr-10 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white outline-none cursor-pointer font-medium">
+                  <option value="" selected>Tất cả khu vực tại CTU</option>
+                  <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
+                  <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
+                  <option value="Nhà học C2">Nhà học C2</option>
+                  <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
+                  <option value="Khoa Kinh tế">Khoa Kinh tế</option>
+                  <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
+                  <option value="Khoa Luật">Khoa Luật</option>
+                  <option value="Khoa Sư phạm">Khoa Sư phạm</option>
+                  <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
+                  <option value="Khu vực khác">Khu vực khác</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Chọn Tầng mấy (Hiển thị sẵn, disabled ban đầu) -->
+            <div id="loc-step-2-wrapper" class="space-y-1">
               <span class="text-[11px] font-medium text-[#727873] block">2. Chọn Tầng mấy</span>
               <div class="relative">
-                <select id="loc-floor"
-                  class="w-full appearance-none px-3 py-2 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-xs text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white outline-none cursor-pointer">
+                <select id="loc-floor" disabled
+                  class="w-full appearance-none pl-3.5 pr-10 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white outline-none cursor-pointer disabled:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed font-medium">
                   <option value="" disabled selected>-- Chọn tầng --</option>
                   <option value="1">Tầng 1</option>
                   <option value="2">Tầng 2</option>
@@ -340,22 +332,22 @@
                   <option value="5">Tầng 5</option>
                   <option value="trệt">Tầng trệt</option>
                 </select>
-                <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-[#727873]">
-                  <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <span class="material-symbols-outlined text-[18px]">expand_more</span>
                 </div>
               </div>
             </div>
 
-            <!-- Bước 3: Chọn Phòng học / Hội trường (Ẩn ban đầu, chỉ hiện sau khi chọn Tầng, trong này có option Hội trường) -->
-            <div id="loc-step-3-wrapper" class="space-y-1 hidden">
+            <!-- 3. Phòng học / Hội trường (Hiển thị sẵn, disabled ban đầu) -->
+            <div id="loc-step-3-wrapper" class="space-y-1">
               <span class="text-[11px] font-medium text-[#727873] block">3. Phòng học / Hội trường</span>
               <div class="relative">
-                <select id="loc-room"
-                  class="w-full appearance-none px-3 py-2 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-xs text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white outline-none cursor-pointer">
+                <select id="loc-room" disabled
+                  class="w-full appearance-none pl-3.5 pr-10 py-2.5 bg-[#fcf9f8] hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] rounded-lg border border-[#e7e1df] focus:border-[#35483d] focus:bg-white outline-none cursor-pointer disabled:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed font-medium">
                   <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
                 </select>
-                <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-[#727873]">
-                  <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
+                  <span class="material-symbols-outlined text-[18px]">expand_more</span>
                 </div>
               </div>
             </div>
@@ -364,7 +356,7 @@
           <!-- Input ẩn lưu giá trị địa điểm đầy đủ để gửi lọc -->
           <input type="hidden" id="filter-location" name="filter-location" value="" />
 
-          <!-- Chỉ ghi là địa điểm là gì không đặt nó trong khối tô màu -->
+          <!-- Tóm tắt địa điểm -->
           <p id="loc-summary" class="hidden text-xs text-[#1b1c1b] font-medium pt-2">
             Địa điểm: <strong id="loc-summary-text" class="text-primary font-bold"></strong>
           </p>
@@ -975,15 +967,21 @@
         locFaculty.addEventListener("change", () => {
           const val = locFaculty.value;
           if (val) {
-            if (locCascadeContainer) locCascadeContainer.classList.remove("hidden");
-            if (locStep2Wrapper) locStep2Wrapper.classList.remove("hidden");
+            if (locFloor) locFloor.disabled = false;
           } else {
-            if (locCascadeContainer) locCascadeContainer.classList.add("hidden");
-            if (locStep2Wrapper) locStep2Wrapper.classList.add("hidden");
+            if (locFloor) {
+              locFloor.selectedIndex = 0;
+              locFloor.disabled = true;
+            }
+            if (locRoom) {
+              locRoom.selectedIndex = 0;
+              locRoom.disabled = true;
+            }
           }
-          if (locFloor) locFloor.selectedIndex = 0;
-          if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
-          if (locRoom) locRoom.selectedIndex = 0;
+          if (locRoom) {
+            locRoom.selectedIndex = 0;
+            locRoom.disabled = true;
+          }
           updateFindLocationSummary();
         });
       }
@@ -992,8 +990,8 @@
         locFloor.addEventListener("change", () => {
           const floor = locFloor.value;
           if (floor) {
-            if (locStep3Wrapper) locStep3Wrapper.classList.remove("hidden");
             if (locRoom) {
+              locRoom.disabled = false;
               locRoom.innerHTML = `
                 <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
                 <optgroup label="Phòng học">
@@ -1015,8 +1013,10 @@
               `;
             }
           } else {
-            if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
-            if (locRoom) locRoom.selectedIndex = 0;
+            if (locRoom) {
+              locRoom.selectedIndex = 0;
+              locRoom.disabled = true;
+            }
           }
           updateFindLocationSummary();
         });
@@ -1030,9 +1030,14 @@
         const form = document.getElementById("search-form");
         if (form) form.reset();
         resetColorFilter();
-        if (locCascadeContainer) locCascadeContainer.classList.add("hidden");
-        if (locStep2Wrapper) locStep2Wrapper.classList.add("hidden");
-        if (locStep3Wrapper) locStep3Wrapper.classList.add("hidden");
+        if (locFloor) {
+          locFloor.selectedIndex = 0;
+          locFloor.disabled = true;
+        }
+        if (locRoom) {
+          locRoom.selectedIndex = 0;
+          locRoom.disabled = true;
+        }
         if (locSummary) locSummary.classList.add("hidden");
         if (filterLocationInput) filterLocationInput.value = "";
       };

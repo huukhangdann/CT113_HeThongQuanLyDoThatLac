@@ -235,6 +235,12 @@
       outline: 2px solid #1f3227;
       outline-offset: 1px;
     }
+
+    /* Triệt tiêu icon mũi tên lặp đôi từ @tailwindcss/forms */
+    select,
+    select.appearance-none {
+      background-image: none !important;
+    }
   </style>
 
   <!-- Shared Global Components & Styles -->
@@ -453,35 +459,94 @@
             </div>
           </div>
 
-          <!-- Màu sắc -->
-          <div class="space-y-1.5">
-            <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 flex items-center gap-1">
+          <!-- Màu sắc (Thiết kế Dropbox Popover chuẩn 100% giống trang tìm đồ find.html) -->
+          <div class="space-y-1.5 relative" id="color-filter-wrapper">
+            <label class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-200 flex items-center gap-1">
               <span class="material-symbols-outlined text-[15px] text-[#727873]">palette</span>
               <span>Màu sắc <span class="text-[#ba1a1a] font-bold">*</span></span>
             </label>
             <input type="hidden" id="primary-color" name="primary-color" value="" required />
 
-            <div class="flex items-center gap-2">
-              <button type="button" id="color-picker-trigger"
-                class="flex-1 h-10 px-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 flex items-center justify-between cursor-pointer hover:bg-stone-50">
-                <div class="flex items-center gap-2 truncate">
-                  <span id="primary-swatch-circle"
-                    class="w-4 h-4 rounded-full border border-stone-300 bg-stone-200 shrink-0"></span>
-                  <span id="primary-color-text" class="text-xs font-medium">Chọn màu sắc</span>
+            <!-- Nút kích hoạt dropdown màu sắc (trigger) -->
+            <button type="button" id="color-picker-trigger"
+              class="w-full flex items-center justify-between px-3.5 py-2.5 bg-white dark:bg-stone-800 hover:bg-[#f6f3f2] dark:hover:bg-stone-700/60 text-sm text-[#1b1c1b] dark:text-stone-100 rounded-xl border border-[#c3c8c2] dark:border-stone-700 focus:border-[#1f3227] transition-all outline-none cursor-pointer font-medium h-10">
+              <div class="flex items-center gap-2 truncate">
+                <span id="primary-swatch-circle"
+                  class="w-4 h-4 rounded-full border border-stone-300 bg-stone-200 shrink-0 shadow-xs"></span>
+                <span id="primary-color-text" class="truncate text-xs font-medium">Chọn màu sắc</span>
+              </div>
+              <span id="color-trigger-arrow"
+                class="material-symbols-outlined text-[18px] text-[#727873] transition-transform shrink-0">expand_more</span>
+            </button>
+
+            <!-- POPOVER CARD MÀU SẮC (Chỉ hiện HEX, nền đồng bộ trang web - Giống 100% find.html) -->
+            <div id="color-picker-popover"
+              class="hidden absolute left-0 sm:right-0 sm:left-auto top-full mt-2 z-40 w-84 max-w-[92vw] bg-[#fcf9f8] border border-[#e7e1df] rounded-2xl p-4 shadow-xl space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-[#e7e1df]">
+                <span class="text-xs font-bold text-[#1b1c1b] uppercase tracking-wider flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px] text-[#35483d]">palette</span>
+                  Màu chủ đạo
+                </span>
+                <button type="button" id="color-popover-close-btn"
+                  class="text-[#727873] hover:text-[#1b1c1b] p-1 rounded-full hover:bg-[#f6f3f2] cursor-pointer transition-colors"
+                  title="Đóng">
+                  <span class="material-symbols-outlined text-[18px]">close</span>
+                </button>
+              </div>
+
+              <!-- Khung swatch màu lớn ở trên -->
+              <div id="filter-color-swatch"
+                class="h-20 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner bg-[#f6f3f2]"
+                title="Nhấp để chọn màu chủ đạo">
+                <span id="filter-swatch-placeholder"
+                  class="text-xs text-[#777771] font-medium flex items-center gap-1.5 select-none">
+                  <span class="material-symbols-outlined text-[18px] text-[#35483d]">palette</span>
+                  <span>Nhấp để chọn màu</span>
+                </span>
+                <div id="filter-swatch-edit-icon"
+                  class="hidden absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white items-center justify-center pointer-events-none group-hover:flex">
+                  <span class="material-symbols-outlined text-[13px]">edit</span>
                 </div>
-                <span class="material-symbols-outlined text-[18px] text-[#727873]">expand_more</span>
-              </button>
+              </div>
+
+              <!-- Ẩn input color -->
               <input type="color" id="primary-color-input" class="sr-only" value="#35483d" />
 
-              <button type="button" id="add-sec-color-btn" title="Thêm màu phụ"
-                class="h-10 px-2.5 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs font-medium text-[#1b1c1c] dark:text-stone-200 flex items-center gap-1 cursor-pointer">
-                <span class="material-symbols-outlined text-[16px]">add</span>
-                <span class="hidden sm:inline">Phụ</span>
-              </button>
-            </div>
+              <!-- Bảng thông số: CHỈ HIỆN CHỈ SỐ HEX -->
+              <div
+                class="flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] rounded-lg border border-[#e7e1df]">
+                <span class="text-[#35483d] font-bold text-xs uppercase tracking-wider">HEX</span>
+                <span id="filter-hex-val" class="text-[#1b1c1b] font-bold tracking-wider text-sm">Chưa chọn</span>
+              </div>
 
-            <!-- Chip màu phụ -->
-            <div id="sec-colors-container" class="flex flex-wrap gap-1.5 pt-1"></div>
+              <!-- Thêm màu phụ (ràng buộc chọn xong màu trước mới cộng tiếp) -->
+              <div class="pt-2 border-t border-[#e7e1df]">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] font-semibold text-[#1b1c1b]">Màu phụ (tối đa 3 màu):</span>
+                  <button type="button" id="add-sec-color-btn" disabled
+                    class="text-xs font-semibold text-[#35483d] hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:no-underline"
+                    title="Vui lòng chọn Màu chủ đạo trước">
+                    <span class="material-symbols-outlined text-[15px]">add_circle</span>
+                    <span>Thêm màu phụ</span>
+                  </button>
+                </div>
+
+                <!-- Container các card màu phụ bên trong dropbox -->
+                <div id="sec-colors-container" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar"></div>
+              </div>
+
+              <!-- Nút hành động trong popover -->
+              <div class="flex items-center justify-between pt-2 border-t border-[#e7e1df] gap-2">
+                <button type="button" id="color-reset-btn"
+                  class="px-2.5 py-1.5 text-xs text-[#727873] hover:text-[#1b1c1b] hover:bg-[#f6f3f2] rounded-lg transition-colors cursor-pointer font-medium">
+                  Đặt lại
+                </button>
+                <button type="button" id="color-apply-btn"
+                  class="px-3.5 py-1.5 bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
+                  Áp dụng
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -506,7 +571,7 @@
         <div class="space-y-1.5">
           <div class="flex items-center justify-between">
             <label for="item-description" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
-              Mô tả chi tiết đặc điểm nhận dạng <span class="text-[#ba1a1a] font-bold">*</span>
+              Mô tả chi tiết đặc điểm nhận dạng
             </label>
             <div class="flex items-center gap-2">
               <span
@@ -517,7 +582,7 @@
               <span id="char-counter" class="text-[11px] text-[#727873]">0/500 ký tự</span>
             </div>
           </div>
-          <textarea id="item-description" rows="4" maxlength="500" required
+          <textarea id="item-description" rows="4" maxlength="500"
             class="w-full p-3.5 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#1f3227] leading-relaxed resize-none"
             placeholder="Ghi rõ màu sắc, kích thước, thương hiệu, tình trạng đồ vật..."></textarea>
         </div>
@@ -753,6 +818,57 @@
           </p>
         </div>
 
+        <!-- Thông tin người nhặt liên hệ (3 trường theo chuẩn CDM NguoiDung) -->
+        <div class="space-y-3 pt-3 border-t border-[#f0eded] dark:border-stone-800">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px] text-[#1f3227] dark:text-emerald-400">contact_phone</span>
+            <h3 class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200 uppercase tracking-wider">
+              Thông tin người nhặt liên hệ
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- 1. Số điện thoại (Bắt buộc) -->
+            <div class="space-y-1.5">
+              <label for="contact-phone" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+                Số điện thoại liên hệ <span class="text-[#ba1a1a] font-bold">*</span>
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined text-[18px] text-[#727873] absolute left-3 top-2.5 pointer-events-none">call</span>
+                <input type="tel" id="contact-phone" name="contact-phone" required pattern="[0-9]{10,11}"
+                  class="w-full h-10 pl-9 pr-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#1f3227]"
+                  placeholder="VD: 0912 345 678" />
+              </div>
+            </div>
+
+            <!-- 2. Họ và tên người nhặt (Tùy chọn) -->
+            <div class="space-y-1.5">
+              <label for="contact-name" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+                Họ và tên
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined text-[18px] text-[#727873] absolute left-3 top-2.5 pointer-events-none">person</span>
+                <input type="text" id="contact-name" name="contact-name"
+                  class="w-full h-10 pl-9 pr-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#1f3227]"
+                  placeholder="VD: Nguyễn Hoàng Long" />
+              </div>
+            </div>
+
+            <!-- 3. Địa chỉ Email (Tùy chọn) -->
+            <div class="space-y-1.5">
+              <label for="contact-email" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+                Địa chỉ Email
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined text-[18px] text-[#727873] absolute left-3 top-2.5 pointer-events-none">mail</span>
+                <input type="email" id="contact-email" name="contact-email"
+                  class="w-full h-10 pl-9 pr-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs sm:text-sm text-[#1b1c1c] dark:text-stone-100 placeholder:text-stone-400 focus:border-[#1f3227]"
+                  placeholder="VD: sinhvien@student.ctu.edu.vn" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Điều hướng Step 4: Hoàn tất đăng tin -->
         <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
           <button type="button" id="btn-back-step-4"
@@ -878,8 +994,8 @@
 
               <!-- Mô tả chi tiết -->
               <div>
-                <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Mô tả chi tiết đặc điểm nhận dạng <span class="text-rose-600">*</span></label>
-                <textarea rows="3" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs leading-relaxed focus:outline-none focus:border-[#35483d] resize-none">Nhặt được tại dãy bàn tự học Tầng 2 Nhà C1. Ví còn nguyên vẹn, bên trong có một số thẻ cá nhân và giấy tờ sinh viên CTU.</textarea>
+                <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Mô tả chi tiết đặc điểm nhận dạng</label>
+                <textarea rows="3" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs leading-relaxed focus:outline-none focus:border-[#35483d] resize-none">Nhặt được tại dãy bàn tự học Tầng 2 Nhà C1. Ví còn nguyên vẹn, bên trong có một số thẻ cá nhân và giấy tờ sinh viên CTU.</textarea>
               </div>
 
               <!-- Địa điểm nhặt (3 cấp) -->
@@ -939,6 +1055,31 @@
                   <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Câu hỏi bảo mật xác minh chủ sở hữu <span class="text-rose-600">*</span></label>
                   <input type="text" value="Mã số in trên thẻ sinh viên kẹp trong ví là gì?" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" />
                 </div>
+
+                <!-- Thông tin người nhặt liên hệ (3 trường theo CDM) -->
+                <div class="space-y-3 pt-2 border-t border-stone-200 dark:border-stone-700">
+                  <div>
+                    <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Số điện thoại liên hệ <span class="text-rose-600">*</span></label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3 top-2.5 text-[#797675] text-[18px]">call</span>
+                      <input type="tel" value="0912345678" required pattern="[0-9]{10,11}" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" placeholder="VD: 0912 345 678" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Họ và tên người nhặt</label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3 top-2.5 text-[#797675] text-[18px]">person</span>
+                      <input type="text" value="Nguyễn Hoàng Long" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" placeholder="VD: Nguyễn Hoàng Long" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Địa chỉ Email</label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3 top-2.5 text-[#797675] text-[18px]">mail</span>
+                      <input type="email" value="longb2105432@student.ctu.edu.vn" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]" placeholder="VD: sinhvien@student.ctu.edu.vn" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -947,7 +1088,7 @@
               <div>
                 <div class="flex items-center justify-between mb-1.5">
                   <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Hình ảnh đồ vật nhặt được <span class="text-rose-600">*</span></label>
-                  <span class="text-[11px] text-[#797675]">Tối đa 5 ảnh</span>
+                  <span class="text-[11px] text-[#797675]">Từ 1 đến 4 ảnh</span>
                 </div>
                 
                 <!-- Khung ảnh chính đã có ảnh sẵn -->
@@ -1147,9 +1288,17 @@
       const btnNext3 = document.getElementById("btn-next-step-3");
       const btnBack4 = document.getElementById("btn-back-step-4");
 
-      // Validate & Sang Step 2
+      // Validate & Sang Step 2 (Ràng buộc ảnh từ 1 đến 4 ảnh cho báo nhặt)
       if (btnNext1) {
         btnNext1.addEventListener("click", () => {
+          if (uploadedFiles.length < 1) {
+            alert("Vui lòng tải lên tối thiểu 1 hình ảnh của đồ vật nhặt được.");
+            return;
+          }
+          if (uploadedFiles.length > 4) {
+            alert("Chỉ được tải lên tối đa 4 hình ảnh.");
+            return;
+          }
           goToStep(2);
         });
       }
@@ -1181,11 +1330,7 @@
             title.focus();
             return;
           }
-          if (!desc.value.trim()) {
-            alert("Vui lòng nhập Mô tả chi tiết.");
-            desc.focus();
-            return;
-          }
+          // Mô tả chi tiết không bắt buộc nhập theo yêu cầu mới
           goToStep(3);
         });
       }
@@ -1261,8 +1406,12 @@
       };
 
       const handleFiles = (files) => {
-        Array.from(files).forEach(file => {
-          if (file.type.startsWith("image/") && uploadedFiles.length < 4) {
+        const imageFiles = Array.from(files).filter(f => f.type.startsWith("image/"));
+        if (uploadedFiles.length + imageFiles.length > 4) {
+          alert("Chỉ được tải lên tối đa 4 hình ảnh.");
+        }
+        imageFiles.forEach(file => {
+          if (uploadedFiles.length < 4) {
             const reader = new FileReader();
             reader.onload = (e) => {
               if (uploadedFiles.length < 4) {
@@ -1310,65 +1459,223 @@
         });
       });
 
-      // 4. Logic Step 2: Bộ đếm ký tự & Chọn màu
-      const descInput = document.getElementById("item-description");
-      const charCounter = document.getElementById("char-counter");
-      if (descInput && charCounter) {
-        descInput.addEventListener("input", (e) => {
-          charCounter.textContent = `${e.target.value.length}/500 ký tự`;
-        });
-      }
-
+      // 4. Logic Step 2: Bộ đếm ký tự & Chọn màu (Dropbox Popover giống 100% find.html)
       const colorPickerTrigger = document.getElementById("color-picker-trigger");
+      const colorTriggerArrow = document.getElementById("color-trigger-arrow");
+      const colorPickerPopover = document.getElementById("color-picker-popover");
+      const colorPopoverCloseBtn = document.getElementById("color-popover-close-btn");
       const primaryColorInput = document.getElementById("primary-color-input");
       const primaryColorHidden = document.getElementById("primary-color");
       const primaryColorText = document.getElementById("primary-color-text");
       const primarySwatchCircle = document.getElementById("primary-swatch-circle");
+      const filterColorSwatch = document.getElementById("filter-color-swatch");
+      const filterSwatchPlaceholder = document.getElementById("filter-swatch-placeholder");
+      const filterSwatchEditIcon = document.getElementById("filter-swatch-edit-icon");
+      const filterHexVal = document.getElementById("filter-hex-val");
       const addSecColorBtn = document.getElementById("add-sec-color-btn");
       const secColorsContainer = document.getElementById("sec-colors-container");
-      let secColors = [];
+      const colorResetBtn = document.getElementById("color-reset-btn");
+      const colorApplyBtn = document.getElementById("color-apply-btn");
 
-      if (colorPickerTrigger && primaryColorInput) {
-        colorPickerTrigger.addEventListener("click", () => primaryColorInput.click());
-        primaryColorInput.addEventListener("input", (e) => {
-          const hex = e.target.value.toUpperCase();
-          primaryColorHidden.value = hex;
-          primaryColorText.textContent = hex;
-          primarySwatchCircle.style.backgroundColor = hex;
+      let currentPrimaryHex = null;
+      let secColors = []; // [{ id, hex, isChosen }]
+
+      const toggleColorPopover = (open) => {
+        if (!colorPickerPopover) return;
+        const isHidden = colorPickerPopover.classList.contains("hidden");
+        const shouldOpen = open !== undefined ? open : isHidden;
+        if (shouldOpen) {
+          colorPickerPopover.classList.remove("hidden");
+          if (colorTriggerArrow) colorTriggerArrow.classList.add("rotate-180");
+        } else {
+          colorPickerPopover.classList.add("hidden");
+          if (colorTriggerArrow) colorTriggerArrow.classList.remove("rotate-180");
+        }
+      };
+
+      if (colorPickerTrigger) {
+        colorPickerTrigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleColorPopover();
         });
       }
+
+      if (colorPopoverCloseBtn) {
+        colorPopoverCloseBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleColorPopover(false);
+        });
+      }
+
+      if (colorPickerPopover) {
+        colorPickerPopover.addEventListener("click", (e) => e.stopPropagation());
+      }
+
+      document.addEventListener("click", () => {
+        if (colorPickerPopover && !colorPickerPopover.classList.contains("hidden")) {
+          toggleColorPopover(false);
+        }
+      });
+
+      if (filterColorSwatch && primaryColorInput) {
+        filterColorSwatch.addEventListener("click", () => primaryColorInput.click());
+        primaryColorInput.addEventListener("input", (e) => {
+          const hex = e.target.value.toUpperCase();
+          currentPrimaryHex = hex;
+          filterColorSwatch.style.backgroundColor = hex;
+          if (filterSwatchPlaceholder) filterSwatchPlaceholder.classList.add("hidden");
+          if (filterSwatchEditIcon) filterSwatchEditIcon.classList.remove("hidden");
+          if (filterHexVal) filterHexVal.textContent = hex;
+          updateAddSecBtnState();
+          syncTriggerDisplay();
+        });
+      }
+
+      const updateAddSecBtnState = () => {
+        if (!addSecColorBtn) return;
+        if (!currentPrimaryHex) {
+          addSecColorBtn.disabled = true;
+          addSecColorBtn.title = "Vui lòng chọn Màu chủ đạo trước";
+          return;
+        }
+        if (secColors.length >= 3) {
+          addSecColorBtn.disabled = true;
+          addSecColorBtn.title = "Đã đạt tối đa 3 màu phụ";
+          return;
+        }
+        if (secColors.length > 0) {
+          const last = secColors[secColors.length - 1];
+          if (!last.isChosen) {
+            addSecColorBtn.disabled = true;
+            addSecColorBtn.title = `Vui lòng chọn Màu phụ ${secColors.length} trước khi thêm`;
+            return;
+          }
+        }
+        addSecColorBtn.disabled = false;
+        addSecColorBtn.title = "Thêm màu phụ";
+      };
 
       const renderSecColors = () => {
         if (!secColorsContainer) return;
         secColorsContainer.innerHTML = "";
-        secColors.forEach((color, idx) => {
-          const chip = document.createElement("div");
-          chip.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-[11px] font-mono";
-          chip.innerHTML = `
-            <span class="w-2.5 h-2.5 rounded-full border border-stone-300" style="background-color: ${color}"></span>
-            <span>${color}</span>
-            <button type="button" class="remove-sec-col text-stone-400 hover:text-red-600 p-0.5 cursor-pointer" title="Xóa màu này">
-              <span class="material-symbols-outlined text-[13px]">close</span>
-            </button>
+        secColors.forEach((sec, idx) => {
+          const card = document.createElement("div");
+          card.className = "bg-[#fcf9f8] dark:bg-stone-800/60 border border-[#e7e1df] dark:border-stone-700 rounded-xl p-2.5 shadow-sm relative";
+          const hexText = sec.isChosen ? sec.hex : "Chưa chọn";
+          const swatchBg = sec.isChosen ? sec.hex : "#f6f3f2";
+
+          card.innerHTML = `
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-semibold text-[#1b1c1c] dark:text-stone-200">Màu phụ ${idx + 1}</span>
+              <button type="button" class="remove-sec-col text-[#727873] hover:text-red-600 p-0.5 cursor-pointer" title="Xóa màu này">
+                <span class="material-symbols-outlined text-[15px]">close</span>
+              </button>
+            </div>
+            <div class="sec-swatch h-10 w-full rounded-lg cursor-pointer border border-[#e7e1df] dark:border-stone-700 flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] transition-transform" style="background-color: ${swatchBg}">
+              <span class="sec-placeholder text-[10px] text-[#727873] font-medium flex items-center gap-1 select-none" style="display: ${sec.isChosen ? 'none' : 'flex'}">
+                <span class="material-symbols-outlined text-[14px] text-[#35483d]">palette</span>
+                <span>Nhấp chọn màu</span>
+              </span>
+              <div class="sec-edit-icon ${sec.isChosen ? '' : 'hidden'} absolute top-1 right-1 w-4 h-4 rounded-full bg-black/60 text-white flex items-center justify-center pointer-events-none">
+                <span class="material-symbols-outlined text-[10px]">edit</span>
+              </div>
+            </div>
+            <input type="color" class="sec-input sr-only" value="${sec.hex || "#3b82f6"}" />
+            <div class="mt-1.5 flex items-center justify-between font-mono py-1 px-2 bg-[#f6f3f2] dark:bg-stone-900/60 rounded border border-[#e7e1df] dark:border-stone-700 text-[10px]">
+              <span class="text-[#35483d] dark:text-emerald-400 font-bold">HEX</span>
+              <span class="sec-hex-val text-[#1b1c1b] dark:text-stone-200 font-bold">${hexText}</span>
+            </div>
           `;
-          chip.querySelector(".remove-sec-col").addEventListener("click", () => {
+
+          const swatch = card.querySelector(".sec-swatch");
+          const input = card.querySelector(".sec-input");
+          const rmBtn = card.querySelector(".remove-sec-col");
+          const hexValSpan = card.querySelector(".sec-hex-val");
+          const placeholder = swatch.querySelector(".sec-placeholder");
+          const editIcon = swatch.querySelector(".sec-edit-icon");
+
+          swatch.addEventListener("click", () => input.click());
+
+          input.addEventListener("input", (e) => {
+            const hex = e.target.value.toUpperCase();
+            sec.hex = hex;
+            sec.isChosen = true;
+            swatch.style.backgroundColor = hex;
+            if (placeholder) placeholder.style.display = "none";
+            if (editIcon) editIcon.classList.remove("hidden");
+            if (hexValSpan) hexValSpan.textContent = hex;
+            updateAddSecBtnState();
+            syncTriggerDisplay();
+          });
+
+          rmBtn.addEventListener("click", () => {
             secColors.splice(idx, 1);
             renderSecColors();
+            updateAddSecBtnState();
+            syncTriggerDisplay();
           });
-          secColorsContainer.appendChild(chip);
+
+          secColorsContainer.appendChild(card);
         });
+        updateAddSecBtnState();
       };
 
       if (addSecColorBtn) {
         addSecColorBtn.addEventListener("click", () => {
-          if (secColors.length >= 3) {
-            alert("Tối đa 3 màu phụ.");
-            return;
-          }
-          const defaultSecs = ["#3B82F6", "#EF4444", "#F59E0B", "#10B981", "#8B5CF6"];
-          const newColor = defaultSecs[secColors.length % defaultSecs.length];
-          secColors.push(newColor);
+          if (!currentPrimaryHex || secColors.length >= 3) return;
+          if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) return;
+          secColors.push({
+            id: Date.now() + Math.random(),
+            hex: null,
+            isChosen: false
+          });
           renderSecColors();
+        });
+      }
+
+      const syncTriggerDisplay = () => {
+        if (!currentPrimaryHex) {
+          if (primarySwatchCircle) {
+            primarySwatchCircle.style.backgroundColor = "#e2e8f0";
+            primarySwatchCircle.style.borderColor = "#cbd5e1";
+          }
+          if (primaryColorText) primaryColorText.textContent = "Chọn màu sắc";
+          if (primaryColorHidden) primaryColorHidden.value = "";
+        } else {
+          if (primarySwatchCircle) {
+            primarySwatchCircle.style.backgroundColor = currentPrimaryHex;
+            primarySwatchCircle.style.borderColor = "rgba(0,0,0,0.2)";
+          }
+          const chosenSecCount = secColors.filter(s => s.isChosen).length;
+          const label = chosenSecCount > 0 ? `${currentPrimaryHex} (+${chosenSecCount})` : currentPrimaryHex;
+          if (primaryColorText) primaryColorText.textContent = label;
+          if (primaryColorHidden) primaryColorHidden.value = currentPrimaryHex;
+        }
+      };
+
+      const resetColorPicker = () => {
+        currentPrimaryHex = null;
+        secColors = [];
+        if (filterColorSwatch) filterColorSwatch.style.backgroundColor = "#f6f3f2";
+        if (filterSwatchPlaceholder) filterSwatchPlaceholder.classList.remove("hidden");
+        if (filterSwatchEditIcon) filterSwatchEditIcon.classList.add("hidden");
+        if (filterHexVal) filterHexVal.textContent = "Chưa chọn";
+        if (secColorsContainer) secColorsContainer.innerHTML = "";
+        updateAddSecBtnState();
+        syncTriggerDisplay();
+      };
+
+      if (colorResetBtn) {
+        colorResetBtn.addEventListener("click", () => {
+          resetColorPicker();
+          toggleColorPopover(false);
+        });
+      }
+
+      if (colorApplyBtn) {
+        colorApplyBtn.addEventListener("click", () => {
+          syncTriggerDisplay();
+          toggleColorPopover(false);
         });
       }
 
@@ -1476,6 +1783,18 @@
       if (foundForm) {
         foundForm.addEventListener("submit", (e) => {
           e.preventDefault();
+          const phoneInput = document.getElementById("contact-phone");
+          if (!phoneInput || !phoneInput.value.trim()) {
+            alert("Vui lòng nhập Số điện thoại liên hệ.");
+            if (phoneInput) phoneInput.focus();
+            return;
+          }
+          const cleanPhone = phoneInput.value.trim().replace(/\s+/g, "");
+          if (!/^[0-9]{10,11}$/.test(cleanPhone)) {
+            alert("Số điện thoại không hợp lệ. Vui lòng nhập 10-11 chữ số.");
+            phoneInput.focus();
+            return;
+          }
           if (successModal) {
             successModal.classList.remove("hidden");
           }
