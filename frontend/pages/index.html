@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <link href="../css/index.css" rel="stylesheet" />
+  <link href="../mascot/mascot.css" rel="stylesheet" />
 
   <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script> -->
   <script>
@@ -53,6 +54,23 @@
     app-header header {
       border-bottom: none !important;
     }
+  
+    /* Mascot con cú tại vị trí trung tâm mặt bìa trước theo đúng hình minh họa */
+    .dossier-mascot-wrapper .ctu-mascot-standalone {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dossier-mascot-wrapper .ctu-mascot-btn {
+      width: clamp(200px, 24vw, 260px);
+      height: clamp(200px, 24vw, 260px);
+      max-width: 260px;
+      max-height: 260px;
+      filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45));
+    }
   </style>
 
   <script src="../js/main.js"></script>
@@ -75,215 +93,322 @@
       </h1>
     </section>
 
-    <!-- Actions Section with Enhanced Hover Effects -->
-    <section class="w-full relative">
-      <div
-        class="relative w-full px-4 sm:px-10 -mb-4 z-0 pointer-events-none select-none flex justify-center overflow-visible">
-        <div class="relative w-[92%] sm:w-[86%] max-w-[960px] h-14 sm:h-16 flex items-end justify-center">
-          <div
-            class="absolute bottom-0 w-full h-8 bg-[#0c140e] rounded-t-2xl border-t border-x border-[#1a281e] shadow-[0_-8px_20px_rgba(0,0,0,0.5)] z-0">
+    <!-- ==================== HERO BANNER: TỆP HỒ SƠ 2 NỬA CTU ==================== -->
+    <section id="ctu-dossier-banner" class="w-full relative pt-36 sm:pt-44 pb-10 select-none max-w-5xl mx-auto px-3 sm:px-4" style="perspective: 1200px;">
+      <!-- GSAP Library -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+      <script src="../mascot/mascot.js"></script>
+
+      <!-- Khung bìa sơ mi 3D -->
+      <div id="dossier-folder" class="relative w-full rounded-[28px] transition-colors duration-300" style="transform-style: preserve-3d;">
+        
+        <!-- 1. BÌA SAU CỦA TỆP HỒ SƠ (BACK COVER) -->
+        <div class="dossier-back-cover relative w-full rounded-[28px] overflow-visible shadow-2xl border transition-colors duration-300"
+             style="background: var(--theme-accent, #1f3227); border-color: var(--theme-border, rgba(255,255,255,0.2)); min-height: 520px; padding: 24px 16px 28px 16px;">
+          
+          <!-- Nẹp tai giấy phía sau -->
+          <div class="absolute -top-3 left-[16%] w-36 sm:w-48 h-5 rounded-t-xl opacity-50 pointer-events-none transition-colors duration-300"
+               style="background: var(--theme-bg-header, #f7f6f2); border-top: 1px solid var(--theme-border, rgba(255,255,255,0.3)); border-left: 1px solid var(--theme-border, rgba(255,255,255,0.3)); border-right: 1px solid var(--theme-border, rgba(255,255,255,0.3));">
+          </div>
+          <div class="absolute -top-2 right-[20%] w-40 sm:w-52 h-4 rounded-t-xl opacity-35 pointer-events-none transition-colors duration-300"
+               style="background: var(--theme-bg-card, #ffffff); border-top: 1px solid var(--theme-border, rgba(255,255,255,0.2)); border-left: 1px solid var(--theme-border, rgba(255,255,255,0.2)); border-right: 1px solid var(--theme-border, rgba(255,255,255,0.2));">
           </div>
 
-          <div
-            class="absolute bottom-1 left-[14%] sm:left-[18%] w-[68%] sm:w-[62%] h-11 sm:h-12 rounded-t-md bg-gradient-to-r from-[#ece5d4] via-[#f7f2e7] to-[#ede7d8] border-t border-x border-[#c9beaa] shadow-[0_-4px_12px_rgba(0,0,0,0.18)] transform -rotate-[1.2deg] origin-bottom-left z-1 overflow-hidden opacity-95">
-            <div
-              class="absolute inset-0 opacity-20 bg-[radial-gradient(#877b63_1px,transparent_1px)] [background-size:6px_6px]">
-            </div>
-            <div
-              class="absolute top-1.5 left-4 right-4 h-[2px] bg-gradient-to-r from-transparent via-[#b5a78d] to-transparent opacity-60">
-            </div>
-            <div class="absolute top-3 left-6 right-6 flex items-center justify-between px-3">
-              <div class="w-12 h-1.5 rounded-full bg-[#d6ccb8] border border-[#beb39c]/60 ml-auto"></div>
-            </div>
-            <div class="absolute top-0 right-12 w-6 h-3 rounded-b-full border-b border-x border-[#c2b59e] bg-[#fbf8f1]">
-            </div>
-          </div>
+          <!-- 2. TỜ ĐƠN 2 NỬA TRỒI LÊN ĐẾN ĐƯỜNG KẺ XANH DƯƠNG (EMERGED FORM SHEET) -->
+          <div id="ctu-dossier-paper" class="relative w-full rounded-2xl shadow-2xl overflow-hidden border cursor-pointer transition-shadow z-10" style="border-color: var(--theme-border, rgba(0,0,0,0.15)); background: var(--theme-bg-card, #ffffff); min-height: 480px; transform-origin: center bottom; will-change: transform;">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 relative">
+              
+              <!-- NỬA TRÁI: BÁO NHẶT ĐỒ -->
+              <a href="post-found.html"
+                 class="lg:col-span-6 flex flex-col justify-between p-6 sm:p-8 relative group/found no-underline block text-white transition-opacity"
+                 style="background: var(--theme-accent, #1f3227);">
+                
+                <div class="flex flex-col gap-4">
+                  <!-- HÀNG ĐỈNH: HUY HIỆU (TRÁI) & NÚT ĐĂNG NGAY (GÓC PHẢI - Ô MÀU XANH LÁ) -->
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase shadow-sm text-white"
+                          style="background: rgba(255,255,255,0.12); border: 1px solid var(--theme-border, rgba(255,255,255,0.25));">
+                      <span class="material-symbols-outlined text-sm">volunteer_activism</span>
+                      <span>TIẾP NHẬN ĐỒ RƠI</span>
+                    </span>
 
-          <div
-            class="absolute bottom-1.5 right-[10%] sm:right-[15%] w-[58%] sm:w-[54%] h-11 sm:h-13 rounded-t-md bg-gradient-to-r from-[#d1e4d8] via-[#e2efe7] to-[#cee2d5] border-t border-x border-[#9bb7a4] shadow-[0_-6px_14px_rgba(15,35,22,0.22)] transform rotate-[1.6deg] origin-bottom-right z-2 overflow-hidden">
-            <div
-              class="absolute inset-0 opacity-25 bg-[radial-gradient(#35483d_1px,transparent_1px)] [background-size:8px_8px]">
-            </div>
-            <div
-              class="absolute top-2 left-6 w-5 h-5 rounded-full border border-[#86a892]/70 bg-white/40 shadow-inner flex items-center justify-center backdrop-blur-[1px]">
-              <div class="w-2.5 h-2.5 rounded-full border border-dashed border-[#557b63]/60"></div>
-            </div>
-            <div class="absolute top-2 left-14 right-8 flex items-center justify-between">
-              <div class="w-12 h-[2px] bg-[#6d967c]/40"></div>
-            </div>
-            <div
-              class="absolute top-1 left-2 right-2 h-[1px] bg-gradient-to-r from-transparent via-[#769b82] to-transparent opacity-70">
-            </div>
-          </div>
+                    <!-- NÚT 'ĐĂNG NGAY' DỜI LÊN GÓC PHẢI THEO Ô XANH LÁ -->
+                    <div class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold shadow-md border transition-all duration-200 group-hover/found:scale-105 active:scale-95"
+                         style="background-color: var(--theme-bg-card, #ffffff); color: var(--theme-accent, #1f3227); border-color: var(--theme-border, rgba(255,255,255,0.35));">
+                      <span>Đăng ngay</span>
+                      <span class="material-symbols-outlined text-sm">add</span>
+                    </div>
+                  </div>
 
-          <div
-            class="absolute bottom-0 left-[8%] sm:left-[11%] right-[8%] sm:right-[11%] h-9 sm:h-11 rounded-t-md bg-gradient-to-r from-[#c0dcc9] via-[#d6ebd9] to-[#bfdcc8] border-t border-x border-[#83ab90] shadow-[0_-8px_18px_rgba(10,28,17,0.28)] transform -rotate-[0.4deg] z-3 overflow-hidden">
-            <div
-              class="absolute inset-0 opacity-15 bg-[radial-gradient(#1f3a2b_1px,transparent_1px)] [background-size:5px_5px]">
-            </div>
-            <div
-              class="absolute top-1 left-3 right-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#467055] to-transparent opacity-80">
-            </div>
-            <div class="absolute top-2.5 left-5 right-5 flex items-center justify-between">
-              <div class="w-16 h-1 rounded-full bg-[#9dc4aa]/60 border border-[#74a182]"></div>
-              <div
-                class="w-8 h-3 rounded-sm bg-gradient-to-r from-amber-200/80 via-emerald-200/90 to-cyan-200/80 border border-amber-300/60">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                  <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white group-hover/found:opacity-90 transition-opacity">
+                    Báo nhặt đồ
+                  </h2>
+                  <p class="text-xs sm:text-sm text-white/85 leading-relaxed font-normal">
+                    Bạn vừa nhặt được đồ thất lạc trên giảng đường hay khuôn viên CTU? Hãy lập biên nhận bàn giao nhanh tại đây.
+                  </p>
 
-      <!-- Main Dual Card Container -->
-      <div class="relative w-full rounded-[28px] bg-[#141e17] p-3 sm:p-4 md:p-6 shadow-2xl border border-[#25362a]">
-        <div
-          class="absolute inset-2 sm:inset-2.5 rounded-[22px] border border-dashed border-[#475c4e]/50 pointer-events-none z-30">
-        </div>
-
-        <div class="relative w-full rounded-[22px] border border-[#202f24] p-1.5 sm:p-2 bg-[#101912] shadow-inner">
-          <div class="grid grid-cols-1 lg:grid-cols-12 relative overflow-hidden rounded-[18px] bg-[#0f1711]">
-            <!-- Left Card: Đăng tin nhặt đồ (Hover rõ nét) -->
-            <div
-              class="lg:col-span-6 flex flex-col justify-between p-6 md:p-8 relative bg-gradient-to-b from-[#18261e] via-[#142018] to-[#101913] text-ivory border-b lg:border-b-0 border-[#223327] transition-all duration-300 hover:bg-[#1a2e23] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer z-10 group/left">
-              <div class="relative z-10 flex flex-col gap-5 mb-3 mt-2">
-                <h2
-                  class="text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-tight group-hover/left:text-emerald-300 transition-colors">
-                  Đăng tin nhặt đồ
-                </h2>
-
-                <div
-                  class="relative w-full rounded-xl bg-black/40 p-2.5 border border-white/10 shadow-lg group-hover/left:border-emerald-500/30 transition-all">
-                  <div
-                    class="w-full h-44 sm:h-52 rounded-lg relative overflow-hidden bg-[#142018] p-4 flex flex-col justify-end border border-white/10 select-none group-hover/left:-translate-y-1.5 transition-transform duration-300">
-                    <div
-                      class="absolute inset-2 border border-dashed border-[#475c4e]/50 rounded pointer-events-none z-30">
-                    </div>
-                    <div
-                      class="absolute top-3.5 left-4 right-4 h-12 rounded-t-lg bg-[#FAF8F5] border-t border-x border-stone-200 flex items-start justify-between px-3 pt-1.5 z-0 transform -translate-y-1">
-                      <div class="w-12 h-1 rounded-full bg-stone-300/60"></div>
-                      <div class="w-5 h-2.5 rounded border border-stone-300/80 bg-stone-100"></div>
-                    </div>
-                    <div
-                      class="absolute top-7 left-3.5 right-3.5 h-6 bg-[#18261e] border-t border-[#35483D] rounded-t-md z-10">
-                    </div>
-                    <div
-                      class="absolute top-9 left-4 right-4 h-12 rounded-t-lg bg-white border-t border-x border-stone-200 flex items-start justify-between px-3 pt-1.5 z-10">
-                      <div class="w-16 h-1 rounded-full bg-stone-300/70"></div>
-                      <div class="flex gap-1">
-                        <div class="w-2 h-2 rounded-full bg-stone-200"></div>
-                        <div class="w-2 h-2 rounded-full bg-stone-300"></div>
-                      </div>
-                    </div>
-                    <div
-                      class="absolute top-14 left-3.5 right-3.5 h-6 bg-[#1a281f] border-t border-[#475c4e] rounded-t-md z-20">
-                    </div>
-                    <div
-                      class="absolute top-16 left-4 right-4 h-14 rounded-t-lg bg-white border-t border-x border-stone-300 flex items-start justify-between px-3 pt-2 z-20">
-                      <div
-                        class="w-5 h-3.5 rounded bg-gradient-to-br from-amber-200 to-amber-400 border border-amber-300">
-                      </div>
-                    </div>
-                    <div
-                      class="relative z-30 w-full h-20 rounded-lg bg-[#142018] border-t-2 border-[#5a7362] flex flex-col justify-between p-3">
-                      <div class="w-full border-t border-dashed border-[#475c4e]/60 pt-1"></div>
-                      <div class="flex items-center justify-between opacity-50 px-1">
-                        <div class="w-12 h-1 rounded-full bg-emerald-400/40"></div>
-                        <div class="flex items-center gap-1.5">
-                          <div class="w-2 h-2 rounded-full border border-white/30"></div>
-                          <div class="w-5 h-1 rounded-full bg-white/20"></div>
+                  <!-- Mockup biểu mẫu biên nhận nhặt đồ (Được che một phần bên dưới bởi bìa trước) -->
+                  <div class="mt-1 rounded-xl p-3.5 border shadow-inner"
+                       style="background: rgba(0,0,0,0.22); border-color: var(--theme-border, rgba(255,255,255,0.18));">
+                    <div class="space-y-1.5 mb-3">
+                      <div class="w-full h-3 rounded-t-md opacity-35" style="background: rgba(255,255,255,0.35);"></div>
+                      <div class="w-full h-3.5 rounded-t-md opacity-60" style="background: rgba(255,255,255,0.55);"></div>
+                      <div class="w-full p-2.5 rounded-lg flex items-center justify-between shadow-sm"
+                           style="background: var(--theme-bg-card, #ffffff); color: var(--theme-accent, #1f3227);">
+                        <div class="flex items-center gap-2">
+                          <div class="w-3.5 h-2.5 rounded-xs shadow-xs" style="background: var(--theme-accent, #1f3227);"></div>
+                          <span class="text-[11px] font-bold">Biên nhận tiếp nhận tài sản</span>
                         </div>
+                      </div>
+                    </div>
+
+                    <div class="pt-2 border-t space-y-1.5 text-xs" style="border-color: rgba(255,255,255,0.15);">
+                      <div class="flex justify-between items-center text-white/90">
+                        <span class="text-white/60">Vật phẩm:</span>
+                        <span class="font-medium text-white px-2 py-0.5 rounded" style="background: rgba(255,255,255,0.12);">Ví tiền / Balo / Thẻ SV</span>
+                      </div>
+                      <div class="flex justify-between items-center text-white/90">
+                        <span class="text-white/60">Địa điểm:</span>
+                        <span class="font-medium text-white">Khu II, Nhà học C1, Thư viện</span>
                       </div>
                     </div>
                   </div>
                 </div>
+              </a>
+
+              <!-- ĐƯỜNG PHÂN CÁCH DỌC -->
+              <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-20 w-px"
+                   style="background: var(--theme-border, rgba(255,255,255,0.25));">
               </div>
 
-              <div class="relative z-10 pt-4 border-t border-white/10 flex justify-end">
-                <a href="post-found.html"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35483d] text-white group-hover/left:bg-[#35483d] group-hover/left:text-white group-hover/left:border-[#4a6353] hover:!bg-[#FAF8F5] hover:!text-[#142018] hover:!border-stone-300 text-xs font-semibold shadow-md border border-[#4a6353] transition-all active:scale-95">
-                  <span>Đăng tin ngay</span>
-                  <span
-                    class="material-symbols-outlined text-base group-hover/left:translate-x-1 transition-transform">add</span>
-                </a>
-              </div>
-            </div>
+              <!-- NỬA PHẢI: BÁO MẤT ĐỒ -->
+              <a href="post-lost.html"
+                 class="lg:col-span-6 flex flex-col justify-between p-6 sm:p-8 relative group/lost no-underline block transition-opacity"
+                 style="background: var(--theme-bg-card, #ffffff); color: var(--theme-header-text, #242424);">
+                
+                <div class="flex flex-col gap-4">
+                  <!-- HÀNG ĐỈNH: HUY HIỆU (TRÁI) & NÚT ĐĂNG NGAY (GÓC PHẢI - Ô MÀU XANH LÁ) -->
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase shadow-sm"
+                          style="background: rgba(31, 50, 39, 0.08); color: var(--theme-accent, #1f3227); border: 1px solid var(--theme-border, #e6e4de);">
+                      <span class="material-symbols-outlined text-sm">search_check</span>
+                      <span>TÌM KIẾM HỖ TRỢ</span>
+                    </span>
 
-            <!-- Vertical Divider -->
-            <div
-              class="hidden lg:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-20 w-7 items-stretch justify-center pointer-events-none">
-              <div class="h-full w-[1px] border-r border-dashed border-[#73887b]/40 mr-1.5"></div>
-              <div class="h-full w-[2px] bg-gradient-to-b from-[#1c2920] via-[#0d1610] to-[#1c2920]"></div>
-              <div class="h-full w-[1px] border-l border-dashed border-[#a69e90]/40 ml-1.5"></div>
-            </div>
+                    <!-- NÚT 'ĐĂNG NGAY' DỜI LÊN GÓC PHẢI THEO Ô XANH LÁ -->
+                    <div class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-xs font-bold shadow-md border transition-all duration-200 group-hover/lost:scale-105 active:scale-95"
+                         style="background-color: var(--theme-accent, #1f3227); border-color: var(--theme-border, rgba(255,255,255,0.25));">
+                      <span>Đăng ngay</span>
+                      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                  </div>
 
-            <!-- Right Card: Báo mất đồ (Hover rõ nét) -->
-            <div
-              class="lg:col-span-6 flex flex-col justify-between p-6 md:p-8 relative bg-[#FAF8F5] text-soft-black transition-all duration-300 hover:bg-white hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] cursor-pointer z-10 group/right">
-              <div class="relative z-10 flex flex-col gap-5 mb-3 mt-2">
-                <h2
-                  class="text-3xl sm:text-4xl font-semibold text-soft-black tracking-tight leading-tight group-hover/right:text-deep-sage transition-colors">
-                  Báo mất đồ
-                </h2>
+                  <h2 class="text-2xl sm:text-3xl font-bold tracking-tight group-hover/lost:opacity-80 transition-opacity"
+                      style="color: var(--theme-header-text, #242424);">
+                    Báo mất đồ
+                  </h2>
+                  <p class="text-xs sm:text-sm leading-relaxed font-normal opacity-75"
+                     style="color: var(--theme-text-muted, #777771);">
+                    Để quên tài sản, thẻ sinh viên hay ba lô tại các khu học tập CTU? Đăng yêu cầu tìm kiếm để cộng đồng hỗ trợ.
+                  </p>
 
-                <div
-                  class="relative w-full rounded-xl bg-white p-2.5 border border-stone-border shadow-sm group-hover/right:border-deep-sage/40 transition-all">
-                  <div
-                    class="w-full h-44 sm:h-52 rounded-lg relative overflow-hidden bg-[#FAF8F3] p-4 flex flex-col justify-end border border-stone-border select-none group-hover/right:-translate-y-1.5 transition-transform duration-300">
-                    <div
-                      class="absolute inset-2 border border-dashed border-[#b8b09f]/60 rounded pointer-events-none z-30">
-                    </div>
-                    <div
-                      class="absolute top-3.5 left-4 right-4 h-12 rounded-t-lg bg-white border-t border-x border-[#ded8cb] flex items-start justify-between px-3 pt-1.5 z-0 transform -translate-y-1">
-                      <div class="w-12 h-1 rounded-full bg-[#ded8cb]/80"></div>
-                      <div class="w-5 h-2.5 rounded border border-[#ded8cb] bg-[#f2eee5]"></div>
-                    </div>
-                    <div
-                      class="absolute top-7 left-3.5 right-3.5 h-6 bg-[#ebe7de] border-t border-[#ded8cb] rounded-t-md z-10">
-                    </div>
-                    <div
-                      class="absolute top-9 left-4 right-4 h-12 rounded-t-lg bg-[#FAF8F5] border-t border-x border-[#ded8cb] flex items-start justify-between px-3 pt-1.5 z-10">
-                      <div class="w-16 h-1 rounded-full bg-[#ded8cb]"></div>
-                      <div class="flex gap-1">
-                        <div class="w-2 h-2 rounded-full bg-[#ded8cb]"></div>
-                        <div class="w-2 h-2 rounded-full bg-[#e3ded4]"></div>
-                      </div>
-                    </div>
-                    <div
-                      class="absolute top-14 left-3.5 right-3.5 h-6 bg-[#e3ded4] border-t border-[#ded8cb] rounded-t-md z-20">
-                    </div>
-                    <div
-                      class="absolute top-16 left-4 right-4 h-14 rounded-t-lg bg-white border-t border-x border-stone-300 flex items-start justify-between px-3 pt-2 z-20">
-                      <div
-                        class="w-5 h-3.5 rounded bg-gradient-to-br from-[#d2e8d9] to-[#b6ccbd] border border-[#a1b6a8]">
-                      </div>
-                    </div>
-                    <div
-                      class="relative z-30 w-full h-20 rounded-lg bg-[#FAF8F3] border-t-2 border-[#b8b09f] flex flex-col justify-between p-3">
-                      <div class="w-full border-t border-dashed border-[#b8b09f]/60 pt-1"></div>
-                      <div class="flex items-center justify-between opacity-50 px-1">
-                        <div class="w-12 h-1 rounded-full bg-deep-sage/40"></div>
-                        <div class="flex items-center gap-1.5">
-                          <div class="w-2 h-2 rounded-full border border-stone-border"></div>
-                          <div class="w-5 h-1 rounded-full bg-stone-200"></div>
+                  <!-- Mockup biểu mẫu biên nhận mất đồ (Được che một phần bên dưới bởi bìa trước) -->
+                  <div class="mt-1 rounded-xl p-3.5 border shadow-sm"
+                       style="background: var(--theme-bg-header, #faf8f5); border: 1px dashed var(--theme-border, #e6e4de);">
+                    <div class="space-y-1.5 mb-3">
+                      <div class="w-full h-3 rounded-t-md opacity-40" style="background: var(--theme-border, #e6e4de);"></div>
+                      <div class="w-full h-3.5 rounded-t-md opacity-70" style="background: var(--theme-border, #e6e4de);"></div>
+                      <div class="w-full p-2.5 rounded-lg border flex items-center justify-between shadow-xs"
+                           style="background: var(--theme-bg-card, #ffffff); border-color: var(--theme-border, #e6e4de);">
+                        <div class="flex items-center gap-2">
+                          <div class="w-3.5 h-2.5 rounded-xs shadow-xs" style="background: var(--theme-accent, #1f3227);"></div>
+                          <span class="text-[11px] font-bold" style="color: var(--theme-header-text, #242424);">Đơn khai báo thất lạc</span>
                         </div>
+                      </div>
+                    </div>
+
+                    <div class="pt-2 border-t space-y-1.5 text-xs" style="border-color: var(--theme-border, #e6e4de);">
+                      <div class="flex justify-between items-center">
+                        <span class="opacity-60">Mô tả:</span>
+                        <span class="font-medium px-2 py-0.5 rounded" style="background: var(--theme-bg-subtle, #f6f3f2); color: var(--theme-header-text, #242424);">Đặc điểm, nhãn hiệu, màu sắc</span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <span class="opacity-60">Thời gian:</span>
+                        <span class="font-medium" style="color: var(--theme-header-text, #242424);">Thời điểm phát hiện mất</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
 
-              <div class="relative z-10 pt-4 border-t border-stone-border flex justify-end">
-                <a href="post-lost.html"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35483d] text-white group-hover/right:bg-[#142018] group-hover/right:text-white group-hover/right:border-[#223327] hover:!bg-[#142018] hover:!text-white hover:!border-[#223327] text-xs font-semibold shadow-md border border-[#35483d] transition-all active:scale-95">
-                  <span>Gửi thông tin ngay</span>
-                  <span
-                    class="material-symbols-outlined text-base group-hover/right:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3. NẾP GẤP MANG CÁ 2 BÊN - CAO LÊN ĐẾN ĐƯỜNG XANH LÁ (320px) -->
+        <div id="folder-gusset-left"
+             class="folder-gusset absolute left-0 bottom-0 pointer-events-none z-20"
+             style="width: 56px; height: 420px; transform-origin: bottom left; will-change: transform, opacity;">
+          <svg viewBox="0 0 56 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="none">
+            <polygon points="14,420 0,0 22,20 18,420"
+                     fill="var(--theme-accent, #1f3227)" fill-opacity="0.95"
+                     stroke="var(--theme-border, rgba(255,255,255,0.2))" stroke-width="1" />
+            <polygon points="18,420 22,20 42,8 34,420"
+                     fill="var(--theme-accent, #1f3227)" fill-opacity="0.65"
+                     stroke="var(--theme-border, rgba(255,255,255,0.18))" stroke-width="1" />
+            <polygon points="34,420 42,8 56,22 48,420"
+                     fill="var(--theme-accent, #1f3227)" fill-opacity="0.85"
+                     stroke="var(--theme-border, rgba(255,255,255,0.25))" stroke-width="1" />
+            <line x1="22" y1="20" x2="18" y2="420" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+            <line x1="42" y1="8" x2="34" y2="420" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
+          </svg>
+        </div>
+
+        <div id="folder-gusset-right"
+             class="folder-gusset absolute right-0 bottom-0 pointer-events-none z-20"
+             style="width: 56px; height: 420px; transform-origin: bottom right; will-change: transform, opacity;">
+          <svg viewBox="0 0 56 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="none">
+            <polygon points="42,420 56,0 34,20 38,420"
+                     fill="var(--theme-accent, #1f3227)" fill-opacity="0.95"
+                     stroke="var(--theme-border, rgba(255,255,255,0.2))" stroke-width="1" />
+            <polygon points="38,420 34,20 14,8 22,420"
+                     fill="var(--theme-accent, #1f3227)" fill-opacity="0.65"
+                     stroke="var(--theme-border, rgba(255,255,255,0.18))" stroke-width="1" />
+            <polygon points="22,420 14,8 0,22 8,420"
+                     fill="var(--theme-accent, #1f3227)" fill-opacity="0.85"
+                     stroke="var(--theme-border, rgba(255,255,255,0.25))" stroke-width="1" />
+            <line x1="34" y1="20" x2="38" y2="420" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+            <line x1="14" y1="8" x2="22" y2="420" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
+          </svg>
+        </div>
+
+        <!-- 4. MẶT BÌA TRƯỚC (FRONT COVER) - DÀI LÊN ĐẾN ĐƯỜNG KẺ MÀU XANH LÁ (320px) -->
+        <div id="folder-front-cover"
+             class="dossier-front-cover absolute bottom-0 left-0 right-0 rounded-b-[28px] rounded-t-3xl shadow-[0_-16px_40px_rgba(0,0,0,0.45)] border-t-2 border-x border-b z-30 pointer-events-none transition-colors duration-300 flex items-center justify-center"
+             style="background: var(--theme-accent, #1f3227); border-color: var(--theme-border, rgba(255,255,255,0.25)); height: 420px; transform-origin: center bottom; transform-style: preserve-3d; will-change: transform;">
+          <!-- MASCOT CON CÚ ĐẶT TẠI VỊ TRÍ CHÍNH GIỮA MẶT BÌA THEO ĐÚNG HÌNH THIẾT KẾ -->
+          <div class="dossier-mascot-wrapper pointer-events-auto flex items-center justify-center select-none"
+               style="width: 280px; height: 280px; max-width: 90%;">
+            <div id="ctu-mascot-app" class="w-full h-full flex items-center justify-center">
+              <div class="ctu-mascot-standalone">
+                <button type="button" class="ctu-mascot-btn" aria-label="Owl Mascot" title="Chạm vào mình nhé!">
+                  <span class="ctu-mascot-squash">
+                    <span class="ctu-mascot-layer ctu-mascot-layer-directions"
+                          style="background-image: url('../mascot/assets/owl-directions.webp'); background-position: 50% 50%; opacity: 1;"></span>
+                    <span class="ctu-mascot-layer ctu-mascot-layer-reactions"
+                          style="background-image: url('../mascot/assets/owl-reactions.webp'); background-position: 50% 50%; opacity: 0;"></span>
+                  </span>
+                </button>
               </div>
             </div>
           </div>
         </div>
+
       </div>
+
+      <!-- GSAP ANIMATION LOGIC: BÌA SƠ MI NGẢ VỀ MÀN HÌNH & TỜ ĐƠN TRỒI HẲN LÊN ĐẾN ĐƯỜNG XANH DƯƠNG -->
+      <script>
+        (function initCtuDossierBanner() {
+          var retryCount = 0;
+          function setupAnimation() {
+            if (typeof window.gsap === "undefined") {
+              retryCount++;
+              if (retryCount < 20) {
+                setTimeout(setupAnimation, 50);
+                return;
+              }
+              // Fallback
+              var fcFallback = document.getElementById("folder-front-cover");
+              var paperFallback = document.getElementById("ctu-dossier-paper");
+              var gussetsFallback = document.querySelectorAll(".folder-gusset");
+              if (fcFallback) fcFallback.style.transform = "rotateX(-16deg)";
+              if (paperFallback) { paperFallback.style.transform = "translateY(-125px)"; paperFallback.style.opacity = "1"; }
+              if (gussetsFallback) gussetsFallback.forEach(function (g) { g.style.opacity = "1"; g.style.transform = "scale(1)"; });
+              return;
+            }
+
+            var folder = document.getElementById("dossier-folder");
+            var frontCover = document.getElementById("folder-front-cover");
+            var paper = document.getElementById("ctu-dossier-paper");
+            var gussetLeft = document.getElementById("folder-gusset-left");
+            var gussetRight = document.getElementById("folder-gusset-right");
+            if (!folder || !frontCover || !paper || !gussetLeft || !gussetRight) return;
+
+            // Hỗ trợ prefers-reduced-motion
+            var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (prefersReducedMotion) {
+              window.gsap.set(frontCover, { rotateX: -16, transformOrigin: "center bottom" });
+              window.gsap.set([gussetLeft, gussetRight], { scaleX: 1, scaleY: 1, opacity: 1 });
+              window.gsap.set(paper, { y: -125, scale: 1, autoAlpha: 1 });
+              return;
+            }
+
+            // 1. Trạng thái ban đầu: Bìa sơ mi khép kín, tờ đơn lọt sâu trong túi
+            window.gsap.set(frontCover, { rotateX: 0, transformOrigin: "center bottom" });
+            window.gsap.set(gussetLeft, { scaleX: 0.08, scaleY: 0.25, opacity: 0, transformOrigin: "bottom left" });
+            window.gsap.set(gussetRight, { scaleX: 0.08, scaleY: 0.25, opacity: 0, transformOrigin: "bottom right" });
+            window.gsap.set(paper, { y: 25, scale: 1, autoAlpha: 0.9, transformOrigin: "center bottom" });
+
+            // 2. Timeline GSAP chạy 1 LẦN khi vào trang web:
+            // Mặt bìa trước ngả về hướng màn hình theo không gian 3D (-24deg),
+            // Nếp gấp mang cá mở rộng đồng bộ,
+            // Tờ đơn TRỒI HẲN LÊN ĐẾN ĐƯỜNG KẺ MÀU XANH DƯƠNG (y: -145px)
+            var tl = window.gsap.timeline({
+              defaults: { ease: "power3.out" },
+              delay: 0.15
+            });
+
+            tl.to(frontCover, {
+              rotateX: -16,
+              duration: 1.2,
+              ease: "power2.out"
+            })
+            .to([gussetLeft, gussetRight], {
+              scaleX: 1,
+              scaleY: 1,
+              opacity: 1,
+              duration: 1.2,
+              ease: "power2.out"
+            }, "<")
+            .to(paper, {
+              y: -125,
+              autoAlpha: 1,
+              duration: 1.4,
+              ease: "power3.out"
+            }, "-=0.7");
+
+            // 3. Khi di chuột (hover) vào tờ đơn: CHỈ PHÓNG TO NHẸ TỜ ĐƠN, KHÔNG CẦN TƯƠNG TÁC 3D
+            var hoverTween = null;
+            paper.addEventListener("mouseenter", function () {
+              if (hoverTween) hoverTween.kill();
+              hoverTween = window.gsap.to(paper, {
+                scale: 1.025,
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: "auto"
+              });
+            });
+
+            paper.addEventListener("mouseleave", function () {
+              if (hoverTween) hoverTween.kill();
+              hoverTween = window.gsap.to(paper, {
+                scale: 1.0,
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: "auto"
+              });
+            });
+          }
+
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", setupAnimation);
+          } else {
+            setupAnimation();
+          }
+        })();
+      </script>
     </section>
 
     <!-- ==================== BẢNG VINH DANH (HONOR BOARD) ==================== -->

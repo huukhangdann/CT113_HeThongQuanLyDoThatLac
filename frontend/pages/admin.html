@@ -11,7 +11,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
   <link href="../css/index.css" rel="stylesheet" />
 
   <script>
@@ -68,9 +70,12 @@
       body * {
         visibility: hidden;
       }
-      #print-area, #print-area * {
+
+      #print-area,
+      #print-area * {
         visibility: visible;
       }
+
       #print-area {
         position: absolute;
         left: 0;
@@ -81,6 +86,7 @@
         background: white !important;
         color: black !important;
       }
+
       .no-print {
         display: none !important;
       }
@@ -92,7 +98,8 @@
   <script src="../js/components.js"></script>
 </head>
 
-<body class="bg-ivory dark:bg-[#121316] text-soft-black dark:text-stone-100 min-h-screen flex flex-col selection:bg-stone-200 dark:selection:bg-stone-800">
+<body
+  class="bg-ivory dark:bg-[#121316] text-soft-black dark:text-stone-100 min-h-screen flex flex-col selection:bg-stone-200 dark:selection:bg-stone-800">
 
   <!-- Header của hệ thống (Đã cấu hình chỉ hiển thị đúng 2 tab: Quản lý bài đăng & Xem điểm thưởng) -->
   <app-header class="no-print"></app-header>
@@ -100,12 +107,15 @@
   <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-8 space-y-6 no-print">
 
     <!-- 1. BREADCRUMB & HEADER QUẢN TRỊ -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
+    <div
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
       <div>
-        <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#797675] dark:text-stone-400">
+        <div
+          class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#797675] dark:text-stone-400">
           <span>Hệ thống CTU Lost &amp; Found</span>
           <span>•</span>
-          <span class="inline-flex items-center gap-1 text-stone-800 dark:text-stone-200 bg-stone-100 dark:bg-stone-800 px-2 py-0.5 rounded-md border border-stone-200 dark:border-stone-700 font-bold">
+          <span
+            class="inline-flex items-center gap-1 text-stone-800 dark:text-stone-200 bg-stone-100 dark:bg-stone-800 px-2 py-0.5 rounded-md border border-stone-200 dark:border-stone-700 font-bold">
             <span class="material-symbols-outlined text-[15px] text-amber-500">shield_person</span>
             Quản trị viên (admin991)
           </span>
@@ -120,11 +130,15 @@
 
       <!-- Action buttons -->
       <div class="flex items-center gap-2.5 shrink-0">
-        <button type="button" onclick="openAddPctsvPostModal();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white shadow-sm transition-all cursor-pointer" title="Đăng bài chính thức từ PCTSV">
+        <button type="button" onclick="openAddPctsvPostModal();"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white shadow-sm transition-all cursor-pointer"
+          title="Đăng bài chính thức từ PCTSV">
           <span class="material-symbols-outlined text-[18px]">add_circle</span>
           <span>Thêm bài đăng (PCTSV)</span>
         </button>
-        <button type="button" onclick="refreshAdminData();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/60 text-[#1b1c1c] dark:text-white shadow-2xs transition-colors cursor-pointer" title="Đồng bộ dữ liệu">
+        <button type="button" onclick="refreshAdminData();"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/60 text-[#1b1c1c] dark:text-white shadow-2xs transition-colors cursor-pointer"
+          title="Đồng bộ dữ liệu">
           <span class="material-symbols-outlined text-[18px]">sync</span>
           <span>Làm mới</span>
         </button>
@@ -133,17 +147,21 @@
 
     <!-- 2. BENTO KPI METRICS GRID (Thiết kế tối giản, đồng bộ tinh tế, không chói mắt) -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
-      
+
       <!-- Card 1: Tổng số bài đăng -->
-      <div onclick="switchAdminTab('posts'); setPostSubFilter('all');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('all');"
+        class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Tổng bài đăng</span>
-          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#1b1c1c] dark:text-white group-hover:scale-105 transition-transform">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Tổng bài
+            đăng</span>
+          <div
+            class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#1b1c1c] dark:text-white group-hover:scale-105 transition-transform">
             <span class="material-symbols-outlined text-[20px]">inventory_2</span>
           </div>
         </div>
         <div class="mt-3">
-          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-total-posts">0</div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono"
+            id="stat-total-posts">0</div>
           <div class="text-[11px] text-[#797675] dark:text-stone-400 mt-1 flex items-center gap-1">
             <span>Toàn hệ thống Trường ĐH Cần Thơ</span>
           </div>
@@ -151,15 +169,19 @@
       </div>
 
       <!-- Card 2: Bài đăng bị báo cáo (Click vào để mở thẳng danh sách đang xác minh / bị báo cáo) -->
-      <div onclick="switchAdminTab('posts'); setPostSubFilter('verifying');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-rose-400 dark:hover:border-rose-700 hover:shadow-sm cursor-pointer group">
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('verifying');"
+        class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-rose-400 dark:hover:border-rose-700 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài bị báo cáo</span>
-          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-rose-600 dark:text-rose-400 group-hover:scale-105 transition-transform">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài bị báo
+            cáo</span>
+          <div
+            class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-rose-600 dark:text-rose-400 group-hover:scale-105 transition-transform">
             <span class="material-symbols-outlined text-[20px]">flag</span>
           </div>
         </div>
         <div class="mt-3">
-          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-reported-posts">0</div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono"
+            id="stat-reported-posts">0</div>
           <div class="text-[11px] text-rose-600 dark:text-rose-400 font-semibold mt-1 flex items-center gap-1">
             <span class="material-symbols-outlined text-[13px]">report</span>
             <span>Bấm để xem &amp; xử lý ngay</span>
@@ -168,15 +190,19 @@
       </div>
 
       <!-- Card 3: Bài đăng đang ẩn (Click vào để mở thẳng danh sách bài bị ẩn) -->
-      <div onclick="switchAdminTab('posts'); setPostSubFilter('hidden');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-amber-400 dark:hover:border-amber-700 hover:shadow-sm cursor-pointer group">
+      <div onclick="switchAdminTab('posts'); setPostSubFilter('hidden');"
+        class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-amber-400 dark:hover:border-amber-700 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài đăng đã ẩn</span>
-          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#797675] dark:text-stone-400 group-hover:scale-105 transition-transform">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài đăng đã
+            ẩn</span>
+          <div
+            class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#797675] dark:text-stone-400 group-hover:scale-105 transition-transform">
             <span class="material-symbols-outlined text-[20px]">visibility_off</span>
           </div>
         </div>
         <div class="mt-3">
-          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-hidden-posts">0</div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono"
+            id="stat-hidden-posts">0</div>
           <div class="text-[11px] text-[#797675] dark:text-stone-400 mt-1 flex items-center gap-1">
             <span class="material-symbols-outlined text-[13px]">lock</span>
             <span>Không hiển thị ra công khai</span>
@@ -185,17 +211,22 @@
       </div>
 
       <!-- Card 4: Tổng số người dùng & Xem điểm thưởng -->
-      <div onclick="switchAdminTab('accounts');" class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
+      <div onclick="switchAdminTab('accounts');"
+        class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Xem điểm thưởng</span>
-          <div class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#35483d] dark:text-emerald-400 group-hover:scale-105 transition-transform">
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Xem điểm
+            thưởng</span>
+          <div
+            class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#35483d] dark:text-emerald-400 group-hover:scale-105 transition-transform">
             <span class="material-symbols-outlined text-[20px]">workspace_premium</span>
           </div>
         </div>
         <div class="mt-3">
-          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono" id="stat-total-accounts">0</div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#1b1c1c] dark:text-white font-mono"
+            id="stat-total-accounts">0</div>
           <div class="text-[11px] text-[#797675] dark:text-stone-400 mt-1 flex items-center gap-1">
-            <span>Điểm cao nhất: <strong class="text-emerald-600 dark:text-emerald-400" id="stat-top-score">24 điểm</strong> (Bảng vinh danh)</span>
+            <span>Điểm cao nhất: <strong class="text-emerald-600 dark:text-emerald-400" id="stat-top-score">24
+                điểm</strong> (Bảng vinh danh)</span>
           </div>
         </div>
       </div>
@@ -206,21 +237,23 @@
     <!-- PHÂN HỆ 1: QUẢN LÝ BÀI ĐĂNG (POST MANAGEMENT TAB)                         -->
     <!-- ========================================================================= -->
     <section id="tab-content-posts" class="space-y-4">
-      
+
       <!-- Thanh chuyển đổi xem nhanh các nhóm bài đăng (5 trạng thái chuẩn đặc tả & Thanh tìm kiếm kiểu sinh viên) -->
-      <div class="space-y-3 bg-white dark:bg-[#18191c] p-4 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs">
-        
+      <div
+        class="space-y-3 bg-white dark:bg-[#18191c] p-4 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs">
+
         <!-- Khung tìm kiếm & bộ lọc chuẩn 100% giao diện từ find.html -->
         <div class="space-y-4">
           <!-- Hàng 1: Primary Search Bar -->
           <div class="relative flex items-center">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#727873] dark:text-stone-400">
+            <div
+              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#727873] dark:text-stone-400">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"></path>
               </svg>
             </div>
-            <input id="post-search-input" type="text" oninput="filterPosts()"
-              placeholder="Nhập tên món đồ, mã thẻ SV, màu sắc hoặc đặc điểm nhận dạng..."
+            <input id="post-search-input" type="text" oninput="filterPosts()" placeholder="Nhập món đồ cần tìm"
               class="w-full pl-11 pr-24 py-3.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] focus:bg-white text-base text-[#1b1c1b] dark:text-white placeholder-[#727873] rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none font-normal" />
             <button id="btn-clear-search-text" type="button" onclick="clearSearchInput()" title="Xóa nội dung nhập"
               class="absolute right-3 px-2 py-1 text-xs font-medium text-[#727873] hover:text-[#1b1c1b] dark:hover:text-white hover:bg-[#e7e1df] dark:hover:bg-stone-700 rounded transition-colors cursor-pointer">
@@ -229,12 +262,17 @@
           </div>
 
           <!-- Hàng 2: Filters Grid (4 cột dropdown chuẩn find.html) -->
-          <div class="border-t border-[#e7e1df] dark:border-stone-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+          <div
+            class="border-t border-[#e7e1df] dark:border-stone-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
             <!-- Cột 1: Loại đồ vật -->
             <div>
-              <label for="filter-category" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              <label for="filter-category"
+                class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
                 <span>Loại đồ vật</span>
               </label>
@@ -259,15 +297,19 @@
 
             <!-- Cột 2: Màu sắc (có chấm màu tròn + "Tất cả màu sắc") -->
             <div class="relative">
-              <label for="filter-color" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 21a4 4 0 01-4-4 4 4 0 014-4c2 0 2 2 4 2 2.5 0 2.5-3 5-3a6.5 6.5 0 11-9 6z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              <label for="filter-color"
+                class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path d="M7 21a4 4 0 01-4-4 4 4 0 014-4c2 0 2 2 4 2 2.5 0 2.5-3 5-3a6.5 6.5 0 11-9 6z"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                 </svg>
                 <span>Màu sắc</span>
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span id="color-trigger-swatch" class="w-4 h-4 rounded-full border border-slate-300 bg-slate-200 shrink-0 shadow-xs"></span>
+                  <span id="color-trigger-swatch"
+                    class="w-4 h-4 rounded-full border border-slate-300 bg-slate-200 shrink-0 shadow-xs"></span>
                 </div>
                 <select id="filter-color" onchange="updateColorFilterSwatch(); filterPosts();"
                   class="w-full appearance-none pl-9 pr-8 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
@@ -289,9 +331,12 @@
 
             <!-- Cột 3: Thời gian nhặt -->
             <div>
-              <label for="filter-time" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              <label for="filter-time"
+                class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"></path>
                 </svg>
                 <span>Thời gian nhặt</span>
               </label>
@@ -313,10 +358,14 @@
 
             <!-- Cột 4: Địa điểm nhặt -->
             <div>
-              <label for="loc-faculty" class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              <label for="loc-faculty"
+                class="block text-xs font-semibold text-[#1b1c1b] dark:text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#727873] dark:text-stone-400" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"></path>
                 </svg>
                 <span>Địa điểm nhặt</span>
               </label>
@@ -351,7 +400,9 @@
             <button type="button" onclick="clearFilters()"
               class="px-4 py-2.5 rounded-lg border border-[#e7e1df] dark:border-stone-700 hover:bg-[#f6f3f2] dark:hover:bg-stone-800 text-sm font-medium text-[#727873] hover:text-[#1b1c1b] dark:hover:text-white transition-all flex items-center gap-2 cursor-pointer">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <path
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
               </svg>
               <span>Xóa bộ lọc</span>
             </button>
@@ -359,7 +410,8 @@
             <button type="button" onclick="filterPosts()"
               class="px-6 py-2.5 rounded-lg bg-[#35483d] hover:bg-[#233229] active:scale-[0.98] text-white text-sm font-semibold tracking-wide transition-all shadow-sm flex items-center gap-2 cursor-pointer">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"></path>
               </svg>
               <span>Tìm kiếm</span>
             </button>
@@ -367,27 +419,34 @@
         </div>
 
         <!-- Các nút lọc 5 trạng thái chuẩn đặc tả -->
-        <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-stone-100 dark:border-stone-800" id="subfilter-container">
-          <button type="button" onclick="setPostSubFilter('all');" id="subfilter-all" class="subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
+        <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-stone-100 dark:border-stone-800"
+          id="subfilter-container">
+          <button type="button" onclick="setPostSubFilter('all');" id="subfilter-all"
+            class="subfilter-active px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer">
             Tất cả (<span id="count-all">0</span>)
           </button>
-          <button type="button" onclick="setPostSubFilter('student_holding');" id="subfilter-student_holding" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+          <button type="button" onclick="setPostSubFilter('student_holding');" id="subfilter-student_holding"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-orange-500"></span>
             <span>Sinh viên đang giữ (<span id="count-student_holding">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('pctsv_holding');" id="subfilter-pctsv_holding" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+          <button type="button" onclick="setPostSubFilter('pctsv_holding');" id="subfilter-pctsv_holding"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-purple-500"></span>
             <span>PCTSV đang giữ (<span id="count-pctsv_holding">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('verifying');" id="subfilter-verifying" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+          <button type="button" onclick="setPostSubFilter('verifying');" id="subfilter-verifying"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-amber-400"></span>
             <span>Đang xác minh (<span id="count-verifying">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('returned');" id="subfilter-returned" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+          <button type="button" onclick="setPostSubFilter('returned');" id="subfilter-returned"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span>Đã trao trả (<span id="count-returned">0</span>)</span>
           </button>
-          <button type="button" onclick="setPostSubFilter('hidden');" id="subfilter-hidden" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
+          <button type="button" onclick="setPostSubFilter('hidden');" id="subfilter-hidden"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-stone-200 dark:border-stone-700 text-[#797675] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-800 transition-all cursor-pointer flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-rose-500"></span>
             <span>Đã được ẩn (<span id="count-hidden">0</span>)</span>
           </button>
@@ -396,11 +455,13 @@
       </div>
 
       <!-- Bảng danh sách bài đăng trên Desktop -->
-      <div class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
+      <div
+        class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
+              <tr
+                class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
                 <th class="py-3 px-4 w-24">Mã tin</th>
                 <th class="py-3 px-4 w-16 text-center">Ảnh</th>
                 <th class="py-3 px-4 min-w-[220px]">Tên món đồ &amp; Danh mục</th>
@@ -411,7 +472,8 @@
                 <th class="py-3 px-4 w-40 text-right">Thao tác</th>
               </tr>
             </thead>
-            <tbody id="posts-table-body" class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
+            <tbody id="posts-table-body"
+              class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
               <!-- Render động bằng JavaScript -->
             </tbody>
           </table>
@@ -419,11 +481,14 @@
 
         <!-- Trạng thái trống (Empty State) -->
         <div id="posts-empty-state" class="hidden p-12 text-center">
-          <div class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
+          <div
+            class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
             <span class="material-symbols-outlined text-[24px]">inbox</span>
           </div>
-          <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không có bài đăng nào trong mục này</h3>
-          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Danh sách hiện tại trống hoặc từ khóa tìm kiếm không khớp.</p>
+          <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không có bài đăng nào trong mục này
+          </h3>
+          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Danh sách hiện tại trống hoặc từ khóa tìm kiếm
+            không khớp.</p>
         </div>
       </div>
 
@@ -439,32 +504,40 @@
     <!-- PHÂN HỆ 2: XEM ĐIỂM THƯỞNG (REWARD POINTS TAB)                            -->
     <!-- ========================================================================= -->
     <section id="tab-content-accounts" class="hidden space-y-4">
-      
+
       <!-- Toolbar: Search + Sort by score + Print score report + Add Account -->
-      <div class="bg-white dark:bg-[#18191c] p-4 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-        
+      <div
+        class="bg-white dark:bg-[#18191c] p-4 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+
         <!-- Ô tìm kiếm tài khoản -->
         <div class="relative flex-1 min-w-[220px]">
-          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#797675] dark:text-stone-400">person_search</span>
-          <input type="text" id="account-search-input" oninput="filterAccounts();" placeholder="Tìm theo MSSV, Họ tên, Email, Khoa..." class="w-full pl-9 pr-8 py-2 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white placeholder:text-[#797675]/70 focus:outline-none focus:ring-1 focus:ring-[#35483d] transition-all">
-          <button type="button" onclick="document.getElementById('account-search-input').value=''; filterAccounts();" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white cursor-pointer">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#797675] dark:text-stone-400">person_search</span>
+          <input type="text" id="account-search-input" oninput="filterAccounts();"
+            placeholder="Tìm theo MSSV, Họ tên, Email, Khoa..."
+            class="w-full pl-9 pr-8 py-2 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white placeholder:text-[#797675]/70 focus:outline-none focus:ring-1 focus:ring-[#35483d] transition-all">
+          <button type="button" onclick="document.getElementById('account-search-input').value=''; filterAccounts();"
+            class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white cursor-pointer">
             <span class="material-symbols-outlined text-[15px]">close</span>
           </button>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          
+
           <!-- SẮP XẾP ĐIỂM (Cao / Thấp) -->
-          <div class="flex items-center gap-1.5 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 px-3 py-1.5 rounded-xl">
+          <div
+            class="flex items-center gap-1.5 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 px-3 py-1.5 rounded-xl">
             <span class="material-symbols-outlined text-[16px] text-[#797675] dark:text-stone-400">swap_vert</span>
-            <select id="account-sort-score" onchange="filterAccounts();" class="text-xs bg-transparent text-[#1b1c1c] dark:text-white focus:outline-none cursor-pointer font-semibold">
+            <select id="account-sort-score" onchange="filterAccounts();"
+              class="text-xs bg-transparent text-[#1b1c1c] dark:text-white focus:outline-none cursor-pointer font-semibold">
               <option value="desc">Điểm: Cao đến thấp</option>
               <option value="asc">Điểm: Thấp đến cao</option>
             </select>
           </div>
 
           <!-- Lọc theo Mức điểm -->
-          <select id="account-filter-score-tier" onchange="filterAccounts();" class="px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white focus:outline-none cursor-pointer">
+          <select id="account-filter-score-tier" onchange="filterAccounts();"
+            class="px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white focus:outline-none cursor-pointer">
             <option value="all">Tất cả mức điểm</option>
             <option value="top">Từ 15 điểm trở lên</option>
             <option value="high">Từ 10 - 14 điểm</option>
@@ -473,13 +546,16 @@
           </select>
 
           <!-- NÚT IN FILE ĐIỂM (Yêu cầu chính của User) -->
-          <button type="button" onclick="openPrintScoreModal();" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white shadow-2xs transition-colors cursor-pointer" title="In danh sách điểm người dùng">
+          <button type="button" onclick="openPrintScoreModal();"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white shadow-2xs transition-colors cursor-pointer"
+            title="In danh sách điểm người dùng">
             <span class="material-symbols-outlined text-[18px]">print</span>
             <span>In file điểm</span>
           </button>
 
           <!-- Nút Thêm tài khoản mới -->
-          <button type="button" onclick="openAddAccountModal();" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+          <button type="button" onclick="openAddAccountModal();"
+            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
             <span class="material-symbols-outlined text-[18px]">person_add</span>
             <span>Thêm</span>
           </button>
@@ -489,11 +565,13 @@
       </div>
 
       <!-- Bảng xem điểm thưởng Desktop (Đã xóa chức năng khóa tài khoản) -->
-      <div class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
+      <div
+        class="hidden md:block bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
+              <tr
+                class="bg-stone-50/80 dark:bg-stone-900/60 text-[#797675] dark:text-stone-400 font-semibold border-b border-stone-200 dark:border-stone-800">
                 <th class="py-3 px-4 min-w-[220px]">Sinh viên / Cán bộ</th>
                 <th class="py-3 px-4 min-w-[180px]">Đơn vị / Khoa</th>
                 <th class="py-3 px-4 min-w-[200px]">Email &amp; SĐT</th>
@@ -501,18 +579,21 @@
                 <th class="py-3 px-4 w-32 text-center">Đồ đã trả</th>
               </tr>
             </thead>
-            <tbody id="accounts-table-body" class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
+            <tbody id="accounts-table-body"
+              class="divide-y divide-stone-100 dark:divide-stone-800/70 text-[#1b1c1c] dark:text-stone-200">
               <!-- Render động bằng JavaScript -->
             </tbody>
           </table>
         </div>
 
         <div id="accounts-empty-state" class="hidden p-12 text-center">
-          <div class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
+          <div
+            class="w-12 h-12 rounded-full bg-stone-100 dark:bg-stone-800 text-[#797675] dark:text-stone-400 flex items-center justify-center mx-auto mb-3">
             <span class="material-symbols-outlined text-[24px]">person_off</span>
           </div>
           <h3 class="font-bold text-sm sm:text-base text-[#1b1c1c] dark:text-white">Không tìm thấy người dùng nào</h3>
-          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Vui lòng điều chỉnh lại bộ lọc điểm hoặc từ khóa tìm kiếm.</p>
+          <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Vui lòng điều chỉnh lại bộ lọc điểm hoặc từ khóa
+            tìm kiếm.</p>
         </div>
       </div>
 
@@ -529,10 +610,13 @@
   <!-- ========================================================================= -->
   <!-- MODAL XỬ LÝ ẨN BÀI ĐĂNG (HIDE POST CONFIRMATION)                          -->
   <!-- ========================================================================= -->
-  <div id="modal-hide-post" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
-    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-md w-full p-5 sm:p-6 text-left space-y-4">
+  <div id="modal-hide-post"
+    class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div
+      class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-md w-full p-5 sm:p-6 text-left space-y-4">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 flex items-center justify-center shrink-0">
+        <div
+          class="w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 flex items-center justify-center shrink-0">
           <span class="material-symbols-outlined text-[22px]">visibility_off</span>
         </div>
         <div>
@@ -542,30 +626,37 @@
       </div>
 
       <p class="text-xs text-[#4a4746] dark:text-stone-300">
-        Bài đăng này sẽ không còn hiển thị với người dùng trên trang chủ và tìm kiếm. Bạn có thể mở lại bài đăng bất cứ lúc nào trong mục <strong>"Đã bị ẩn"</strong>.
+        Bài đăng này sẽ không còn hiển thị với người dùng trên trang chủ và tìm kiếm. Bạn có thể mở lại bài đăng bất cứ
+        lúc nào trong mục <strong>"Đã bị ẩn"</strong>.
       </p>
 
       <div class="space-y-1.5">
         <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-300">
           Lý do ẩn bài đăng:
         </label>
-        <select id="hide-reason-select" onchange="toggleCustomHideReason()" class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none cursor-pointer">
-          <option value="Bài đăng có dấu hiệu gian lận / thông tin sai lệch">Có dấu hiệu gian lận / thông tin sai lệch</option>
+        <select id="hide-reason-select" onchange="toggleCustomHideReason()"
+          class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none cursor-pointer">
+          <option value="Bài đăng có dấu hiệu gian lận / thông tin sai lệch">Có dấu hiệu gian lận / thông tin sai lệch
+          </option>
           <option value="Người đăng yêu cầu tạm ẩn bài">Người đăng yêu cầu tạm ẩn bài</option>
-          <option value="Bài đăng chứa hình ảnh hoặc nội dung không phù hợp">Chứa hình ảnh hoặc nội dung không phù hợp</option>
+          <option value="Bài đăng chứa hình ảnh hoặc nội dung không phù hợp">Chứa hình ảnh hoặc nội dung không phù hợp
+          </option>
           <option value="Nội dung vi phạm quy định diễn đàn CTU Lost & Found">Vi phạm quy định diễn đàn</option>
           <option value="other">Khác (Tự nhập lý do)</option>
         </select>
         <div id="hide-reason-custom-wrapper" class="hidden mt-2">
-          <input type="text" id="hide-reason-custom" placeholder="Nhập lý do ẩn cụ thể..." class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none" />
+          <input type="text" id="hide-reason-custom" placeholder="Nhập lý do ẩn cụ thể..."
+            class="w-full px-3 py-2 text-xs rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none" />
         </div>
       </div>
 
       <div class="pt-2 flex items-center justify-end gap-2 border-t border-stone-100 dark:border-stone-800">
-        <button type="button" onclick="closeHidePostModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 dark:bg-stone-800 text-[#1b1c1c] dark:text-white hover:bg-stone-200 transition-colors cursor-pointer">
+        <button type="button" onclick="closeHidePostModal();"
+          class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 dark:bg-stone-800 text-[#1b1c1c] dark:text-white hover:bg-stone-200 transition-colors cursor-pointer">
           Hủy bỏ
         </button>
-        <button type="button" onclick="confirmHidePost();" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white transition-colors cursor-pointer">
+        <button type="button" onclick="confirmHidePost();"
+          class="px-4 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white transition-colors cursor-pointer">
           Xác nhận ẩn bài
         </button>
       </div>
@@ -576,14 +667,18 @@
   <!-- ========================================================================= -->
   <!-- MODAL XEM CHI TIẾT & BÁO CÁO BÀI ĐĂNG (POST & REPORT DETAIL MODAL)        -->
   <!-- ========================================================================= -->
-  <div id="modal-post-detail" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
-    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-6 text-left space-y-4">
+  <div id="modal-post-detail"
+    class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div
+      class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-6 text-left space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-[22px] text-[#35483d] dark:text-emerald-400">info</span>
-          <h3 class="font-bold text-base sm:text-lg text-[#1b1c1c] dark:text-white" id="modal-post-title">Chi tiết bài đăng</h3>
+          <h3 class="font-bold text-base sm:text-lg text-[#1b1c1c] dark:text-white" id="modal-post-title">Chi tiết bài
+            đăng</h3>
         </div>
-        <button type="button" onclick="closePostDetailModal();" class="w-8 h-8 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+        <button type="button" onclick="closePostDetailModal();"
+          class="w-8 h-8 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
           <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
@@ -596,7 +691,8 @@
         <div id="modal-post-left-actions" class="flex items-center gap-2">
           <!-- Nút thao tác nhanh theo trạng thái -->
         </div>
-        <button type="button" onclick="closePostDetailModal();" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+        <button type="button" onclick="closePostDetailModal();"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
           Đóng
         </button>
       </div>
@@ -607,11 +703,14 @@
   <!-- ========================================================================= -->
   <!-- MODAL XEM TRƯỚC BẢN IN FILE ĐIỂM (PRINT SCORE PREVIEW MODAL)              -->
   <!-- ========================================================================= -->
-  <div id="modal-print-score" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-2xs no-print">
-    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden text-left">
-      
+  <div id="modal-print-score"
+    class="hidden fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-2xs no-print">
+    <div
+      class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden text-left">
+
       <!-- Modal Header -->
-      <div class="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between shrink-0 bg-stone-50 dark:bg-stone-900/60">
+      <div
+        class="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between shrink-0 bg-stone-50 dark:bg-stone-900/60">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-[22px] text-[#35483d] dark:text-emerald-400">print</span>
           <div>
@@ -619,15 +718,17 @@
             <p class="text-xs text-[#797675] dark:text-stone-400">Xem trước văn bản trước khi in hoặc xuất tệp</p>
           </div>
         </div>
-        <button type="button" onclick="closePrintScoreModal();" class="w-8 h-8 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800 flex items-center justify-center transition-colors cursor-pointer">
+        <button type="button" onclick="closePrintScoreModal();"
+          class="w-8 h-8 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800 flex items-center justify-center transition-colors cursor-pointer">
           <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
 
       <!-- Printable Document Canvas -->
       <div class="flex-1 overflow-y-auto p-6 sm:p-8 bg-stone-100 dark:bg-stone-950/40">
-        <div id="print-sheet" class="bg-white text-black p-8 sm:p-10 rounded-xl shadow-md border border-stone-200 mx-auto max-w-[800px] text-xs leading-relaxed space-y-6">
-          
+        <div id="print-sheet"
+          class="bg-white text-black p-8 sm:p-10 rounded-xl shadow-md border border-stone-200 mx-auto max-w-[800px] text-xs leading-relaxed space-y-6">
+
           <!-- Quốc hiệu / Đơn vị -->
           <div class="flex items-start justify-between border-b pb-4 border-stone-300">
             <div class="text-center font-serif">
@@ -691,16 +792,20 @@
       </div>
 
       <!-- Modal Footer with action buttons -->
-      <div class="px-6 py-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between shrink-0 bg-stone-50 dark:bg-stone-900/60">
-        <button type="button" onclick="closePrintScoreModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+      <div
+        class="px-6 py-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between shrink-0 bg-stone-50 dark:bg-stone-900/60">
+        <button type="button" onclick="closePrintScoreModal();"
+          class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
           Đóng
         </button>
         <div class="flex items-center gap-2">
-          <button type="button" onclick="exportScoreCSV();" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-[#1b1c1c] dark:text-white hover:bg-stone-100 transition-colors cursor-pointer">
+          <button type="button" onclick="exportScoreCSV();"
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-[#1b1c1c] dark:text-white hover:bg-stone-100 transition-colors cursor-pointer">
             <span class="material-symbols-outlined text-[16px]">file_download</span>
             <span>Tải file Excel / CSV</span>
           </button>
-          <button type="button" onclick="triggerNativePrint();" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white shadow-sm transition-colors cursor-pointer">
+          <button type="button" onclick="triggerNativePrint();"
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white shadow-sm transition-colors cursor-pointer">
             <span class="material-symbols-outlined text-[16px]">print</span>
             <span>In ngay (Print / PDF)</span>
           </button>
@@ -714,53 +819,65 @@
   <!-- ========================================================================= -->
   <!-- MODAL THÊM TÀI KHOẢN MỚI                                                  -->
   <!-- ========================================================================= -->
-  <div id="modal-add-account" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
-    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-lg w-full p-5 sm:p-6 text-left space-y-4">
+  <div id="modal-add-account"
+    class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div
+      class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-lg w-full p-5 sm:p-6 text-left space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800">
         <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white flex items-center gap-2">
           <span class="material-symbols-outlined text-[20px] text-[#35483d] dark:text-emerald-400">person_add</span>
           Thêm người dùng vào danh sách điểm thưởng
         </h3>
-        <button type="button" onclick="closeAddAccountModal();" class="w-7 h-7 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+        <button type="button" onclick="closeAddAccountModal();"
+          class="w-7 h-7 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-[#797675] hover:text-[#1b1c1c] dark:hover:text-white flex items-center justify-center transition-colors cursor-pointer">
           <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
 
-      <form id="add-account-form" onsubmit="event.preventDefault(); submitNewAccount();" class="space-y-3 text-xs sm:text-sm">
+      <form id="add-account-form" onsubmit="event.preventDefault(); submitNewAccount();"
+        class="space-y-3 text-xs sm:text-sm">
         <div>
           <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Họ và tên *</label>
-          <input type="text" id="new-acc-name" required placeholder="VD: Nguyễn Văn An" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+          <input type="text" id="new-acc-name" required placeholder="VD: Nguyễn Văn An"
+            class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Mã định danh (MSSV/CB) *</label>
-            <input type="text" id="new-acc-id" required placeholder="VD: B2301234" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+            <input type="text" id="new-acc-id" required placeholder="VD: B2301234"
+              class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
           </div>
           <div>
             <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Điểm khởi tạo</label>
-            <input type="number" id="new-acc-score" value="10" min="0" max="100" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none font-mono">
+            <input type="number" id="new-acc-score" value="10" min="0" max="100"
+              class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none font-mono">
           </div>
         </div>
         <div>
           <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Đơn vị / Khoa</label>
-          <input type="text" id="new-acc-dept" placeholder="VD: Khoa Công nghệ Thông tin & Truyền thông" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+          <input type="text" id="new-acc-dept" placeholder="VD: Khoa Công nghệ Thông tin & Truyền thông"
+            class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Email CTU</label>
-            <input type="email" id="new-acc-email" placeholder="anb2301234@student.ctu.edu.vn" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+            <input type="email" id="new-acc-email" placeholder="anb2301234@student.ctu.edu.vn"
+              class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
           </div>
           <div>
             <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Số điện thoại</label>
-            <input type="text" id="new-acc-phone" placeholder="09xxxxxxxx" class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+            <input type="text" id="new-acc-phone" placeholder="09xxxxxxxx"
+              class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
           </div>
         </div>
 
         <div class="pt-3 flex items-center justify-end gap-2 border-t border-stone-100 dark:border-stone-800">
-          <button type="button" onclick="closeAddAccountModal();" class="px-4 py-2 rounded-xl font-semibold bg-stone-100 dark:bg-stone-800 text-[#1b1c1c] dark:text-white hover:bg-stone-200 transition-colors cursor-pointer">
+          <button type="button" onclick="closeAddAccountModal();"
+            class="px-4 py-2 rounded-xl font-semibold bg-stone-100 dark:bg-stone-800 text-[#1b1c1c] dark:text-white hover:bg-stone-200 transition-colors cursor-pointer">
             Hủy
           </button>
-          <button type="submit" class="px-4 py-2 rounded-xl font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
+          <button type="submit"
+            class="px-4 py-2 rounded-xl font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
             Lưu tài khoản
           </button>
         </div>
@@ -770,7 +887,8 @@
 
 
   <!-- TOAST NOTIFICATION CONTAINER (UI/UX Pro Max) -->
-  <div id="toast-container" class="fixed top-5 right-5 z-[150] flex flex-col gap-2.5 pointer-events-none no-print"></div>
+  <div id="toast-container" class="fixed top-5 right-5 z-[150] flex flex-col gap-2.5 pointer-events-none no-print">
+  </div>
 
   <!-- BẢN IN NGUYÊN BẢN (Dành cho print engine) -->
   <div id="print-area" class="hidden"></div>
@@ -1179,7 +1297,7 @@
     // -----------------------------------------------------------------------
     // 2. CHUYỂN TAB CHÍNH (ĐIỀU HƯỚNG QUA HEADER TABS & DỌN DẸP BODY TABS)
     // -----------------------------------------------------------------------
-    window.switchAdminTab = function(tabName) {
+    window.switchAdminTab = function (tabName) {
       const tabPosts = document.getElementById("tab-content-posts");
       const tabAccounts = document.getElementById("tab-content-accounts");
       const btnPosts = document.getElementById("tab-btn-posts");
@@ -1263,15 +1381,14 @@
       }
 
       const toast = document.createElement("div");
-      toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-semibold border transition-all duration-300 translate-y-2 opacity-0 ${
-        type === "success"
+      toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-semibold border transition-all duration-300 translate-y-2 opacity-0 ${type === "success"
           ? "bg-stone-900 text-white border-stone-700 dark:bg-stone-100 dark:text-stone-900"
           : type === "warning"
-          ? "bg-amber-950 text-amber-100 border-amber-800"
-          : type === "error"
-          ? "bg-rose-950 text-rose-100 border-rose-800"
-          : "bg-stone-900 text-white border-stone-700"
-      }`;
+            ? "bg-amber-950 text-amber-100 border-amber-800"
+            : type === "error"
+              ? "bg-rose-950 text-rose-100 border-rose-800"
+              : "bg-stone-900 text-white border-stone-700"
+        }`;
 
       const iconName = type === "success" ? "check_circle" : type === "warning" ? "warning" : type === "error" ? "error" : "info";
       const iconColor = type === "success" ? "text-emerald-400" : type === "warning" ? "text-amber-400" : type === "error" ? "text-rose-400" : "text-blue-400";
@@ -1550,7 +1667,7 @@
         const normStatus = normalizePostStatus(post.status);
 
         // 1. Text search
-        const matchesQuery = !query || 
+        const matchesQuery = !query ||
           post.title.toLowerCase().includes(query) ||
           post.id.toLowerCase().includes(query) ||
           post.reporterName.toLowerCase().includes(query) ||
@@ -1779,7 +1896,7 @@
       if (previewContainer) previewContainer.classList.add("hidden");
       if (emptyPlaceholder) emptyPlaceholder.classList.remove("hidden");
       if (previewImg) previewImg.src = "";
-      
+
       for (let i = 1; i <= 4; i++) {
         const thumb = document.getElementById(`pctsv-thumb-${i}`);
         if (thumb) {
@@ -1822,7 +1939,7 @@
       if (input.files && input.files[0]) {
         const file = input.files[0];
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           const thumb = document.getElementById(`pctsv-thumb-${currentThumbIndex}`);
           if (thumb) {
             thumb.innerHTML = `<img src="${e.target.result}" alt="Ảnh phụ ${currentThumbIndex}" class="w-full h-full object-cover rounded-xl">`;
@@ -1836,7 +1953,7 @@
       if (input.files && input.files[0]) {
         const file = input.files[0];
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           setPctsvPreview(e.target.result);
         };
         reader.readAsDataURL(file);
@@ -1865,7 +1982,7 @@
       if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
         const file = e.dataTransfer.files[0];
         const reader = new FileReader();
-        reader.onload = function(evt) {
+        reader.onload = function (evt) {
           setPctsvPreview(evt.target.result);
         };
         reader.readAsDataURL(file);
@@ -1938,7 +2055,7 @@
       const hourBtn = document.getElementById("clock-btn-hour");
       const minuteBtn = document.getElementById("clock-btn-minute");
       const modeLabel = document.getElementById("clock-mode-label");
-      
+
       const hhStr = String(clockPickerHour).padStart(2, "0");
       const mmStr = String(clockPickerMinute).padStart(2, "0");
 
@@ -1996,11 +2113,10 @@
           const isSelected = !isInner && (clockPickerHour === h || (h === 12 && clockPickerHour === 12));
 
           const numEl = document.createElement("div");
-          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${
-            isSelected
+          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${isSelected
               ? "text-white font-bold z-10"
               : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
-          }`;
+            }`;
           numEl.style.left = `${x}px`;
           numEl.style.top = `${y}px`;
           numEl.textContent = String(h);
@@ -2022,11 +2138,10 @@
           const isSelected = isInner && clockPickerHour === val;
 
           const numEl = document.createElement("div");
-          numEl.className = `absolute w-6 h-6 -ml-3 -mt-3 flex items-center justify-center rounded-full text-[10px] font-medium cursor-pointer select-none transition-colors pointer-events-auto ${
-            isSelected
+          numEl.className = `absolute w-6 h-6 -ml-3 -mt-3 flex items-center justify-center rounded-full text-[10px] font-medium cursor-pointer select-none transition-colors pointer-events-auto ${isSelected
               ? "text-white font-bold z-10"
               : "text-stone-500 dark:text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400"
-          }`;
+            }`;
           numEl.style.left = `${x}px`;
           numEl.style.top = `${y}px`;
           numEl.textContent = val === 0 ? "00" : String(val);
@@ -2052,11 +2167,10 @@
           const isSelected = clockPickerMinute === m;
 
           const numEl = document.createElement("div");
-          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${
-            isSelected
+          numEl.className = `absolute w-7 h-7 -ml-3.5 -mt-3.5 flex items-center justify-center rounded-full text-xs font-semibold cursor-pointer select-none transition-colors pointer-events-auto ${isSelected
               ? "text-white font-bold z-10"
               : "text-stone-700 dark:text-stone-200 hover:text-[#1f3227] dark:hover:text-emerald-400"
-          }`;
+            }`;
           numEl.style.left = `${x}px`;
           numEl.style.top = `${y}px`;
           numEl.textContent = String(m).padStart(2, "0");
@@ -2387,8 +2501,8 @@
 
       accountsToRender.forEach(acc => {
         // Điểm hiển thị (Chỉ người dùng sinh viên có điểm theo bảng vinh danh, cán bộ hiển thị '-')
-        const pointsDisplay = (acc.points !== null && acc.points !== undefined) 
-          ? `<span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points}</span>` 
+        const pointsDisplay = (acc.points !== null && acc.points !== undefined)
+          ? `<span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points}</span>`
           : `<span class="text-stone-400 font-normal">-</span>`;
 
         // Desktop Row (Không có chức năng khóa tài khoản)
@@ -2548,7 +2662,7 @@
 
       // 3. Cập nhật ngày in thực tế
       const today = new Date();
-      document.getElementById("print-sheet-date").innerText = 
+      document.getElementById("print-sheet-date").innerText =
         `Cập nhật ngày ${today.getDate()} tháng ${today.getMonth() + 1} năm ${today.getFullYear()} • Bảng vinh danh CTU Lost & Found`;
 
       document.getElementById("modal-print-score").classList.remove("hidden");
@@ -2686,10 +2800,13 @@
 
 
   <!-- MODAL XÁC NHẬN XÓA BÀI ĐĂNG (CHỈ CẦN CLICK XÁC NHẬN, KHÔNG CẦN NHẬP LÝ DO) -->
-  <div id="modal-confirm-delete" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
-    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-md w-full p-6 text-left space-y-4 animate-in fade-in zoom-in-95 duration-200">
+  <div id="modal-confirm-delete"
+    class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div
+      class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-md w-full p-6 text-left space-y-4 animate-in fade-in zoom-in-95 duration-200">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 flex items-center justify-center shrink-0">
+        <div
+          class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 flex items-center justify-center shrink-0">
           <span class="material-symbols-outlined text-[24px]">delete_forever</span>
         </div>
         <div>
@@ -2701,10 +2818,12 @@
         Bạn có chắc chắn muốn xóa vĩnh viễn bài đăng này khỏi hệ thống? Thao tác này không thể hoàn tác.
       </p>
       <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-stone-100 dark:border-stone-800">
-        <button type="button" onclick="closeDeletePostModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+        <button type="button" onclick="closeDeletePostModal();"
+          class="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
           Hủy bỏ
         </button>
-        <button type="button" onclick="executeDeletePost();" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm">
+        <button type="button" onclick="executeDeletePost();"
+          class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm">
           <span class="material-symbols-outlined text-[16px]">delete</span>
           <span>Xác nhận xóa</span>
         </button>
@@ -2713,23 +2832,28 @@
   </div>
 
   <!-- MODAL THÊM BÀI ĐĂNG PHÒNG CÔNG TÁC SINH VIÊN (PCTSV) -->
-  <div id="modal-add-pctsv-post" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
-    <div class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-7 text-left space-y-5 animate-in fade-in zoom-in-95 duration-200">
-      
+  <div id="modal-add-pctsv-post"
+    class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs no-print">
+    <div
+      class="bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-7 text-left space-y-5 animate-in fade-in zoom-in-95 duration-200">
+
       <!-- Modal Header (KHÔNG có tích xanh trong form nhập liệu) -->
       <div class="flex items-center justify-between pb-4 border-b border-stone-100 dark:border-stone-800">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center shadow-xs">
+          <div
+            class="w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center shadow-xs">
             <span class="material-symbols-outlined text-[22px]">post_add</span>
           </div>
           <div>
             <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">
               Thêm bài đăng tiếp nhận (PCTSV)
             </h3>
-            <p class="text-xs text-[#797675] dark:text-stone-400 mt-0.5">Tiếp nhận và quản lý đồ vật thất lạc tại Phòng Công tác Sinh viên</p>
+            <p class="text-xs text-[#797675] dark:text-stone-400 mt-0.5">Tiếp nhận và quản lý đồ vật thất lạc tại Phòng
+              Công tác Sinh viên</p>
           </div>
         </div>
-        <button type="button" onclick="closeAddPctsvPostModal();" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+        <button type="button" onclick="closeAddPctsvPostModal();"
+          class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
           <span class="material-symbols-outlined text-[20px]">close</span>
         </button>
       </div>
@@ -2737,16 +2861,17 @@
       <!-- Form 2 Cột hoàn chỉnh chuẩn UI/UX Pro Max (Mirroring edit-form layout) -->
       <form id="form-add-pctsv-post" onsubmit="handleCreatePctsvPost(event);" class="space-y-5 text-xs">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
+
           <!-- CỘT TRÁI (7 CỘT): CÁC TRƯỜNG THÔNG TIN ĐỒ VẬT -->
           <div class="lg:col-span-7 space-y-3.5">
-            
+
             <!-- 1. Tiêu đề -->
             <div>
               <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                 Tiêu đề bài đăng <span class="text-rose-600">*</span>
               </label>
-              <input type="text" id="pctsv-title" required placeholder="Nhập tiêu đề đồ vật tiếp nhận..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+              <input type="text" id="pctsv-title" required placeholder="Nhập tiêu đề đồ vật tiếp nhận..."
+                class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
             </div>
 
             <!-- 2. Loại đồ vật & Màu sắc (2 cột) -->
@@ -2755,7 +2880,8 @@
                 <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                   Loại đồ vật <span class="text-rose-600">*</span>
                 </label>
-                <select id="pctsv-category" required class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+                <select id="pctsv-category" required
+                  class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
                   <option value="" disabled selected>-- Chọn loại đồ vật --</option>
                   <option value="Ví tiền / Bóp da">Ví tiền / Bóp da</option>
                   <option value="Thiết bị điện tử">Thiết bị điện tử</option>
@@ -2771,7 +2897,8 @@
                 <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                   Màu sắc <span class="text-rose-600">*</span>
                 </label>
-                <select id="pctsv-color" required class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+                <select id="pctsv-color" required
+                  class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
                   <option value="" disabled selected>-- Chọn màu sắc --</option>
                   <option value="Đen">Đen</option>
                   <option value="Nâu">Nâu</option>
@@ -2790,19 +2917,24 @@
               <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                 Mô tả đặc điểm nhận dạng <span class="text-rose-600">*</span>
               </label>
-              <textarea id="pctsv-note" rows="3" required placeholder="Ghi chú chi tiết đặc điểm nhận dạng, tình trạng hiện tại của đồ vật..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs leading-relaxed focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 resize-none transition-colors"></textarea>
+              <textarea id="pctsv-note" rows="3" required
+                placeholder="Ghi chú chi tiết đặc điểm nhận dạng, tình trạng hiện tại của đồ vật..."
+                class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs leading-relaxed focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 resize-none transition-colors"></textarea>
             </div>
 
             <!-- 4. Địa điểm nhặt (theo khoa / tòa nhà / tầng / phòng) -->
-            <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-stone-800/40 border border-stone-200 dark:border-stone-700/80 space-y-2">
+            <div
+              class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-stone-800/40 border border-stone-200 dark:border-stone-700/80 space-y-2">
               <div class="flex items-center justify-between">
-                <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Địa điểm nhặt được <span class="text-rose-600">*</span></label>
+                <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200">Địa điểm nhặt được <span
+                    class="text-rose-600">*</span></label>
                 <span class="text-[10px] text-[#797675] dark:text-stone-400">Khoa / Tòa nhà / Tầng / Phòng</span>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div>
                   <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">1. Khoa / Khu</span>
-                  <select id="pctsv-loc-faculty" onchange="syncPctsvLocation()" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                  <select id="pctsv-loc-faculty" onchange="syncPctsvLocation()"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
                     <option value="" selected>-- Chọn khoa --</option>
                     <option value="Khoa CNTT&TT (C1)">Khoa CNTT&TT (C1)</option>
                     <option value="Nhà học B1">Nhà học B1</option>
@@ -2818,7 +2950,8 @@
                 </div>
                 <div>
                   <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">2. Tầng</span>
-                  <select id="pctsv-loc-floor" disabled onchange="syncPctsvLocation()" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800/40 text-stone-400 dark:text-stone-500 font-medium text-xs cursor-not-allowed">
+                  <select id="pctsv-loc-floor" disabled onchange="syncPctsvLocation()"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800/40 text-stone-400 dark:text-stone-500 font-medium text-xs cursor-not-allowed">
                     <option value="" selected>-- Chọn tầng --</option>
                     <option value="Tầng trệt">Tầng trệt</option>
                     <option value="Tầng 1">Tầng 1</option>
@@ -2829,10 +2962,13 @@
                 </div>
                 <div>
                   <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">3. Phòng / Vị trí</span>
-                  <input type="text" id="pctsv-loc-room" oninput="syncPctsvLocation()" placeholder="VD: Phòng 204..." class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
+                  <input type="text" id="pctsv-loc-room" oninput="syncPctsvLocation()" placeholder="VD: Phòng 204..."
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
                 </div>
               </div>
-              <input type="text" id="pctsv-location" required placeholder="Địa điểm tổng hợp (VD: Nhà học C1, Tầng 2, Phòng 204)..." class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+              <input type="text" id="pctsv-location" required
+                placeholder="Địa điểm tổng hợp (VD: Nhà học C1, Tầng 2, Phòng 204)..."
+                class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
             </div>
 
             <!-- 5. Ngày nhặt & Thời gian nhặt / Khoảng giờ nhặt -->
@@ -2841,15 +2977,20 @@
                 <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                   Ngày nhặt <span class="text-rose-600">*</span>
                 </label>
-                <input type="date" id="pctsv-date" required value="" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+                <input type="date" id="pctsv-date" required value=""
+                  class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
               </div>
               <div>
                 <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                   Thời gian / Khoảng giờ nhặt <span class="text-rose-600">*</span>
                 </label>
                 <div class="relative">
-                  <input type="text" id="pctsv-time" required placeholder="VD: 14:15" value="" onclick="openPctsvClockPicker()" class="w-full px-3 py-2.5 pr-10 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors cursor-pointer">
-                  <button type="button" onclick="openPctsvClockPicker()" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400 p-1 transition-colors cursor-pointer" title="Mở đồng hồ chọn giờ">
+                  <input type="text" id="pctsv-time" required placeholder="VD: 14:15" value=""
+                    onclick="openPctsvClockPicker()"
+                    class="w-full px-3 py-2.5 pr-10 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors cursor-pointer">
+                  <button type="button" onclick="openPctsvClockPicker()"
+                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-[#1f3227] dark:hover:text-emerald-400 p-1 transition-colors cursor-pointer"
+                    title="Mở đồng hồ chọn giờ">
                     <span class="material-symbols-outlined text-[18px]">schedule</span>
                   </button>
                 </div>
@@ -2861,7 +3002,9 @@
               <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                 Vị trí lưu giữ tại PCTSV <span class="text-rose-600">*</span>
               </label>
-              <input type="text" id="pctsv-storage" required placeholder="VD: Bàn tiếp nhận PCTSV - Tủ A1, Nhà điều hành C1..." value="" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+              <input type="text" id="pctsv-storage" required
+                placeholder="VD: Bàn tiếp nhận PCTSV - Tủ A1, Nhà điều hành C1..." value=""
+                class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
             </div>
 
             <!-- 7. Câu hỏi bảo mật -->
@@ -2869,7 +3012,9 @@
               <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5 text-xs">
                 Câu hỏi bảo mật xác minh quyền sở hữu
               </label>
-              <input type="text" id="pctsv-question" placeholder="VD: Mã số in trên thẻ sinh viên hoặc đặc điểm nhận dạng riêng biệt là gì?" value="" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
+              <input type="text" id="pctsv-question"
+                placeholder="VD: Mã số in trên thẻ sinh viên hoặc đặc điểm nhận dạng riêng biệt là gì?" value=""
+                class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#1f3227] dark:focus:border-emerald-500 transition-colors">
             </div>
 
           </div>
@@ -2879,24 +3024,28 @@
             <div>
               <div class="mb-1.5">
                 <label class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200 leading-snug">
-                  Hình ảnh đồ vật nhặt được <span class="text-rose-600">*</span> <span class="text-[11px] font-normal text-[#797675] dark:text-stone-400 block sm:inline mt-0.5 sm:mt-0">(Tối thiểu 1 ảnh, tối đa 5 ảnh, PNG, JPG &lt; 5MB)</span>
+                  Hình ảnh đồ vật nhặt được <span class="text-rose-600">*</span> <span
+                    class="text-[11px] font-normal text-[#797675] dark:text-stone-400 block sm:inline mt-0.5 sm:mt-0">(Tối
+                    thiểu 1 ảnh, tối đa 5 ảnh, PNG, JPG &lt; 5MB)</span>
                 </label>
               </div>
 
               <!-- Vùng kéo thả upload ảnh chính -->
-              <input type="file" id="pctsv-file-input" accept="image/*" class="hidden" onchange="handlePctsvFileSelect(this)">
-              <div id="pctsv-drop-zone"
-                onclick="document.getElementById('pctsv-file-input').click();"
-                ondragover="handlePctsvDragOver(event);"
-                ondragleave="handlePctsvDragLeave(event);"
+              <input type="file" id="pctsv-file-input" accept="image/*" class="hidden"
+                onchange="handlePctsvFileSelect(this)">
+              <div id="pctsv-drop-zone" onclick="document.getElementById('pctsv-file-input').click();"
+                ondragover="handlePctsvDragOver(event);" ondragleave="handlePctsvDragLeave(event);"
                 ondrop="handlePctsvDrop(event);"
                 class="border-2 border-dashed border-[#c3c8c2] dark:border-stone-700 hover:border-[#1f3227] dark:hover:border-emerald-500 rounded-2xl p-6 text-center bg-[#fcf9f8] dark:bg-stone-800/40 transition-all cursor-pointer group relative overflow-hidden min-h-[190px] flex flex-col items-center justify-center">
-                
+
                 <!-- Preview khi có ảnh -->
-                <div id="pctsv-preview-container" class="hidden absolute inset-0 bg-stone-900/10 flex items-center justify-center">
+                <div id="pctsv-preview-container"
+                  class="hidden absolute inset-0 bg-stone-900/10 flex items-center justify-center">
                   <img id="pctsv-preview-img" src="" alt="Ảnh xem trước" class="w-full h-full object-cover">
-                  <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                    <span class="px-3 py-1.5 rounded-lg bg-white/95 text-[#1b1c1c] text-xs font-bold shadow flex items-center gap-1">
+                  <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <span
+                      class="px-3 py-1.5 rounded-lg bg-white/95 text-[#1b1c1c] text-xs font-bold shadow flex items-center gap-1">
                       <span class="material-symbols-outlined text-[15px]">change_circle</span>
                       <span>Đổi ảnh khác</span>
                     </span>
@@ -2905,11 +3054,13 @@
 
                 <!-- Trạng thái trống ban đầu -->
                 <div id="pctsv-empty-placeholder" class="space-y-2">
-                  <div class="w-12 h-12 mx-auto rounded-full bg-stone-200 dark:bg-stone-700 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div
+                    class="w-12 h-12 mx-auto rounded-full bg-stone-200 dark:bg-stone-700 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <span class="material-symbols-outlined text-2xl">add_a_photo</span>
                   </div>
                   <p class="text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 leading-tight">
-                    Kéo thả hình ảnh vào đây, hoặc <span class="text-[#1f3227] dark:text-emerald-400 underline underline-offset-2">chọn từ thiết bị</span>
+                    Kéo thả hình ảnh vào đây, hoặc <span
+                      class="text-[#1f3227] dark:text-emerald-400 underline underline-offset-2">chọn từ thiết bị</span>
                   </p>
                   <p class="text-[11px] text-[#797675] dark:text-stone-400">Hỗ trợ JPG, PNG, WEBP (&lt; 5MB)</p>
                 </div>
@@ -2917,26 +3068,32 @@
 
               <!-- 4 ô thumbnail phụ trợ nhỏ -->
               <div class="mt-3.5">
-                <span class="text-[11px] font-medium text-[#797675] dark:text-stone-400 block mb-1.5">Ảnh phụ trợ (4 góc chụp khác nhau):</span>
+                <span class="text-[11px] font-medium text-[#797675] dark:text-stone-400 block mb-1.5">Ảnh phụ trợ (4 góc
+                  chụp khác nhau):</span>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="pctsv-thumbnails-grid">
-                  <div onclick="triggerPctsvThumbnail(1)" id="pctsv-thumb-1" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                  <div onclick="triggerPctsvThumbnail(1)" id="pctsv-thumb-1"
+                    class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
                     <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
                     <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 1</span>
                   </div>
-                  <div onclick="triggerPctsvThumbnail(2)" id="pctsv-thumb-2" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                  <div onclick="triggerPctsvThumbnail(2)" id="pctsv-thumb-2"
+                    class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
                     <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
                     <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 2</span>
                   </div>
-                  <div onclick="triggerPctsvThumbnail(3)" id="pctsv-thumb-3" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                  <div onclick="triggerPctsvThumbnail(3)" id="pctsv-thumb-3"
+                    class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
                     <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
                     <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 3</span>
                   </div>
-                  <div onclick="triggerPctsvThumbnail(4)" id="pctsv-thumb-4" class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
+                  <div onclick="triggerPctsvThumbnail(4)" id="pctsv-thumb-4"
+                    class="h-18 rounded-xl border border-dashed border-stone-300 dark:border-stone-700 flex flex-col items-center justify-center text-[#797675] hover:border-[#1f3227] dark:hover:border-emerald-500 hover:text-[#1b1c1c] dark:hover:text-white transition-colors cursor-pointer bg-stone-50/50 dark:bg-stone-800/30 overflow-hidden relative group">
                     <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
                     <span class="text-[10px] font-medium mt-0.5">Thêm ảnh 4</span>
                   </div>
                 </div>
-                <input type="file" id="pctsv-thumb-input" accept="image/*" class="hidden" onchange="handlePctsvThumbFileSelect(this)">
+                <input type="file" id="pctsv-thumb-input" accept="image/*" class="hidden"
+                  onchange="handlePctsvThumbFileSelect(this)">
               </div>
 
             </div>
@@ -2946,10 +3103,12 @@
 
         <!-- Nút hành động dưới cùng -->
         <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-100 dark:border-stone-800">
-          <button type="button" onclick="closeAddPctsvPostModal();" class="px-5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-[#4a4746] dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+          <button type="button" onclick="closeAddPctsvPostModal();"
+            class="px-5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-[#4a4746] dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
             Hủy
           </button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-bold shadow-sm flex items-center gap-2 cursor-pointer transition-colors">
+          <button type="submit"
+            class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-bold shadow-sm flex items-center gap-2 cursor-pointer transition-colors">
             <span class="material-symbols-outlined text-[18px]">publish</span>
             <span>Đăng bài tiếp nhận</span>
           </button>
@@ -2959,27 +3118,32 @@
   </div>
 
   <!-- POPUP / MODAL CHỌN GIỜ KIM XOAY TRÒN (CLOCK TIME PICKER) -->
-  <div id="modal-pctsv-clock-picker" onclick="if(event.target === this) closePctsvClockPicker();" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/50 backdrop-blur-2xs select-none no-print">
-    <div class="bg-white dark:bg-[#1f2125] rounded-3xl border border-stone-200 dark:border-stone-800 shadow-2xl p-5 sm:p-6 w-full max-w-[340px] text-center space-y-4 animate-in fade-in zoom-in-95 duration-200">
-      
+  <div id="modal-pctsv-clock-picker" onclick="if(event.target === this) closePctsvClockPicker();"
+    class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/50 backdrop-blur-2xs select-none no-print">
+    <div
+      class="bg-white dark:bg-[#1f2125] rounded-3xl border border-stone-200 dark:border-stone-800 shadow-2xl p-5 sm:p-6 w-full max-w-[340px] text-center space-y-4 animate-in fade-in zoom-in-95 duration-200">
+
       <!-- Header: Title & Close -->
       <div class="flex items-center justify-between pb-2 border-b border-stone-100 dark:border-stone-800">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-[#1f3227] dark:text-emerald-400 text-[20px]">schedule</span>
           <span class="text-xs font-bold text-[#1b1c1c] dark:text-white uppercase tracking-wider">Chọn giờ nhặt</span>
         </div>
-        <button type="button" onclick="closePctsvClockPicker()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+        <button type="button" onclick="closePctsvClockPicker()"
+          class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
           <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
 
       <!-- Time Display (Giờ : Phút) with Mode Toggle Buttons -->
       <div class="flex items-center justify-center gap-1.5 py-1">
-        <button type="button" id="clock-btn-hour" onclick="setClockPickerMode('hour')" class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105">
+        <button type="button" id="clock-btn-hour" onclick="setClockPickerMode('hour')"
+          class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-[#1f3227] dark:bg-emerald-600 text-white shadow-md scale-105">
           14
         </button>
         <span class="text-2xl font-black text-stone-400 select-none animate-pulse">:</span>
-        <button type="button" id="clock-btn-minute" onclick="setClockPickerMode('minute')" class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200">
+        <button type="button" id="clock-btn-minute" onclick="setClockPickerMode('minute')"
+          class="px-4 py-2 rounded-2xl text-3xl font-extrabold font-mono transition-all duration-200 cursor-pointer bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200">
           00
         </button>
       </div>
@@ -2990,16 +3154,20 @@
       </div>
 
       <!-- Interactive Clock Face Dial (260px x 260px) -->
-      <div class="relative w-[260px] h-[260px] mx-auto rounded-full bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700/80 shadow-inner flex items-center justify-center cursor-pointer select-none touch-none" id="clock-dial-face">
-        
+      <div
+        class="relative w-[260px] h-[260px] mx-auto rounded-full bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700/80 shadow-inner flex items-center justify-center cursor-pointer select-none touch-none"
+        id="clock-dial-face">
+
         <!-- SVG for Clock Hand (Kim đồng hồ) -->
         <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 260 260">
           <!-- Center Pivot -->
           <circle cx="130" cy="130" r="5" fill="#1f3227" class="dark:fill-emerald-400" />
           <!-- Hand Line -->
-          <line id="clock-hand-line" x1="130" y1="130" x2="130" y2="34" stroke="#1f3227" stroke-width="2.5" class="dark:stroke-emerald-400" />
+          <line id="clock-hand-line" x1="130" y1="130" x2="130" y2="34" stroke="#1f3227" stroke-width="2.5"
+            class="dark:stroke-emerald-400" />
           <!-- End Knob -->
-          <circle id="clock-hand-knob" cx="130" cy="34" r="16" fill="#1f3227" fill-opacity="0.95" class="dark:fill-emerald-500" />
+          <circle id="clock-hand-knob" cx="130" cy="34" r="16" fill="#1f3227" fill-opacity="0.95"
+            class="dark:fill-emerald-500" />
         </svg>
 
         <!-- Dynamic Numbers Container (DOM elements positioned over dial) -->
@@ -3011,19 +3179,26 @@
 
       <!-- Quick Preset Chips -->
       <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1">
-        <button type="button" onclick="setClockPreset(8, 0)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">08:00</button>
-        <button type="button" onclick="setClockPreset(10, 30)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">10:30</button>
-        <button type="button" onclick="setClockPreset(11, 45)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">11:45</button>
-        <button type="button" onclick="setClockPreset(14, 15)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">14:15</button>
-        <button type="button" onclick="setClockPreset(16, 30)" class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">16:30</button>
+        <button type="button" onclick="setClockPreset(8, 0)"
+          class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">08:00</button>
+        <button type="button" onclick="setClockPreset(10, 30)"
+          class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">10:30</button>
+        <button type="button" onclick="setClockPreset(11, 45)"
+          class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">11:45</button>
+        <button type="button" onclick="setClockPreset(14, 15)"
+          class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">14:15</button>
+        <button type="button" onclick="setClockPreset(16, 30)"
+          class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-[10px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer">16:30</button>
       </div>
 
       <!-- Footer Buttons: Hủy & Xác nhận -->
       <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-stone-100 dark:border-stone-800">
-        <button type="button" onclick="closePctsvClockPicker()" class="px-4 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
+        <button type="button" onclick="closePctsvClockPicker()"
+          class="px-4 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer">
           Hủy
         </button>
-        <button type="button" onclick="confirmPctsvClockPicker()" class="px-5 py-2 rounded-xl bg-[#1f3227] hover:bg-[#142018] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white text-xs font-bold shadow transition-colors flex items-center gap-1.5 cursor-pointer">
+        <button type="button" onclick="confirmPctsvClockPicker()"
+          class="px-5 py-2 rounded-xl bg-[#1f3227] hover:bg-[#142018] dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white text-xs font-bold shadow transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">check</span>
           <span>Xác nhận</span>
         </button>
@@ -3033,4 +3208,5 @@
   </div>
 
 </body>
+
 </html>

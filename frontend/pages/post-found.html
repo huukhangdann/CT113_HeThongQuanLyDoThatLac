@@ -58,6 +58,7 @@
       --ux-spring: cubic-bezier(.34, 1.45, .64, 1);
       --ux-shadow-strong: rgba(31, 50, 39, 0.15);
     }
+
     .dark {
       --ux-surface: #1e1f22;
       --ux-ink: #F4F0E8;
@@ -80,6 +81,7 @@
       padding: 18px 20px 16px;
       margin-bottom: 24px;
     }
+
     .u318-hd {
       display: flex;
       flex-direction: column;
@@ -88,30 +90,35 @@
       text-align: center;
       margin-bottom: 12px;
     }
+
     .u318-hd b {
       font-size: 17px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--ux-ink);
     }
+
     .u318-hd span {
       font-size: 12px;
       font-weight: 500;
       color: var(--ux-ink-3);
       margin-top: 2px;
     }
+
     .u318-track {
       position: relative;
       width: 100%;
       max-width: 640px;
       margin: 0 auto;
     }
+
     .u318-track svg {
       width: 100%;
       height: 44px;
       overflow: visible;
       display: block;
     }
+
     .u318-guide {
       fill: none;
       stroke: var(--ux-line-2);
@@ -119,6 +126,7 @@
       stroke-dasharray: 4 6;
       stroke-linecap: round;
     }
+
     .u318-route {
       fill: none;
       stroke: var(--ux-accent);
@@ -126,6 +134,7 @@
       stroke-linecap: round;
       transition: stroke-dashoffset 0.45s var(--ux-spring);
     }
+
     .u318-dot {
       fill: var(--ux-surface);
       stroke: var(--ux-line-2);
@@ -133,13 +142,16 @@
       transition: stroke 0.3s, fill 0.3s;
       cursor: pointer;
     }
+
     .u318-dot.on {
       stroke: var(--ux-accent);
     }
+
     .u318-dot.done {
       fill: var(--ux-accent);
       stroke: var(--ux-accent);
     }
+
     .u318-dotc {
       fill: var(--ux-accent);
       transform-box: fill-box;
@@ -148,9 +160,11 @@
       transition: transform 0.4s var(--ux-spring);
       pointer-events: none;
     }
+
     .u318-dotc.on {
       transform: scale(1);
     }
+
     .u318-dot-txt {
       font-size: 11px;
       font-weight: 700;
@@ -160,6 +174,7 @@
       pointer-events: none;
       font-family: inherit;
     }
+
     .u318-dot-txt.done {
       fill: var(--ux-accent-ink);
     }
@@ -172,6 +187,7 @@
       margin: 4px auto 0;
       padding: 0 4px;
     }
+
     .u318-step-lbl {
       width: 25%;
       text-align: center;
@@ -181,6 +197,7 @@
       transition: color 0.3s, font-weight 0.3s;
       cursor: pointer;
     }
+
     .u318-step-lbl.on {
       color: var(--ux-accent);
       font-weight: 700;
@@ -193,6 +210,7 @@
       transform: translateY(6px);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
+
     .step-panel.active {
       display: block;
       opacity: 1;
@@ -203,13 +221,17 @@
       background-color: var(--theme-bg-page, #fcf9f8);
       font-family: "Be Vietnam Pro", sans-serif;
     }
+
     .material-symbols-outlined {
       font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
       display: inline-block;
       vertical-align: middle;
       line-height: 1;
     }
-    input:focus-visible, select:focus-visible, textarea:focus-visible {
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
       outline: 2px solid #1f3227;
       outline-offset: 1px;
     }
@@ -229,7 +251,8 @@
   <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
     <!-- Breadcrumb & Mode Selector Header -->
-    <div class="mb-5 pb-4 border-b border-[#e7e1df] dark:border-stone-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div
+      class="mb-5 pb-4 border-b border-[#e7e1df] dark:border-stone-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div>
         <nav class="flex items-center gap-1.5 text-xs text-[#727873] dark:text-stone-400 mb-1" aria-label="Breadcrumb">
           <a href="index.html" class="hover:text-[#1b1c1c] dark:hover:text-white transition-colors">Trang chủ</a>
@@ -244,12 +267,15 @@
       </div>
 
       <!-- Tab chuyển đổi giữa Báo nhặt & Báo mất -->
-      <div class="inline-flex p-1 bg-[#f0eded] dark:bg-stone-800 rounded-xl border border-[#e7e1df] dark:border-stone-700 self-start sm:self-auto shrink-0">
-        <span class="px-3 py-1 rounded-lg bg-white dark:bg-stone-900 text-xs font-semibold text-[#1f3227] dark:text-emerald-400 shadow-xs flex items-center gap-1.5">
+      <div
+        class="inline-flex p-1 bg-[#f0eded] dark:bg-stone-800 rounded-xl border border-[#e7e1df] dark:border-stone-700 self-start sm:self-auto shrink-0">
+        <span
+          class="px-3 py-1 rounded-lg bg-white dark:bg-stone-900 text-xs font-semibold text-[#1f3227] dark:text-emerald-400 shadow-xs flex items-center gap-1.5">
           <span class="material-symbols-outlined text-[15px]">volunteer_activism</span>
           <span>Báo nhặt đồ</span>
         </span>
-        <a href="post-lost.html" class="px-3 py-1 rounded-lg text-xs font-medium text-[#5e5f59] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white transition-colors flex items-center gap-1.5">
+        <a href="post-lost.html"
+          class="px-3 py-1 rounded-lg text-xs font-medium text-[#5e5f59] dark:text-stone-400 hover:text-[#1b1c1c] dark:hover:text-white transition-colors flex items-center gap-1.5">
           <span class="material-symbols-outlined text-[15px]">search</span>
           <span>Báo mất đồ</span>
         </a>
@@ -297,7 +323,7 @@
       <div class="u318-labels">
         <div class="u318-step-lbl on" data-step="1">Step 1: Hình ảnh</div>
         <div class="u318-step-lbl" data-step="2">Step 2: Mô tả đồ vật</div>
-        <div class="u318-step-lbl" data-step="3">Step 3: Địa chỉ & Thời gian</div>
+        <div class="u318-step-lbl" data-step="3">Step 3: Thông tin</div>
         <div class="u318-step-lbl" data-step="4">Step 4: Xác minh</div>
       </div>
     </div>
@@ -306,7 +332,8 @@
     <form id="found-post-form" onsubmit="event.preventDefault()">
 
       <!-- ================= STEP 1: NHẬP HÌNH VÀO (THEO ẢNH 1) ================= -->
-      <section id="step-panel-1" class="step-panel active bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+      <section id="step-panel-1"
+        class="step-panel active bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
         <div>
           <div class="flex items-center justify-between">
             <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100 flex items-center gap-1.5">
@@ -325,11 +352,13 @@
         <!-- Vùng kéo thả ảnh nét đứt (theo Ảnh 1) -->
         <div id="drop-zone"
           class="border-2 border-dashed border-[#c3c8c2] dark:border-stone-700 hover:border-[#1f3227] dark:hover:border-emerald-500 rounded-2xl p-8 text-center bg-[#fcf9f8] dark:bg-stone-800/40 transition-colors cursor-pointer group">
-          <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-stone-200 dark:bg-stone-700 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 rounded-full bg-stone-200 dark:bg-stone-700 text-[#1f3227] dark:text-emerald-400 flex items-center justify-center">
             <span class="material-symbols-outlined text-2xl">add_a_photo</span>
           </div>
           <p class="text-sm font-semibold text-[#1b1c1c] dark:text-stone-100">
-            Kéo thả hình ảnh vào đây, hoặc <span class="text-[#1f3227] dark:text-emerald-400 underline underline-offset-2">chọn từ thiết bị</span>
+            Kéo thả hình ảnh vào đây, hoặc <span
+              class="text-[#1f3227] dark:text-emerald-400 underline underline-offset-2">chọn từ thiết bị</span>
           </p>
           <p class="text-xs text-[#727873] dark:text-stone-400 max-w-md mx-auto mt-1 leading-relaxed">
             Hình ảnh rõ nét giúp đối chiếu thông tin chính xác và trao trả đồ vật nhanh chóng.
@@ -338,19 +367,27 @@
 
         <!-- Lưới 4 ô xem trước ảnh (theo Ảnh 1) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-1" id="image-slots-grid">
-          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="0">
+          <div
+            class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors"
+            data-index="0">
             <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
             <span class="text-xs font-medium">Thêm ảnh 1</span>
           </div>
-          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="1">
+          <div
+            class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors"
+            data-index="1">
             <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
             <span class="text-xs font-medium">Thêm ảnh 2</span>
           </div>
-          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="2">
+          <div
+            class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors"
+            data-index="2">
             <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
             <span class="text-xs font-medium">Thêm ảnh 3</span>
           </div>
-          <div class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors" data-index="3">
+          <div
+            class="image-slot relative border border-dashed border-[#c3c8c2] dark:border-stone-700 rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 text-[#727873] hover:border-[#1f3227] hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer overflow-hidden transition-colors"
+            data-index="3">
             <span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
             <span class="text-xs font-medium">Thêm ảnh 4</span>
           </div>
@@ -358,10 +395,12 @@
 
         <!-- Điều hướng Step 1 -->
         <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
-          <a href="post.html" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors">
+          <a href="post.html"
+            class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors">
             Hủy
           </a>
-          <button type="button" id="btn-next-step-1" class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+          <button type="button" id="btn-next-step-1"
+            class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
             <span>Tiếp tục sang Bước 2</span>
             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
           </button>
@@ -369,7 +408,8 @@
       </section>
 
       <!-- ================= STEP 2: MÔ TẢ ĐỒ VẬT (THEO ẢNH 2) ================= -->
-      <section id="step-panel-2" class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+      <section id="step-panel-2"
+        class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
         <div>
           <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100">
             Mô Tả Chi Tiết Đồ Vật
@@ -387,7 +427,8 @@
               <label for="item-category" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
                 Loại đồ vật <span class="text-[#ba1a1a] font-bold">*</span>
               </label>
-              <span class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1f3227] dark:text-emerald-400 bg-[#eef5f0] dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-[#e7e1df] dark:border-stone-700">
+              <span
+                class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1f3227] dark:text-emerald-400 bg-[#eef5f0] dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-[#e7e1df] dark:border-stone-700">
                 <span class="material-symbols-outlined text-xs text-amber-600">auto_awesome</span>
                 AI gợi ý
               </span>
@@ -398,14 +439,17 @@
                 <option value="" disabled selected>-- Chọn loại đồ vật --</option>
                 <option value="Bình nước giữ nhiệt / Bình đựng nước">Bình nước giữ nhiệt / Bình đựng nước</option>
                 <option value="Thẻ sinh viên / Thẻ ATM / CCCD">Thẻ sinh viên / Thẻ ATM / CCCD</option>
-                <option value="Thiết bị điện tử (Điện thoại, Laptop, Tai nghe)">Thiết bị điện tử (Điện thoại, Laptop, Tai nghe)</option>
-                <option value="Tài liệu học tập / Giáo trình / Bìa hồ sơ">Tài liệu học tập / Giáo trình / Bìa hồ sơ</option>
+                <option value="Thiết bị điện tử (Điện thoại, Laptop, Tai nghe)">Thiết bị điện tử (Điện thoại, Laptop,
+                  Tai nghe)</option>
+                <option value="Tài liệu học tập / Giáo trình / Bìa hồ sơ">Tài liệu học tập / Giáo trình / Bìa hồ sơ
+                </option>
                 <option value="Chìa khóa xe / Chìa khóa phòng trọ">Chìa khóa xe / Chìa khóa phòng trọ</option>
                 <option value="Ví tiền / Bóp / Túi xách">Ví tiền / Bóp / Túi xách</option>
                 <option value="Trang phục / Áo khoác / Mũ bảo hiểm">Trang phục / Áo khoác / Mũ bảo hiểm</option>
                 <option value="Khác">Khác</option>
               </select>
-              <span class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
+              <span
+                class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
             </div>
           </div>
 
@@ -421,7 +465,8 @@
               <button type="button" id="color-picker-trigger"
                 class="flex-1 h-10 px-3 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 flex items-center justify-between cursor-pointer hover:bg-stone-50">
                 <div class="flex items-center gap-2 truncate">
-                  <span id="primary-swatch-circle" class="w-4 h-4 rounded-full border border-stone-300 bg-stone-200 shrink-0"></span>
+                  <span id="primary-swatch-circle"
+                    class="w-4 h-4 rounded-full border border-stone-300 bg-stone-200 shrink-0"></span>
                   <span id="primary-color-text" class="text-xs font-medium">Chọn màu sắc</span>
                 </div>
                 <span class="material-symbols-outlined text-[18px] text-[#727873]">expand_more</span>
@@ -446,7 +491,8 @@
             <label for="item-title" class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
               Tiêu đề bài đăng <span class="text-[#ba1a1a] font-bold">*</span>
             </label>
-            <span class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1f3227] dark:text-emerald-400 bg-[#eef5f0] dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-[#e7e1df] dark:border-stone-700">
+            <span
+              class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1f3227] dark:text-emerald-400 bg-[#eef5f0] dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-[#e7e1df] dark:border-stone-700">
               <span class="material-symbols-outlined text-xs text-amber-600">auto_awesome</span>
               AI gợi ý
             </span>
@@ -463,7 +509,8 @@
               Mô tả chi tiết đặc điểm nhận dạng <span class="text-[#ba1a1a] font-bold">*</span>
             </label>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1f3227] dark:text-emerald-400 bg-[#eef5f0] dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-[#e7e1df] dark:border-stone-700">
+              <span
+                class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1f3227] dark:text-emerald-400 bg-[#eef5f0] dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-[#e7e1df] dark:border-stone-700">
                 <span class="material-symbols-outlined text-xs text-amber-600">auto_awesome</span>
                 AI gợi ý
               </span>
@@ -477,11 +524,13 @@
 
         <!-- Điều hướng Step 2 -->
         <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
-          <button type="button" id="btn-back-step-2" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
+          <button type="button" id="btn-back-step-2"
+            class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
             <span class="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Quay lại Bước 1</span>
           </button>
-          <button type="button" id="btn-next-step-2" class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+          <button type="button" id="btn-next-step-2"
+            class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
             <span>Tiếp tục sang Bước 3</span>
             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
           </button>
@@ -489,7 +538,8 @@
       </section>
 
       <!-- ================= STEP 3: ĐỊA CHỈ & THỜI GIAN (THEO ẢNH 4) ================= -->
-      <section id="step-panel-3" class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+      <section id="step-panel-3"
+        class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
         <div>
           <h2 class="text-base sm:text-lg font-bold text-[#1b1c1c] dark:text-stone-100">
             Địa Chỉ & Mốc Thời Gian Nhặt Được
@@ -500,7 +550,8 @@
         </div>
 
         <!-- Hộp Địa điểm nhặt được (3 cấp tuần tự theo Ảnh 4) -->
-        <div class="space-y-3 bg-[#fcf9f8] dark:bg-stone-800/40 p-4 rounded-xl border border-[#e7e1df] dark:border-stone-700">
+        <div
+          class="space-y-3 bg-[#fcf9f8] dark:bg-stone-800/40 p-4 rounded-xl border border-[#e7e1df] dark:border-stone-700">
           <div class="flex items-center justify-between">
             <label class="block text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
               Địa điểm nhặt được <span class="text-[#ba1a1a] font-bold">*</span>
@@ -529,7 +580,8 @@
                   <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
                   <option value="Khu vực khác">Khu vực khác</option>
                 </select>
-                <span class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
+                <span
+                  class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
               </div>
             </div>
 
@@ -547,7 +599,8 @@
                   <option value="5">Tầng 5</option>
                   <option value="trệt">Tầng trệt</option>
                 </select>
-                <span class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
+                <span
+                  class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
               </div>
             </div>
 
@@ -559,7 +612,8 @@
                   class="w-full h-10 px-2.5 pr-7 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-lg text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#1f3227] appearance-none cursor-pointer disabled:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed">
                   <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
                 </select>
-                <span class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
+                <span
+                  class="material-symbols-outlined text-[16px] text-[#727873] absolute right-2 top-3 pointer-events-none">expand_more</span>
               </div>
             </div>
           </div>
@@ -597,23 +651,28 @@
             <select id="item-custody" required
               class="w-full h-10 px-3 pr-8 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#1f3227] appearance-none cursor-pointer">
               <option value="" disabled selected>-- Chọn nơi lưu giữ hiện tại --</option>
-              <option value="Đang giữ cá nhân (Liên hệ trực tiếp sinh viên)">Đang giữ cá nhân (Liên hệ trực tiếp sinh viên)</option>
+              <option value="Đang giữ cá nhân (Liên hệ trực tiếp sinh viên)">Đang giữ cá nhân (Liên hệ trực tiếp sinh
+                viên)</option>
               <option value="Đã gửi Bàn trực Thư viện Trung tâm CTU">Đã gửi Bàn trực Thư viện Trung tâm CTU</option>
               <option value="Đã gửi Bảo vệ tòa nhà / Giảng đường">Đã gửi Bảo vệ tòa nhà / Giảng đường</option>
-              <option value="Đã gửi Văn phòng Đoàn Thanh niên - Hội Sinh viên trường">Đã gửi Văn phòng Đoàn Thanh niên - Hội Sinh viên trường</option>
+              <option value="Đã gửi Văn phòng Đoàn Thanh niên - Hội Sinh viên trường">Đã gửi Văn phòng Đoàn Thanh niên -
+                Hội Sinh viên trường</option>
               <option value="Đã gửi Văn phòng Khoa / Viện phụ trách">Đã gửi Văn phòng Khoa / Viện phụ trách</option>
             </select>
-            <span class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
+            <span
+              class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
           </div>
         </div>
 
         <!-- Điều hướng Step 3 -->
         <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
-          <button type="button" id="btn-back-step-3" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
+          <button type="button" id="btn-back-step-3"
+            class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
             <span class="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Quay lại Bước 2</span>
           </button>
-          <button type="button" id="btn-next-step-3" class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
+          <button type="button" id="btn-next-step-3"
+            class="px-6 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs">
             <span>Tiếp tục sang Xác minh</span>
             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
           </button>
@@ -621,7 +680,8 @@
       </section>
 
       <!-- ================= STEP 4: CÂU HỎI XÁC MINH (XONG SAU TẤT CẢ) ================= -->
-      <section id="step-panel-4" class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
+      <section id="step-panel-4"
+        class="step-panel bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
         <div>
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-[#1f3227] dark:text-emerald-400 text-2xl">verified_user</span>
@@ -630,13 +690,16 @@
             </h2>
           </div>
           <p class="text-xs text-[#5e5f59] dark:text-stone-400 mt-1">
-            Đặt một câu hỏi bí mật để chỉ chủ nhân thực sự của món đồ mới có thể trả lời khi liên hệ nhận lại. Không cần nhập câu trả lời cố định tại đây.
+            Đặt một câu hỏi bí mật để chỉ chủ nhân thực sự của món đồ mới có thể trả lời khi liên hệ nhận lại. Không cần
+            nhập câu trả lời cố định tại đây.
           </p>
         </div>
 
         <!-- 2 Tùy chọn Radio: Câu hỏi do hệ thống/AI tạo hoặc Tự nhập -->
-        <div class="p-4 rounded-xl bg-[#fcf9f8] dark:bg-stone-800/50 border border-[#e7e1df] dark:border-stone-700 space-y-4">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
+        <div
+          class="p-4 rounded-xl bg-[#fcf9f8] dark:bg-stone-800/50 border border-[#e7e1df] dark:border-stone-700 space-y-4">
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs font-semibold text-[#1b1c1c] dark:text-stone-200">
             <label class="inline-flex items-center gap-2 cursor-pointer">
               <input type="radio" name="question_type" value="preset" checked
                 class="w-4 h-4 text-[#1f3227] focus:ring-[#1f3227] border-[#c3c8c2] cursor-pointer" />
@@ -658,13 +721,19 @@
               <select id="preset-question-select"
                 class="w-full h-10 px-3 pr-8 bg-white dark:bg-stone-800 border border-[#c3c8c2] dark:border-stone-700 rounded-xl text-xs text-[#1b1c1c] dark:text-stone-100 focus:border-[#1f3227] appearance-none cursor-pointer">
                 <option value="" disabled selected>-- Chọn câu hỏi xác minh phù hợp --</option>
-                <option value="Bên trong bình hoặc dưới đáy bình có đặc điểm/sticker gì đặc biệt?">Bên trong bình hoặc dưới đáy bình có đặc điểm/sticker gì đặc biệt?</option>
-                <option value="Món đồ có vết trầy xước hoặc chi tiết gì ẩn bên trong?">Món đồ có vết trầy xước hoặc chi tiết gì ẩn bên trong?</option>
-                <option value="Mật khẩu mở khóa màn hình hoặc hình nền máy là gì?">Mật khẩu mở khóa màn hình hoặc hình nền máy là gì?</option>
-                <option value="Số lượng hoặc giấy tờ cụ thể kèm theo trong ví là gì?">Số lượng hoặc giấy tờ cụ thể kèm theo trong ví là gì?</option>
-                <option value="Móc khóa kèm theo có hình dáng hoặc ký tự gì?">Móc khóa kèm theo có hình dáng hoặc ký tự gì?</option>
+                <option value="Bên trong bình hoặc dưới đáy bình có đặc điểm/sticker gì đặc biệt?">Bên trong bình hoặc
+                  dưới đáy bình có đặc điểm/sticker gì đặc biệt?</option>
+                <option value="Món đồ có vết trầy xước hoặc chi tiết gì ẩn bên trong?">Món đồ có vết trầy xước hoặc chi
+                  tiết gì ẩn bên trong?</option>
+                <option value="Mật khẩu mở khóa màn hình hoặc hình nền máy là gì?">Mật khẩu mở khóa màn hình hoặc hình
+                  nền máy là gì?</option>
+                <option value="Số lượng hoặc giấy tờ cụ thể kèm theo trong ví là gì?">Số lượng hoặc giấy tờ cụ thể kèm
+                  theo trong ví là gì?</option>
+                <option value="Móc khóa kèm theo có hình dáng hoặc ký tự gì?">Móc khóa kèm theo có hình dáng hoặc ký tự
+                  gì?</option>
               </select>
-              <span class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
+              <span
+                class="material-symbols-outlined text-[18px] text-[#727873] absolute right-3 top-2.5 pointer-events-none">expand_more</span>
             </div>
           </div>
 
@@ -679,17 +748,20 @@
           </div>
 
           <p class="text-[11px] text-[#727873] leading-relaxed">
-            * Lưu ý: Không cần nhập câu trả lời trước. Khi có người gửi yêu cầu nhận lại đồ vật, hệ thống sẽ yêu cầu họ trả lời câu hỏi này để bạn xác thực.
+            * Lưu ý: Không cần nhập câu trả lời trước. Khi có người gửi yêu cầu nhận lại đồ vật, hệ thống sẽ yêu cầu họ
+            trả lời câu hỏi này để bạn xác thực.
           </p>
         </div>
 
         <!-- Điều hướng Step 4: Hoàn tất đăng tin -->
         <div class="flex items-center justify-between pt-4 border-t border-[#f0eded] dark:border-stone-800">
-          <button type="button" id="btn-back-step-4" class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
+          <button type="button" id="btn-back-step-4"
+            class="px-5 py-2.5 rounded-xl border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors flex items-center gap-1 cursor-pointer">
             <span class="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Quay lại Bước 3</span>
           </button>
-          <button type="submit" id="btn-submit-post" class="px-8 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer shadow-sm">
+          <button type="submit" id="btn-submit-post"
+            class="px-8 py-2.5 rounded-xl bg-[#1f3227] hover:bg-[#142018] text-white text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer shadow-sm">
             <span class="material-symbols-outlined text-[18px]">send</span>
             <span>Hoàn tất đăng tin nhặt đồ</span>
           </button>
@@ -700,9 +772,13 @@
   </main>
 
   <!-- MODAL THÔNG BÁO GỬI THÀNH CÔNG -->
-  <div id="success-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
-      <div class="w-12 h-12 mx-auto rounded-full bg-[#eef5f0] text-[#1f3227] dark:bg-emerald-950 dark:text-emerald-400 flex items-center justify-center">
+  <div id="success-modal"
+    class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs" role="dialog"
+    aria-modal="true" aria-labelledby="modal-title">
+    <div
+      class="bg-white dark:bg-stone-900 border border-[#e7e1df] dark:border-stone-800 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
+      <div
+        class="w-12 h-12 mx-auto rounded-full bg-[#eef5f0] text-[#1f3227] dark:bg-emerald-950 dark:text-emerald-400 flex items-center justify-center">
         <span class="material-symbols-outlined text-3xl">check_circle</span>
       </div>
       <div>
@@ -712,10 +788,12 @@
         </p>
       </div>
       <div class="flex items-center justify-center gap-2 pt-2">
-        <a href="index.html" class="w-full py-2 rounded-lg border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50">
+        <a href="index.html"
+          class="w-full py-2 rounded-lg border border-[#c3c8c2] dark:border-stone-700 text-xs font-semibold text-[#5e5f59] dark:text-stone-300 hover:bg-stone-50">
           Về trang chủ
         </a>
-        <a href="post.html" class="w-full py-2 rounded-lg bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold">
+        <a href="post.html"
+          class="w-full py-2 rounded-lg bg-[#1f3227] hover:bg-[#142018] text-white text-xs font-semibold">
           Quản lý tin
         </a>
       </div>
@@ -729,33 +807,33 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-    // XỬ LÝ CHẾ ĐỘ CHỈNH SỬA (MODE=EDIT)
-    const urlParams = new URLSearchParams(window.location.search);
-    const isEditMode = urlParams.get("mode") === "edit";
+      // XỬ LÝ CHẾ ĐỘ CHỈNH SỬA (MODE=EDIT)
+      const urlParams = new URLSearchParams(window.location.search);
+      const isEditMode = urlParams.get("mode") === "edit";
 
-    if (isEditMode) {
-      // Ẩn cụm toggle [Báo nhặt đồ / Báo mất đồ]
-      const modeToggle = document.querySelector("main .inline-flex.p-1");
-      if (modeToggle) modeToggle.style.display = "none";
+      if (isEditMode) {
+        // Ẩn cụm toggle [Báo nhặt đồ / Báo mất đồ]
+        const modeToggle = document.querySelector("main .inline-flex.p-1");
+        if (modeToggle) modeToggle.style.display = "none";
 
-      // 1. Ẩn Stepper Timeline
-      const stepper = document.querySelector(".u318-horizontal");
-      if (stepper) stepper.style.display = "none";
+        // 1. Ẩn Stepper Timeline
+        const stepper = document.querySelector(".u318-horizontal");
+        if (stepper) stepper.style.display = "none";
 
-      // 2. Ẩn toàn bộ multi-step form cũ
-      const oldForm = document.getElementById("found-post-form");
-      if (oldForm) oldForm.style.display = "none";
+        // 2. Ẩn toàn bộ multi-step form cũ
+        const oldForm = document.getElementById("found-post-form");
+        if (oldForm) oldForm.style.display = "none";
 
-      // 3. Cập nhật tiêu đề trang
-      document.title = "Chỉnh sửa bài đăng báo nhặt | CTU Lost & Found";
-      const heading = document.querySelector("h1");
-      if (heading) heading.textContent = "Chỉnh Sửa Bài Đăng Báo Nhặt Đồ";
+        // 3. Cập nhật tiêu đề trang
+        document.title = "Chỉnh sửa bài đăng báo nhặt | CTU Lost & Found";
+        const heading = document.querySelector("h1");
+        if (heading) heading.textContent = "Chỉnh Sửa Bài Đăng Báo Nhặt Đồ";
 
-      // 4. Tạo Form 2 cột độc lập (Khớp yêu cầu, bỏ mascot con cú, nút Cập nhật)
-      const editContainer = document.createElement("div");
-      editContainer.id = "edit-mode-container";
-      editContainer.className = "bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 p-6 md:p-8 shadow-sm space-y-6";
-      editContainer.innerHTML = `
+        // 4. Tạo Form 2 cột độc lập (Khớp yêu cầu, bỏ mascot con cú, nút Cập nhật)
+        const editContainer = document.createElement("div");
+        editContainer.id = "edit-mode-container";
+        editContainer.className = "bg-white dark:bg-[#18191c] rounded-2xl border border-stone-200 dark:border-stone-800 p-6 md:p-8 shadow-sm space-y-6";
+        editContainer.innerHTML = `
         <div class="border-b border-stone-100 dark:border-stone-800 pb-4">
           <h2 class="text-xl md:text-2xl font-bold text-[#1b1c1c] dark:text-white">Thông tin đồ vật nhặt được</h2>
           <p class="text-xs text-[#797675] dark:text-stone-400 mt-1">Cập nhật thông tin chi tiết và câu hỏi bảo mật để xác minh chủ nhân</p>
@@ -921,50 +999,50 @@
         </form>
       `;
 
-      const mainContainer = document.querySelector("main");
-      if (mainContainer) {
-        mainContainer.appendChild(editContainer);
+        const mainContainer = document.querySelector("main");
+        if (mainContainer) {
+          mainContainer.appendChild(editContainer);
+        }
+
+        // Đăng ký sự kiện submit và cancel cho form chỉnh sửa
+        const editFoundForm = document.getElementById("edit-found-form");
+        if (editFoundForm) {
+          editFoundForm.addEventListener("submit", window.handleUpdateFoundPost);
+        }
+
+        const btnCancelFound = document.getElementById("btn-cancel-edit-found");
+        if (btnCancelFound) {
+          btnCancelFound.addEventListener("click", () => {
+            const params = new URLSearchParams(window.location.search);
+            const targetUrl = params.get("returnUrl") || params.get("from") || "requests.html";
+            window.location.href = targetUrl;
+          });
+        }
       }
 
-      // Đăng ký sự kiện submit và cancel cho form chỉnh sửa
-      const editFoundForm = document.getElementById("edit-found-form");
-      if (editFoundForm) {
-        editFoundForm.addEventListener("submit", window.handleUpdateFoundPost);
-      }
+      // Xử lý cập nhật bài đăng báo nhặt (mode=edit)
+      let isSubmittingFoundUpdate = false;
+      window.handleUpdateFoundPost = function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (isSubmittingFoundUpdate) return false;
+        isSubmittingFoundUpdate = true;
 
-      const btnCancelFound = document.getElementById("btn-cancel-edit-found");
-      if (btnCancelFound) {
-        btnCancelFound.addEventListener("click", () => {
-          const params = new URLSearchParams(window.location.search);
-          const targetUrl = params.get("returnUrl") || params.get("from") || "requests.html";
+        const toast = document.createElement("div");
+        toast.className = "fixed bottom-20 right-6 z-[9999] px-5 py-3.5 rounded-xl shadow-xl border bg-emerald-800 text-white border-emerald-700 text-xs font-bold flex items-center gap-2 animate-in fade-in duration-200";
+        toast.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Cập nhật bài đăng thành công! Đang chuyển hướng...</span>';
+        document.body.appendChild(toast);
+
+        const params = new URLSearchParams(window.location.search);
+        const targetUrl = params.get("returnUrl") || params.get("from") || "requests.html";
+
+        setTimeout(() => {
           window.location.href = targetUrl;
-        });
+        }, 800);
+        return false;
+      };
+      function handleUpdateFoundPost(e) {
+        return window.handleUpdateFoundPost(e);
       }
-    }
-
-    // Xử lý cập nhật bài đăng báo nhặt (mode=edit)
-    let isSubmittingFoundUpdate = false;
-    window.handleUpdateFoundPost = function(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      if (isSubmittingFoundUpdate) return false;
-      isSubmittingFoundUpdate = true;
-
-      const toast = document.createElement("div");
-      toast.className = "fixed bottom-20 right-6 z-[9999] px-5 py-3.5 rounded-xl shadow-xl border bg-emerald-800 text-white border-emerald-700 text-xs font-bold flex items-center gap-2 animate-in fade-in duration-200";
-      toast.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Cập nhật bài đăng thành công! Đang chuyển hướng...</span>';
-      document.body.appendChild(toast);
-
-      const params = new URLSearchParams(window.location.search);
-      const targetUrl = params.get("returnUrl") || params.get("from") || "requests.html";
-
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 800);
-      return false;
-    };
-    function handleUpdateFoundPost(e) {
-      return window.handleUpdateFoundPost(e);
-    }
 
       // 1. Quản lý Stepper Lucian #318 nằm ngang
       const TOTAL_STEPS = 4;
