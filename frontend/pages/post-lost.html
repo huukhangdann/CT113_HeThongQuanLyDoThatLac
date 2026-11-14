@@ -72,6 +72,24 @@
       --ux-shadow-strong: rgba(0, 0, 0, 0.4);
     }
 
+    input[type="date"] {
+      accent-color: var(--ux-accent, #b45309);
+      border-radius: 0.75rem;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 0.375rem;
+      padding: 2px;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
+    .dark input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.85);
+    }
+
     /* Lucian #318 Horizontal Timeline Stepper */
     .u318-horizontal {
       position: relative;
@@ -877,15 +895,81 @@
                     <option value="other">Đồ dùng khác</option>
                   </select>
                 </div>
-                <div>
+                <div class="relative" id="edit-color-picker-wrapper">
                   <label class="block text-xs font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Màu sắc <span class="text-rose-600">*</span></label>
-                  <select id="edit-color" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d]">
-                    <option value="brown" selected>Nâu</option>
-                    <option value="black">Đen</option>
-                    <option value="blue">Xanh dương</option>
-                    <option value="white">Trắng</option>
-                    <option value="other">Màu khác</option>
-                  </select>
+                  <button type="button" id="edit-color-picker-trigger"
+                    class="w-full flex items-center justify-between px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-[#fcf9f8] dark:bg-stone-800/60 text-[#1b1c1c] dark:text-white text-xs font-medium focus:outline-none focus:border-[#35483d] transition-all cursor-pointer h-[38px]">
+                    <div class="flex items-center gap-2 truncate">
+                      <span id="edit-primary-swatch-circle"
+                        class="w-4 h-4 rounded-full border border-stone-300 bg-[#795548] shrink-0 shadow-xs"></span>
+                      <span id="edit-primary-color-text" class="truncate text-xs font-medium">#795548</span>
+                    </div>
+                    <span id="edit-color-trigger-arrow"
+                      class="material-symbols-outlined text-[18px] text-[#727873] dark:text-stone-400 transition-transform shrink-0">expand_more</span>
+                  </button>
+                  <input type="hidden" id="edit-color" name="edit-color" value="#795548" />
+
+                  <div id="edit-color-picker-popover"
+                    class="hidden absolute left-0 sm:right-0 sm:left-auto top-full mt-2 z-40 w-80 max-w-[92vw] bg-[#fcf9f8] dark:bg-[#18191c] border border-[#e7e1df] dark:border-stone-700 rounded-2xl p-4 shadow-xl space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-[#e7e1df] dark:border-stone-700">
+                      <span class="text-xs font-bold text-[#1b1c1c] dark:text-stone-200 uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px] text-[#b45309] dark:text-amber-400">palette</span>
+                        Màu chủ đạo
+                      </span>
+                      <button type="button" id="edit-color-popover-close-btn"
+                        class="text-[#727873] hover:text-[#1b1c1c] dark:hover:text-white p-1 rounded-full hover:bg-[#f6f3f2] dark:hover:bg-stone-800 cursor-pointer transition-colors"
+                        title="Đóng">
+                        <span class="material-symbols-outlined text-[18px]">close</span>
+                      </button>
+                    </div>
+
+                    <div id="edit-filter-color-swatch"
+                      class="h-16 w-full rounded-xl cursor-pointer transition-all duration-200 border border-[#e7e1df] dark:border-stone-700 flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] shadow-inner"
+                      style="background-color: #795548"
+                      title="Nhấp để chọn màu chủ đạo">
+                      <span id="edit-filter-swatch-placeholder"
+                        class="hidden text-xs text-[#777771] dark:text-stone-400 font-medium items-center gap-1.5 select-none">
+                        <span class="material-symbols-outlined text-[18px] text-[#b45309]">palette</span>
+                        <span>Nhấp để chọn màu</span>
+                      </span>
+                      <div id="edit-filter-swatch-edit-icon"
+                        class="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center pointer-events-none group-hover:flex">
+                        <span class="material-symbols-outlined text-[13px]">edit</span>
+                      </div>
+                    </div>
+
+                    <input type="color" id="edit-filter-primary-color-input" class="sr-only" value="#795548" />
+
+                    <div class="flex items-center justify-between font-mono py-1.5 px-3 bg-[#f6f3f2] dark:bg-stone-800/80 rounded-lg border border-[#e7e1df] dark:border-stone-700">
+                      <span class="text-[#b45309] dark:text-amber-400 font-bold text-xs uppercase tracking-wider">HEX</span>
+                      <span id="edit-filter-hex-val" class="text-[#1b1c1c] dark:text-white font-bold tracking-wider text-sm">#795548</span>
+                    </div>
+
+                    <div class="pt-2 border-t border-[#e7e1df] dark:border-stone-700">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-semibold text-[#1b1c1c] dark:text-stone-200">Màu phụ (tối đa 3 màu):</span>
+                        <button type="button" id="edit-filter-add-sec-color-btn"
+                          class="text-xs font-semibold text-[#b45309] dark:text-amber-400 hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:no-underline"
+                          title="Thêm màu phụ">
+                          <span class="material-symbols-outlined text-[15px]">add_circle</span>
+                          <span>Thêm màu phụ</span>
+                        </button>
+                      </div>
+
+                      <div id="edit-filter-sec-colors-container" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2 border-t border-[#e7e1df] dark:border-stone-700 gap-2">
+                      <button type="button" id="edit-filter-color-reset-btn"
+                        class="px-2.5 py-1.5 text-xs text-[#727873] hover:text-[#1b1c1c] dark:hover:text-white hover:bg-[#f6f3f2] dark:hover:bg-stone-800 rounded-lg transition-colors cursor-pointer font-medium">
+                        Đặt lại
+                      </button>
+                      <button type="button" id="edit-filter-color-apply-btn"
+                        class="px-3.5 py-1.5 bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
+                        Áp dụng
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1040,6 +1124,185 @@
           mainContainer.appendChild(editContainer);
         }
 
+        // Khởi tạo Dropbox Color Popover cho chế độ chỉnh sửa (khớp find.html, hiện +1, +2...)
+        (function initEditColorPicker() {
+          const trigger = document.getElementById("edit-color-picker-trigger");
+          const arrow = document.getElementById("edit-color-trigger-arrow");
+          const popover = document.getElementById("edit-color-picker-popover");
+          const closeBtn = document.getElementById("edit-color-popover-close-btn");
+          const hiddenInp = document.getElementById("edit-color");
+          const triggerTxt = document.getElementById("edit-primary-color-text");
+          const swatchCircle = document.getElementById("edit-primary-swatch-circle");
+          const bigSwatch = document.getElementById("edit-filter-color-swatch");
+          const colorInput = document.getElementById("edit-filter-primary-color-input");
+          const placeholder = document.getElementById("edit-filter-swatch-placeholder");
+          const editIcon = document.getElementById("edit-filter-swatch-edit-icon");
+          const hexVal = document.getElementById("edit-filter-hex-val");
+          const addSecBtn = document.getElementById("edit-filter-add-sec-color-btn");
+          const secContainer = document.getElementById("edit-filter-sec-colors-container");
+          const resetBtn = document.getElementById("edit-filter-color-reset-btn");
+          const applyBtn = document.getElementById("edit-filter-color-apply-btn");
+
+          let currentHex = "#795548";
+          let secColors = [];
+
+          const togglePopover = (open) => {
+            if (!popover) return;
+            const isHidden = popover.classList.contains("hidden");
+            const shouldOpen = open !== undefined ? open : isHidden;
+            if (shouldOpen) {
+              popover.classList.remove("hidden");
+              if (arrow) arrow.classList.add("rotate-180");
+            } else {
+              popover.classList.add("hidden");
+              if (arrow) arrow.classList.remove("rotate-180");
+            }
+          };
+
+          if (trigger) trigger.addEventListener("click", (e) => { e.stopPropagation(); togglePopover(); });
+          if (closeBtn) closeBtn.addEventListener("click", (e) => { e.stopPropagation(); togglePopover(false); });
+          if (popover) popover.addEventListener("click", (e) => e.stopPropagation());
+          document.addEventListener("click", () => {
+            if (popover && !popover.classList.contains("hidden")) togglePopover(false);
+          });
+
+          const syncDisplay = () => {
+            if (!currentHex) {
+              if (swatchCircle) { swatchCircle.style.backgroundColor = "#e2e8f0"; swatchCircle.style.borderColor = "#cbd5e1"; }
+              if (triggerTxt) triggerTxt.textContent = "Chọn màu sắc";
+              if (hiddenInp) hiddenInp.value = "";
+            } else {
+              if (swatchCircle) { swatchCircle.style.backgroundColor = currentHex; swatchCircle.style.borderColor = "rgba(0,0,0,0.2)"; }
+              const chosenSecCount = secColors.filter(s => s.isChosen).length;
+              const label = chosenSecCount > 0 ? `${currentHex} (+${chosenSecCount})` : currentHex;
+              if (triggerTxt) triggerTxt.textContent = label;
+              if (hiddenInp) hiddenInp.value = currentHex;
+            }
+          };
+
+          const updateAddSecState = () => {
+            if (!addSecBtn) return;
+            if (!currentHex || secColors.length >= 3) {
+              addSecBtn.disabled = true;
+              return;
+            }
+            if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) {
+              addSecBtn.disabled = true;
+              return;
+            }
+            addSecBtn.disabled = false;
+          };
+
+          const renderSecColors = () => {
+            if (!secContainer) return;
+            secContainer.innerHTML = "";
+            secColors.forEach((sec, idx) => {
+              const card = document.createElement("div");
+              card.className = "bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl p-2.5 shadow-sm relative";
+              const swatchBg = sec.isChosen ? sec.hex : "#f6f3f2";
+              card.innerHTML = `
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-[11px] font-semibold text-[#1b1c1c] dark:text-stone-200">Màu phụ ${idx + 1}</span>
+                  <button type="button" class="remove-sec text-[#727873] hover:text-rose-600 p-0.5 cursor-pointer">
+                    <span class="material-symbols-outlined text-[15px]">close</span>
+                  </button>
+                </div>
+                <div class="sec-swatch h-10 w-full rounded-lg cursor-pointer border border-stone-200 dark:border-stone-700 flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] transition-transform" style="background-color: ${swatchBg}">
+                  <span class="sec-placeholder text-[10px] text-[#727873] font-medium flex items-center gap-1 select-none" style="display: ${sec.isChosen ? 'none' : 'flex'}">
+                    <span class="material-symbols-outlined text-[14px] text-[#b45309]">palette</span>
+                    <span>Chọn màu</span>
+                  </span>
+                  <div class="sec-edit-icon ${sec.isChosen ? '' : 'hidden'} absolute top-1 right-1 w-4 h-4 rounded-full bg-black/60 text-white flex items-center justify-center pointer-events-none">
+                    <span class="material-symbols-outlined text-[10px]">edit</span>
+                  </div>
+                </div>
+                <input type="color" class="sec-input sr-only" value="${sec.hex || '#3b82f6'}" />
+                <div class="mt-1.5 flex items-center justify-between font-mono py-1 px-2 bg-stone-50 dark:bg-stone-900 rounded border border-stone-200 dark:border-stone-700 text-[10px]">
+                  <span class="text-[#b45309] dark:text-amber-400 font-bold">HEX</span>
+                  <span class="sec-hex-val text-[#1b1c1c] dark:text-white font-bold">${sec.isChosen ? sec.hex : 'Chưa chọn'}</span>
+                </div>
+              `;
+              const swatch = card.querySelector(".sec-swatch");
+              const input = card.querySelector(".sec-input");
+              const rmBtn = card.querySelector(".remove-sec");
+              const hexSpan = card.querySelector(".sec-hex-val");
+              const ph = swatch.querySelector(".sec-placeholder");
+              const ed = swatch.querySelector(".sec-edit-icon");
+
+              swatch.addEventListener("click", () => input.click());
+              input.addEventListener("input", (e) => {
+                const hex = e.target.value.toUpperCase();
+                sec.hex = hex;
+                sec.isChosen = true;
+                swatch.style.backgroundColor = hex;
+                if (ph) ph.style.display = "none";
+                if (ed) ed.classList.remove("hidden");
+                if (hexSpan) hexSpan.textContent = hex;
+                updateAddSecState();
+                syncDisplay();
+              });
+
+              rmBtn.addEventListener("click", () => {
+                secColors.splice(idx, 1);
+                renderSecColors();
+                updateAddSecState();
+                syncDisplay();
+              });
+
+              secContainer.appendChild(card);
+            });
+            updateAddSecState();
+          };
+
+          if (bigSwatch && colorInput) {
+            bigSwatch.addEventListener("click", () => colorInput.click());
+            colorInput.addEventListener("input", (e) => {
+              const hex = e.target.value.toUpperCase();
+              currentHex = hex;
+              bigSwatch.style.backgroundColor = hex;
+              if (placeholder) placeholder.classList.add("hidden");
+              if (editIcon) editIcon.classList.remove("hidden");
+              if (hexVal) hexVal.textContent = hex;
+              updateAddSecState();
+              syncDisplay();
+            });
+          }
+
+          if (addSecBtn) {
+            addSecBtn.addEventListener("click", () => {
+              if (!currentHex || secColors.length >= 3) return;
+              if (secColors.length > 0 && !secColors[secColors.length - 1].isChosen) return;
+              secColors.push({ id: Date.now() + Math.random(), hex: null, isChosen: false });
+              renderSecColors();
+            });
+          }
+
+          if (resetBtn) {
+            resetBtn.addEventListener("click", () => {
+              currentHex = null;
+              secColors = [];
+              if (bigSwatch) bigSwatch.style.backgroundColor = "#f6f3f2";
+              if (placeholder) placeholder.classList.remove("hidden");
+              if (editIcon) editIcon.classList.add("hidden");
+              if (hexVal) hexVal.textContent = "Chưa chọn";
+              if (secContainer) secContainer.innerHTML = "";
+              updateAddSecState();
+              syncDisplay();
+              togglePopover(false);
+            });
+          }
+
+          if (applyBtn) {
+            applyBtn.addEventListener("click", () => {
+              syncDisplay();
+              togglePopover(false);
+            });
+          }
+
+          updateAddSecState();
+          syncDisplay();
+        })();
+
         // Đăng ký sự kiện submit và cancel cho form chỉnh sửa
         const editLostForm = document.getElementById("edit-lost-form");
         if (editLostForm) {
@@ -1185,16 +1448,16 @@
           const color = document.getElementById("primary-color");
 
           if (!cat.value) {
-            alert("Vui lòng chọn Loại đồ vật.");
+            showErrorPopup("Vui lòng chọn Loại đồ vật.", "Thiếu thông tin");
             cat.focus();
             return;
           }
           if (!color.value) {
-            alert("Vui lòng chọn Màu sắc chủ đạo.");
+            showErrorPopup("Vui lòng chọn Màu sắc chủ đạo.", "Thiếu thông tin");
             return;
           }
           if (!title.value.trim()) {
-            alert("Vui lòng nhập Tên món đồ bị mất.");
+            showErrorPopup("Vui lòng nhập Tên món đồ bị mất.", "Thiếu thông tin");
             title.focus();
             return;
           }
@@ -1328,6 +1591,9 @@
         const isHidden = colorPickerPopover.classList.contains("hidden");
         const shouldOpen = open !== undefined ? open : isHidden;
         if (shouldOpen) {
+          if (typeof window.closeAllDropdowns === "function") {
+            window.closeAllDropdowns(colorPickerPopover);
+          }
           colorPickerPopover.classList.remove("hidden");
           if (colorTriggerArrow) colorTriggerArrow.classList.add("rotate-180");
         } else {
@@ -1550,14 +1816,27 @@
 
       if (locFaculty) {
         locFaculty.addEventListener("change", () => {
-          if (locFaculty.value) {
-            locFloor.disabled = false;
+          // Khi chọn lại Khoa/Khu: reset toàn bộ tầng & phòng về trạng thái chưa chọn và bị khóa
+          if (locFloor) {
             locFloor.selectedIndex = 0;
-            locRoom.disabled = true;
-            locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-          } else {
+            locFloor.value = "";
             locFloor.disabled = true;
+            locFloor._syncCustomDropdown?.();
+          }
+          if (locRoom) {
+            locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
+            locRoom.selectedIndex = 0;
+            locRoom.value = "";
             locRoom.disabled = true;
+            locRoom._syncCustomDropdown?.();
+          }
+
+          // Sau khi chọn khu khoa xong mới mở lần lượt tầng
+          if (locFaculty.value) {
+            if (locFloor) {
+              locFloor.disabled = false;
+              locFloor._syncCustomDropdown?.();
+            }
           }
           updateFullLocation();
         });
@@ -1566,26 +1845,41 @@
       if (locFloor) {
         locFloor.addEventListener("change", () => {
           const fl = locFloor.value;
-          if (fl) {
-            locRoom.disabled = false;
-            locRoom.innerHTML = `
-              <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
-              <optgroup label="Phòng học">
-                <option value="Phòng ${fl === 'trệt' ? '001' : fl + '01'}">Phòng ${fl === 'trệt' ? '001' : fl + '01'}</option>
-                <option value="Phòng ${fl === 'trệt' ? '002' : fl + '02'}">Phòng ${fl === 'trệt' ? '002' : fl + '02'}</option>
-                <option value="Phòng ${fl === 'trệt' ? '003' : fl + '03'}">Phòng ${fl === 'trệt' ? '003' : fl + '03'}</option>
-                <option value="Phòng Máy ${fl}">Phòng Máy ${fl}</option>
-                <option value="Hành lang ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl}">Hành lang ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl}</option>
-              </optgroup>
-              <optgroup label="Hội trường">
-                <option value="Hội trường Rùa">Hội trường Rùa</option>
-                <option value="Hội trường Lớn">Hội trường Lớn</option>
-                <option value="Hội trường C1">Hội trường C1</option>
-                <option value="Hội trường Khoa">Hội trường Khoa</option>
-              </optgroup>
-            `;
-          } else {
+          // Reset phòng khi chọn lại tầng
+          if (locRoom) {
+            locRoom.selectedIndex = 0;
+            locRoom.value = "";
             locRoom.disabled = true;
+          }
+
+          if (fl) {
+            // Xong tầng mới mở phòng
+            if (locRoom) {
+              locRoom.disabled = false;
+              locRoom.innerHTML = `
+                <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
+                <optgroup label="Phòng học">
+                  <option value="Phòng ${fl === 'trệt' ? '001' : fl + '01'}">Phòng ${fl === 'trệt' ? '001' : fl + '01'}</option>
+                  <option value="Phòng ${fl === 'trệt' ? '002' : fl + '02'}">Phòng ${fl === 'trệt' ? '002' : fl + '02'}</option>
+                  <option value="Phòng ${fl === 'trệt' ? '003' : fl + '03'}">Phòng ${fl === 'trệt' ? '003' : fl + '03'}</option>
+                  <option value="Phòng Máy ${fl}">Phòng Máy ${fl}</option>
+                  <option value="Hành lang ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl}">Hành lang ${fl === 'trệt' ? 'Tầng trệt' : 'Tầng ' + fl}</option>
+                </optgroup>
+                <optgroup label="Hội trường">
+                  <option value="Hội trường Rùa">Hội trường Rùa</option>
+                  <option value="Hội trường Lớn">Hội trường Lớn</option>
+                  <option value="Hội trường C1">Hội trường C1</option>
+                  <option value="Hội trường Khoa">Hội trường Khoa</option>
+                </optgroup>
+              `;
+              locRoom._syncCustomDropdown?.();
+            }
+          } else {
+            if (locRoom) {
+              locRoom.disabled = true;
+              locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
+              locRoom._syncCustomDropdown?.();
+            }
           }
           updateFullLocation();
         });
@@ -1610,13 +1904,13 @@
           e.preventDefault();
           const phoneInput = document.getElementById("contact-phone");
           if (!phoneInput || !phoneInput.value.trim()) {
-            alert("Vui lòng nhập Số điện thoại liên hệ.");
+            showErrorPopup("Vui lòng nhập Số điện thoại liên hệ.", "Thiếu thông tin");
             if (phoneInput) phoneInput.focus();
             return;
           }
           const cleanPhone = phoneInput.value.trim().replace(/\s+/g, "");
           if (!/^[0-9]{10,11}$/.test(cleanPhone)) {
-            alert("Số điện thoại không hợp lệ. Vui lòng nhập 10-11 chữ số.");
+            showErrorPopup("Số điện thoại không hợp lệ. Vui lòng nhập 10-11 chữ số.", "Số điện thoại không hợp lệ");
             phoneInput.focus();
             return;
           }

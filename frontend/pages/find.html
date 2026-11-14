@@ -719,6 +719,9 @@
         const isCurrentlyHidden = colorPickerPopover.classList.contains("hidden");
         const shouldOpen = open !== undefined ? open : isCurrentlyHidden;
         if (shouldOpen) {
+          if (typeof window.closeAllDropdowns === "function") {
+            window.closeAllDropdowns(colorPickerPopover);
+          }
           colorPickerPopover.classList.remove("hidden");
           if (colorTriggerArrow) colorTriggerArrow.classList.add("rotate-180");
         } else {
@@ -965,22 +968,28 @@
 
       if (locFaculty) {
         locFaculty.addEventListener("change", () => {
-          const val = locFaculty.value;
-          if (val) {
-            if (locFloor) locFloor.disabled = false;
-          } else {
-            if (locFloor) {
-              locFloor.selectedIndex = 0;
-              locFloor.disabled = true;
-            }
-            if (locRoom) {
-              locRoom.selectedIndex = 0;
-              locRoom.disabled = true;
-            }
+          // Khi chọn lại Khoa/Khu: reset toàn bộ tầng & phòng về trạng thái chưa chọn và bị khóa
+          if (locFloor) {
+            locFloor.selectedIndex = 0;
+            locFloor.value = "";
+            locFloor.disabled = true;
+            locFloor._syncCustomDropdown?.();
           }
           if (locRoom) {
+            locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
             locRoom.selectedIndex = 0;
+            locRoom.value = "";
             locRoom.disabled = true;
+            locRoom._syncCustomDropdown?.();
+          }
+
+          const val = locFaculty.value;
+          if (val) {
+            // Sau khi chọn khu khoa xong mới mở lần lượt tầng
+            if (locFloor) {
+              locFloor.disabled = false;
+              locFloor._syncCustomDropdown?.();
+            }
           }
           updateFindLocationSummary();
         });
@@ -989,7 +998,15 @@
       if (locFloor) {
         locFloor.addEventListener("change", () => {
           const floor = locFloor.value;
+          // Reset phòng khi chọn lại tầng
+          if (locRoom) {
+            locRoom.selectedIndex = 0;
+            locRoom.value = "";
+            locRoom.disabled = true;
+          }
+
           if (floor) {
+            // Xong tầng mới mở phòng
             if (locRoom) {
               locRoom.disabled = false;
               locRoom.innerHTML = `
@@ -1011,11 +1028,13 @@
                   <option value="Hội trường 2">Hội trường 2</option>
                 </optgroup>
               `;
+              locRoom._syncCustomDropdown?.();
             }
           } else {
             if (locRoom) {
-              locRoom.selectedIndex = 0;
               locRoom.disabled = true;
+              locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
+              locRoom._syncCustomDropdown?.();
             }
           }
           updateFindLocationSummary();

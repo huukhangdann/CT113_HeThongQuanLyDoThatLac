@@ -1204,12 +1204,11 @@ class AppHeader extends HTMLElement {
         e.stopPropagation();
         const isHidden = userMenuDropdown.classList.contains("hidden");
 
-        // 1. Luôn đóng popup theme
-        closeThemePopup();
-
-        // 2. Chỉ đóng notif nếu notif không ở trạng thái mở rộng
-        if (!isExpanded) {
-          closeNotifPopup();
+        if (typeof closeAllDropdowns === "function") {
+          closeAllDropdowns(isHidden ? userMenuDropdown : null);
+        } else {
+          closeThemePopup();
+          if (!isExpanded) closeNotifPopup();
         }
 
         if (isHidden) {
@@ -1247,9 +1246,12 @@ class AppHeader extends HTMLElement {
         e.stopPropagation();
         const isHidden = notifDropdown.classList.contains("hidden");
 
-        // Khi click chuông, đóng cả theme và user menu
-        closeUserMenuPopup();
-        closeThemePopup();
+        if (typeof closeAllDropdowns === "function") {
+          closeAllDropdowns(isHidden ? notifDropdown : null);
+        } else {
+          closeUserMenuPopup();
+          closeThemePopup();
+        }
 
         if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
         if (notifListContainer) {
@@ -1884,12 +1886,11 @@ class AppHeader extends HTMLElement {
         e.stopPropagation();
         const isHidden = themeDropdown.classList.contains("hidden");
 
-        // 1. Luôn đóng user menu
-        closeUserMenuPopup();
-
-        // 2. Chỉ đóng notif nếu notif không ở trạng thái mở rộng
-        if (!isExpanded) {
-          closeNotifPopup();
+        if (typeof closeAllDropdowns === "function") {
+          closeAllDropdowns(isHidden ? themeDropdown : null);
+        } else {
+          closeUserMenuPopup();
+          if (!isExpanded) closeNotifPopup();
         }
 
         if (isHidden) {
@@ -2194,6 +2195,198 @@ function removeVietnameseTones(str) {
     .toLowerCase();
 }
 
+// Quản trị toàn cục: Chỉ cho phép mở duy nhất 1 dropdown/dropbox/popover tại 1 thời điểm
+function closeAllDropdowns(except = null) {
+  if (typeof document === "undefined") return;
+
+  // 1. Đóng toàn bộ custom dropdown popovers (.ctu-dropdown-popover)
+  document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
+    if (p !== except && !p.classList.contains("hidden")) {
+      p.classList.add("hidden");
+      const wrapper = p.closest(".ctu-searchable-dropdown-wrapper");
+      const arrow = wrapper?.querySelector(".material-symbols-outlined");
+      if (arrow) arrow.classList.remove("rotate-180");
+    }
+  });
+
+  // 2. Đóng toàn bộ bảng chọn màu sắc (Color Popovers)
+  document.querySelectorAll("#color-picker-popover, .color-picker-popover, [id*='color-picker-popover']").forEach((cp) => {
+    if (cp !== except && !cp.classList.contains("hidden")) {
+      cp.classList.add("hidden");
+      const arrow = document.getElementById("color-trigger-arrow") || document.querySelector("[id*='color-trigger-arrow']");
+      if (arrow) arrow.classList.remove("rotate-180");
+    }
+  });
+
+  // 3. Đóng Theme Dropdown trên Navbar (nếu không phải là ngoại lệ)
+  const themeDropdown = document.getElementById("theme-dropdown");
+  if (themeDropdown && themeDropdown !== except && !themeDropdown.classList.contains("hidden")) {
+    themeDropdown.classList.add("hidden");
+    const themeBtn = document.getElementById("theme-menu-btn");
+    if (themeBtn) themeBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+    const themeContainer = document.getElementById("theme-menu-container");
+    if (themeContainer) {
+      themeContainer.classList.remove("theme-menu-open");
+      themeContainer.style.zIndex = "";
+    }
+    const customColor = document.getElementById("custom-color-popover");
+    if (customColor) customColor.classList.add("hidden");
+  }
+
+  // 4. Đóng Notification Dropdown trên Navbar (nếu không phải là ngoại lệ)
+  const notifDropdown = document.getElementById("notif-dropdown");
+  if (notifDropdown && notifDropdown !== except && !notifDropdown.classList.contains("hidden")) {
+    notifDropdown.classList.add("hidden");
+    const notifBtn = document.getElementById("notif-bell-btn");
+    if (notifBtn) notifBtn.classList.remove("ring-2", "ring-[#35483d]/20", "border-[#35483d]/40", "bg-[#f0edec]");
+    const notifHeaderMenu = document.getElementById("notif-header-menu");
+    if (notifHeaderMenu) notifHeaderMenu.classList.add("hidden");
+    document.querySelectorAll(".notif-item-menu").forEach((m) => m.classList.add("hidden"));
+  }
+
+  // 5. Đóng User Menu Dropdown trên Navbar (nếu không phải là ngoại lệ)
+  const userMenuDropdown = document.getElementById("user-menu-dropdown");
+  if (userMenuDropdown && userMenuDropdown !== except && !userMenuDropdown.classList.contains("hidden")) {
+    userMenuDropdown.classList.add("hidden");
+    const userBtn = document.getElementById("user-menu-btn");
+    if (userBtn) userBtn.classList.remove("ring-2", "ring-[#35483d]/20", "bg-stone-200");
+  }
+
+  // 6. Đóng menu nổi Assistive Touch (nếu không phải là ngoại lệ)
+  const assistiveMenu = document.getElementById("assistive-touch-menu");
+  if (assistiveMenu && assistiveMenu !== except && !assistiveMenu.classList.contains("hidden")) {
+    assistiveMenu.classList.add("hidden");
+  }
+}
+if (typeof window !== "undefined") {
+  window.closeAllDropdowns = closeAllDropdowns;
+}
+
+// =========================================================================
+// HỆ THỐNG POPUP THÔNG BÁO LỖI (GIAO DIỆN UI, THAY THẾ ALERT HỆ THỐNG)
+// =========================================================================
+
+function ensureErrorModalExists() {
+  if (typeof document === "undefined") return null;
+  let modal = document.getElementById("ctu-error-modal");
+  if (modal) return modal;
+
+  modal = document.createElement("div");
+  modal.id = "ctu-error-modal";
+  modal.className =
+    "fixed inset-0 z-[100005] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden animate-in fade-in duration-200 select-none";
+  modal.innerHTML = `
+    <div id="ctu-error-modal-card" class="bg-white dark:bg-[#18191c] rounded-2xl max-w-sm w-full p-5 sm:p-6 shadow-2xl border border-stone-200 dark:border-stone-800 space-y-4 text-center transform scale-95 transition-transform duration-200">
+      <div class="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 mx-auto flex items-center justify-center shadow-inner">
+        <span class="material-symbols-outlined text-[30px]">error</span>
+      </div>
+      <div class="space-y-1.5">
+        <h3 id="ctu-error-modal-title" class="font-bold text-base text-[#1b1c1c] dark:text-white">Thông báo</h3>
+        <p id="ctu-error-modal-message" class="text-xs sm:text-sm text-[#5e5f59] dark:text-stone-300 leading-relaxed break-words"></p>
+      </div>
+      <div class="pt-2">
+        <button type="button" id="ctu-error-modal-ok-btn" class="w-full py-2.5 px-4 rounded-xl bg-[#35483d] hover:bg-[#28372e] dark:bg-emerald-700 dark:hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold transition-all shadow-md hover:shadow-lg cursor-pointer">
+          Đã hiểu
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const okBtn = modal.querySelector("#ctu-error-modal-ok-btn");
+  const card = modal.querySelector("#ctu-error-modal-card");
+
+  const closeFn = () => {
+    modal.classList.add("hidden");
+    if (card) {
+      card.classList.remove("scale-100");
+      card.classList.add("scale-95");
+    }
+  };
+
+  okBtn?.addEventListener("click", closeFn);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeFn();
+  });
+
+  return modal;
+}
+
+function showErrorPopup(message, title = "Thông báo") {
+  if (typeof document === "undefined") return;
+  const modal = ensureErrorModalExists();
+  if (!modal) return;
+
+  const titleEl = modal.querySelector("#ctu-error-modal-title");
+  const msgEl = modal.querySelector("#ctu-error-modal-message");
+  const card = modal.querySelector("#ctu-error-modal-card");
+  const okBtn = modal.querySelector("#ctu-error-modal-ok-btn");
+
+  if (titleEl) titleEl.textContent = title || "Thông báo";
+  if (msgEl) msgEl.textContent = message || "";
+
+  modal.classList.remove("hidden");
+  setTimeout(() => {
+    if (card) {
+      card.classList.remove("scale-95");
+      card.classList.add("scale-100");
+    }
+    okBtn?.focus();
+  }, 10);
+}
+
+function closeErrorModal() {
+  const modal = document.getElementById("ctu-error-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+if (typeof window !== "undefined") {
+  window.showErrorPopup = showErrorPopup;
+  window.closeErrorModal = closeErrorModal;
+  // Ghi đè alert hệ thống để chuyển thành popup giao diện UI
+  window.alert = function (message) {
+    showErrorPopup(message, "Thông báo");
+  };
+}
+
+// Kiểm tra xem dropbox có thuộc Loại đồ vật hoặc Ô nhập địa điểm hay không
+function isSearchableCategoryOrLocation(selectEl) {
+  if (!selectEl) return false;
+  if (selectEl.dataset.searchable === "true") return true;
+  if (selectEl.dataset.searchable === "false") return false;
+
+  const id = (selectEl.id || "").toLowerCase();
+  const name = (selectEl.name || "").toLowerCase();
+  const labelText = (
+    selectEl.closest("div")?.querySelector("label, span")?.textContent || ""
+  ).toLowerCase();
+
+  const isCategory =
+    id.includes("category") ||
+    name.includes("category") ||
+    id.includes("loai-do") ||
+    labelText.includes("loại đồ") ||
+    labelText.includes("danh mục");
+
+  const isLocation =
+    id.includes("loc") ||
+    id.includes("location") ||
+    id.includes("faculty") ||
+    id.includes("floor") ||
+    id.includes("room") ||
+    id.includes("area") ||
+    name.includes("location") ||
+    name.includes("faculty") ||
+    labelText.includes("địa điểm") ||
+    labelText.includes("khoa") ||
+    labelText.includes("khu") ||
+    labelText.includes("tầng") ||
+    labelText.includes("phòng");
+
+  return isCategory || isLocation;
+}
+
 function makeSearchableDropdown(selectEl) {
   if (!selectEl || selectEl._searchableDropdownInstance) return;
   // Bỏ qua nếu select nằm trong custom popover màu sắc hoặc có cờ bỏ qua
@@ -2256,16 +2449,20 @@ function makeSearchableDropdown(selectEl) {
   popover.className =
     "ctu-dropdown-popover hidden absolute left-0 right-0 top-full mt-1.5 z-50 bg-[#fcf9f8] dark:bg-[#1f2125] border border-[#e7e1df] dark:border-stone-700 rounded-xl shadow-xl p-2 space-y-1.5 min-w-[200px] animate-in fade-in zoom-in-95 duration-150";
 
-  // Search input ở trên cùng của popover
-  const searchWrapper = document.createElement("div");
-  searchWrapper.className = "relative px-0.5 pt-0.5";
-  searchWrapper.innerHTML = `
-    <span class="material-symbols-outlined text-[16px] text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
-    <input type="text" class="ctu-dropdown-search w-full pl-8 pr-2.5 py-1.5 text-xs bg-white dark:bg-stone-800 border border-[#e7e1df] dark:border-stone-700 rounded-lg outline-none focus:border-[#35483d] dark:focus:border-emerald-500 text-[#1b1c1c] dark:text-white placeholder-stone-400 font-sans transition-colors" placeholder="Tìm kiếm nhanh..." />
-  `;
-  popover.appendChild(searchWrapper);
+  // Quy định: Chỉ có các dropbox Loại đồ vật và các ô nhập Địa điểm mới có ô tìm kiếm ở trong
+  const isSearchable = isSearchableCategoryOrLocation(selectEl);
+  let searchInput = null;
 
-  const searchInput = searchWrapper.querySelector("input");
+  if (isSearchable) {
+    const searchWrapper = document.createElement("div");
+    searchWrapper.className = "relative px-0.5 pt-0.5";
+    searchWrapper.innerHTML = `
+      <span class="material-symbols-outlined text-[16px] text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
+      <input type="text" class="ctu-dropdown-search w-full pl-8 pr-2.5 py-1.5 text-xs bg-white dark:bg-stone-800 border border-[#e7e1df] dark:border-stone-700 rounded-lg outline-none focus:border-[#35483d] dark:focus:border-emerald-500 text-[#1b1c1c] dark:text-white placeholder-stone-400 font-sans transition-colors" placeholder="Tìm kiếm nhanh..." />
+    `;
+    popover.appendChild(searchWrapper);
+    searchInput = searchWrapper.querySelector("input");
+  }
 
   // Options container
   const optionsList = document.createElement("div");
@@ -2401,18 +2598,15 @@ function makeSearchableDropdown(selectEl) {
   }
 
   function openMenu() {
-    document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
-      if (p !== popover) p.classList.add("hidden");
-    });
-    document.querySelectorAll(".ctu-dropdown-trigger .material-symbols-outlined").forEach((arr) => {
-      arr.classList.remove("rotate-180");
-    });
+    closeAllDropdowns(popover);
 
     popover.classList.remove("hidden");
     arrowSpan.classList.add("rotate-180");
-    searchInput.value = "";
-    filterOptions("");
-    setTimeout(() => searchInput.focus(), 50);
+    if (searchInput) {
+      searchInput.value = "";
+      filterOptions("");
+      setTimeout(() => searchInput.focus(), 50);
+    }
   }
 
   function closeMenu() {
@@ -2444,9 +2638,11 @@ function makeSearchableDropdown(selectEl) {
     noResults.classList.toggle("hidden", matchCount > 0);
   }
 
-  searchInput.addEventListener("input", (e) => {
-    filterOptions(e.target.value);
-  });
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      filterOptions(e.target.value);
+    });
+  }
 
   triggerBtn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -2459,6 +2655,10 @@ function makeSearchableDropdown(selectEl) {
   });
 
   selectEl.addEventListener("change", updateTriggerState);
+  selectEl._syncCustomDropdown = function () {
+    syncOptions();
+    updateTriggerState();
+  };
 
   const observer = new MutationObserver(() => {
     syncOptions();
@@ -2563,6 +2763,7 @@ function ensureClockPickerModalExists() {
 }
 
 function openPctsvClockPicker(targetInput = null) {
+  closeAllDropdowns();
   ensureClockPickerModalExists();
   if (targetInput && targetInput instanceof HTMLElement) {
     activeClockTargetInput = targetInput;
@@ -2827,25 +3028,41 @@ function initClockPickerEvents() {
 
 if (typeof document !== "undefined") {
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".ctu-searchable-dropdown-wrapper")) {
-      document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
-        p.classList.add("hidden");
-      });
-      document.querySelectorAll(".ctu-dropdown-trigger .material-symbols-outlined").forEach((arr) => {
-        arr.classList.remove("rotate-180");
-      });
+    if (
+      !e.target.closest(".ctu-searchable-dropdown-wrapper") &&
+      !e.target.closest("#color-picker-popover") &&
+      !e.target.closest("#color-filter-trigger") &&
+      !e.target.closest("#color-picker-trigger") &&
+      !e.target.closest(".color-trigger-btn") &&
+      !e.target.closest("#theme-menu-btn") &&
+      !e.target.closest("#theme-dropdown") &&
+      !e.target.closest("#notif-bell-btn") &&
+      !e.target.closest("#notif-dropdown") &&
+      !e.target.closest("#user-menu-btn") &&
+      !e.target.closest("#user-menu-dropdown") &&
+      !e.target.closest("#assistive-touch-container")
+    ) {
+      closeAllDropdowns();
     }
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      document.querySelectorAll(".ctu-dropdown-popover").forEach((p) => {
-        p.classList.add("hidden");
-      });
-      document.querySelectorAll(".ctu-dropdown-trigger .material-symbols-outlined").forEach((arr) => {
-        arr.classList.remove("rotate-180");
-      });
+      closeAllDropdowns();
       closePctsvClockPicker();
+      closeErrorModal();
+    }
+  });
+
+  // Khi người dùng click hoặc focus vào bất kỳ thẻ SELECT native nào, đóng tất cả dropdown/popover khác
+  document.addEventListener("mousedown", (e) => {
+    if (e.target.tagName === "SELECT") {
+      closeAllDropdowns();
+    }
+  });
+  document.addEventListener("focusin", (e) => {
+    if (e.target.tagName === "SELECT") {
+      closeAllDropdowns();
     }
   });
 }

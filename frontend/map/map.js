@@ -15,11 +15,24 @@
     return "./ctu-campus-map.png";
   }
 
-  function getClaimLink(itemId) {
-    if (window.location.pathname.includes("/pages/")) {
-      return `claim.html?id=${itemId}&from=${encodeURIComponent("match-detail.html?level=room&room=p204")}`;
+  function getClaimLink(itemId, context = {}) {
+    const isPagesDir = window.location.pathname.includes("/pages/");
+    const claimBase = isPagesDir ? "claim.html" : "../pages/claim.html";
+    const currentMapBase = isPagesDir ? "match-detail.html" : "../map/index.html";
+
+    let fromTarget = "";
+    if (context.type === "building_popup" && context.buildingId) {
+      fromTarget = `${currentMapBase}?openBuilding=${context.buildingId}`;
+    } else if (context.type === "room_plan") {
+      const bId = context.buildingId || "c1";
+      const fNum = context.floorNumber || 2;
+      const rId = context.roomId || "p204";
+      fromTarget = `${currentMapBase}?level=room&building=${bId}&floor=${fNum}&room=${rId}`;
+    } else {
+      fromTarget = currentMapBase;
     }
-    return `../pages/claim.html?id=${itemId}&from=../map/index.html`;
+
+    return `${claimBase}?id=${itemId}&from=${encodeURIComponent(fromTarget)}`;
   }
 
   function getRoomTypeLabel(type) {
@@ -287,7 +300,7 @@
                 <span>${item.time || 'Hôm nay, 09:30'}</span>
               </p>
             </div>
-            <a href="${getClaimLink(item.id)}" class="px-3 py-1.5 rounded-lg bg-[#35483d] hover:bg-[#28372e] text-white text-xs font-semibold shrink-0 transition-colors flex items-center gap-1">
+            <a href="${getClaimLink(item.id, { type: 'building_popup', buildingId: building.id })}" class="px-3 py-1.5 rounded-lg bg-[#35483d] hover:bg-[#28372e] text-white text-xs font-semibold shrink-0 transition-colors flex items-center gap-1">
               <span>Xem chi tiết</span>
               <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
             </a>
@@ -469,7 +482,7 @@
           const roomId = cell.dataset.roomId;
           const room = rooms.find(r => r.id === roomId);
           if (room && room.item) {
-            showItemPopover(room.item);
+            showItemPopover(room.item, room, floor, building);
           }
         });
       });
@@ -499,7 +512,7 @@
       `;
     }
 
-    function showItemPopover(item) {
+    function showItemPopover(item, room = null, floor = null, building = null) {
       const popover = document.getElementById("item-popover");
       if (!popover) return;
 
@@ -525,7 +538,7 @@
             </div>
             <div class="popover-actions">
               <button class="popover-close-btn" id="popover-close-btn">Đóng</button>
-              <a href="${getClaimLink(item.id)}" class="popover-detail-btn">
+              <a href="${getClaimLink(item.id, { type: 'room_plan', buildingId: building ? building.id : 'c1', floorNumber: floor ? floor.floorNumber : 2, roomId: room ? room.id : 'p204' })}" class="popover-detail-btn">
                 <span>Xem chi tiết bài đăng</span>
                 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
               </a>
@@ -549,6 +562,7 @@
     // Kiểm tra URL query params để điều hướng trực tiếp cấp độ bản đồ
     const urlParams = new URLSearchParams(window.location.search);
     const targetLevel = urlParams.get('level');
+    const openBuildingId = urlParams.get('openBuilding');
     const targetRoomId = (urlParams.get('room') || 'p204').toLowerCase();
 
     if (targetLevel === 'room' || targetLevel === '3') {
@@ -580,6 +594,16 @@
     }
 
     renderCampus();
+
+    // Nếu quay về từ popup trực tiếp trên bản đồ, tự động mở lại đúng popup của tòa nhà đó
+    if (openBuildingId) {
+      const b = data.buildings.find(x => x.id === openBuildingId);
+      if (b) {
+        setTimeout(() => {
+          openBuildingModal(b);
+        }, 120);
+      }
+    }
   }
 
   if (document.readyState === "loading") {
