@@ -1,0 +1,36 @@
+{
+    "table_name": "YeucauNhanDo",
+    "table_relation": [
+        "BaoNhat",
+        "BaoMat",
+        "NguoiDung"
+    ],
+    "records": {
+        "YC_1795272242387_b3fer": {
+            "YC_id": "YC_1795272242387_b3fer",
+            "BN_id": "BN_1795272164314_yaw3hn",
+            "ND_id": "B2405015",
+            "CauTraLoiXacMinh": "xin chao",
+            "LoiNhan": "sdsds",
+            "SoDienThoai": "0967734511",
+            "HinhAnhMinhChung": "",
+            "ThoiGianYeuCau": 1795272242387,
+            "TrangThai": "DaChapNhan",
+            "DuocChapNhan": true,
+            "ThoiGianChapNhan": 1795272266766
+        },
+        "YC_1795273629553_j8prg": {
+            "YC_id": "YC_1795273629553_j8prg",
+            "BN_id": "BN_1795273496839_c74veg",
+            "ND_id": "B2404990",
+            "CauTraLoiXacMinh": "xin hcoa",
+            "LoiNhan": "sdsd",
+            "SoDienThoai": "0967734511",
+            "HinhAnhMinhChung": "",
+            "ThoiGianYeuCau": 1795273629553,
+            "TrangThai": "DaChapNhan",
+            "DuocChapNhan": true,
+            "ThoiGianChapNhan": 1795273660831
+        }
+    }
+}

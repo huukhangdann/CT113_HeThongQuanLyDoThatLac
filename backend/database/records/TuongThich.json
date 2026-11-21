@@ -1,0 +1,35 @@
+{
+    "table_name": "TuongThich",
+    "table_relation": [
+        "BaoMat",
+        "BaoNhat"
+    ],
+    "records": {
+        "TC_001": {
+            "BM_id": "BM_001",
+            "BN_id": "BN_001",
+            "DoTuongThich": 0.9512
+        },
+        "TC_1795272883532_1_3yhe": {
+            "TC_id": "TC_1795272883532_1_3yhe",
+            "BM_id": "BM_1795269539584",
+            "BN_id": "BN_1795272164314_yaw3hn",
+            "DoTuongThich": 1,
+            "ThoiGianTao": 1795272883532
+        },
+        "TC_1795272883534_1_ox1o": {
+            "TC_id": "TC_1795272883534_1_ox1o",
+            "BM_id": "BM_1795269539584",
+            "BN_id": "BN_1795272223856_fazojb",
+            "DoTuongThich": 1,
+            "ThoiGianTao": 1795272883535
+        },
+        "TC_1795273496863_1_y0f6": {
+            "TC_id": "TC_1795273496863_1_y0f6",
+            "BM_id": "BM_1795273447510",
+            "BN_id": "BN_1795273496839_c74veg",
+            "DoTuongThich": 1,
+            "ThoiGianTao": 1795273496863
+        }
+    }
+}

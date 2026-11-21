@@ -1,0 +1,66 @@
+{
+    "table_name": "HinhAnh",
+    "table_relation": [
+        "BaoNhat",
+        "BaoMat"
+    ],
+    "records": {
+        "HA_BN_1794796751614_h057v0_1": {
+            "HA_id": "HA_BN_1794796751614_h057v0_1",
+            "HA_URL": "/uploads/1794796751568-540118952.jpg",
+            "HA_Ten": "download.jpg",
+            "BN_id": "BN_1794796751614_h057v0"
+        },
+        "HA_1794800880991": {
+            "HA_id": "HA_1794800880991",
+            "HA_URL": "/uploads/1794800880928-468767107.jpg",
+            "HA_Ten": "download.jpg"
+        },
+        "HA_BN_1795263143122_droj9q_1": {
+            "HA_id": "HA_BN_1795263143122_droj9q_1",
+            "HA_URL": "/uploads/1795263143064-276313344.jpg",
+            "HA_Ten": "download.jpg",
+            "BN_id": "BN_1795263143122_droj9q"
+        },
+        "HA_1795269539662": {
+            "HA_id": "HA_1795269539662",
+            "HA_URL": "/uploads/1795269539598-435803346.jpg",
+            "HA_Ten": "download.jpg"
+        },
+        "HA_BN_1795269592475_9fzr6z_1": {
+            "HA_id": "HA_BN_1795269592475_9fzr6z_1",
+            "HA_URL": "/uploads/1795269592415-715052168.jpg",
+            "HA_Ten": "download.jpg",
+            "BN_id": "BN_1795269592475_9fzr6z"
+        },
+        "HA_BN_1795270331334_3urta0_1": {
+            "HA_id": "HA_BN_1795270331334_3urta0_1",
+            "HA_URL": "/uploads/1795270331286-626725913.jpg",
+            "HA_Ten": "download.jpg",
+            "BN_id": "BN_1795270331334_3urta0"
+        },
+        "HA_BN_1795272164314_yaw3hn_1": {
+            "HA_id": "HA_BN_1795272164314_yaw3hn_1",
+            "HA_URL": "/uploads/1795272164260-761593173.jpg",
+            "HA_Ten": "download.jpg",
+            "BN_id": "BN_1795272164314_yaw3hn"
+        },
+        "HA_BN_1795272223856_fazojb_1": {
+            "HA_id": "HA_BN_1795272223856_fazojb_1",
+            "HA_URL": "/uploads/1795272223810-465107441.jpg",
+            "HA_Ten": "download.jpg",
+            "BN_id": "BN_1795272223856_fazojb"
+        },
+        "HA_1795273447589": {
+            "HA_id": "HA_1795273447589",
+            "HA_URL": "/uploads/1795273447522-626980432.jpg",
+            "HA_Ten": "Casio_calculator_JS-20WK_in_201901_002.jpg"
+        },
+        "HA_BN_1795273496839_c74veg_1": {
+            "HA_id": "HA_BN_1795273496839_c74veg_1",
+            "HA_URL": "/uploads/1795273496787-209804159.jpg",
+            "HA_Ten": "Casio_calculator_JS-20WK_in_201901_002.jpg",
+            "BN_id": "BN_1795273496839_c74veg"
+        }
+    }
+}

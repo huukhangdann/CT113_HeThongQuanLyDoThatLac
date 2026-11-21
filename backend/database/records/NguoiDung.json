@@ -1,0 +1,38 @@
+{
+    "table_name": "NguoiDung",
+    "table_relation": ["BaoNhat", "BaoMat", "Lop", "VaiTro"],
+    "records": {
+        "B24050167": {
+            "ND_id": "B2405017",
+            "ND_HoTen": "Lương Trung Nhật Trường",
+            "ND_email": "nhattruongb2483@gmail.com",
+            "ND_MatKhau": "truong12345",
+            "ND_SDT": "0394863566",
+            "ND_DiemCong": 0
+        },
+        "B2405015": {
+            "ND_id": "B2405015",
+            "ND_HoTen": "Trần Chí Trọng",
+            "ND_email": "trongb2483@gmail.com",
+            "ND_MatKhau": "096774663",
+            "ND_SDT": "0394863566",
+            "ND_DiemCong": 0
+        }, 
+        "B2404990": {
+            "ND_id": "B2404990",
+            "ND_HoTen": "Đặng Hữu Khang",
+            "ND_email": "huukhangb2483@gmail.com",
+            "ND_MatKhau": "123456789",
+            "ND_SDT": "0394863566",
+            "ND_DiemCong": 0
+        },
+        "B2404991": {
+             "ND_id": "B2404991",
+            "ND_HoTen": "Phan Minh Khang",
+            "ND_email": "minhkhangb2483@gmail.com",
+            "ND_MatKhau": "khang888229",
+            "ND_SDT": "0394863566",
+            "ND_DiemCong": 0
+        }
+    }
+}

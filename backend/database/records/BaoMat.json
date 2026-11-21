@@ -1,0 +1,42 @@
+{
+    "table_name": "BaoMat",
+    "table_relation": [
+        "NguoiDung",
+        "DiaDiem",
+        "LoaiDo",
+        "HinhAnh"
+    ],
+    "records": {
+        "BM_1795269539584": {
+            "BM_id": "BM_1795269539584",
+            "BM_ThoiGianMat": 1795269480000,
+            "BM_ThoiGianDang": 1795269539666,
+            "BM_MoTa": "Tên đồ vật: Ví da - Địa điểm nghi mất: Dãy nhà học A3 (A3) - Tầng trệt - Phòng A3-001 - Mô tả: Ví da mà nâu đen - Số điện thoại liên hệ: 0394863566 - Tên liên hệ: Đặng Hữu Khang - Email liên hệ: huukhangb2483@gmail.com",
+            "BM_TimThay": false,
+            "BM_MauChuDao": "#99480A",
+            "BM_MauPhu1": "",
+            "BM_MauPhu2": "",
+            "BM_MauPhu3": "",
+            "ND_id": "B2404990",
+            "DO_id": "DD_001",
+            "LD_id": "VI",
+            "HA_id": "HA_1795269539662"
+        },
+        "BM_1795273447510": {
+            "BM_id": "BM_1795273447510",
+            "BM_ThoiGianMat": 1795273320000,
+            "BM_ThoiGianDang": 1795273447594,
+            "BM_MoTa": "Tên đồ vật: Máy tính cầm tay - Địa điểm nghi mất: Dãy nhà học B1 (B1) - Tầng trệt - Phòng B1-001 - Mô tả: máy tính casio - Số điện thoại liên hệ: 0394863566 - Tên liên hệ: Đặng Hữu Khang - Email liên hệ: huukhangb2483@gmail.com",
+            "BM_DiaDiem": "Dãy nhà học B1 (B1) - Tầng trệt - Phòng B1-001",
+            "BM_TimThay": false,
+            "BM_MauChuDao": "#757575",
+            "BM_MauPhu1": "#2B2B2B",
+            "BM_MauPhu2": "",
+            "BM_MauPhu3": "",
+            "ND_id": "B2404990",
+            "DO_id": "DD_001",
+            "LD_id": "MAYTINH",
+            "HA_id": "HA_1795273447589"
+        }
+    }
+}

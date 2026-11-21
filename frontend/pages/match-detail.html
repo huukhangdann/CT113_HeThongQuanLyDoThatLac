@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <!-- Favicon / Chrome Tab Logo (Owl Mascot) -->
+  <link rel="icon" type="image/svg+xml" href="../mascot/assets/owl-logo.svg" />
+  <link rel="icon" type="image/png" href="../mascot/assets/owl-logo-32.png" />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Chi Tiết Kết Quả Ghép Nối - CTU Lost &amp; Found</title>
+
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+          },
+          colors: {
+            primary: '#35483d',
+            'primary-dark': '#28372e',
+            surface: '#fcf9f8',
+            'surface-dim': '#dcd9d9',
+            'surface-low': '#f6f3f2',
+            'surface-container': '#f0edec',
+            outline: '#e7e1df',
+            'text-main': '#1b1c1c',
+            'text-body': '#4a4746',
+            'text-muted': '#797675',
+            'footer-bg': '#27382B',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS và Web Components của dự án -->
+  <link href="../css/index.css" rel="stylesheet" />
+  <!-- Map CSS -->
+  <link href="../map/map.css" rel="stylesheet" />
+  <script src="../js/main.js"></script>
+  <script src="../js/components.js"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    body {
+      background-color: #fcf9f8;
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
+
+    app-header {
+      display: block;
+      min-height: 64px;
+    }
+
+    /* Custom Scrollbar for list container */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f0edec;
+      border-radius: 9999px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #dcd9d9;
+      border-radius: 9999px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #797675;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-[#fcf9f8] text-[#1b1c1c] font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-[#35483d] selection:text-white">
+
+  <!-- =========================================================================
+       1. GLOBAL TOP NAVBAR (Web Component Header của dự án)
+       ========================================================================= -->
+  <app-header></app-header>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="w-full bg-[#fcf9f8] border-b border-[#e7e1df]">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center text-xs">
+        <a class="font-medium text-[#797675] hover:text-[#1b1c1c] transition-colors flex items-center gap-1.5"
+          href="notifications.html">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span>Quay lại trang kết quả ghép nối</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. MAIN CONTENT (max-w-5xl mx-auto w-full px-4 py-8 flex flex-col gap-8)
+       ========================================================================= -->
+  <main class="max-w-5xl mx-auto w-full px-4 py-8 flex-1 flex flex-col gap-8">
+
+    <!-- -----------------------------------------------------------------------
+         KHU VỰC 1: ẢNH TRUNG TÂM (MÓN ĐỒ ĐÃ BÁO MẤT CỦA BẠN)
+         ----------------------------------------------------------------------- -->
+    <section class="flex flex-col gap-3">
+      <!-- Khung Ảnh: 1 thẻ div trải ngang -->
+      <div
+        class="w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-sm border border-[#e7e1df] relative group bg-[#f0edec]">
+        <!-- Ảnh cover to -->
+        <img id="lostItemMatchImage" alt="Món đồ báo mất"
+          class="hidden object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+          src="" />
+
+        <!-- Gradient overlay nhẹ phía dưới để làm rõ thông tin -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10 pointer-events-none"></div>
+
+
+
+        <!-- Góc dưới: Tóm tắt thông tin tin báo mất của bạn -->
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+          <h3 id="lostItemMatchTitle" class="text-xl md:text-2xl font-bold tracking-tight drop-shadow-sm">
+            Đang tải bài đăng báo mất...
+          </h3>
+          <p id="lostItemMatchDescription" class="text-xs md:text-sm text-white/90 mt-1 line-clamp-1 drop-shadow-sm">
+            Đang tải thông tin bài đăng...
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         KHU VỰC 2: BẢN ĐỒ VỊ TRÍ CÁC MÓN ĐỒ TRÙNG KHỚP
+         ----------------------------------------------------------------------- -->
+    <section class="flex flex-col gap-3">
+      <div class="flex items-center justify-between mb-1">
+        <div>
+          <h2 class="font-bold text-xl text-[#1b1c1c] flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#35483d] text-[24px]">pin_drop</span>
+            <span>Vị trí các món đồ trùng khớp</span>
+          </h2>
+          <p class="text-xs text-[#797675] mt-1">
+            Vị trí tòa nhà nghi mất của bạn đang sáng đỏ. Các tòa nhà xung quanh có đồ nhặt được khả nghi đang sáng vàng.
+          </p>
+        </div>
+      </div>
+
+      <!-- Khung chứa Map 3 cấp độ thay thế cho các card -->
+      <div id="map-viewport-container"
+        class="rounded-2xl overflow-hidden border border-[#e7e1df] shadow-xs bg-white">
+        <!-- Render tự động bởi map.js -->
+      </div>
+    </section>
+
+
+
+  </main>
+
+  <!-- =========================================================================
+       3. GLOBAL FOOTER (Web Component Footer của dự án)
+       ========================================================================= -->
+  <app-footer></app-footer>
+
+  <!-- Toast Notification Alert -->
+  <div id="toastNotification"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-md bg-white border border-emerald-200 text-[#1b1c1c] p-4 rounded-xl shadow-lg flex items-start gap-3 pointer-events-none">
+    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
+      <span class="material-symbols-outlined text-xl">check_circle</span>
+    </div>
+    <div class="flex-1">
+      <h4 class="font-bold text-sm text-emerald-900" id="toastTitle">Đã gửi yêu cầu!</h4>
+      <p class="text-xs text-[#4a4746] mt-0.5" id="toastMessage">
+        Yêu cầu xác minh quyền sở hữu đã được chuyển tới người nhặt.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Hàm hiển thị Toast thông báo
+    function showToast(title, message) {
+      const toast = document.getElementById('toastNotification');
+      const titleEl = document.getElementById('toastTitle');
+      const msgEl = document.getElementById('toastMessage');
+      if (titleEl && title) titleEl.textContent = title;
+      if (msgEl && message) msgEl.textContent = message;
+
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 4000);
+    }
+
+    // Hàm xử lý nút "Đồ của tôi"
+    function handleClaimItem(itemName, buttonEl) {
+      const confirmed = confirm(
+        `Bạn muốn gửi yêu cầu xác minh nhận lại món đồ:\n"${itemName}"?\n\n` +
+        `Hệ thống sẽ chuyển tiếp câu hỏi xác minh đến bạn để xác nhận quyền sở hữu.`
+      );
+
+      if (!confirmed) return;
+
+      buttonEl.innerHTML = `
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+          </svg>
+          Đã gửi yêu cầu
+        </span>
+      `;
+      buttonEl.classList.remove('bg-[#35483d]', 'hover:bg-[#28372e]');
+      buttonEl.classList.add('bg-emerald-700', 'cursor-default');
+      buttonEl.disabled = true;
+
+      showToast(
+        'Đã gửi yêu cầu thành công!',
+        `Yêu cầu xác minh cho "${itemName}" đã được gửi. Vui lòng theo dõi tab Thông báo để nhận phản hồi sớm nhất.`
+      );
+    }
+  </script>
+
+  <!-- Bản đồ tương tác 3 cấp độ Scripts -->
+  <script src="../map/map-data.js"></script>
+  <script src="../js/rendering/match-detail.js"></script>
+  <script src="../map/map.js"></script>
+</body>
+
+</html>

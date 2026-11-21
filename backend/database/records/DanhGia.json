@@ -1,0 +1,11 @@
+{
+    "table_name": "DanhGia",
+    "table_relation": ["NguoiDung"],
+    "records": {
+        "DG_001": {
+            "ND_id": "B2405015",
+            "DG_NoiDung": "Giao dịch nhanh chóng, trung thực và rất nhiệt tình!",
+            "DG_ThoiGian": 1730780000000
+        }
+    }
+}

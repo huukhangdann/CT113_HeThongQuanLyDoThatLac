@@ -1,0 +1,38 @@
+{
+    "table_name": "Phong",
+    "table_relation": [
+        "Tang"
+    ],
+    "records": {
+        "PHONG_201": {
+            "Phong_id": "PHONG_201",
+            "Phong": "Phòng C1-201",
+            "Tang_id": "TANG_C1_2"
+        },
+        "PHONG_D2_101": {
+            "Phong_id": "PHONG_D2_101",
+            "Phong": "Phòng D2-101",
+            "Tang_id": "TANG_D2_1"
+        },
+        "PHONG_D1_201": {
+            "Phong_id": "PHONG_D1_201",
+            "Phong": "Phòng D1-201",
+            "Tang_id": "TANG_D1_2"
+        },
+        "PHONG_C1_303": {
+            "Phong_id": "PHONG_C1_303",
+            "Phong": "Phòng C1-303",
+            "Tang_id": "TANG_C1_3"
+        },
+        "PHONG_A3_001": {
+            "Phong_id": "PHONG_A3_001",
+            "Phong": "Phòng A3-001",
+            "Tang_id": "TANG_A3_0"
+        },
+        "PHONG_B1_001": {
+            "Phong_id": "PHONG_B1_001",
+            "Phong": "Phòng B1-001",
+            "Tang_id": "TANG_B1_0"
+        }
+    }
+}

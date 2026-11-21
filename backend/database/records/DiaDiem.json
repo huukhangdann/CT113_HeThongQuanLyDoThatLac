@@ -1,0 +1,82 @@
+{
+    "table_name": "DiaDiem",
+    "table_relation": [
+        "Toa",
+        "Tang",
+        "Phong",
+        "BaoNhat",
+        "BaoMat"
+    ],
+    "records": {
+        "DD_001": {
+            "DO_id": "DD_001",
+            "Toa_ID": "TOA_C1",
+            "Tang_id": "TANG_C1_2",
+            "Phong_id": "PHONG_201"
+        },
+        "DD_1794722441233_8nhk8z": {
+            "DD_id": "DD_1794722441233_8nhk8z",
+            "DO_id": "DD_1794722441233_8nhk8z",
+            "Toa_ID": "D2",
+            "Tang_id": "TANG_D2_1",
+            "Phong_id": "PHONG_D2_101",
+            "DD_MoTa": "Nhà Điều hành (D2) - Tầng 1 - Phòng D2-101"
+        },
+        "DD_1794796751614_mvznpo": {
+            "DD_id": "DD_1794796751614_mvznpo",
+            "DO_id": "DD_1794796751614_mvznpo",
+            "Toa_ID": "D1",
+            "Tang_id": "TANG_D1_2",
+            "Phong_id": "PHONG_D1_201",
+            "DD_MoTa": "Nhà Điều hành (D1) - Tầng 2 - Phòng D1-201"
+        },
+        "DD_1795263143122_9me309": {
+            "DD_id": "DD_1795263143122_9me309",
+            "DO_id": "DD_1795263143122_9me309",
+            "Toa_ID": "C1",
+            "Tang_id": "TANG_C1_3",
+            "Phong_id": "PHONG_C1_303",
+            "DD_MoTa": "Dãy nhà học C1 (C1) - Tầng 3 - Phòng C1-303"
+        },
+        "DD_1795269592475_ldxnx5": {
+            "DD_id": "DD_1795269592475_ldxnx5",
+            "DO_id": "DD_1795269592475_ldxnx5",
+            "Toa_ID": "A3",
+            "Tang_id": "TANG_A3_0",
+            "Phong_id": "PHONG_A3_001",
+            "DD_MoTa": "Dãy nhà học A3 (A3) - Tầng trệt - Phòng A3-001"
+        },
+        "DD_1795270331334_7wgwbh": {
+            "DD_id": "DD_1795270331334_7wgwbh",
+            "DO_id": "DD_1795270331334_7wgwbh",
+            "Toa_ID": "A3",
+            "Tang_id": "TANG_A3_0",
+            "Phong_id": "PHONG_A3_001",
+            "DD_MoTa": "Dãy nhà học A3 (A3) - Tầng trệt - Phòng A3-001"
+        },
+        "DD_1795272164314_qf540p": {
+            "DD_id": "DD_1795272164314_qf540p",
+            "DO_id": "DD_1795272164314_qf540p",
+            "Toa_ID": "A3",
+            "Tang_id": "TANG_A3_0",
+            "Phong_id": "PHONG_A3_001",
+            "DD_MoTa": "Dãy nhà học A3 (A3) - Tầng trệt - Phòng A3-001"
+        },
+        "DD_1795272223856_b77au7": {
+            "DD_id": "DD_1795272223856_b77au7",
+            "DO_id": "DD_1795272223856_b77au7",
+            "Toa_ID": "A3",
+            "Tang_id": "TANG_A3_0",
+            "Phong_id": "PHONG_A3_001",
+            "DD_MoTa": "Dãy nhà học A3 (A3) - Tầng trệt - Phòng A3-001"
+        },
+        "DD_1795273496839_s82ccf": {
+            "DD_id": "DD_1795273496839_s82ccf",
+            "DO_id": "DD_1795273496839_s82ccf",
+            "Toa_ID": "B1",
+            "Tang_id": "TANG_B1_0",
+            "Phong_id": "PHONG_B1_001",
+            "DD_MoTa": "Dãy nhà học B1 (B1) - Tầng trệt - Phòng B1-001"
+        }
+    }
+}

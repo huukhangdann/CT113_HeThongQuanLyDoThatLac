@@ -1,0 +1,11 @@
+{
+    "table_name": "VaiTro",
+    "table_relation": ["NguoiDung"],
+    "records": {
+        "VT01": {
+            "VT_id": "VT01",
+            "VT_Ten": "Sinh viên",
+            "VT_Ma": "STUDENT"
+        }
+    }
+}

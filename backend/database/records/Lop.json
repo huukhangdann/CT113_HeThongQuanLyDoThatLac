@@ -1,0 +1,402 @@
+{
+    "table_name": "Lop",
+    "table_relation": ["Nganh", "DonVi"],
+    "records": {
+        "DI2295A1": {
+            "Lop_Ma": "DI2295A1",
+            "Lop_Ten": "Hệ thống thông tin 1 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2296A1": {
+            "Lop_Ma": "DI2296A1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2296F1": {
+            "Lop_Ma": "DI2296F1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K48 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2296F2": {
+            "Lop_Ma": "DI2296F2",
+            "Lop_Ten": "Kỹ thuật phần mềm 2 - K48 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI22D1A2": {
+            "Lop_Ma": "DI22D1A2",
+            "Lop_Ten": "Truyền thông đa phương tiện 2 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D1",
+            "DV": "DI"
+        },
+        "DI22D2A1": {
+            "Lop_Ma": "DI22D2A1",
+            "Lop_Ten": "An toàn thông tin 1 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D2",
+            "DV": "DI"
+        },
+        "DI22T9A1": {
+            "Lop_Ma": "DI22T9A1",
+            "Lop_Ten": "Mạng máy tính và truyền thông dữ liệu 1 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "T9",
+            "DV": "DI"
+        },
+        "DI22V7A1": {
+            "Lop_Ma": "DI22V7A1",
+            "Lop_Ten": "Công nghệ thông tin 1 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI22V7F2": {
+            "Lop_Ma": "DI22V7F2",
+            "Lop_Ten": "Công nghệ thông tin 2 - K48 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI22Z6A1": {
+            "Lop_Ma": "DI22Z6A1",
+            "Lop_Ten": "Khoa học máy tính 1 - K48 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "Z6",
+            "DV": "DI"
+        },
+        "DI2395A1": {
+            "Lop_Ma": "DI2395A1",
+            "Lop_Ten": "Hệ thống thông tin 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2396A1": {
+            "Lop_Ma": "DI2396A1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2396F1": {
+            "Lop_Ma": "DI2396F1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K49 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI23D1A1": {
+            "Lop_Ma": "DI23D1A1",
+            "Lop_Ten": "Truyền thông đa phương tiện 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D1",
+            "DV": "DI"
+        },
+        "DI23D1A2": {
+            "Lop_Ma": "DI23D1A2",
+            "Lop_Ten": "Truyền thông đa phương tiện 2 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D1",
+            "DV": "DI"
+        },
+        "DI23D2A1": {
+            "Lop_Ma": "DI23D2A1",
+            "Lop_Ten": "An toàn thông tin 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D2",
+            "DV": "DI"
+        },
+        "DI23T9A1": {
+            "Lop_Ma": "DI23T9A1",
+            "Lop_Ten": "Mạng máy tính và truyền thông dữ liệu 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "T9",
+            "DV": "DI"
+        },
+        "DI23V7A1": {
+            "Lop_Ma": "DI23V7A1",
+            "Lop_Ten": "Công nghệ thông tin 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI23V7F1": {
+            "Lop_Ma": "DI23V7F1",
+            "Lop_Ten": "Công nghệ thông tin 1 - K49 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI23Z6A1": {
+            "Lop_Ma": "DI23Z6A1",
+            "Lop_Ten": "Khoa học máy tính 1 - K49 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "Z6",
+            "DV": "DI"
+        },
+        "DI2495A1": {
+            "Lop_Ma": "DI2495A1",
+            "Lop_Ten": "Hệ thống thông tin 1 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2495A2": {
+            "Lop_Ma": "DI2495A2",
+            "Lop_Ten": "Hệ thống thông tin 2 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2495F1": {
+            "Lop_Ma": "DI2495F1",
+            "Lop_Ten": "Hệ thống thông tin 1 - K50 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2496A1": {
+            "Lop_Ma": "DI2496A1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2496A2": {
+            "Lop_Ma": "DI2496A2",
+            "Lop_Ten": "Kỹ thuật phần mềm 2 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2496F1": {
+            "Lop_Ma": "DI2496F1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K50 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2496F2": {
+            "Lop_Ma": "DI2496F2",
+            "Lop_Ten": "Kỹ thuật phần mềm 2 - K50 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI24D1A2": {
+            "Lop_Ma": "DI24D1A2",
+            "Lop_Ten": "Truyền thông đa phương tiện 2 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D1",
+            "DV": "DI"
+        },
+        "DI24D2A1": {
+            "Lop_Ma": "DI24D2A1",
+            "Lop_Ten": "An toàn thông tin 1 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "D2",
+            "DV": "DI"
+        },
+        "DI24T9A1": {
+            "Lop_Ma": "DI24T9A1",
+            "Lop_Ten": "Mạng máy tính và truyền thông dữ liệu 1 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "T9",
+            "DV": "DI"
+        },
+        "DI24T9A2": {
+            "Lop_Ma": "DI24T9A2",
+            "Lop_Ten": "Mạng máy tính và truyền thông dữ liệu 2 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "T9",
+            "DV": "DI"
+        },
+        "DI24V7A1": {
+            "Lop_Ma": "DI24V7A1",
+            "Lop_Ten": "Công nghệ thông tin 1 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI24V7A2": {
+            "Lop_Ma": "DI24V7A2",
+            "Lop_Ten": "Công nghệ thông tin 2 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI24V7F1": {
+            "Lop_Ma": "DI24V7F1",
+            "Lop_Ten": "Công nghệ thông tin 1 - K50 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI24V7F2": {
+            "Lop_Ma": "DI24V7F2",
+            "Lop_Ten": "Công nghệ thông tin 2 - K50 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "V7",
+            "DV": "DI"
+        },
+        "DI24Z6A1": {
+            "Lop_Ma": "DI24Z6A1",
+            "Lop_Ten": "Khoa học máy tính 1 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "Z6",
+            "DV": "DI"
+        },
+        "DI24Z6A2": {
+            "Lop_Ma": "DI24Z6A2",
+            "Lop_Ten": "Khoa học máy tính 2 - K50 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "Z6",
+            "DV": "DI"
+        },
+        "DI2595A1": {
+            "Lop_Ma": "DI2595A1",
+            "Lop_Ten": "Hệ thống thông tin 1 - K51 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2595A2": {
+            "Lop_Ma": "DI2595A2",
+            "Lop_Ten": "Hệ thống thông tin 2 - K51 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2595F1": {
+            "Lop_Ma": "DI2595F1",
+            "Lop_Ten": "Hệ thống thông tin 1 - K51 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "95",
+            "DV": "DI"
+        },
+        "DI2596A1": {
+            "Lop_Ma": "DI2596A1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K51 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2596A2": {
+            "Lop_Ma": "DI2596A2",
+            "Lop_Ten": "Kỹ thuật phần mềm 2 - K51 (Hệ đại trà)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2596F1": {
+            "Lop_Ma": "DI2596F1",
+            "Lop_Ten": "Kỹ thuật phần mềm 1 - K51 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 1",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        },
+        "DI2596F2": {
+            "Lop_Ma": "DI2596F2",
+            "Lop_Ten": "Kỹ thuật phần mềm 2 - K51 (Hệ chất lượng cao)",
+            "Lop_SiSo": 45,
+            "Lop_NhomLop": "Nhóm 2",
+            "Lop_NTS": 1730700000000,
+            "Nganh_Ma": "96",
+            "DV": "DI"
+        }
+    }
+}

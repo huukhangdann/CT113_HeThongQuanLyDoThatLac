@@ -1,0 +1,1193 @@
+<!doctype html>
+<html class="light" lang="vi">
+
+<head>
+  <!-- Favicon / Chrome Tab Logo (Owl Mascot) -->
+  <link rel="icon" type="image/svg+xml" href="../mascot/assets/owl-logo.svg" />
+  <link rel="icon" type="image/png" href="../mascot/assets/owl-logo-32.png" />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Thông báo Yêu cầu Ghép nối - CTU Lost &amp; Found</title>
+
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 with Plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+    };
+  </script>
+
+  <!-- Liên kết CSS và JS chung -->
+  <link href="../css/index.css" rel="stylesheet" />
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/verification-requests.js"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    body {
+      background-color: #fcf9f8;
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
+
+    app-header {
+      display: block;
+      min-height: 64px;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface antialiased flex flex-col min-h-screen">
+  <!-- TOP NAV BAR (Web Component) -->
+  <app-header></app-header>
+
+  <!-- Thanh Sub-nav (Điều hướng phụ dạng tab thông báo) -->
+  <section class="w-full bg-[#f7f6f2] sub-nav-tabs border-b border-[#E6E4DE] transition-colors">
+    <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 pt-4">
+      <div class="flex items-center gap-8">
+        <!-- Tab 1: Kết quả ghép nối (Inactive) -->
+        <a class="text-[#777771] font-medium hover:text-[#1b1c1b] pb-2 text-[15px] transition-colors duration-150 flex items-center gap-2"
+          href="notifications.html">
+          <span class="material-symbols-outlined text-lg">auto_awesome</span>
+          Kết quả ghép nối
+        </a>
+        <!-- Tab 2: Yêu cầu ghép nối (Active) -->
+        <a class="text-[#1f3227] border-b-2 border-[#1f3227] pb-2 font-bold text-[15px] flex items-center gap-2"
+          href="requests.html">
+          <span class="material-symbols-outlined text-lg">inbox</span>
+          Yêu cầu ghép nối
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nội dung chính -->
+  <main class="flex-grow max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 py-8">
+    <!-- Section Heading -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-2">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h1 class="text-2xl md:text-3xl font-bold text-[#1b1c1c] tracking-tight">
+            Những món đồ nhặt được
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+      <!-- Card 1: Ví da nam màu nâu -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden h-full flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer"
+        onclick="window.location.href='request-detail.html'">
+        <div>
+          <!-- Banner Top -->
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Ví da nam màu nâu"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4krsSH65DETYigspQtl4eay9ABGWwoWIr4yFJAtWTGyTMsWecWSjNczyxhb8yxDXXP8sAYSHv60HBRZ80vvAM_G-H3X2Q3BEs4Sh0KK_1uRFAEKXdDtxfOKVyp9_APee0q5qofBZTIW9skD3768F4ua8F_oMUk-649hRhVlwhYzDLQQlQnlqW5f6r4yC4BXmUHy7wKzL3RyM4DsSO5kmRMNqz3LAItWV2iyF9ekMIPnq_jQYOVtUY" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- Notification Badge -->
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            2
+          </div>
+          <!-- Avatar & Body -->
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">wallet</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Ví da nam màu nâu - Tòa C1
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 2 yêu cầu xác nhận ghép nối
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">10 phút trước</p>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Actions -->
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-warm-gray font-medium">Đang giữ hộ</span>
+              <div class="w-[1px] h-3.5 bg-[#E6E4DE]"></div>
+              <div class="action-buttons-group">
+                <!-- Chỉnh sửa -->
+                <button type="button" onclick="event.stopPropagation(); window.location.href='post-found.html?mode=edit&id=req-item';" class="action-pill-btn edit-pill-btn"
+                  aria-label="Chỉnh sửa">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">edit</span>
+                  <span class="action-pill-label">Chỉnh sửa</span>
+                </button>
+
+                <!-- Chuyển PCTSV -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn transfer-pill-btn"
+                  aria-label="Chuyển PCTSV">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">forward_to_inbox</span>
+                  <span class="action-pill-label">Chuyển PCTSV</span>
+                </button>
+
+                <!-- Xóa bài -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn delete-pill-btn"
+                  aria-label="Xóa bài">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">delete</span>
+                  <span class="action-pill-label">Xóa bài</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="request-detail.html"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Thẻ sinh viên CTU -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden h-full flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Thẻ sinh viên CTU"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuARNHgksfIws9Z2UQUUEbPfKnsNbo_WPEGgjTtNKRKeUJctpIZIa9gdy4qbtY4zuIy2X5bEwv-a-bbyTxumveQymhJw2j2gtx7RE-Zv6gB6clUMvLXgLgT-W2ed977dttODZ3VrStbTjQfBRqrJCu-DjFLhtDSwU9-QCHo9AnJnsMZdsN-AdFQ1TvvlrwF3U-7GNPeilhE7CIQjbVpIc14QDn2JtDOxPycf-5anksYtAbwY22sDT-br" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            1
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">badge</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Thẻ sinh viên CTU B2105432
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 1 yêu cầu xác nhận ghép nối
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">25 phút trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-warm-gray font-medium">Đang giữ hộ</span>
+              <div class="w-[1px] h-3.5 bg-[#E6E4DE]"></div>
+              <div class="action-buttons-group">
+                <!-- Chỉnh sửa -->
+                <button type="button" onclick="event.stopPropagation(); window.location.href='post-found.html?mode=edit&id=req-item';" class="action-pill-btn edit-pill-btn"
+                  aria-label="Chỉnh sửa">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">edit</span>
+                  <span class="action-pill-label">Chỉnh sửa</span>
+                </button>
+
+                <!-- Chuyển PCTSV -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn transfer-pill-btn"
+                  aria-label="Chuyển PCTSV">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">forward_to_inbox</span>
+                  <span class="action-pill-label">Chuyển PCTSV</span>
+                </button>
+
+                <!-- Xóa bài -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn delete-pill-btn"
+                  aria-label="Xóa bài">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">delete</span>
+                  <span class="action-pill-label">Xóa bài</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Bình giữ nhiệt Lock&Lock -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden h-full flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Bình giữ nhiệt Lock&amp;Lock xanh"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyB4F-sar009JOTS1EwU1ga0UtcHH34bh_agHY5D7YF7GAJS4Wy-x2L-kcss9HvTkuqBgYeaVrm7cWw-sXjQLlqx4NNmwofFkBPDxJRmoSJwFfCJKM8RPoyUAlODw5oOPWWSVGGlj-Xt1Vk65HcozH3rGTxi1SybXMtmUMor0BKo6qr6Gbrqmd1p11GKGAst1cAMjZPd4RB60WDxNX6ZRmudqtJdjqfHK9muHQLfQGwmcsUePOofiP" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            3
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">local_cafe</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Bình giữ nhiệt Lock&amp;Lock xanh
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 3 yêu cầu xác nhận ghép nối
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">1 giờ trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-warm-gray font-medium">Chờ bàn giao</span>
+              <div class="w-[1px] h-3.5 bg-[#E6E4DE]"></div>
+              <div class="action-buttons-group">
+                <!-- Chỉnh sửa -->
+                <button type="button" onclick="event.stopPropagation(); window.location.href='post-found.html?mode=edit&id=req-item';" class="action-pill-btn edit-pill-btn"
+                  aria-label="Chỉnh sửa">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">edit</span>
+                  <span class="action-pill-label">Chỉnh sửa</span>
+                </button>
+
+                <!-- Chuyển PCTSV -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn transfer-pill-btn"
+                  aria-label="Chuyển PCTSV">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">forward_to_inbox</span>
+                  <span class="action-pill-label">Chuyển PCTSV</span>
+                </button>
+
+                <!-- Xóa bài -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn delete-pill-btn"
+                  aria-label="Xóa bài">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">delete</span>
+                  <span class="action-pill-label">Xóa bài</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Balo laptop đen -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden h-full flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Balo laptop Predator"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuu2T8O0cLqHJ5pTtVr_WmzBs9-frIgnf5GhV61wx-Q0VZIbmjjrrEurwPeh0-SVSUW4Mu5TwNJU9E7_1zAQiv-QoV4VZelx-PhQwCxQ2uB4Li90-beP88q1WR4olko0ZTVrzW1FMr1WkLM-ZUlVK3nR1qX2Qm5YWF9lzlwGJaQVa_pfgh4afL4YcC9zQhqu20jc4HU6TpJ38aovNWdLshP8rDXD1V7vnnMK0hb_XRdsT4TwhYzo-p" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            2
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">backpack</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Balo laptop Predator 15.6 inch
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 2 yêu cầu xác nhận ghép nối
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">3 giờ trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-warm-gray font-medium">Đang giữ hộ</span>
+              <div class="w-[1px] h-3.5 bg-[#E6E4DE]"></div>
+              <div class="action-buttons-group">
+                <!-- Chỉnh sửa -->
+                <button type="button" onclick="event.stopPropagation(); window.location.href='post-found.html?mode=edit&id=req-item';" class="action-pill-btn edit-pill-btn"
+                  aria-label="Chỉnh sửa">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">edit</span>
+                  <span class="action-pill-label">Chỉnh sửa</span>
+                </button>
+
+                <!-- Chuyển PCTSV -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn transfer-pill-btn"
+                  aria-label="Chuyển PCTSV">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">forward_to_inbox</span>
+                  <span class="action-pill-label">Chuyển PCTSV</span>
+                </button>
+
+                <!-- Xóa bài -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn delete-pill-btn"
+                  aria-label="Xóa bài">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">delete</span>
+                  <span class="action-pill-label">Xóa bài</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Chìa khóa xe Honda Smartkey -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden h-full flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Chìa khóa xe Honda Smartkey"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuyvW0mdnur8KKNBMgIcrlviLhTSMtjUe1c-aq7TVsT7mDDLP7knoUmouGM-vtcwggM8vRhxOArfZO-o4HipO-Z1hncMn-x96zKyoCjEvUbooaoEhI-k4sn5rpzC2N9RIytGNuYPvvFvyiPwvxL3qXJwZFKA1Dhyv7asva-rBQstm4VfM_-Kv4OD14MkAxSgREqS8bwDhjQX5uR6pZu36F71vQDI6TvFv9W7hQhcER5cfcf3GU-MLb" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            5
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">vpn_key</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Chìa khóa xe Honda Smartkey
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 5 yêu cầu xác nhận ghép nối
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">5 giờ trước</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-warm-gray font-medium">Chờ bàn giao</span>
+              <div class="w-[1px] h-3.5 bg-[#E6E4DE]"></div>
+              <div class="action-buttons-group">
+                <!-- Chỉnh sửa -->
+                <button type="button" onclick="event.stopPropagation(); window.location.href='post-found.html?mode=edit&id=req-item';" class="action-pill-btn edit-pill-btn"
+                  aria-label="Chỉnh sửa">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">edit</span>
+                  <span class="action-pill-label">Chỉnh sửa</span>
+                </button>
+
+                <!-- Chuyển PCTSV -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn transfer-pill-btn"
+                  aria-label="Chuyển PCTSV">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">forward_to_inbox</span>
+                  <span class="action-pill-label">Chuyển PCTSV</span>
+                </button>
+
+                <!-- Xóa bài -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn delete-pill-btn"
+                  aria-label="Xóa bài">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">delete</span>
+                  <span class="action-pill-label">Xóa bài</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: Hộp sạc AirPods Pro -->
+      <article
+        class="relative bg-white rounded-2xl border border-[#E6E4DE] shadow-sm overflow-hidden h-full flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Hộp sạc AirPods Pro vỏ ốp đen"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo59obF6YvVHgkJmA-LGObfnbal9vj-WJkguSH0X1pzRy5oEd5xST-f6msei9vHIQctvQktasZwckGDdWXJqCjSLOrpGwk0FIn-X-PJixxJWxMMSnYY_zwhUe7LvIrVb3vXn3lCs3vBFVGId_aVsKqygtdqanUePL5Y-ttqlEBVOjJPiiyOTvTtGnIgPHwOK2TXZDwahLJFZw0ol2mpjRNhVH_dO5SamWNHO9GU8Zl8KYeekE2DC_i" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#ba1a1a] text-white font-bold text-xs flex items-center justify-center shadow-md">
+            1
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-[#f6f3f2] shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] relative">
+              <span class="material-symbols-outlined text-xl">headphones</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Hộp sạc AirPods Pro vỏ ốp đen
+              </h2>
+              <p class="mt-1 text-sm font-medium text-[#1f3227] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">hub</span>
+                Có 1 yêu cầu xác nhận ghép nối
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Hôm qua</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-warm-gray font-medium">Đang giữ hộ</span>
+              <div class="w-[1px] h-3.5 bg-[#E6E4DE]"></div>
+              <div class="action-buttons-group">
+                <!-- Chỉnh sửa -->
+                <button type="button" onclick="event.stopPropagation(); window.location.href='post-found.html?mode=edit&id=req-item';" class="action-pill-btn edit-pill-btn"
+                  aria-label="Chỉnh sửa">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">edit</span>
+                  <span class="action-pill-label">Chỉnh sửa</span>
+                </button>
+
+                <!-- Chuyển PCTSV -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn transfer-pill-btn"
+                  aria-label="Chuyển PCTSV">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">forward_to_inbox</span>
+                  <span class="action-pill-label">Chuyển PCTSV</span>
+                </button>
+
+                <!-- Xóa bài -->
+                <button type="button" onclick="event.stopPropagation()"
+                  class="action-pill-btn delete-pill-btn"
+                  aria-label="Xóa bài">
+                  <span class="material-symbols-outlined text-[17px] shrink-0">delete</span>
+                  <span class="action-pill-label">Xóa bài</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="#"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f3227] hover:text-[#2a3a31] transition-colors py-1">
+                <span class="text-[13px] font-semibold">Xem chi tiết</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    
+    <!-- =========================================================================
+         PHÂN ĐOẠN 2: NHỮNG MÓN ĐỒ ĐANG XỬ LÝ (2 BÊN ĐANG GẶP MẶT TRAO TRẢ NGOÀI ĐỜI)
+         ========================================================================= -->
+    <div id="in-progress-heading" class="mt-12 mb-6 flex flex-col md:flex-row md:items-end justify-between gap-2 border-t border-[#E6E4DE] dark:border-stone-800 pt-8">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h2 class="text-2xl md:text-3xl font-bold text-[#1b1c1c] dark:text-white tracking-tight flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-amber-600 text-2xl md:text-3xl">sync</span>
+            <span>Những món đồ đang xử lý</span>
+          </h2>
+        </div>
+        <p class="text-sm text-[#777771] dark:text-stone-400">Hai bên đang hẹn gặp và trao trả ngoài đời thực. Vui lòng bấm xác nhận sau khi bạn đã trao trả đồ thành công cho chủ sở hữu.</p>
+      </div>
+    </div>
+
+    <section id="in-progress-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+      <!-- Card đang xử lý 1 (Bên người nhặt) -->
+      <article id="req-inprog-1" class="relative bg-white dark:bg-[#18191c] rounded-2xl border border-[#e7e1df] dark:border-stone-800 shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden h-full flex flex-col justify-between hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition-all duration-300 ease-out">
+        <div>
+          <!-- Banner Top -->
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Thẻ sinh viên CTU"
+              src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- Avatar & Body -->
+          <div class="px-5 pb-4">
+            <div class="w-12 h-12 rounded-full border-2 border-white dark:border-stone-800 bg-[#f6f3f2] dark:bg-stone-800 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-[#1f3227] dark:text-emerald-400 relative">
+              <span class="material-symbols-outlined text-xl">handshake</span>
+            </div>
+            <div class="mt-3 space-y-2">
+              <h3 class="text-base font-bold text-[#1b1c1c] dark:text-white line-clamp-2 min-h-[2.75rem]">
+                Bình giữ nhiệt Lock&Lock 500ml màu xanh
+              </h3>
+              <p class="text-xs text-[#797675] dark:text-stone-400">
+                <strong class="text-[#1b1c1c] dark:text-stone-200">Chủ sở hữu:</strong> Lê Văn C (B2109876) • SĐT: 0945 678 123
+              </p>
+              <div class="flex items-center gap-2 text-xs text-[#4a4746] dark:text-stone-300 bg-stone-50 dark:bg-stone-800/60 px-3 py-2 rounded-lg border border-stone-200/70 dark:border-stone-700/60">
+                <span class="material-symbols-outlined text-stone-500 text-[18px]">schedule</span>
+                <span>Hẹn gặp lúc 16:30 chiều nay tại Sảnh C1 Tầng 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút hành động 2 bên -->
+        <div>
+          <div class="border-t border-[#E6E4DE] dark:border-stone-800"></div>
+          <div class="p-4 flex items-center justify-between gap-2.5">
+            <button type="button" onclick="openCancelHandoverModal('req-inprog-1', 'Bình giữ nhiệt Lock&Lock 500ml màu xanh')" class="px-3.5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 text-xs font-semibold text-[#4a4746] dark:text-stone-300 transition-colors flex items-center gap-1 cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">close</span>
+              <span>Hủy</span>
+            </button>
+            <button type="button" onclick="confirmHandoverSuccess('req-inprog-1', 'Bình giữ nhiệt Lock&Lock 500ml màu xanh', 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80')" class="flex-1 px-4 py-2.5 rounded-xl bg-[#35483d] hover:bg-[#28372e] text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">verified</span>
+              <span>Xác nhận</span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- =========================================================================
+         PHÂN ĐOẠN 3: NHỮNG MÓN ĐỒ NHẶT ĐƯỢC ĐÃ TRAO TRẢ THÀNH CÔNG
+         ========================================================================= -->
+    <div class="mt-14 mb-6 flex flex-col md:flex-row md:items-end justify-between gap-2 border-t border-[#E6E4DE] pt-10">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h2 class="text-2xl md:text-3xl font-bold text-[#1b1c1c] tracking-tight flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-600 text-2xl md:text-3xl">task_alt</span>
+            <span>Những món đồ nhặt được đã trao trả thành công</span>
+          </h2>
+        </div>
+        <p class="text-sm text-[#777771]">Danh sách các món đồ bạn nhặt được đã được chủ nhân xác minh và nhận lại thành công</p>
+      </div>
+    </div>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+      <!-- Card Thành công 1: Chìa khóa xe Honda -->
+      <article
+        class="relative bg-white dark:bg-[#18191c] rounded-2xl border border-[#E6E4DE] dark:border-stone-800 shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden h-full flex flex-col justify-between hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out">
+        <div>
+          <!-- Banner Top -->
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Chìa khóa xe Honda Smartkey"
+              src="https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- Ô xanh tích trắng (thành công) -->
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
+            <span class="material-symbols-outlined text-[16px] font-bold">check</span>
+          </div>
+          <!-- Avatar & Body -->
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white dark:border-stone-800 bg-emerald-50 dark:bg-stone-800 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-emerald-700 dark:text-emerald-400 relative">
+              <span class="material-symbols-outlined text-xl">key</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c] dark:text-white line-clamp-2 min-h-[2.75rem]">
+                Chìa khóa xe Honda Smartkey
+              </h2>
+              <p class="mt-1 text-sm font-medium text-emerald-700 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                Đã bàn giao cho chủ nhân thành công
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Hoàn tất hôm qua, 16:30</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thẻ hiển thị lời cảm ơn từ chủ nhân món đồ -->
+        <div class="border-t border-[#E6E4DE] dark:border-stone-800 p-4 bg-emerald-50/50 dark:bg-emerald-950/20">
+          <div class="flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-rose-500 text-[18px] shrink-0 mt-0.5">favorite</span>
+            <div class="text-xs">
+              <span class="font-bold text-[#1f3227] dark:text-emerald-400">Lời cảm ơn từ chủ nhân:</span>
+              <p class="text-stone-700 dark:text-stone-300 mt-1 italic leading-relaxed">
+                "Cảm ơn bạn rất nhiều vì đã nhặt được chìa khóa và trao trả lại cho mình! Chúc bạn luôn may mắn và học tốt!"
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div>
+          <div class="border-t border-[#E6E4DE] dark:border-stone-800"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đã trao trả
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card Thành công 2: Thẻ thư viện ĐHCT -->
+      <article
+        class="relative bg-white dark:bg-[#18191c] rounded-2xl border border-[#E6E4DE] dark:border-stone-800 shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden h-full flex flex-col justify-between hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Thẻ thư viện ĐHCT"
+              src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- Ô xanh tích trắng -->
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
+            <span class="material-symbols-outlined text-[16px] font-bold">check</span>
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white dark:border-stone-800 bg-emerald-50 dark:bg-stone-800 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-emerald-700 dark:text-emerald-400 relative">
+              <span class="material-symbols-outlined text-xl">badge</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c] dark:text-white line-clamp-2 min-h-[2.75rem]">
+                Thẻ thư viện CTU sinh viên Khóa 48
+              </h2>
+              <p class="mt-1 text-sm font-medium text-emerald-700 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                Đã bàn giao cho chủ nhân thành công
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Hoàn tất 2 ngày trước</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thẻ hiển thị lời cảm ơn từ chủ nhân món đồ -->
+        <div class="border-t border-[#E6E4DE] dark:border-stone-800 p-4 bg-emerald-50/50 dark:bg-emerald-950/20">
+          <div class="flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-rose-500 text-[18px] shrink-0 mt-0.5">favorite</span>
+            <div class="text-xs">
+              <span class="font-bold text-[#1f3227] dark:text-emerald-400">Lời cảm ơn từ chủ nhân:</span>
+              <p class="text-stone-700 dark:text-stone-300 mt-1 italic leading-relaxed">
+                "Nhờ có bạn mà mình đã tìm lại được thẻ thư viện để kịp vào thi. Cảm ơn bạn rất nhiều!"
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="border-t border-[#E6E4DE] dark:border-stone-800"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đã trao trả
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card Thành công 3: Bình giữ nhiệt Lock&Lock -->
+      <article
+        class="relative bg-white dark:bg-[#18191c] rounded-2xl border border-[#E6E4DE] dark:border-stone-800 shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden h-full flex flex-col justify-between hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="Bình giữ nhiệt Lock&Lock xanh"
+              src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- Ô xanh tích trắng -->
+          <div
+            class="absolute top-3 right-3 w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
+            <span class="material-symbols-outlined text-[16px] font-bold">check</span>
+          </div>
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white dark:border-stone-800 bg-emerald-50 dark:bg-stone-800 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-emerald-700 dark:text-emerald-400 relative">
+              <span class="material-symbols-outlined text-xl">local_cafe</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c] dark:text-white line-clamp-2 min-h-[2.75rem]">
+                Bình giữ nhiệt Lock&amp;Lock xanh ngọc
+              </h2>
+              <p class="mt-1 text-sm font-medium text-emerald-700 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                Đã nhận lại tại quầy bảo vệ
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Hoàn tất 3 ngày trước</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thẻ hiển thị lời cảm ơn từ chủ nhân món đồ -->
+        <div class="border-t border-[#E6E4DE] dark:border-stone-800 p-4 bg-emerald-50/50 dark:bg-emerald-950/20">
+          <div class="flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-rose-500 text-[18px] shrink-0 mt-0.5">favorite</span>
+            <div class="text-xs">
+              <span class="font-bold text-[#1f3227] dark:text-emerald-400">Lời cảm ơn từ chủ nhân:</span>
+              <p class="text-stone-700 dark:text-stone-300 mt-1 italic leading-relaxed">
+                "Cảm ơn bạn nhiều nhé, bình nước này là kỷ niệm của mình. Chúc bạn một ngày tốt lành!"
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="border-t border-[#E6E4DE] dark:border-stone-800"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đã trao trả
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- =========================================================================
+         PHÂN ĐOẠN 3: NHỮNG MÓN ĐỒ NHẶT ĐƯỢC QUÁ HẠN
+         ========================================================================= -->
+    <div class="mt-14 mb-6 flex flex-col md:flex-row md:items-end justify-between gap-2 border-t border-[#E6E4DE] pt-10">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h2 class="text-2xl md:text-3xl font-bold text-[#1b1c1c] tracking-tight flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-gray-500 text-2xl md:text-3xl">history_toggle_off</span>
+            <span>Những món đồ nhặt được quá hạn</span>
+          </h2>
+        </div>
+        <p class="text-sm text-[#777771]">Các món đồ đã quá thời hạn lưu giữ quy định (hơn 30 ngày) chưa có người xác nhận nhận lại</p>
+      </div>
+    </div>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+      <!-- Card Quá hạn 1: Dù che mưa mini (Làm xám, KHÔNG hiện ô đỏ góc trên, nút Đăng lại) -->
+      <article
+        class="relative bg-[#fbf9f8] rounded-2xl border border-[#d8d4d1] shadow-none overflow-hidden h-full flex flex-col justify-between grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+        <div>
+          <!-- Banner Top -->
+          <div class="relative h-32 w-full overflow-hidden bg-stone-700">
+            <img class="w-full h-full object-cover" alt="Dù che mưa gấp gọn màu đen"
+              src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- KHÔNG CÓ Ô ĐỎ TRÊN GÓC THEO YÊU CẦU -->
+
+          <!-- Avatar & Body -->
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-neutral-200 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-neutral-700 relative">
+              <span class="material-symbols-outlined text-xl">umbrella</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Dù che mưa mini gấp gọn màu đen
+              </h2>
+              <p class="mt-1 text-sm font-medium text-neutral-600 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                Đã quá hạn lưu giữ 35 ngày
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Đăng từ ngày 25/09/2026</p>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Actions -->
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
+                Quá hạn lưu giữ
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <!-- Nút "Đăng lại" thay thế cho "Xem chi tiết" theo yêu cầu -->
+              <button type="button" onclick="showToast('Đã tạo bản nháp bài đăng lại thành công!', 'success');"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1f3227] hover:text-white bg-[#e8e4e1] hover:bg-[#35483d] px-3 py-1.5 rounded-lg transition-all cursor-pointer active:scale-95 shadow-2xs">
+                <span class="material-symbols-outlined text-[16px]">replay</span>
+                <span class="text-[12px] font-bold">Đăng lại</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card Quá hạn 2: Cục sạc dự phòng 10.000mAh -->
+      <article
+        class="relative bg-[#fbf9f8] rounded-2xl border border-[#d8d4d1] shadow-none overflow-hidden h-full flex flex-col justify-between grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-700">
+            <img class="w-full h-full object-cover" alt="Sạc dự phòng Anker màu trắng"
+              src="https://images.unsplash.com/photo-1609592426809-54371424a04e?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- KHÔNG CÓ Ô ĐỎ TRÊN GÓC -->
+
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-neutral-200 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-neutral-700 relative">
+              <span class="material-symbols-outlined text-xl">battery_charging_full</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Sạc dự phòng Anker 10.000mAh trắng
+              </h2>
+              <p class="mt-1 text-sm font-medium text-neutral-600 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                Đã quá hạn lưu giữ 40 ngày
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Đăng từ ngày 20/09/2026</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
+                Quá hạn lưu giữ
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <!-- Nút "Đăng lại" -->
+              <button type="button" onclick="showToast('Đã tạo bản nháp bài đăng lại thành công!', 'success');"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1f3227] hover:text-white bg-[#e8e4e1] hover:bg-[#35483d] px-3 py-1.5 rounded-lg transition-all cursor-pointer active:scale-95 shadow-2xs">
+                <span class="material-symbols-outlined text-[16px]">replay</span>
+                <span class="text-[12px] font-bold">Đăng lại</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card Quá hạn 3: Áo khoác dù sinh viên -->
+      <article
+        class="relative bg-[#fbf9f8] rounded-2xl border border-[#d8d4d1] shadow-none overflow-hidden h-full flex flex-col justify-between grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-700">
+            <img class="w-full h-full object-cover" alt="Áo khoác dù CTU màu xanh đen"
+              src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <!-- KHÔNG CÓ Ô ĐỎ TRÊN GÓC -->
+
+          <div class="px-5 pb-4">
+            <div
+              class="w-12 h-12 rounded-full border-2 border-white bg-neutral-200 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-neutral-700 relative">
+              <span class="material-symbols-outlined text-xl">apparel</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c]">
+                Áo khoác dù thể thao xanh đen
+              </h2>
+              <p class="mt-1 text-sm font-medium text-neutral-600 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                Đã quá hạn lưu giữ 45 ngày
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Đăng từ ngày 15/09/2026</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="border-t border-[#E6E4DE]"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
+                Quá hạn lưu giữ
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <!-- Nút "Đăng lại" -->
+              <button type="button" onclick="showToast('Đã tạo bản nháp bài đăng lại thành công!', 'success');"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1f3227] hover:text-white bg-[#e8e4e1] hover:bg-[#35483d] px-3 py-1.5 rounded-lg transition-all cursor-pointer active:scale-95 shadow-2xs">
+                <span class="material-symbols-outlined text-[16px]">replay</span>
+                <span class="text-[12px] font-bold">Đăng lại</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- FOOTER (Web Component) -->
+  <app-footer></app-footer>
+
+  <!-- MODAL HỦY TRAO TRẢ -->
+  <div id="modal-cancel-handover" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-[#18191c] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200 dark:border-stone-800 space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-2.5 text-amber-600">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/50 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">cancel</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-[#1b1c1c] dark:text-white">Xác nhận hủy trao trả</h3>
+            <p class="text-xs text-[#797675] dark:text-stone-400">Chọn lý do hủy để thông báo cho đối phương</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeCancelHandoverModal()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1 rounded-lg">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-[#1b1c1c] dark:text-stone-200 mb-1.5">Lý do hủy trao trả <span class="text-rose-600">*</span></label>
+          <select id="cancel-reason-select" onchange="toggleCustomCancelReason(this.value)" class="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-[#1b1c1c] dark:text-white focus:outline-none focus:border-[#35483d] font-medium">
+            <option value="">-- Chọn lý do mẫu --</option>
+            <option value="not_owner">Không phải chủ sở hữu thật sự sau khi đối chiếu</option>
+            <option value="no_show">Người nhận không đến điểm hẹn trao trả</option>
+            <option value="wrong_item">Đồ vật không khớp với thông tin đã trao đổi</option>
+            <option value="transfer_pctsv">Đổi ý bàn giao về văn phòng PCTSV để bảo quản</option>
+            <option value="other">Khác (Tự nhập chi tiết)</option>
+          </select>
+        </div>
+
+        <div id="cancel-custom-reason-container" class="hidden space-y-1.5">
+          <label class="block font-bold text-[#1b1c1c] dark:text-stone-200">Mô tả lý do khác <span class="text-rose-600">*</span></label>
+          <textarea id="cancel-custom-reason-input" rows="3" placeholder="Nhập lý do chi tiết..." class="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-[#1b1c1c] dark:text-white focus:outline-none focus:border-[#35483d] text-xs resize-none"></textarea>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-stone-100 dark:border-stone-800">
+        <button type="button" onclick="closeCancelHandoverModal()" class="px-4 py-2 rounded-xl border border-stone-200 dark:border-stone-700 text-xs font-semibold hover:bg-stone-100 dark:hover:bg-stone-800 text-[#4a4746] dark:text-stone-300 transition-colors">
+          Đóng
+        </button>
+        <!-- Nút xác nhận hủy nổi bật theo màu chủ đề/nổi sáng -->
+        <button type="button" onclick="executeCancelHandover()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-md transition-colors flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">check</span>
+          <span>Xác nhận hủy</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentCancellingCardId = null;
+
+    function openCancelHandoverModal(cardId, itemTitle) {
+      currentCancellingCardId = cardId;
+      document.getElementById("modal-cancel-handover").classList.remove("hidden");
+    }
+    function closeCancelHandoverModal() {
+      document.getElementById("modal-cancel-handover").classList.add("hidden");
+      document.getElementById("cancel-reason-select").value = "";
+      document.getElementById("cancel-custom-reason-container").classList.add("hidden");
+      document.getElementById("cancel-custom-reason-input").value = "";
+    }
+    function toggleCustomCancelReason(val) {
+      const c = document.getElementById("cancel-custom-reason-container");
+      if (val === "other") c.classList.remove("hidden");
+      else c.classList.add("hidden");
+    }
+    async function executeCancelHandover() {
+      const reasonSelect = document.getElementById("cancel-reason-select").value;
+      if (!reasonSelect) {
+        showToast("Vui lòng chọn lý do hủy trao trả.", "warning");
+        return;
+      }
+      const customReason = document.getElementById("cancel-custom-reason-input").value.trim();
+      if (reasonSelect === "other" && !customReason) {
+        showToast("Vui lòng nhập chi tiết lý do hủy.", "warning");
+        return;
+      }
+      const finalReason = reasonSelect === "other" ? customReason : reasonSelect;
+
+      if (pendingCancelBnId) {
+        try {
+          await fetch(`${API_BASE}/api/verification-requests/cancel-handover`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bnId: pendingCancelBnId, reason: finalReason })
+          });
+          initRequestsPage();
+        } catch (e) {
+          console.error('[Cancel Handover Error]:', e);
+        }
+      }
+
+      if (currentCancellingCardId) {
+        const card = document.getElementById(currentCancellingCardId);
+        if (card) {
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            card.remove();
+            checkEmptyInProgress();
+          }, 300);
+        }
+      }
+      closeCancelHandoverModal();
+      showToast("Đã hủy trao trả bài đăng. Trạng thái đã được khôi phục về Đang giữ hộ.", "warning");
+    }
+
+    function confirmHandoverSuccess(cardId, itemTitle, photoUrl) {
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        setTimeout(() => {
+          card.remove();
+          checkEmptyInProgress();
+          appendCompletedCard(itemTitle, photoUrl);
+        }, 300);
+      }
+      showToast("Xác nhận thành công! Hai bên đã hoàn tất trao trả trên hệ thống.", "success");
+    }
+
+    function checkEmptyInProgress() {
+      const container = document.getElementById("in-progress-container");
+      if (container && container.children.length === 0) {
+        container.innerHTML = '<div class="col-span-3 p-6 text-center text-xs text-[#777771] bg-white rounded-xl border border-stone-200">Hiện không có món đồ nào đang trong quá trình trao trả.</div>';
+      }
+    }
+
+    function appendCompletedCard(title, photo) {
+      const completedSection = document.querySelector(".grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.py-2:last-of-type");
+      if (!completedSection) return;
+      const art = document.createElement("article");
+      art.className = "relative bg-white dark:bg-[#18191c] rounded-2xl border border-[#E6E4DE] dark:border-stone-800 shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden h-full flex flex-col justify-between hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out animate-in fade-in zoom-in-95";
+      art.innerHTML = `
+        <div>
+          <div class="relative h-32 w-full overflow-hidden bg-stone-800">
+            <img class="w-full h-full object-cover" alt="${title}" src="${photo || 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80'}" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          </div>
+          <div class="absolute top-3 right-3 w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
+            <span class="material-symbols-outlined text-[16px] font-bold">check</span>
+          </div>
+          <div class="px-5 pb-4">
+            <div class="w-12 h-12 rounded-full border-2 border-white dark:border-stone-800 bg-emerald-50 dark:bg-stone-800 shadow-sm -mt-6 ml-1 z-10 flex items-center justify-center text-emerald-700 dark:text-emerald-400 relative">
+              <span class="material-symbols-outlined text-xl">verified</span>
+            </div>
+            <div class="mt-3">
+              <h2 class="text-base font-bold text-[#1b1c1c] dark:text-white line-clamp-2 min-h-[2.75rem]">${title}</h2>
+              <p class="mt-1 text-sm font-medium text-emerald-700 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                Đã bàn giao cho chủ nhân thành công
+              </p>
+              <p class="mt-1 text-xs text-[#777771]">Vừa xong</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thẻ hiển thị lời cảm ơn từ chủ nhân món đồ -->
+        <div class="border-t border-[#E6E4DE] dark:border-stone-800 p-4 bg-emerald-50/50 dark:bg-emerald-950/20">
+          <div class="flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-rose-500 text-[18px] shrink-0 mt-0.5">favorite</span>
+            <div class="text-xs">
+              <span class="font-bold text-[#1f3227] dark:text-emerald-400">Lời cảm ơn từ chủ nhân:</span>
+              <p class="text-stone-700 dark:text-stone-300 mt-1 italic leading-relaxed">
+                "Cảm ơn bạn rất nhiều vì đã nhặt được và trao trả lại cho mình! Chúc bạn luôn may mắn và học tốt!"
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="border-t border-[#E6E4DE] dark:border-stone-800"></div>
+          <div class="px-5 py-3 flex items-center justify-between text-[#777771]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Đã trao trả
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+      completedSection.prepend(art);
+    }
+
+    function handleSelectPredefinedThanks(selectEl, inputId) {
+      if (selectEl.value) {
+        const inp = document.getElementById(inputId);
+        if (inp) inp.value = selectEl.value;
+      }
+    }
+
+    function sendThankYou(inputId, sectionId) {
+      const inp = document.getElementById(inputId);
+      if (!inp || !inp.value.trim()) {
+        showToast("Vui lòng chọn lời nhắn mẫu hoặc tự nhập nội dung!", "warning");
+        return;
+      }
+      const sec = sectionId ? document.getElementById(sectionId) : (inp.closest ? inp.closest('[id^="thank-section"]') : null);
+      if (sec) {
+        sec.innerHTML = `
+          <div class="py-2.5 px-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-300 animate-in fade-in">
+            <span class="flex items-center gap-1.5 font-medium">
+              <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+              <span>Đã gửi lời nhắn thành công đến người nhận! ✨</span>
+            </span>
+            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">Vừa xong</span>
+          </div>
+        `;
+      }
+      showToast("Đã gửi lời nhắn thành công đến người nhận!", "success");
+    }
+
+    function showToast(msg, type = "success") {
+      const toast = document.createElement("div");
+      toast.className = "fixed bottom-20 right-6 z-50 px-4 py-3 rounded-xl shadow-lg border text-xs font-semibold flex items-center gap-2 " + 
+        (type === "success" ? "bg-emerald-800 text-white border-emerald-700" : type === "warning" ? "bg-amber-800 text-white border-amber-700" : "bg-rose-800 text-white border-rose-700");
+      toast.innerHTML = '<span class="material-symbols-outlined text-[18px]">' + (type === "success" ? "check_circle" : "info") + '</span><span>' + msg + '</span>';
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.transition = "opacity 0.3s ease";
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+
+</body>
+
+</html>

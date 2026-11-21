@@ -1,0 +1,39 @@
+{
+    "table_name": "Tang",
+    "table_relation": [
+        "Toa",
+        "Phong"
+    ],
+    "records": {
+        "TANG_C1_2": {
+            "Tang_id": "TANG_C1_2",
+            "Tang": 2,
+            "Toa_ID": "TOA_C1"
+        },
+        "TANG_D2_1": {
+            "Tang_id": "TANG_D2_1",
+            "Tang": 1,
+            "Toa_ID": "D2"
+        },
+        "TANG_D1_2": {
+            "Tang_id": "TANG_D1_2",
+            "Tang": 2,
+            "Toa_ID": "D1"
+        },
+        "TANG_C1_3": {
+            "Tang_id": "TANG_C1_3",
+            "Tang": 3,
+            "Toa_ID": "C1"
+        },
+        "TANG_A3_0": {
+            "Tang_id": "TANG_A3_0",
+            "Tang": 0,
+            "Toa_ID": "A3"
+        },
+        "TANG_B1_0": {
+            "Tang_id": "TANG_B1_0",
+            "Tang": 0,
+            "Toa_ID": "B1"
+        }
+    }
+}

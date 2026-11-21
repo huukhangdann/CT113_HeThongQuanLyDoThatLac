@@ -1,0 +1,86 @@
+{
+    "table_name": "DonVi",
+    "table_relation": ["Nganh"],
+    "records": {
+        "DA": {
+            "DV_Ma": "DA",
+            "DV_Ten": "Viện Công nghệ Sinh học và thực phẩm",
+            "Nganh_Ma": ["V8"]
+        },
+        "DI": {
+            "DV_Ma": "DI",
+            "DV_Ten": "Trường Công nghệ Thông tin và Truyền thông",
+            "Nganh_Ma": ["CNTT"]
+        },
+        "FL": {
+            "DV_Ma": "FL",
+            "DV_Ten": "Khoa Ngoại ngữ",
+            "Nganh_Ma": ["Z9"]
+        },
+        "KH": {
+            "DV_Ma": "KH",
+            "DV_Ten": "Trường Khoa học tự nhiên",
+            "Nganh_Ma": ["69"]
+        },
+        "KT": {
+            "DV_Ma": "KT",
+            "DV_Ten": "Trường Kinh tế",
+            "Nganh_Ma": ["20"]
+        },
+        "LK": {
+            "DV_Ma": "LK",
+            "DV_Ten": "Khoa Luật",
+            "Nganh_Ma": ["L1"]
+        },
+        "MT": {
+            "DV_Ma": "MT",
+            "DV_Ten": "Khoa Môi trường và tài nguyên thiên nhiên",
+            "Nganh_Ma": ["38"]
+        },
+        "NN": {
+            "DV_Ma": "NN",
+            "DV_Ten": "Trường Nông nghiệp",
+            "Nganh_Ma": ["25"]
+        },
+        "SP": {
+            "DV_Ma": "SP",
+            "DV_Ten": "Trường Sư phạm",
+            "Nganh_Ma": ["X1"]
+        },
+        "TN": {
+            "DV_Ma": "TN",
+            "DV_Ten": "Trường Bách khoa",
+            "Nganh_Ma": ["U1"]
+        },
+        "TS": {
+            "DV_Ma": "TS",
+            "DV_Ten": "Trường Thủy sản",
+            "Nganh_Ma": ["13"]
+        },
+        "XH": {
+            "DV_Ma": "XH",
+            "DV_Ten": "Khoa Khoa học Chính trị, Xã hội và Nhân văn",
+            "Nganh_Ma": ["80"]
+        },
+        "HG": {
+            "DV_Ma": "HG",
+            "DV_Ten": "Cơ sở Hậu Giang (tạm)",
+            "Nganh_Ma": ["L2_HG"]
+        },
+        "ML": {
+            "DV_Ma": "ML",
+            "DV_Ten": "Khoa Lý luận Chính trị (tạm)",
+            "Nganh_Ma": ["U3"]
+        },
+        "ST": {
+            "DV_Ma": "ST",
+            "DV_Ten": "Khu Sóc Trăng (tạm)",
+            "Nganh_Ma": ["L2_ST"]
+        },
+        "TD": {
+            "DV_Ma": "TD",
+            "DV_Ten": "Khoa Giáo dục Thể chất (tạm)",
+            "Nganh_Ma": ["X6"]
+        }
+    }
+}

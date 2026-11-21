@@ -1,0 +1,33 @@
+{
+    "table_name": "TrangThaiBaoNhat",
+    "table_relation": [
+        "BaoNhat"
+    ],
+    "records": {
+        "TT_01": {
+            "TT_id": "TT_01",
+            "TT_Ten": "Sinh viên đang giữ",
+            "TT_MoTa": "Đồ vật đang được chủ bài đăng giữ."
+        },
+        "TT_02": {
+            "TT_id": "TT_02",
+            "TT_Ten": "PCTSV đang giữ",
+            "TT_MoTa": "Đồ vật đang ở văn phòng PCTSV."
+        },
+        "TT_03": {
+            "TT_id": "TT_03",
+            "TT_Ten": "Đang xác minh",
+            "TT_MoTa": "Trạng thái này bắt đầu khi người nhặt đồ nhấn chấp nhận 1 yêu cầu trong danh sách yêu cầu, thể hiện báo nhặt đang trong giai đoạn xác minh và chuẩn bị trao trả"
+        },
+        "TT_04": {
+            "TT_id": "TT_04",
+            "TT_Ten": "Đã trao trả",
+            "TT_MoTa": "Đồ vật đã được trao trả cho người nhận và cả người giao lẫn người nhận đều xác nhận hoàn tất trên hệ thống."
+        },
+        "TT_05": {
+            "TT_id": "TT_05",
+            "TT_Ten": "Đã được ẩn",
+            "TT_MoTa": "Trạng thái này sẽ được tự động kích hoạt khi các bài đăng ở trạng thái “Đang xác minh” quá 30 ngày"
+        }
+    }
+}

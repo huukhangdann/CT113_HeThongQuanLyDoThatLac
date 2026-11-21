@@ -1,0 +1,386 @@
+{
+    "table_name": "Nganh",
+    "table_relation": [],
+    "records": {
+        "X1": {
+            "Nganh_Ma": "X1",
+            "Nganh_Ten": "Sư phạm Tiếng Anh"
+        },
+        "X2": {
+            "Nganh_Ma": "X2",
+            "Nganh_Ten": "Sư phạm Tiếng Pháp"
+        },
+        "Z9": {
+            "Nganh_Ma": "Z9",
+            "Nganh_Ten": "Ngôn ngữ Pháp"
+        },
+        "69": {
+            "Nganh_Ma": "69",
+            "Nganh_Ten": "Hóa học"
+        },
+        "89": {
+            "Nganh_Ma": "89",
+            "Nganh_Ten": "Toán ứng dụng"
+        },
+        "94": {
+            "Nganh_Ma": "94",
+            "Nganh_Ten": "Sinh học"
+        },
+        "D3": {
+            "Nganh_Ma": "D3",
+            "Nganh_Ten": "Thống kê"
+        },
+        "H1": {
+            "Nganh_Ma": "H1",
+            "Nganh_Ten": "Khoa học dữ liệu"
+        },
+        "T3": {
+            "Nganh_Ma": "T3",
+            "Nganh_Ten": "Hóa dược"
+        },
+        "U1": {
+            "Nganh_Ma": "U1",
+            "Nganh_Ten": "Vật lý kỹ thuật"
+        },
+        "20": {
+            "Nganh_Ma": "20",
+            "Nganh_Ten": "Kế toán"
+        },
+        "21": {
+            "Nganh_Ma": "21",
+            "Nganh_Ten": "Tài chính - Ngân hàng"
+        },
+        "22": {
+            "Nganh_Ma": "22",
+            "Nganh_Ten": "Quản trị kinh doanh"
+        },
+        "23": {
+            "Nganh_Ma": "23",
+            "Nganh_Ten": "Kinh tế nông nghiệp"
+        },
+        "45": {
+            "Nganh_Ma": "45",
+            "Nganh_Ten": "Marketing"
+        },
+        "90": {
+            "Nganh_Ma": "90",
+            "Nganh_Ten": "Kinh tế tài nguyên thiên nhiên"
+        },
+        "K1": {
+            "Nganh_Ma": "K1",
+            "Nganh_Ten": "Thương mại điện tử"
+        },
+        "K2": {
+            "Nganh_Ma": "K2",
+            "Nganh_Ten": "Công nghệ tài chính"
+        },
+        "U7": {
+            "Nganh_Ma": "U7",
+            "Nganh_Ten": "Kinh doanh nông nghiệp"
+        },
+        "V5": {
+            "Nganh_Ma": "V5",
+            "Nganh_Ten": "Kiểm toán"
+        },
+        "W1": {
+            "Nganh_Ma": "W1",
+            "Nganh_Ten": "Kinh tế"
+        },
+        "W2": {
+            "Nganh_Ma": "W2",
+            "Nganh_Ten": "Quản trị dịch vụ du lịch và lữ hành"
+        },
+        "W3": {
+            "Nganh_Ma": "W3",
+            "Nganh_Ten": "Kinh doanh thương mại"
+        },
+        "W4": {
+            "Nganh_Ma": "W4",
+            "Nganh_Ten": "Kinh doanh quốc tế"
+        },
+        "L1": {
+            "Nganh_Ma": "L1",
+            "Nganh_Ten": "Luật dân sự và tố tụng dân sự"
+        },
+        "L2": {
+            "Nganh_Ma": "L2",
+            "Nganh_Ten": "Luật"
+        },
+        "L2_HG": {
+            "Nganh_Ma": "L2",
+            "Nganh_Ten": "Luật - học tại Cơ sở Hậu Giang"
+        },
+        "L2_ST": {
+            "Nganh_Ma": "L2",
+            "Nganh_Ten": "Luật - học tại Khu Sóc Trăng"
+        },
+        "S9": {
+            "Nganh_Ma": "S9",
+            "Nganh_Ten": "Luật kinh tế"
+        },
+        "25": {
+            "Nganh_Ma": "25",
+            "Nganh_Ten": "Quản lý đất đai"
+        },
+        "38": {
+            "Nganh_Ma": "38",
+            "Nganh_Ten": "Khoa học môi trường"
+        },
+        "57": {
+            "Nganh_Ma": "57",
+            "Nganh_Ten": "Kỹ thuật môi trường"
+        },
+        "D4": {
+            "Nganh_Ma": "D4",
+            "Nganh_Ten": "Kỹ thuật cấp thoát nước"
+        },
+        "S8": {
+            "Nganh_Ma": "S8",
+            "Nganh_Ten": "Quy hoạch vùng và đô thị"
+        },
+        "X7": {
+            "Nganh_Ma": "X7",
+            "Nganh_Ten": "Quản lý tài nguyên và môi trường"
+        },
+        "19": {
+            "Nganh_Ma": "19",
+            "Nganh_Ten": "Nông học"
+        },
+        "67": {
+            "Nganh_Ma": "67",
+            "Nganh_Ten": "Thú y"
+        },
+        "73": {
+            "Nganh_Ma": "73",
+            "Nganh_Ten": "Bảo vệ thực vật"
+        },
+        "S1": {
+            "Nganh_Ma": "S1",
+            "Nganh_Ten": "Chăn nuôi"
+        },
+        "S4": {
+            "Nganh_Ma": "S4",
+            "Nganh_Ten": "Khoa học đất"
+        },
+        "V8": {
+            "Nganh_Ma": "V8",
+            "Nganh_Ten": "Sinh học ứng dụng"
+        },
+        "X8": {
+            "Nganh_Ma": "X8",
+            "Nganh_Ten": "Khoa học cây trồng"
+        },
+        "X9": {
+            "Nganh_Ma": "X9",
+            "Nganh_Ten": "Công nghệ rau hoa quả và cảnh quan"
+        },
+        "01": {
+            "Nganh_Ma": "01",
+            "Nganh_Ten": "Sư phạm Toán học"
+        },
+        "02": {
+            "Nganh_Ma": "02",
+            "Nganh_Ten": "Sư phạm Vật lý"
+        },
+        "09": {
+            "Nganh_Ma": "09",
+            "Nganh_Ten": "Sư phạm Hóa học"
+        },
+        "10": {
+            "Nganh_Ma": "10",
+            "Nganh_Ten": "Sư phạm Sinh học"
+        },
+        "16": {
+            "Nganh_Ma": "16",
+            "Nganh_Ten": "Sư phạm Địa lý"
+        },
+        "17": {
+            "Nganh_Ma": "17",
+            "Nganh_Ten": "Sư phạm Ngữ văn"
+        },
+        "18": {
+            "Nganh_Ma": "18",
+            "Nganh_Ten": "Sư phạm Lịch sử"
+        },
+        "E1": {
+            "Nganh_Ma": "E1",
+            "Nganh_Ten": "Giáo dục mầm non"
+        },
+        "E2": {
+            "Nganh_Ma": "E2",
+            "Nganh_Ten": "Sư phạm Khoa học tự nhiên"
+        },
+        "E3": {
+            "Nganh_Ma": "E3",
+            "Nganh_Ten": "Sư phạm Lịch sử - Địa lý"
+        },
+        "E4": {
+            "Nganh_Ma": "E4",
+            "Nganh_Ten": "Tâm lý học giáo dục"
+        },
+        "U8": {
+            "Nganh_Ma": "U8",
+            "Nganh_Ten": "Sư phạm Tin học"
+        },
+        "X3": {
+            "Nganh_Ma": "X3",
+            "Nganh_Ten": "Giáo dục Tiểu học"
+        },
+        "X6": {
+            "Nganh_Ma": "X6",
+            "Nganh_Ten": "Giáo dục Thể chất"
+        },
+        "83": {
+            "Nganh_Ma": "83",
+            "Nganh_Ten": "Quản lý công nghiệp"
+        },
+        "84": {
+            "Nganh_Ma": "84",
+            "Nganh_Ten": "Kỹ thuật cơ khí"
+        },
+        "B1": {
+            "Nganh_Ma": "B1",
+            "Nganh_Ten": "Kỹ thuật ô tô"
+        },
+        "B2": {
+            "Nganh_Ma": "B2",
+            "Nganh_Ten": "Kỹ thuật y sinh"
+        },
+        "B3": {
+            "Nganh_Ma": "B3",
+            "Nganh_Ten": "Kỹ thuật máy tính"
+        },
+        "B4": {
+            "Nganh_Ma": "B4",
+            "Nganh_Ten": "Quản lý xây dựng"
+        },
+        "D5": {
+            "Nganh_Ma": "D5",
+            "Nganh_Ten": "Logistics và Quản lý chuỗi cung ứng"
+        },
+        "S3": {
+            "Nganh_Ma": "S3",
+            "Nganh_Ten": "Kỹ thuật cơ điện tử"
+        },
+        "S7": {
+            "Nganh_Ma": "S7",
+            "Nganh_Ten": "Kiến trúc"
+        },
+        "T1": {
+            "Nganh_Ma": "T1",
+            "Nganh_Ten": "Kỹ thuật xây dựng công trình giao thông"
+        },
+        "T4": {
+            "Nganh_Ma": "T4",
+            "Nganh_Ten": "Kỹ thuật vật liệu"
+        },
+        "T5": {
+            "Nganh_Ma": "T5",
+            "Nganh_Ten": "Kỹ thuật điện"
+        },
+        "T6": {
+            "Nganh_Ma": "T6",
+            "Nganh_Ten": "Kỹ thuật điện tử - viễn thông"
+        },
+        "T7": {
+            "Nganh_Ma": "T7",
+            "Nganh_Ten": "Kỹ thuật xây dựng"
+        },
+        "T8": {
+            "Nganh_Ma": "T8",
+            "Nganh_Ten": "Kỹ thuật xây dựng công trình thủy"
+        },
+        "V6": {
+            "Nganh_Ma": "V6",
+            "Nganh_Ten": "Công nghệ kỹ thuật hóa học"
+        },
+        "Y8": {
+            "Nganh_Ma": "Y8",
+            "Nganh_Ten": "Kỹ thuật điều khiển và tự động hóa"
+        },
+        "13": {
+            "Nganh_Ma": "13",
+            "Nganh_Ten": "Nuôi trồng thủy sản"
+        },
+        "76": {
+            "Nganh_Ma": "76",
+            "Nganh_Ten": "Bệnh học thủy sản"
+        },
+        "82": {
+            "Nganh_Ma": "82",
+            "Nganh_Ten": "Công nghệ chế biến thủy sản"
+        },
+        "F1": {
+            "Nganh_Ma": "F1",
+            "Nganh_Ten": "Đảm bảo chất lượng và an toàn thực phẩm"
+        },
+        "S2": {
+            "Nganh_Ma": "S2",
+            "Nganh_Ten": "Quản lý thủy sản"
+        },
+        "80": {
+            "Nganh_Ma": "80",
+            "Nganh_Ten": "Thông tin - thư viện"
+        },
+        "N1": {
+            "Nganh_Ma": "N1",
+            "Nganh_Ten": "Báo chí"
+        },
+        "N2": {
+            "Nganh_Ma": "N2",
+            "Nganh_Ten": "Du lịch"
+        },
+        "N2_HG": {
+            "Nganh_Ma": "N2",
+            "Nganh_Ten": "Du lịch - học tại Cơ sở Hậu Giang"
+        },
+        "N2_ST": {
+            "Nganh_Ma": "N2",
+            "Nganh_Ten": "Du lịch - học tại Khu Sóc Trăng"
+        },
+        "U3": {
+            "Nganh_Ma": "U3",
+            "Nganh_Ten": "Triết học"
+        },
+        "U4": {
+            "Nganh_Ma": "U4",
+            "Nganh_Ten": "Xã hội học"
+        },
+        "V9": {
+            "Nganh_Ma": "V9",
+            "Nganh_Ten": "Chính trị học"
+        },
+        "W7": {
+            "Nganh_Ma": "W7",
+            "Nganh_Ten": "Văn học"
+        },
+        "X4": {
+            "Nganh_Ma": "X4",
+            "Nganh_Ten": "Giáo dục Công dân"
+        },
+        "63": {
+            "Nganh_Ma": "63",
+            "Nganh_Ten": "Ngành 63 (tạm)"
+        },
+        "65": {
+            "Nganh_Ma": "65",
+            "Nganh_Ten": "Ngành 65 (tạm)"
+        },
+        "S5": {
+            "Nganh_Ma": "S5",
+            "Nganh_Ten": "Ngành S5 (tạm)"
+        },
+        "S6": {
+            "Nganh_Ma": "S6",
+            "Nganh_Ten": "Ngành S6 (tạm)"
+        },
+        "Z5": {
+            "Nganh_Ma": "Z5",
+            "Nganh_Ten": "Ngành Z5 (tạm)"
+        },
+        "Z8": {
+            "Nganh_Ma": "Z8",
+            "Nganh_Ten": "Ngành Z8 (tạm)"
+        }
+    }
+}
