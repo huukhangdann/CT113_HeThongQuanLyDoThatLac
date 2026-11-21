@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const adminService = require('./adminService');
 const authService = require('./authService');
+const foundItemSearchService = require('./foundItemSearchService');
 const { createAdminToken, requireAdmin } = require('../utils/adminToken');
 
 const database = {
@@ -78,9 +79,15 @@ test('lists real found and lost records with status, poster, and image data', ()
     assert.equal(posts[0].title, 'Ví da thật');
     assert.equal(posts[0].status, 'student_holding');
     assert.equal(posts[0].photo, '/uploads/found.jpg');
+    assert.equal(posts[0].categoryId, 'VI');
+    assert.equal(posts[0].buildingId, 'C1');
+    assert.equal(posts[0].floorId, 'TANG_C1_2');
+    assert.equal(posts[0].roomId, 'PHONG_201');
     assert.equal(posts[1].title, 'Ví mất');
     assert.equal(posts[1].location, 'Nhà C1');
     assert.equal(posts[1].photo, '/uploads/lost.jpg');
+    assert.equal(posts[1].categoryId, 'VI');
+    assert.equal(posts[1].buildingId, 'C1');
 });
 
 test('lists account points and does not expose passwords', () => {
@@ -93,6 +100,48 @@ test('lists account points and does not expose passwords', () => {
     assert.equal(admin.role, 'admin');
     assert.equal(admin.points, null);
     assert.equal(Object.prototype.hasOwnProperty.call(student, 'ND_MatKhau'), false);
+});
+
+test('uses the same live category list as the user-facing found-item form', () => {
+    const metadata = adminService.getMetadata(database);
+    assert.deepEqual(metadata.categories, foundItemSearchService.getFoundItemCategories(database));
+    assert.deepEqual(metadata.categories, [{ id: 'VI', name: 'Ví tiền' }]);
+});
+
+test('passes shared location IDs through when creating a PCTSV found post', () => {
+    const foundItemService = require('./foundItemService');
+    const originalCreateFoundItemRecord = foundItemService.createFoundItemRecord;
+    let captured;
+    foundItemService.createFoundItemRecord = (db, requestBody, files, options) => {
+        captured = { db, payload: JSON.parse(requestBody.data), files, options };
+        return { foundItem: { BN_id: 'BN_PCTSV_TEST' } };
+    };
+
+    try {
+        adminService.createPctsvPost(database, database.NguoiDung.admin991, {
+            toaId: 'C1',
+            tangId: 'TANG_C1_2',
+            floorNumber: 2,
+            phongId: 'PHONG_C1_201',
+            roomName: 'Phòng C1-201',
+            date: '2026-03-20',
+            time: '09:45',
+            tieuDe: 'Ví nhặt được',
+            ldId: 'VI',
+            noiLuuGiu: 'PCTSV',
+            cauHoiXacMinh: 'Nhãn gì?',
+            mauChuDao: '#123456'
+        }, []);
+    } finally {
+        foundItemService.createFoundItemRecord = originalCreateFoundItemRecord;
+    }
+
+    assert.equal(captured.payload.toaId, 'C1');
+    assert.equal(captured.payload.tangId, 'TANG_C1_2');
+    assert.equal(captured.payload.phongId, 'PHONG_C1_201');
+    assert.equal(captured.payload.roomName, 'Phòng C1-201');
+    assert.equal(captured.payload.ttId, 'TT_02');
+    assert.equal(captured.options.allowExternalImageUrl, true);
 });
 
 test('authenticates admin role from the stored user record and signs only admin sessions', () => {

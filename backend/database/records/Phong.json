@@ -33,6 +33,11 @@
             "Phong_id": "PHONG_B1_001",
             "Phong": "Phòng B1-001",
             "Tang_id": "TANG_B1_0"
+        },
+        "PHONG_CN_001": {
+            "Phong_id": "PHONG_CN_001",
+            "Phong": "Phòng CN-001",
+            "Tang_id": "TANG_CN_0"
         }
     }
 }

@@ -290,12 +290,6 @@
                 <select id="filter-category" onchange="filterPosts()"
                   class="w-full appearance-none px-3.5 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white focus:ring-2 focus:ring-[#35483d]/20 transition-all outline-none cursor-pointer font-medium">
                   <option value="all" selected>Tất cả loại đồ vật</option>
-                  <option value="the-sv">Thẻ sinh viên / CCCD / Giấy tờ</option>
-                  <option value="vi">Ví tiền / Bóp da</option>
-                  <option value="dien-tu">Đồ điện tử (Tai nghe, Sạc, Điện thoại)</option>
-                  <option value="chia-khoa">Chùm chìa khóa xe / Thẻ từ</option>
-                  <option value="sach-vo">Sách vở / Tài liệu / Balo</option>
-                  <option value="khac">Vật dụng khác (Ô dù, Bình nước...)</option>
                 </select>
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -438,25 +432,12 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <!-- 1. Chọn Khoa / Khu (Hiển thị sẵn, enabled) -->
+              <!-- 1. Chọn Khoa / Khu -->
               <div id="loc-step-1-wrapper" class="space-y-1">
                 <span class="text-[11px] font-medium text-[#727873] dark:text-stone-400 block">1. Khoa / Khu vực</span>
                 <div class="relative">
                   <select id="loc-faculty"
                     class="w-full appearance-none pl-3.5 pr-10 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white outline-none cursor-pointer font-medium">
-                    <option value="" selected>Tất cả khu vực tại CTU</option>
-                    <option value="Khoa CNTT&TT (Nhà C1)">Khoa CNTT&TT (Nhà C1)</option>
-                    <option value="Khu Giảng đường B1">Khu Giảng đường B1</option>
-                    <option value="Nhà học C2">Nhà học C2</option>
-                    <option value="Khoa Khoa học Tự nhiên">Khoa Khoa học Tự nhiên</option>
-                    <option value="Khoa Kinh tế">Khoa Kinh tế</option>
-                    <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
-                    <option value="Khoa Luật">Khoa Luật</option>
-                    <option value="Khoa Sư phạm">Khoa Sư phạm</option>
-                    <option value="Thư viện Trung tâm CTU">Thư viện Trung tâm CTU</option>
-                    <option value="Hội trường Rùa">Hội trường Rùa</option>
-                    <option value="Bãi xe Cổng A">Bãi xe Cổng A</option>
-                    <option value="Khu vực khác">Khu vực khác</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -466,18 +447,12 @@
                 </div>
               </div>
 
-              <!-- 2. Chọn Tầng mấy (Hiển thị sẵn, disabled ban đầu) -->
+              <!-- 2. Chọn tầng -->
               <div id="loc-step-2-wrapper" class="space-y-1">
                 <span class="text-[11px] font-medium text-[#727873] dark:text-stone-400 block">2. Chọn Tầng mấy</span>
                 <div class="relative">
                   <select id="loc-floor" disabled
                     class="w-full appearance-none pl-3.5 pr-10 py-2.5 bg-[#fcf9f8] dark:bg-stone-900 hover:bg-[#f6f3f2] text-sm text-[#1b1c1b] dark:text-white rounded-lg border border-[#e7e1df] dark:border-stone-700 focus:border-[#35483d] focus:bg-white outline-none cursor-pointer disabled:bg-stone-100 dark:disabled:bg-stone-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium">
-                    <option value="" disabled selected>-- Chọn tầng --</option>
-                    <option value="1">Tầng 1</option>
-                    <option value="2">Tầng 2</option>
-                    <option value="3">Tầng 3</option>
-                    <option value="4">Tầng 4</option>
-                    <option value="5">Tầng 5</option>
                     <option value="trệt">Tầng trệt</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-[#727873]">
@@ -486,7 +461,7 @@
                 </div>
               </div>
 
-              <!-- 3. Phòng học / Hội trường (Hiển thị sẵn, disabled ban đầu) -->
+              <!-- 3. Phòng học / Hội trường -->
               <div id="loc-step-3-wrapper" class="space-y-1">
                 <span class="text-[11px] font-medium text-[#727873] dark:text-stone-400 block">3. Phòng học / Hội trường</span>
                 <div class="relative">
@@ -1020,6 +995,7 @@
   <!-- ========================================================================= -->
   <!-- JAVASCRIPT LOGIC DÀNH CHO TRANG QUẢN TRỊ VIÊN                            -->
   <!-- ========================================================================= -->
+  <script src="../js/init/location.js"></script>
   <script>
     // -----------------------------------------------------------------------
     // 1. DỮ LIỆU BAN ĐẦU: 5 TRẠNG THÁI CHUẨN ĐẶC TẢ & BÀI ĐĂNG PCTSV CÓ TÍCH XANH
@@ -1394,7 +1370,7 @@
 
     let adminPosts = [];
     let adminAccounts = [];
-    let adminMetadata = { categories: [], buildings: [] };
+    let adminMetadata = { categories: [] };
 
     async function adminRequest(path, options = {}) {
       const token = localStorage.getItem("ctu_admin_token");
@@ -2034,98 +2010,24 @@
       const locSummary = document.getElementById("loc-summary");
       const locSummaryText = document.getElementById("loc-summary-text");
 
-      const updateLocationSummary = () => {
-        const faculty = locFaculty ? locFaculty.value : "";
-        const floor = locFloor ? locFloor.value : "";
-        const room = locRoom ? locRoom.value : "";
-
-        const isComplete = Boolean(faculty && floor && room);
-        const fullLoc = isComplete
-          ? `${faculty} - ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor} - ${room}`
-          : "";
-
-        if (filterLocationInput) filterLocationInput.value = fullLoc;
-
-        if (locSummary && locSummaryText) {
-          if (isComplete) {
-            locSummary.classList.remove("hidden");
-            locSummaryText.textContent = fullLoc;
-          } else {
-            locSummary.classList.add("hidden");
+      if (!locFaculty || !locFloor || !locRoom) return;
+      window.initLocationCascade({
+        buildingSelect: locFaculty,
+        floorSelect: locFloor,
+        roomSelect: locRoom,
+        allowEmptyBuildingSelection: true,
+        placeholders: { building: "Tất cả khu vực tại CTU" },
+        onChange: ({ buildingId, floorId, roomId, buildingName, floorName, roomName }) => {
+          const isComplete = Boolean(buildingId && floorId && roomId);
+          const fullLocation = isComplete ? `${buildingName} - ${floorName} - ${roomName}` : "";
+          if (filterLocationInput) filterLocationInput.value = fullLocation;
+          if (locSummary && locSummaryText) {
+            locSummary.classList.toggle("hidden", !isComplete);
+            locSummaryText.textContent = fullLocation;
           }
+          filterPosts();
         }
-      };
-
-      if (locFaculty) {
-        locFaculty.addEventListener("change", () => {
-          if (locFloor) {
-            locFloor.selectedIndex = 0;
-            locFloor.value = "";
-            locFloor.disabled = !locFaculty.value;
-            locFloor._syncCustomDropdown?.();
-          }
-          if (locRoom) {
-            locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-            locRoom.selectedIndex = 0;
-            locRoom.value = "";
-            locRoom.disabled = true;
-            locRoom._syncCustomDropdown?.();
-          }
-          updateLocationSummary();
-          filterPosts();
-        });
-      }
-
-      if (locFloor) {
-        locFloor.addEventListener("change", () => {
-          const floor = locFloor.value;
-          if (locRoom) {
-            locRoom.selectedIndex = 0;
-            locRoom.value = "";
-          }
-
-          if (floor) {
-            if (locRoom) {
-              locRoom.disabled = false;
-              locRoom.innerHTML = `
-                <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
-                <optgroup label="Phòng học">
-                  <option value="Phòng ${floor === 'trệt' ? '001' : floor + '01'}">Phòng ${floor === 'trệt' ? '001' : floor + '01'}</option>
-                  <option value="Phòng ${floor === 'trệt' ? '002' : floor + '02'}">Phòng ${floor === 'trệt' ? '002' : floor + '02'}</option>
-                  <option value="Phòng ${floor === 'trệt' ? '003' : floor + '03'}">Phòng ${floor === 'trệt' ? '003' : floor + '03'}</option>
-                  <option value="Phòng ${floor === 'trệt' ? '004' : floor + '04'}">Phòng ${floor === 'trệt' ? '004' : floor + '04'}</option>
-                  <option value="Phòng Máy ${floor}">Phòng Máy ${floor}</option>
-                  <option value="Hành lang ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor}">Hành lang ${floor === 'trệt' ? 'Tầng trệt' : 'Tầng ' + floor}</option>
-                </optgroup>
-                <optgroup label="Hội trường">
-                  <option value="Hội trường Rùa">Hội trường Rùa</option>
-                  <option value="Hội trường Lớn">Hội trường Lớn</option>
-                  <option value="Hội trường C1">Hội trường C1</option>
-                  <option value="Hội trường Khoa">Hội trường Khoa</option>
-                  <option value="Hội trường 1">Hội trường 1</option>
-                  <option value="Hội trường 2">Hội trường 2</option>
-                </optgroup>
-              `;
-              locRoom._syncCustomDropdown?.();
-            }
-          } else {
-            if (locRoom) {
-              locRoom.disabled = true;
-              locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-              locRoom._syncCustomDropdown?.();
-            }
-          }
-          updateLocationSummary();
-          filterPosts();
-        });
-      }
-
-      if (locRoom) {
-        locRoom.addEventListener("change", () => {
-          updateLocationSummary();
-          filterPosts();
-        });
-      }
+      });
     }
 
     function clearSearchInput() {
@@ -2154,21 +2056,7 @@
       if (locFaculty) {
         locFaculty.value = "";
         locFaculty._syncCustomDropdown?.();
-      }
-      const locFloor = document.getElementById("loc-floor");
-      if (locFloor) {
-        locFloor.selectedIndex = 0;
-        locFloor.value = "";
-        locFloor.disabled = true;
-        locFloor._syncCustomDropdown?.();
-      }
-      const locRoom = document.getElementById("loc-room");
-      if (locRoom) {
-        locRoom.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-        locRoom.selectedIndex = 0;
-        locRoom.value = "";
-        locRoom.disabled = true;
-        locRoom._syncCustomDropdown?.();
+        locFaculty.dispatchEvent(new Event("change"));
       }
       const filterLocationInput = document.getElementById("filter-location");
       if (filterLocationInput) filterLocationInput.value = "";
@@ -2183,9 +2071,12 @@
       const categoryFilter = document.getElementById("filter-category")?.value || "all";
       const colorFilter = document.getElementById("filter-color")?.value || "all";
       const timeFilter = document.getElementById("filter-time")?.value || "all";
-      const facultyFilter = document.getElementById("loc-faculty")?.value || "";
+      const buildingFilter = document.getElementById("loc-faculty")?.value || "";
       const floorFilter = document.getElementById("loc-floor")?.value || "";
       const roomFilter = document.getElementById("loc-room")?.value || "";
+      const normalizeBuildingId = value => String(value || "").trim().toUpperCase().replace(/^TOA[_-]?/, "");
+      const normalizeFloorId = value => String(value || "").trim().toUpperCase();
+      const normalizeRoomId = value => String(value || "").trim().toUpperCase().replace(/^PHONG_/, "").split("_").pop();
 
       const filtered = adminPosts.filter(post => {
         const normStatus = normalizePostStatus(post.status);
@@ -2205,25 +2096,11 @@
           matchesSubFilter = normStatus === currentPostSubFilter;
         }
 
-        // 3. Category filter (supporting both find.html slugs and full category names)
+        // 3. Category filters use the same category-ID groups as public search.
         let matchesCategory = true;
         if (categoryFilter !== "all") {
-          const postCat = (post.category || "").toLowerCase();
-          if (categoryFilter === "the-sv") {
-            matchesCategory = postCat.includes("giấy tờ") || postCat.includes("thẻ") || postCat.includes("cccd");
-          } else if (categoryFilter === "vi") {
-            matchesCategory = postCat.includes("ví") || postCat.includes("bóp");
-          } else if (categoryFilter === "dien-tu") {
-            matchesCategory = postCat.includes("điện tử") || postCat.includes("tai nghe") || postCat.includes("sạc") || postCat.includes("laptop") || postCat.includes("apple");
-          } else if (categoryFilter === "chia-khoa") {
-            matchesCategory = postCat.includes("chìa") || postCat.includes("khóa") || postCat.includes("thẻ xe");
-          } else if (categoryFilter === "sach-vo") {
-            matchesCategory = postCat.includes("sách") || postCat.includes("giáo trình") || postCat.includes("tài liệu") || postCat.includes("balo");
-          } else if (categoryFilter === "khac") {
-            matchesCategory = postCat.includes("cá nhân") || postCat.includes("khác") || postCat.includes("ô dù");
-          } else {
-            matchesCategory = postCat.includes(categoryFilter.toLowerCase());
-          }
+          matchesCategory = String(post.categoryId || "").trim().toUpperCase()
+            === String(categoryFilter).trim().toUpperCase();
         }
 
         // 4. Color filter
@@ -2262,18 +2139,16 @@
           }
         }
 
-        // 6. Faculty / Location filter
+        // 6. Location filters use the same building, floor, and room IDs as public search.
         let matchesLocation = true;
-        const postLoc = (post.location || "").toLowerCase();
-        if (facultyFilter && facultyFilter !== "" && facultyFilter !== "all") {
-          matchesLocation = postLoc.includes(facultyFilter.toLowerCase()) || facultyFilter.toLowerCase().includes(postLoc);
+        if (buildingFilter) {
+          matchesLocation = normalizeBuildingId(post.buildingId) === normalizeBuildingId(buildingFilter);
         }
         if (matchesLocation && floorFilter) {
-          const flPattern = floorFilter === "trệt" ? "trệt" : ("tầng " + floorFilter);
-          matchesLocation = postLoc.includes(flPattern) || postLoc.includes(floorFilter);
+          matchesLocation = normalizeFloorId(post.floorId) === normalizeFloorId(floorFilter);
         }
         if (matchesLocation && roomFilter) {
-          matchesLocation = postLoc.includes(roomFilter.toLowerCase());
+          matchesLocation = normalizeRoomId(post.roomId) === normalizeRoomId(roomFilter);
         }
 
         return matchesQuery && matchesSubFilter && matchesCategory && matchesColor && matchesDate && matchesLocation;
@@ -2419,87 +2294,19 @@
       const roomEl = document.getElementById("pctsv-loc-room");
       if (!floorEl) return;
       const hasFaculty = !!(facEl && facEl.value && facEl.value.trim() !== "");
-      if (hasFaculty) {
-        floorEl.disabled = false;
-        floorEl.classList.remove("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
-        floorEl.classList.add("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
-      } else {
-        floorEl.disabled = true;
-        floorEl.value = "";
-        floorEl.classList.remove("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
-        floorEl.classList.add("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
-      }
-
-      if (roomEl) {
-        const hasFloor = !!(hasFaculty && floorEl && floorEl.value && floorEl.value.trim() !== "");
-        if (hasFloor) {
-          roomEl.disabled = false;
-          roomEl.classList.remove("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
-          roomEl.classList.add("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
-        } else {
-          roomEl.disabled = true;
-          roomEl.selectedIndex = 0;
-          roomEl.value = "";
-          roomEl.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-          roomEl.classList.remove("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
-          roomEl.classList.add("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
-        }
-      }
-    }
-
-    function onPctsvFacultyChange() {
-      const floorEl = document.getElementById("pctsv-loc-floor");
-      const roomEl = document.getElementById("pctsv-loc-room");
-      if (floorEl) {
-        floorEl.selectedIndex = 0;
-        floorEl.value = "";
-      }
-      if (roomEl) {
-        roomEl.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-        roomEl.selectedIndex = 0;
-        roomEl.value = "";
-        roomEl.disabled = true;
-      }
-      syncPctsvLocation();
-    }
-
-    function onPctsvFloorChange() {
-      const floorEl = document.getElementById("pctsv-loc-floor");
-      const roomEl = document.getElementById("pctsv-loc-room");
-      const flVal = floorEl ? floorEl.value : "";
-      if (roomEl) {
-        roomEl.selectedIndex = 0;
-        roomEl.value = "";
-        if (flVal) {
-          const flNum = Number(flVal);
-          const floorLabel = flNum === 0 ? "Tầng trệt" : `Tầng ${flNum}`;
-          roomEl.disabled = false;
-          roomEl.classList.remove("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
-          roomEl.classList.add("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
-          roomEl.innerHTML = `
-            <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
-            <optgroup label="Phòng học">
-              <option value="Phòng ${flNum === 0 ? '001' : flNum + '01'}">Phòng ${flNum === 0 ? '001' : flNum + '01'}</option>
-              <option value="Phòng ${flNum === 0 ? '002' : flNum + '02'}">Phòng ${flNum === 0 ? '002' : flNum + '02'}</option>
-              <option value="Phòng ${flNum === 0 ? '003' : flNum + '03'}">Phòng ${flNum === 0 ? '003' : flNum + '03'}</option>
-              <option value="Phòng Máy ${floorLabel}">Phòng Máy ${floorLabel}</option>
-              <option value="Hành lang ${floorLabel}">Hành lang ${floorLabel}</option>
-            </optgroup>
-            <optgroup label="Hội trường">
-              <option value="Hội trường Rùa">Hội trường Rùa</option>
-              <option value="Hội trường Lớn">Hội trường Lớn</option>
-              <option value="Hội trường C1">Hội trường C1</option>
-              <option value="Hội trường Khoa">Hội trường Khoa</option>
-            </optgroup>
-          `;
-        } else {
-          roomEl.disabled = true;
-          roomEl.innerHTML = '<option value="" disabled selected>-- Chọn phòng / hội trường --</option>';
-          roomEl.classList.remove("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
-          roomEl.classList.add("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
-        }
-      }
-      syncPctsvLocation();
+      const hasFloors = Array.from(floorEl.options).some(option => option.value);
+      const hasFloor = !!(hasFaculty && floorEl.value && floorEl.value.trim() !== "");
+      const hasRooms = roomEl && Array.from(roomEl.options).some(option => option.value);
+      const setEnabled = (select, enabled) => {
+        if (!select) return;
+        const enabledClasses = ["bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer"];
+        const disabledClasses = ["bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed"];
+        select.disabled = !enabled;
+        select.classList.remove(...(enabled ? disabledClasses : enabledClasses));
+        select.classList.add(...(enabled ? enabledClasses : disabledClasses));
+      };
+      setEnabled(floorEl, hasFaculty && hasFloors);
+      setEnabled(roomEl, hasFloor && hasRooms);
     }
 
     // Khởi tạo Dropbox Color Popover cho form PCTSV (chuẩn find.html, hiện +1, +2...)
@@ -2694,7 +2501,9 @@
       pctsvMainFile = null;
       pctsvThumbnailFiles = [];
       pctsvExtraColors = [];
+      pctsvFloorNumber = null;
       updatePctsvFloorLockState();
+      document.getElementById("pctsv-loc-faculty")?.dispatchEvent(new Event("change"));
       if (typeof resetPctsvColorPickerFn === "function") resetPctsvColorPickerFn();
       const previewContainer = document.getElementById("pctsv-preview-container");
       const emptyPlaceholder = document.getElementById("pctsv-empty-placeholder");
@@ -2723,20 +2532,21 @@
       document.getElementById("modal-add-pctsv-post")?.classList.add("hidden");
     }
 
-    function syncPctsvLocation() {
+    function syncPctsvLocation(selection = {}) {
+      pctsvFloorNumber = Number.isInteger(selection.floorNumber) ? selection.floorNumber : null;
       updatePctsvFloorLockState();
-      const fac = document.getElementById("pctsv-loc-faculty")?.value || "";
-      const floor = document.getElementById("pctsv-loc-floor")?.value || "";
-      const room = document.getElementById("pctsv-loc-room")?.value.trim() || "";
-      const getSelectedLabel = id => document.getElementById(id)?.selectedOptions[0]?.textContent?.trim() || "";
+      const getSelectedLabel = id => {
+        const select = document.getElementById(id);
+        return select?.value ? select.selectedOptions[0]?.textContent?.trim() || "" : "";
+      };
       const parts = [
         getSelectedLabel("pctsv-loc-faculty"),
-        floor ? (Number(floor) === 0 ? "Tầng trệt" : `Tầng ${floor}`) : "",
-        room
+        getSelectedLabel("pctsv-loc-floor"),
+        getSelectedLabel("pctsv-loc-room")
       ].filter(Boolean);
       const locInput = document.getElementById("pctsv-location");
       if (locInput) {
-        locInput.value = parts.join(", ");
+        locInput.value = parts.join(" - ");
       }
     }
 
@@ -2744,6 +2554,7 @@
     let pctsvMainFile = null;
     let pctsvThumbnailFiles = [];
     let pctsvExtraColors = [];
+    let pctsvFloorNumber = null;
     function triggerPctsvThumbnail(index) {
       currentThumbIndex = index;
       document.getElementById("pctsv-thumb-input")?.click();
@@ -2830,8 +2641,10 @@
       const categoryId = document.getElementById("pctsv-category")?.value || "";
       const color = document.getElementById("pctsv-color")?.value.trim() || "";
       const buildingId = document.getElementById("pctsv-loc-faculty")?.value || "";
-      const floorNumber = document.getElementById("pctsv-loc-floor")?.value || "";
-      const roomName = document.getElementById("pctsv-loc-room")?.value || "";
+      const floorId = document.getElementById("pctsv-loc-floor")?.value || "";
+      const roomSelect = document.getElementById("pctsv-loc-room");
+      const roomId = roomSelect?.value || "";
+      const roomName = roomSelect?.selectedOptions[0]?.textContent?.trim() || "";
       const location = document.getElementById("pctsv-location")?.value.trim() || "";
       const dateVal = document.getElementById("pctsv-date")?.value.trim() || "";
       const rawTime = document.getElementById("pctsv-time")?.value.trim() || "";
@@ -2841,7 +2654,9 @@
       const note = document.getElementById("pctsv-note")?.value.trim() || "";
       const question = document.getElementById("pctsv-question")?.value.trim() || "";
 
-      if (!title || !categoryId || !color || !buildingId || floorNumber === "" || !roomName || !dateVal || !timeVal || !storage || !question || !note) {
+      if (!title || !categoryId || !color || !buildingId || !floorId
+        || !Number.isInteger(pctsvFloorNumber) || !roomId || !roomName
+        || !dateVal || !timeVal || !storage || !question || !note) {
         showToast("Vui lòng nhập đầy đủ thông tin bài đăng.", "warning");
         return;
       }
@@ -2866,7 +2681,9 @@
         tieuDe: title,
         ldId: categoryId,
         toaId: buildingId,
-        tangId: floorNumber,
+        tangId: floorId,
+        floorNumber: pctsvFloorNumber,
+        phongId: roomId,
         roomName,
         locationText: location,
         date: dateVal,
@@ -3342,23 +3159,23 @@
     async function loadAdminMetadata() {
       const metadata = await adminRequest("/metadata");
       adminMetadata = {
-        categories: Array.isArray(metadata.categories) ? metadata.categories : [],
-        buildings: Array.isArray(metadata.buildings) ? metadata.buildings : []
+        categories: Array.isArray(metadata.categories) ? metadata.categories : []
       };
+
+      const filterCategorySelect = document.getElementById("filter-category");
+      if (filterCategorySelect) {
+        filterCategorySelect.replaceChildren(new Option("Tất cả loại đồ vật", "all"));
+        adminMetadata.categories.forEach(category => {
+          filterCategorySelect.add(new Option(category.name, category.id));
+        });
+        filterCategorySelect._syncCustomDropdown?.();
+      }
 
       const categorySelect = document.getElementById("pctsv-category");
       if (categorySelect) {
         categorySelect.replaceChildren(new Option("-- Chọn loại đồ vật --", ""));
         adminMetadata.categories.forEach(category => {
           categorySelect.add(new Option(category.name, category.id));
-        });
-      }
-
-      const buildingSelect = document.getElementById("pctsv-loc-faculty");
-      if (buildingSelect) {
-        buildingSelect.replaceChildren(new Option("-- Chọn tòa nhà --", ""));
-        adminMetadata.buildings.forEach(building => {
-          buildingSelect.add(new Option(building.name, building.id));
         });
       }
     }
@@ -3412,8 +3229,6 @@
     window.closePrintScoreModal = closePrintScoreModal;
     window.triggerNativePrint = triggerNativePrint;
     window.exportScoreCSV = exportScoreCSV;
-    window.onPctsvFloorChange = onPctsvFloorChange;
-    window.onPctsvFacultyChange = onPctsvFacultyChange;
     window.initPctsvColorPicker = initPctsvColorPicker;
     window.initAdminSearchColorFilter = initAdminSearchColorFilter;
     window.initAdminSearchLocationCascade = initAdminSearchLocationCascade;
@@ -3436,6 +3251,12 @@
       // Khởi tạo Dropbox Color Popover cho thanh tìm kiếm & form PCTSV
       initAdminSearchColorFilter();
       initAdminSearchLocationCascade();
+      window.initLocationCascade({
+        buildingSelect: document.getElementById("pctsv-loc-faculty"),
+        floorSelect: document.getElementById("pctsv-loc-floor"),
+        roomSelect: document.getElementById("pctsv-loc-room"),
+        onChange: syncPctsvLocation
+      });
       initPctsvColorPicker();
 
       try {
@@ -3661,38 +3482,20 @@
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div>
                   <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">1. Khoa / Khu</span>
-                  <select id="pctsv-loc-faculty" onchange="onPctsvFacultyChange()"
+                  <select id="pctsv-loc-faculty"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-[#1b1c1c] dark:text-white font-medium text-xs">
-                    <option value="" selected>-- Chọn khoa --</option>
-                    <option value="Khoa CNTT&TT (C1)">Khoa CNTT&TT (C1)</option>
-                    <option value="Nhà học B1">Nhà học B1</option>
-                    <option value="Nhà học C2">Nhà học C2</option>
-                    <option value="Khoa Kinh tế">Khoa Kinh tế</option>
-                    <option value="Khoa Nông nghiệp">Khoa Nông nghiệp</option>
-                    <option value="Hội trường Rùa">Hội trường Rùa</option>
-                    <option value="Thư viện Trung tâm">Thư viện Trung tâm</option>
-                    <option value="Khu hiệu bộ">Khu hiệu bộ</option>
-                    <option value="Bãi xe Cổng A">Bãi xe Cổng A</option>
-                    <option value="Bãi xe Cổng B">Bãi xe Cổng B</option>
                   </select>
                 </div>
                 <div>
                   <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">2. Tầng</span>
-                  <select id="pctsv-loc-floor" disabled onchange="onPctsvFloorChange()"
+                  <select id="pctsv-loc-floor" disabled
                     class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800/40 text-stone-400 dark:text-stone-500 font-medium text-xs cursor-not-allowed">
-                    <option value="" selected>-- Chọn tầng --</option>
-                    <option value="0">Tầng trệt</option>
-                    <option value="1">Tầng 1</option>
-                    <option value="2">Tầng 2</option>
-                    <option value="3">Tầng 3</option>
-                    <option value="4">Tầng 4</option>
                   </select>
                 </div>
                 <div>
                   <span class="text-[10px] text-[#797675] dark:text-stone-400 block mb-1">3. Phòng / Vị trí</span>
-                  <select id="pctsv-loc-room" disabled onchange="syncPctsvLocation()"
+                  <select id="pctsv-loc-room" disabled
                     class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800/40 text-stone-400 dark:text-stone-500 font-medium text-xs cursor-not-allowed">
-                    <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
                   </select>
                 </div>
               </div>

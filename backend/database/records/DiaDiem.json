@@ -77,6 +77,14 @@
             "Tang_id": "TANG_B1_0",
             "Phong_id": "PHONG_B1_001",
             "DD_MoTa": "Dãy nhà học B1 (B1) - Tầng trệt - Phòng B1-001"
+        },
+        "DD_1795278728840_xc0jv8": {
+            "DD_id": "DD_1795278728840_xc0jv8",
+            "DO_id": "DD_1795278728840_xc0jv8",
+            "Toa_ID": "CN",
+            "Tang_id": "TANG_CN_0",
+            "Phong_id": "PHONG_CN_001",
+            "DD_MoTa": "Trường Bách Khoa (CN) - Tầng trệt - Phòng CN-001"
         }
     }
 }

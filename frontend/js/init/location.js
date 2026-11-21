@@ -757,9 +757,13 @@ function initLocationCascade({
     floorSelect.disabled = true;
 
     const notifyChange = () => {
+        const selectedFloor = (tang[buildingSelect.value] || []).find(
+            floor => floor.Tang_id === floorSelect.value
+        );
         onChange({
             buildingId: buildingSelect.value,
             floorId: floorSelect.value,
+            floorNumber: selectedFloor ? Number(selectedFloor.Tang) : null,
             roomId: roomSelect.value,
             buildingName: buildingSelect.value ? buildingSelect.selectedOptions[0]?.textContent.trim() || "" : "",
             floorName: floorSelect.value ? floorSelect.selectedOptions[0]?.textContent.trim() || "" : "",

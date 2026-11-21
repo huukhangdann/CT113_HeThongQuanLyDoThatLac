@@ -76,6 +76,27 @@
             "BN_ThoiGianXacMinh": 1795273660831,
             "BN_Accepted_YC_id": "YC_1795273629553_j8prg",
             "BN_NguoiNhan_ND_id": "B2404990"
+        },
+        "BN_1795278728840_pnu0sy": {
+            "BN_id": "BN_1795278728840_pnu0sy",
+            "BN_TieuDe": "Điện thoại iPhone màu xanh dương nhạt",
+            "BN_ThoiGianNhat": 1795278660000,
+            "BN_MoTa": "Điện thoại iPhone màu xanh dương nhạt, cụm 3 camera phía sau, có logo quả táo của Apple ở mặt lưng.",
+            "BN_ThoiGianDang": 1795278728840,
+            "BN_CauHoiXacMinh": "Món đồ có vết trầy xước hoặc chi tiết gì ẩn bên trong?",
+            "BN_MauChuDao": "#8FA4B8",
+            "BN_MauPhu1": "#4C6279",
+            "BN_MauPhu2": "#121B2B",
+            "BN_MauPhu3": "",
+            "BN_TenNguoiLienHe": "Trần Chí Trọng",
+            "BN_EmailLienHe": "trongb2483@gmail.com",
+            "BN_SDTLienHe": "0394863566",
+            "BN_NoiLuuGiu": "Đã gửi Bàn trực Thư viện Trung tâm CTU",
+            "HA_id": "HA_BN_1795278728840_pnu0sy_1",
+            "ND_id": "B2405015",
+            "DD_id": "DD_1795278728840_xc0jv8",
+            "LD_id": "DT",
+            "TT_id": "TT_01"
         }
     }
 }

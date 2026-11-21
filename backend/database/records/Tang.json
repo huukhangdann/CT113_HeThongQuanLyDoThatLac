@@ -34,6 +34,11 @@
             "Tang_id": "TANG_B1_0",
             "Tang": 0,
             "Toa_ID": "B1"
+        },
+        "TANG_CN_0": {
+            "Tang_id": "TANG_CN_0",
+            "Tang": 0,
+            "Toa_ID": "CN"
         }
     }
 }

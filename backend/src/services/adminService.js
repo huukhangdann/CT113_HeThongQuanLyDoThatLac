@@ -2,6 +2,7 @@ const path = require('path');
 const { saveRecord, deleteRecord } = require('../../database/engine/write');
 const foundItemSearchService = require('./foundItemSearchService');
 const { isAdmin } = require('../utils/adminToken');
+const { getLostLocation } = require('../utils/lostItemLocation');
 
 const dataFolderPath = path.join(__dirname, '../../database/records');
 const normalizeText = value => String(value || '')
@@ -66,12 +67,16 @@ const getFoundPosts = db => {
             id: item.id,
             title: item.title,
             category: item.category,
+            categoryId: item.categoryId,
             color: item.colors[0] || '',
             type: 'found',
             reporterName: item.posterName || 'Người dùng',
             reporterId: record?.ND_id || '',
             isPctsv: item.statusId === 'TT_02' || isAdmin(findRecord(db.NguoiDung, record?.ND_id, 'ND_id')),
             location: item.location,
+            buildingId: item.buildingId,
+            floorId: item.floorId,
+            roomId: item.roomId,
             time: formatDate(item.postedAt || item.foundAt),
             postedAt: Number(item.postedAt || item.foundAt) || 0,
             status: ID_TO_STATUS[item.statusId] || 'student_holding',
@@ -103,6 +108,7 @@ const getLostPosts = db => Object.values(db.BaoMat || {}).map(record => {
         record.BM_DiaDiem
         || extractLossField(description, 'Địa điểm nghi mất', ['Mô tả', 'Số điện thoại liên hệ', 'Tên liên hệ', 'Email liên hệ'])
     );
+    const locationIds = getLostLocation(db, record);
     const status = record.BM_AdminStatus
         || (record.BM_TimThay ? 'returned' : 'student_holding');
 
@@ -111,12 +117,16 @@ const getLostPosts = db => Object.values(db.BaoMat || {}).map(record => {
         title: extractLossField(description, 'Tên đồ vật', ['Địa điểm nghi mất', 'Mô tả'])
             || description.slice(0, 100),
         category: String(category?.LD_Ten || 'Chưa phân loại'),
+        categoryId: String(record.LD_id || ''),
         color: String(record.BM_MauChuDao || ''),
         type: 'lost',
         reporterName: String(user?.ND_HoTen || 'Người dùng'),
         reporterId: String(record.ND_id || ''),
         isPctsv: false,
         location,
+        buildingId: String(locationIds.Toa_ID || '').trim().toUpperCase().replace(/^TOA[_-]?/, ''),
+        floorId: String(locationIds.Tang_id || '').trim().toUpperCase(),
+        roomId: String(locationIds.Phong_id || '').trim().toUpperCase(),
         time: formatDate(record.BM_ThoiGianDang || record.BM_ThoiGianMat),
         postedAt: Number(record.BM_ThoiGianDang || record.BM_ThoiGianMat) || 0,
         status,
@@ -170,11 +180,15 @@ exports.createPctsvPost = (db, adminUser, body, files) => {
     }
     const form = body || {};
     const buildingId = String(form.toaId || '').trim();
-    const floorValue = String(form.tangId || '').trim();
+    const floorId = String(form.tangId || '').trim();
     const roomName = String(form.roomName || '').trim();
     const building = findRecord(db.Toa, buildingId, 'Toa_ID');
-    const floorNumber = Number(floorValue);
+    const selectedFloor = findRecord(db.Tang, floorId, 'Tang_id');
+    const floorNumber = Number(form.floorNumber !== undefined && form.floorNumber !== ''
+        ? form.floorNumber
+        : selectedFloor?.Tang ?? floorId);
     if (!building) throw createError('Tòa nhà không tồn tại trong hệ thống.');
+    if (!floorId) throw createError('Vui lòng chọn tầng.');
     if (!Number.isInteger(floorNumber) || floorNumber < 0 || floorNumber > 20) {
         throw createError('Tầng không hợp lệ.');
     }
@@ -188,16 +202,33 @@ exports.createPctsvPost = (db, adminUser, body, files) => {
     if (!category) throw createError('Loại đồ vật không hợp lệ.');
 
     const normalizedToaId = String(building.Toa_ID).replace(/[^A-Za-z0-9]/g, '_');
-    const floor = Object.values(db.Tang || {}).find(record =>
+    const floorPrefix = `TANG_${normalizedToaId}_`;
+    const roomPrefix = `PHONG_${normalizedToaId}_`;
+    const floor = selectedFloor || Object.values(db.Tang || {}).find(record =>
         normalizeBuildingId(record.Toa_ID) === normalizeBuildingId(building.Toa_ID)
         && Number(record.Tang) === floorNumber
     );
-    const tangId = floor?.Tang_id || `TANG_${normalizedToaId}_${floorNumber}`;
-    const room = Object.values(db.Phong || {}).find(record =>
-        record.Tang_id === tangId && normalizeText(record.Phong) === normalizeText(roomName)
-    );
+    const tangId = floor?.Tang_id || floorId || `${floorPrefix}${floorNumber}`;
+    if (!tangId.startsWith(floorPrefix)
+        || Number(tangId.slice(floorPrefix.length)) !== floorNumber
+        || floor && (
+            normalizeBuildingId(floor.Toa_ID) !== normalizeBuildingId(building.Toa_ID)
+            || Number(floor.Tang) !== floorNumber
+        )) {
+        throw createError('Tầng không thuộc tòa nhà đã chọn.');
+    }
+
+    const selectedRoomId = String(form.phongId || '').trim();
+    const room = selectedRoomId
+        ? findRecord(db.Phong, selectedRoomId, 'Phong_id')
+        : Object.values(db.Phong || {}).find(record =>
+            record.Tang_id === tangId && normalizeText(record.Phong) === normalizeText(roomName)
+        );
     const roomSlug = `${floorNumber}_${normalizeText(roomName).toUpperCase() || 'LOCATION'}`;
-    const phongId = room?.Phong_id || `PHONG_${normalizedToaId}_${roomSlug}`;
+    const phongId = room?.Phong_id || selectedRoomId || `${roomPrefix}${roomSlug}`;
+    if (!phongId.startsWith(roomPrefix) || room?.Tang_id && room.Tang_id !== tangId) {
+        throw createError('Phòng không thuộc tòa nhà hoặc tầng đã chọn.');
+    }
     const locationText = String(form.locationText || '').trim()
         || [building.Toa_Ten, floorNumber === 0 ? 'Tầng trệt' : `Tầng ${floorNumber}`, roomName].join(' - ');
     const timestamp = Date.parse(`${form.date}T${form.time}:00`);
