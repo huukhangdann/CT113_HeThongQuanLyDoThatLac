@@ -6,6 +6,11 @@
             "VT_id": "VT01",
             "VT_Ten": "Sinh viên",
             "VT_Ma": "STUDENT"
+        },
+        "VT02": {
+            "VT_id": "VT02",
+            "VT_Ten": "Quản trị viên",
+            "VT_Ma": "ADMIN"
         }
     }
 }

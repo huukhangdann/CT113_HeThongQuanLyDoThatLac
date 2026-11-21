@@ -1243,6 +1243,7 @@ class AppHeader extends HTMLElement {
         localStorage.removeItem("ctu_user_name");
         localStorage.removeItem("ctu_user_id");
         localStorage.removeItem("currentUser");
+        localStorage.removeItem("ctu_admin_token");
       });
     }
 
@@ -1254,6 +1255,7 @@ class AppHeader extends HTMLElement {
         localStorage.removeItem("ctu_user_name");
         localStorage.removeItem("ctu_user_id");
         localStorage.removeItem("currentUser");
+        localStorage.removeItem("ctu_admin_token");
       });
     }
 

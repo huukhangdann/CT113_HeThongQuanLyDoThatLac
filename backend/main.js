@@ -50,6 +50,8 @@ app.use('/api/found', foundItemRoute);
 const verificationRequestRoute = require('./src/routes/verificationRequestRoute');
 app.use('/api/verification-requests', verificationRequestRoute);
 
+const adminRoute = require('./src/routes/adminRoute');
+app.use('/api/admin', adminRoute);
 
 
 
@@ -68,8 +70,6 @@ const server = app.listen(PORT, () => {
         console.log(`[Neural Matcher] Đã khôi phục ${backfilledMatches} kết quả ghép nối còn thiếu.`);
     }
 
-    console.log(app.locals.database.NguoiDung["B2405015"]);
-   
     console.log(`Server đang lượn lờ tại: http://localhost:${PORT}`);
 
 });

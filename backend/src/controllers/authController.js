@@ -1,4 +1,5 @@
 const authService = require('../services/authService');
+const { createAdminToken } = require('../utils/adminToken');
 
 exports.loginUser = (req, res) => {
     try {
@@ -9,11 +10,13 @@ exports.loginUser = (req, res) => {
 
         // Gọi sang Service để xử lý logic nghiệp vụ
         const userInfo = authService.authenticateUser(db, email, password);
+        const token = userInfo.role === 'admin' ? createAdminToken(userInfo.ND_id) : undefined;
 
         return res.status(200).json({
             success: true,
             message: "Đăng nhập thành công!",
-            user: userInfo
+            user: userInfo,
+            ...(token ? { token } : {})
         });
 
     } catch (error) {

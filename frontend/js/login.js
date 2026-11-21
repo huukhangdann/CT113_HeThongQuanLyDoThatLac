@@ -3,8 +3,10 @@
  */
 async function handleLogin() {
     // 1. Lấy giá trị từ các ô input thông qua ID
-    const accountInput = document.getElementById('login-account').value.trim();
-    const passwordInput = document.getElementById('password-input').value.trim();
+    const accountElement = document.getElementById('username-input') || document.getElementById('login-account');
+    const passwordElement = document.getElementById('password-input');
+    const accountInput = accountElement?.value.trim() || '';
+    const passwordInput = passwordElement?.value || '';
 
     // Kiểm tra nhanh phía client
     if (!accountInput || !passwordInput) {
@@ -39,10 +41,15 @@ async function handleLogin() {
             localStorage.setItem('currentUser', JSON.stringify(result.user));
             localStorage.setItem('ctu_user_name', result.user.ND_HoTen || '');
             localStorage.setItem('ctu_user_id', result.user.ND_id);
-            localStorage.setItem('ctu_user_role', 'user');
+            localStorage.setItem('ctu_user_role', result.user.role || 'user');
             localStorage.setItem('ctu_user_logged_in', 'true');
+            if (result.user.role === 'admin' && result.token) {
+                localStorage.setItem('ctu_admin_token', result.token);
+            } else {
+                localStorage.removeItem('ctu_admin_token');
+            }
 
-            window.location.href = 'index.html';
+            window.location.href = result.user.role === 'admin' ? 'admin.html' : 'index.html';
         } else {
             // Đăng nhập thất bại (sai mật khẩu, không tìm thấy email,...)
             console.warn("[Client] Đăng nhập thất bại:", result.message);

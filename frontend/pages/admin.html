@@ -182,8 +182,8 @@
       <div onclick="switchAdminTab('posts'); setPostSubFilter('verifying');"
         class="bg-white dark:bg-[#18191c] p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800/80 shadow-2xs flex flex-col justify-between transition-all hover:border-rose-400 dark:hover:border-rose-700 hover:shadow-sm cursor-pointer group">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Bài bị báo
-            cáo</span>
+          <span class="text-xs font-semibold text-[#797675] dark:text-stone-400 uppercase tracking-wider">Đang xác
+            minh</span>
           <div
             class="w-9 h-9 rounded-xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-rose-600 dark:text-rose-400 group-hover:scale-105 transition-transform">
             <span class="material-symbols-outlined text-[20px]">flag</span>
@@ -969,6 +969,11 @@
           </div>
         </div>
         <div>
+          <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Mật khẩu tạm thời (ít nhất 8 ký tự) *</label>
+          <input type="password" id="new-acc-password" required minlength="8" autocomplete="new-password"
+            class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
+        </div>
+        <div>
           <label class="block font-semibold mb-1 text-[#1b1c1c] dark:text-stone-200">Đơn vị / Khoa</label>
           <input type="text" id="new-acc-dept" placeholder="VD: Khoa Công nghệ Thông tin & Truyền thông"
             class="w-full px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-[#1b1c1c] dark:text-white outline-none">
@@ -1369,50 +1374,54 @@
       }
     ];
 
-    // State lưu trong LocalStorage (hỗ trợ đồng bộ v3 và v2)
+    const ADMIN_API_BASE = "http://localhost:3000/api/admin";
+    function escapeAdminHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[character]);
+    }
+
+    function getAdminImageSrc(value) {
+      const imageUrl = String(value || "").trim();
+      if (imageUrl.startsWith("/uploads/")) return `http://localhost:3000${imageUrl}`;
+      if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
+      return "../mascot/assets/owl-logo.svg";
+    }
+
     let adminPosts = [];
-    try {
-      const stored = localStorage.getItem("ctu_admin_posts_v3") || localStorage.getItem("ctu_admin_posts_v2");
-      const parsed = stored ? JSON.parse(stored) : null;
-      adminPosts = (Array.isArray(parsed) && parsed.length > 0) ? parsed.map(p => ({
-        ...p,
-        status: normalizePostStatus(p.status)
-      })) : [...INITIAL_POSTS];
-    } catch (e) {
-      adminPosts = [...INITIAL_POSTS];
-    }
-    if (!Array.isArray(adminPosts) || adminPosts.length === 0) {
-      adminPosts = [...INITIAL_POSTS];
-      try { localStorage.setItem("ctu_admin_posts_v3", JSON.stringify(adminPosts)); } catch(e){}
-    }
-
     let adminAccounts = [];
-    try {
-      const stored = localStorage.getItem("ctu_admin_accounts_v4");
-      const parsed = stored ? JSON.parse(stored) : null;
-      adminAccounts = (Array.isArray(parsed) && parsed.length > 0) ? parsed : [...INITIAL_ACCOUNTS];
-    } catch (e) {
-      adminAccounts = [...INITIAL_ACCOUNTS];
-    }
-    if (!Array.isArray(adminAccounts) || adminAccounts.length === 0) {
-      adminAccounts = [...INITIAL_ACCOUNTS];
-      try { localStorage.setItem("ctu_admin_accounts_v4", JSON.stringify(adminAccounts)); } catch(e){}
-    }
+    let adminMetadata = { categories: [], buildings: [] };
 
-    function savePosts() {
-      try {
-        localStorage.setItem("ctu_admin_posts_v3", JSON.stringify(adminPosts));
-        localStorage.setItem("ctu_admin_posts_v2", JSON.stringify(adminPosts));
-      } catch (e) {
-        console.error("Lỗi lưu posts:", e);
+    async function adminRequest(path, options = {}) {
+      const token = localStorage.getItem("ctu_admin_token");
+      const headers = new Headers(options.headers || {});
+      if (token) headers.set("Authorization", `Bearer ${token}`);
+      if (options.body && !(options.body instanceof FormData) && !headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
       }
-    }
-    function saveAccounts() {
+
+      const response = await fetch(`${ADMIN_API_BASE}${path}`, { ...options, headers });
+      let result;
       try {
-        localStorage.setItem("ctu_admin_accounts_v4", JSON.stringify(adminAccounts));
-      } catch (e) {
-        console.error("Lỗi lưu accounts:", e);
+        result = await response.json();
+      } catch (error) {
+        throw new Error("Máy chủ trả về dữ liệu không hợp lệ.");
       }
+
+      if (response.status === 401) {
+        localStorage.removeItem("ctu_admin_token");
+        localStorage.setItem("ctu_user_logged_in", "false");
+        window.location.replace("login.html");
+        throw new Error(result.message || "Phiên quản trị hết hạn. Vui lòng đăng nhập lại.");
+      }
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Không thể hoàn tất thao tác quản trị.");
+      }
+      return result.data;
     }
 
     // -----------------------------------------------------------------------
@@ -1513,7 +1522,7 @@
       const iconColor = type === "success" ? "text-emerald-400" : type === "warning" ? "text-amber-400" : type === "error" ? "text-rose-400" : "text-blue-400";
       toast.innerHTML = `
         <span class="material-symbols-outlined text-[18px] shrink-0 ${iconColor}">${iconName}</span>
-        <span>${message}</span>
+        <span>${escapeAdminHtml(message)}</span>
       `;
 
       container.appendChild(toast);
@@ -1618,8 +1627,8 @@
             <span class="text-xs font-semibold text-[#1b1c1c] dark:text-stone-200 whitespace-nowrap">${cfg.label}</span>
           </div>
           ${normStatus === 'hidden' && post.hiddenReason ? `
-            <span class="text-[10px] text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1 max-w-[140px]" title="${post.hiddenReason}">
-              Lý do: ${post.hiddenReason}
+            <span class="text-[10px] text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1 max-w-[140px]" title="${escapeAdminHtml(post.hiddenReason)}">
+              Lý do: ${escapeAdminHtml(post.hiddenReason)}
             </span>
           ` : ''}
         </div>
@@ -1629,14 +1638,15 @@
     function getPostActionButtons(post) {
       const normStatus = normalizePostStatus(post.status);
       const isHidden = normStatus === "hidden";
+      const postId = escapeAdminHtml(JSON.stringify(String(post.id)));
       return `
-        <button type="button" onclick="viewPostDetail('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem chi tiết bài đăng">
+        <button type="button" onclick="viewPostDetail(${postId});" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="Xem chi tiết bài đăng">
           <span class="material-symbols-outlined text-[16px]">visibility</span>
         </button>
-        <button type="button" onclick="${isHidden ? `unhidePost('${post.id}')` : `openHidePostModal('${post.id}')`};" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="${isHidden ? 'Bỏ ẩn bài đăng' : 'Ẩn bài đăng'}">
+        <button type="button" onclick="${isHidden ? `unhidePost(${postId})` : `openHidePostModal(${postId})`};" class="w-7 h-7 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition-colors flex items-center justify-center cursor-pointer" title="${isHidden ? 'Bỏ ẩn bài đăng' : 'Ẩn bài đăng'}">
           <span class="material-symbols-outlined text-[16px]">${isHidden ? 'unarchive' : 'visibility_off'}</span>
         </button>
-        <button type="button" onclick="openDeletePostModal('${post.id}');" class="w-7 h-7 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài đăng">
+        <button type="button" onclick="openDeletePostModal(${postId});" class="w-7 h-7 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors flex items-center justify-center cursor-pointer" title="Xóa bài đăng">
           <span class="material-symbols-outlined text-[16px]">delete</span>
         </button>
       `;
@@ -1662,6 +1672,13 @@
         const normStatus = normalizePostStatus(post.status);
         const isHidden = normStatus === "hidden";
         const isPctsv = post.isPctsv || post.reporterName === "Cán bộ PCTSV" || (post.reporterId && post.reporterId.startsWith("CB"));
+        const postId = escapeAdminHtml(post.id);
+        const postTitle = escapeAdminHtml(post.title);
+        const postCategory = escapeAdminHtml(post.category);
+        const reporterName = escapeAdminHtml(post.reporterName);
+        const reporterId = escapeAdminHtml(post.reporterId);
+        const location = escapeAdminHtml(post.location);
+        const photo = escapeAdminHtml(getAdminImageSrc(post.photo));
 
         const typeBadge = post.type === "found"
           ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-200 dark:border-stone-700">Nhặt được</span>`
@@ -1679,27 +1696,27 @@
         const tr = document.createElement("tr");
         tr.className = `hover:bg-stone-50/70 dark:hover:bg-stone-800/40 transition-colors ${isHidden ? 'opacity-70' : ''}`;
         tr.innerHTML = `
-          <td class="py-3 px-4 font-mono font-bold text-xs text-[#797675] dark:text-stone-400">${post.id}</td>
+          <td class="py-3 px-4 font-mono font-bold text-xs text-[#797675] dark:text-stone-400">${postId}</td>
           <td class="py-3 px-4 text-center">
-            <img src="${post.photo}" alt="${post.title}" class="w-9 h-9 rounded-lg object-cover mx-auto border border-stone-200 dark:border-stone-700">
+            <img src="${photo}" alt="${postTitle}" class="w-9 h-9 rounded-lg object-cover mx-auto border border-stone-200 dark:border-stone-700">
           </td>
           <td class="py-3 px-4">
             <div class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1.5">
-              <span>${post.title}</span>
+              <span>${postTitle}</span>
               ${pctsvBadge}
               ${normStatus === 'verifying' && post.reportCount ? '<span class="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">[Có báo cáo]</span>' : ''}
             </div>
-            <div class="text-[11px] text-[#797675] dark:text-stone-400">${post.category}</div>
+            <div class="text-[11px] text-[#797675] dark:text-stone-400">${postCategory}</div>
           </td>
           <td class="py-3 px-4">${typeBadge}</td>
           <td class="py-3 px-4">
             <div class="font-medium text-[#1b1c1c] dark:text-stone-200 flex items-center gap-1">
-              <span>${post.reporterName}</span>
+              <span>${reporterName}</span>
               ${isPctsv ? pctsvBadge : ''}
             </div>
-            <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${post.reporterId}</div>
+            <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${reporterId}</div>
           </td>
-          <td class="py-3 px-4 text-xs">${post.location}</td>
+          <td class="py-3 px-4 text-xs">${location}</td>
           <td class="py-3 px-4">${getPostStatusBadge(post)}</td>
           <td class="py-3 px-4 text-right">
             <div class="inline-flex items-center gap-1.5 justify-end">
@@ -1714,21 +1731,21 @@
         mCard.className = `bg-white dark:bg-[#18191c] p-4 rounded-xl border border-stone-200 dark:border-stone-800 shadow-2xs space-y-3 ${isHidden ? 'opacity-70' : ''}`;
         mCard.innerHTML = `
           <div class="flex items-start gap-3">
-            <img src="${post.photo}" alt="${post.title}" class="w-12 h-12 rounded-lg object-cover border border-stone-200 dark:border-stone-700 shrink-0">
+            <img src="${photo}" alt="${postTitle}" class="w-12 h-12 rounded-lg object-cover border border-stone-200 dark:border-stone-700 shrink-0">
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between gap-1">
-                <span class="font-mono text-[11px] font-bold text-[#797675] dark:text-stone-400">${post.id}</span>
+                <span class="font-mono text-[11px] font-bold text-[#797675] dark:text-stone-400">${postId}</span>
                 ${getPostStatusBadge(post)}
               </div>
               <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white truncate mt-0.5 flex items-center gap-1.5">
-                <span class="truncate">${post.title}</span>
+                <span class="truncate">${postTitle}</span>
                 ${pctsvBadge}
               </h4>
-              <p class="text-xs text-[#797675] dark:text-stone-400 line-clamp-1">${post.location}</p>
+              <p class="text-xs text-[#797675] dark:text-stone-400 line-clamp-1">${location}</p>
             </div>
           </div>
           <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs">
-            <span class="text-[#797675] dark:text-stone-400">Đăng bởi: <strong class="text-[#1b1c1c] dark:text-stone-200">${post.reporterName}</strong></span>
+            <span class="text-[#797675] dark:text-stone-400">Đăng bởi: <strong class="text-[#1b1c1c] dark:text-stone-200">${reporterName}</strong></span>
             <div class="flex items-center gap-1.5">
               ${actionButtons}
             </div>
@@ -2228,13 +2245,20 @@
         // 5. Time filter
         let matchesDate = true;
         if (timeFilter !== "all") {
-          const timeLower = (post.time || "").toLowerCase();
+          const timestamp = Number(post.postedAt);
+          const postedAt = Number.isFinite(timestamp) && timestamp > 0 ? new Date(timestamp) : null;
+          const now = new Date();
           if (timeFilter === "today") {
-            matchesDate = timeLower.includes("hôm nay") || timeLower.includes("vừa xong") || timeLower.includes("phút") || timeLower.includes("giờ");
+            matchesDate = postedAt !== null
+              && postedAt.getFullYear() === now.getFullYear()
+              && postedAt.getMonth() === now.getMonth()
+              && postedAt.getDate() === now.getDate();
           } else if (timeFilter === "week") {
-            matchesDate = timeLower.includes("hôm nay") || timeLower.includes("vừa xong") || timeLower.includes("hôm qua") || timeLower.includes("ngày trước");
+            matchesDate = postedAt !== null && postedAt >= new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
           } else if (timeFilter === "month") {
-            matchesDate = !timeLower.includes("tháng trước");
+            matchesDate = postedAt !== null
+              && postedAt.getFullYear() === now.getFullYear()
+              && postedAt.getMonth() === now.getMonth();
           }
         }
 
@@ -2294,51 +2318,61 @@
       }
     }
 
-    function confirmHidePost() {
+    async function confirmHidePost() {
       if (!hidingPostId) return;
       const post = adminPosts.find(p => p.id === hidingPostId);
-      if (post) {
-        const sel = document.getElementById("hide-reason-select");
-        let reason = sel ? sel.value : "";
-        if (reason === "other") {
-          const customInput = document.getElementById("hide-reason-custom");
-          reason = (customInput && customInput.value.trim()) ? customInput.value.trim() : "Lý do khác do Quản trị viên chỉ định";
-        }
-        post.status = "hidden";
-        post.hiddenReason = reason;
-        post.hiddenAt = "Vừa xong";
-        savePosts();
-        updateMetrics();
-        filterPosts();
+      if (!post) return;
+      const postId = hidingPostId;
+      const sel = document.getElementById("hide-reason-select");
+      let reason = sel ? sel.value : "";
+      if (reason === "other") {
+        const customInput = document.getElementById("hide-reason-custom");
+        reason = (customInput && customInput.value.trim()) ? customInput.value.trim() : "Lý do khác do Quản trị viên chỉ định";
+      }
+
+      try {
+        await adminRequest(`/posts/${encodeURIComponent(postId)}/status`, {
+          method: "PATCH",
+          body: JSON.stringify({ status: "hidden", reason })
+        });
         closeHidePostModal();
-        showToast(`Đã ẩn bài đăng ${hidingPostId} ("${post.title}"). Lý do: ${reason}`, "success");
+        const refreshed = await refreshAdminData(false);
+        showToast(
+          refreshed ? `Đã ẩn bài đăng ${postId} ("${post.title}").` : "Đã ẩn bài đăng nhưng không tải lại được danh sách.",
+          refreshed ? "success" : "warning"
+        );
+      } catch (error) {
+        showToast(error.message, "error");
       }
     }
 
-    function unhidePost(postId) {
+    async function unhidePost(postId) {
       const post = adminPosts.find(p => p.id === postId);
-      if (post) {
-        post.status = "student_holding";
-        delete post.hiddenReason;
-        delete post.hiddenAt;
-        savePosts();
-        updateMetrics();
-        filterPosts();
-        showToast(`Đã bỏ ẩn, đưa bài đăng ${postId} trở lại công khai`, "success");
+      if (!post) return;
+      try {
+        await adminRequest(`/posts/${encodeURIComponent(postId)}/status`, {
+          method: "PATCH",
+          body: JSON.stringify({ status: post.previousStatus || "student_holding" })
+        });
+        const refreshed = await refreshAdminData(false);
+        showToast(refreshed ? `Đã bỏ ẩn bài đăng ${postId}.` : "Đã cập nhật bài đăng nhưng không tải lại được danh sách.", refreshed ? "success" : "warning");
+      } catch (error) {
+        showToast(error.message, "error");
       }
     }
 
-    function dismissReport(postId) {
+    async function dismissReport(postId) {
       const post = adminPosts.find(p => p.id === postId);
-      if (post) {
-        post.status = "student_holding";
-        delete post.reportReason;
-        delete post.reportCount;
-        delete post.reportedBy;
-        savePosts();
-        updateMetrics();
-        filterPosts();
-        showToast(`Đã bác bỏ báo cáo cho bài đăng ${postId}`, "success");
+      if (!post) return;
+      try {
+        await adminRequest(`/posts/${encodeURIComponent(postId)}/status`, {
+          method: "PATCH",
+          body: JSON.stringify({ status: "student_holding" })
+        });
+        const refreshed = await refreshAdminData(false);
+        showToast(refreshed ? `Đã đưa bài đăng ${postId} về trạng thái đang giữ.` : "Đã cập nhật bài đăng nhưng không tải lại được danh sách.", refreshed ? "success" : "warning");
+      } catch (error) {
+        showToast(error.message, "error");
       }
     }
 
@@ -2349,7 +2383,7 @@
       const post = adminPosts.find(p => p.id === postId);
       const msgEl = document.getElementById("confirm-delete-msg");
       if (msgEl) {
-        msgEl.innerHTML = `Bạn có chắc chắn muốn xóa vĩnh viễn bài đăng <strong>${postId}</strong> (${post ? post.title : ''}) khỏi hệ thống? Thao tác này không cần nhập lý do và không thể hoàn tác.`;
+        msgEl.textContent = `Bạn có chắc chắn muốn xóa vĩnh viễn bài đăng ${postId} (${post ? post.title : ''}) khỏi hệ thống? Thao tác này không cần nhập lý do và không thể hoàn tác.`;
       }
       document.getElementById("modal-confirm-delete")?.classList.remove("hidden");
     }
@@ -2359,16 +2393,19 @@
       document.getElementById("modal-confirm-delete")?.classList.add("hidden");
     }
 
-    function executeDeletePost() {
+    async function executeDeletePost() {
       if (!deletingPostId) return;
-      const post = adminPosts.find(p => p.id === deletingPostId);
-      const title = post ? post.title : deletingPostId;
-      adminPosts = adminPosts.filter(p => p.id !== deletingPostId);
-      savePosts();
-      updateMetrics();
-      filterPosts();
-      closeDeletePostModal();
-      showToast(`Đã xóa bài đăng ${deletingPostId} ("${title}") khỏi hệ thống`, "success");
+      const postId = deletingPostId;
+      const post = adminPosts.find(p => p.id === postId);
+      const title = post ? post.title : postId;
+      try {
+        await adminRequest(`/posts/${encodeURIComponent(postId)}`, { method: "DELETE" });
+        closeDeletePostModal();
+        const refreshed = await refreshAdminData(false);
+        showToast(refreshed ? `Đã xóa bài đăng ${postId} ("${title}") khỏi hệ thống.` : "Đã xóa bài đăng nhưng không tải lại được danh sách.", refreshed ? "success" : "warning");
+      } catch (error) {
+        showToast(error.message, "error");
+      }
     }
 
     function deletePost(postId) {
@@ -2434,18 +2471,19 @@
         roomEl.selectedIndex = 0;
         roomEl.value = "";
         if (flVal) {
-          const flNum = flVal.replace("Tầng ", "").trim();
+          const flNum = Number(flVal);
+          const floorLabel = flNum === 0 ? "Tầng trệt" : `Tầng ${flNum}`;
           roomEl.disabled = false;
           roomEl.classList.remove("bg-stone-100", "dark:bg-stone-800/40", "text-stone-400", "dark:text-stone-500", "cursor-not-allowed");
           roomEl.classList.add("bg-white", "dark:bg-stone-800", "text-[#1b1c1c]", "dark:text-white", "cursor-pointer");
           roomEl.innerHTML = `
             <option value="" disabled selected>-- Chọn phòng / hội trường --</option>
             <optgroup label="Phòng học">
-              <option value="Phòng ${flNum === 'trệt' ? '001' : flNum + '01'}">Phòng ${flNum === 'trệt' ? '001' : flNum + '01'}</option>
-              <option value="Phòng ${flNum === 'trệt' ? '002' : flNum + '02'}">Phòng ${flNum === 'trệt' ? '002' : flNum + '02'}</option>
-              <option value="Phòng ${flNum === 'trệt' ? '003' : flNum + '03'}">Phòng ${flNum === 'trệt' ? '003' : flNum + '03'}</option>
-              <option value="Phòng Máy ${flNum}">Phòng Máy ${flNum}</option>
-              <option value="Hành lang ${flVal}">Hành lang ${flVal}</option>
+              <option value="Phòng ${flNum === 0 ? '001' : flNum + '01'}">Phòng ${flNum === 0 ? '001' : flNum + '01'}</option>
+              <option value="Phòng ${flNum === 0 ? '002' : flNum + '02'}">Phòng ${flNum === 0 ? '002' : flNum + '02'}</option>
+              <option value="Phòng ${flNum === 0 ? '003' : flNum + '03'}">Phòng ${flNum === 0 ? '003' : flNum + '03'}</option>
+              <option value="Phòng Máy ${floorLabel}">Phòng Máy ${floorLabel}</option>
+              <option value="Hành lang ${floorLabel}">Hành lang ${floorLabel}</option>
             </optgroup>
             <optgroup label="Hội trường">
               <option value="Hội trường Rùa">Hội trường Rùa</option>
@@ -2508,6 +2546,7 @@
       });
 
       const syncDisplay = () => {
+        pctsvExtraColors = secColors.filter(color => color.isChosen).map(color => color.hex).slice(0, 3);
         if (!currentHex) {
           if (swatchCircle) { swatchCircle.style.backgroundColor = "#e2e8f0"; swatchCircle.style.borderColor = "#cbd5e1"; }
           if (triggerTxt) triggerTxt.textContent = "Chọn màu sắc";
@@ -2621,6 +2660,7 @@
       resetPctsvColorPickerFn = () => {
         currentHex = null;
         secColors = [];
+        pctsvExtraColors = [];
         if (bigSwatch) bigSwatch.style.backgroundColor = "#f6f3f2";
         if (placeholder) placeholder.classList.remove("hidden");
         if (editIcon) editIcon.classList.add("hidden");
@@ -2651,6 +2691,9 @@
     function resetPctsvModalState() {
       const form = document.getElementById("form-add-pctsv-post");
       if (form) form.reset();
+      pctsvMainFile = null;
+      pctsvThumbnailFiles = [];
+      pctsvExtraColors = [];
       updatePctsvFloorLockState();
       if (typeof resetPctsvColorPickerFn === "function") resetPctsvColorPickerFn();
       const previewContainer = document.getElementById("pctsv-preview-container");
@@ -2685,7 +2728,12 @@
       const fac = document.getElementById("pctsv-loc-faculty")?.value || "";
       const floor = document.getElementById("pctsv-loc-floor")?.value || "";
       const room = document.getElementById("pctsv-loc-room")?.value.trim() || "";
-      const parts = [fac, floor, room].filter(Boolean);
+      const getSelectedLabel = id => document.getElementById(id)?.selectedOptions[0]?.textContent?.trim() || "";
+      const parts = [
+        getSelectedLabel("pctsv-loc-faculty"),
+        floor ? (Number(floor) === 0 ? "Tầng trệt" : `Tầng ${floor}`) : "",
+        room
+      ].filter(Boolean);
       const locInput = document.getElementById("pctsv-location");
       if (locInput) {
         locInput.value = parts.join(", ");
@@ -2693,6 +2741,9 @@
     }
 
     let currentThumbIndex = 1;
+    let pctsvMainFile = null;
+    let pctsvThumbnailFiles = [];
+    let pctsvExtraColors = [];
     function triggerPctsvThumbnail(index) {
       currentThumbIndex = index;
       document.getElementById("pctsv-thumb-input")?.click();
@@ -2701,6 +2752,7 @@
     function handlePctsvThumbFileSelect(input) {
       if (input.files && input.files[0]) {
         const file = input.files[0];
+        pctsvThumbnailFiles[currentThumbIndex - 1] = file;
         const reader = new FileReader();
         reader.onload = function (e) {
           const thumb = document.getElementById(`pctsv-thumb-${currentThumbIndex}`);
@@ -2715,6 +2767,7 @@
     function handlePctsvFileSelect(input) {
       if (input.files && input.files[0]) {
         const file = input.files[0];
+        pctsvMainFile = file;
         const reader = new FileReader();
         reader.onload = function (e) {
           setPctsvPreview(e.target.result);
@@ -2744,6 +2797,7 @@
       if (dropZone) dropZone.classList.remove("border-[#1f3227]", "bg-stone-100/80");
       if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
         const file = e.dataTransfer.files[0];
+        pctsvMainFile = file;
         const reader = new FileReader();
         reader.onload = function (evt) {
           setPctsvPreview(evt.target.result);
@@ -2770,81 +2824,75 @@
 
         // Clock Picker logic được sử dụng trực tiếp từ frontend/js/components.js
 
-    function handleCreatePctsvPost(e) {
+    async function handleCreatePctsvPost(e) {
       e.preventDefault();
       const title = document.getElementById("pctsv-title")?.value.trim() || "";
-      const category = document.getElementById("pctsv-category")?.value || "Khác";
+      const categoryId = document.getElementById("pctsv-category")?.value || "";
       const color = document.getElementById("pctsv-color")?.value.trim() || "";
-      const location = document.getElementById("pctsv-location")?.value.trim() || "Phòng Công tác Sinh viên (PCTSV)";
+      const buildingId = document.getElementById("pctsv-loc-faculty")?.value || "";
+      const floorNumber = document.getElementById("pctsv-loc-floor")?.value || "";
+      const roomName = document.getElementById("pctsv-loc-room")?.value || "";
+      const location = document.getElementById("pctsv-location")?.value.trim() || "";
       const dateVal = document.getElementById("pctsv-date")?.value.trim() || "";
-      const timeVal = document.getElementById("pctsv-time")?.value.trim() || "";
-      const storage = document.getElementById("pctsv-storage")?.value.trim() || "Phòng Công tác Sinh viên (PCTSV) - Nhà điều hành C1";
+      const rawTime = document.getElementById("pctsv-time")?.value.trim() || "";
+      const timeMatch = rawTime.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);
+      const timeVal = timeMatch ? `${timeMatch[1].padStart(2, "0")}:${timeMatch[2]}` : "";
+      const storage = document.getElementById("pctsv-storage")?.value.trim() || "";
       const note = document.getElementById("pctsv-note")?.value.trim() || "";
       const question = document.getElementById("pctsv-question")?.value.trim() || "";
 
-      if (!color) {
-        showToast("Vui lòng chọn màu sắc cho đồ vật!", "warning");
+      if (!title || !categoryId || !color || !buildingId || floorNumber === "" || !roomName || !dateVal || !timeVal || !storage || !question || !note) {
+        showToast("Vui lòng nhập đầy đủ thông tin bài đăng.", "warning");
         return;
       }
 
-      // Validate: At least 1 image uploaded (Min 1, Max 5: 1 main + 4 thumbnails)
       const previewImg = document.getElementById("pctsv-preview-img");
       const previewContainer = document.getElementById("pctsv-preview-container");
-      const hasMainImg = previewImg && previewImg.src && !previewContainer?.classList.contains("hidden") && (previewImg.src.startsWith("data:") || previewImg.src.startsWith("http") || previewImg.src.startsWith("blob:"));
-
-      const thumbnails = [];
-      for (let i = 1; i <= 4; i++) {
-        const thumbEl = document.querySelector(`#pctsv-thumb-${i} img`);
-        if (thumbEl && thumbEl.src && (thumbEl.src.startsWith("data:") || thumbEl.src.startsWith("http") || thumbEl.src.startsWith("blob:"))) {
-          thumbnails.push(thumbEl.src);
-        }
-      }
-
-      if (!hasMainImg && thumbnails.length === 0) {
-        showToast("Thiếu hình ảnh", "Vui lòng tải lên ít nhất 1 hình ảnh đồ vật để đăng tin!");
+      const imageUrl = !pctsvMainFile && previewImg && previewImg.src
+        && !previewContainer?.classList.contains("hidden")
+        && /^https?:\/\//i.test(previewImg.src)
+        ? previewImg.src
+        : "";
+      const imageFiles = [
+        ...(pctsvMainFile ? [pctsvMainFile] : []),
+        ...pctsvThumbnailFiles.filter(Boolean)
+      ].slice(0, 5);
+      if (!imageFiles.length && !imageUrl) {
+        showToast("Vui lòng tải lên ít nhất 1 hình ảnh đồ vật để đăng tin!", "warning");
         return;
       }
 
-      const photoUrl = hasMainImg ? previewImg.src : thumbnails[0];
-
-      // Readable time formatting
-      let timeDisplay = "Vừa xong";
-      if (timeVal && dateVal) {
-        timeDisplay = `${dateVal} (${timeVal})`;
-      } else if (timeVal) {
-        timeDisplay = timeVal.toLowerCase().includes("hôm") ? timeVal : `Hôm nay, ${timeVal}`;
-      } else if (dateVal) {
-        timeDisplay = dateVal;
-      }
-
-      const newPost = {
-        id: `POST-${String(100 + adminPosts.length + 1).padStart(3, '0')}`,
-        title: title,
-        category: category,
-        color: color,
+      const payload = {
+        tieuDe: title,
+        ldId: categoryId,
+        toaId: buildingId,
+        tangId: floorNumber,
+        roomName,
+        locationText: location,
         date: dateVal,
-        time: timeDisplay,
-        timeDetail: timeVal,
-        type: "found",
-        reporterName: "Cán bộ PCTSV",
-        reporterId: "CB0018",
-        isPctsv: true,
-        location: location,
-        status: "pctsv_holding",
-        storage: storage,
-        photo: photoUrl,
-        thumbnails: thumbnails,
-        note: color ? `[Màu sắc: ${color}] ${note}` : note,
-        question: question
+        time: timeVal,
+        noiLuuGiu: storage,
+        cauHoiXacMinh: question,
+        moTa: note,
+        mauChuDao: color,
+        mauPhu1: pctsvExtraColors[0] || "",
+        mauPhu2: pctsvExtraColors[1] || "",
+        mauPhu3: pctsvExtraColors[2] || "",
+        imageUrl
       };
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(payload));
+      imageFiles.forEach(file => formData.append("images", file));
 
-      adminPosts.unshift(newPost);
-      savePosts();
-      updateMetrics();
-      filterPosts();
-      closeAddPctsvPostModal();
-      resetPctsvModalState();
-      showToast(`Đã thêm thành công bài đăng chính thức của PCTSV (có tích xanh trên bảng)!`, "success");
+      try {
+        await adminRequest("/posts/found", { method: "POST", body: formData });
+        closeAddPctsvPostModal();
+        resetPctsvModalState();
+        const refreshed = await refreshAdminData(false);
+        showToast(refreshed ? "Đã đăng bài tiếp nhận của PCTSV." : "Đã đăng bài nhưng không tải lại được danh sách.", refreshed ? "success" : "warning");
+      } catch (error) {
+        showToast(error.message, "error");
+      }
     }
 
     // -----------------------------------------------------------------------
@@ -2856,6 +2904,18 @@
 
       const normStatus = normalizePostStatus(post.status);
       const isPctsv = post.isPctsv || post.reporterName === "Cán bộ PCTSV" || (post.reporterId && post.reporterId.startsWith("CB"));
+      const postIdArg = escapeAdminHtml(JSON.stringify(String(post.id)));
+      const safePostId = escapeAdminHtml(post.id);
+      const safeTitle = escapeAdminHtml(post.title);
+      const safeCategory = escapeAdminHtml(post.category);
+      const safeLocation = escapeAdminHtml(post.location);
+      const safeReporterName = escapeAdminHtml(post.reporterName);
+      const safeReporterId = escapeAdminHtml(post.reporterId);
+      const safeStorage = escapeAdminHtml(post.storage || "Đang cập nhật");
+      const safeTime = escapeAdminHtml(post.time || "Chưa cập nhật");
+      const safeColor = escapeAdminHtml(post.color);
+      const safeNote = escapeAdminHtml(post.note || "Không có mô tả chi tiết.");
+      const safePhoto = escapeAdminHtml(getAdminImageSrc(post.photo));
       const pctsvBadge = isPctsv ? `
         <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#1d9bf0] text-white shrink-0 ml-1.5" title="Chính thức từ PCTSV">
           <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -2866,9 +2926,9 @@
       if (modalTitleEl) {
         modalTitleEl.innerHTML = `
           <span class="flex items-center gap-1.5 flex-wrap">
-            <span>${post.title}</span>
+            <span>${safeTitle}</span>
             ${pctsvBadge}
-            <span class="text-xs font-mono font-normal text-stone-500">(${post.id})</span>
+            <span class="text-xs font-mono font-normal text-stone-500">(${safePostId})</span>
           </span>
         `;
       }
@@ -2884,8 +2944,8 @@
               <span class="material-symbols-outlined text-[16px] text-rose-600">flag</span>
               Chi tiết báo cáo từ người dùng (${post.reportCount || 1} lượt báo cáo):
             </span>
-            <p class="text-rose-800 dark:text-rose-200 font-medium">${post.reportReason || 'Nội dung nghi vấn cần kiểm tra'}</p>
-            <p class="text-[11px] text-rose-600/80 dark:text-rose-400">Người báo cáo: ${post.reportedBy || 'Người dùng ẩn danh'}</p>
+            <p class="text-rose-800 dark:text-rose-200 font-medium">${escapeAdminHtml(post.reportReason || 'Nội dung nghi vấn cần kiểm tra')}</p>
+            <p class="text-[11px] text-rose-600/80 dark:text-rose-400">Người báo cáo: ${escapeAdminHtml(post.reportedBy || 'Người dùng ẩn danh')}</p>
           </div>
         `;
       } else if (normStatus === "hidden") {
@@ -2895,7 +2955,7 @@
               <span class="material-symbols-outlined text-[16px]">visibility_off</span>
               Lý do bài đăng đang bị ẩn:
             </span>
-            <p class="text-[#4a4746] dark:text-stone-300 mt-0.5">${post.hiddenReason || 'Tạm ẩn theo yêu cầu quản trị'}</p>
+            <p class="text-[#4a4746] dark:text-stone-300 mt-0.5">${escapeAdminHtml(post.hiddenReason || 'Tạm ẩn theo yêu cầu quản trị')}</p>
           </div>
         `;
       }
@@ -2904,7 +2964,7 @@
         content.innerHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <img src="${post.photo}" alt="${post.title}" class="w-full h-44 sm:h-52 object-cover rounded-xl border border-stone-200 dark:border-stone-700">
+              <img src="${safePhoto}" alt="${safeTitle}" class="w-full h-44 sm:h-52 object-cover rounded-xl border border-stone-200 dark:border-stone-700">
             </div>
             <div class="space-y-2">
               <div class="flex items-center justify-between">
@@ -2913,32 +2973,32 @@
               </div>
               <div>
                 <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Danh mục:</span>
-                <p class="font-bold text-[#1b1c1c] dark:text-white">${post.category}</p>
+                <p class="font-bold text-[#1b1c1c] dark:text-white">${safeCategory}</p>
               </div>
               <div>
                 <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Địa điểm:</span>
-                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.location}</p>
+                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${safeLocation}</p>
               </div>
               <div>
                 <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Người đăng:</span>
                 <p class="font-bold text-[#1b1c1c] dark:text-white flex items-center gap-1">
-                  <span>${post.reporterName}</span>
+                  <span>${safeReporterName}</span>
                   ${isPctsv ? pctsvBadge : ''}
-                  <span class="font-mono text-xs text-[#797675]">(${post.reporterId})</span>
+                  <span class="font-mono text-xs text-[#797675]">(${safeReporterId})</span>
                 </p>
               </div>
               <div>
                 <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Nơi bảo quản:</span>
-                <p class="text-emerald-700 dark:text-emerald-400 font-semibold">${post.storage || 'Đang cập nhật'}</p>
+                <p class="text-emerald-700 dark:text-emerald-400 font-semibold">${safeStorage}</p>
               </div>
               <div>
                 <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Thời gian nhặt / đăng:</span>
-                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.time || post.date || 'Hôm nay'}</p>
+                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${safeTime}</p>
               </div>
               ${post.color ? `
               <div>
                 <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Màu sắc:</span>
-                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${post.color}</p>
+                <p class="font-medium text-[#1b1c1c] dark:text-stone-200">${safeColor}</p>
               </div>` : ''}
             </div>
           </div>
@@ -2947,7 +3007,7 @@
             <div class="space-y-1.5 pt-1">
               <span class="text-xs font-semibold text-[#797675] dark:text-stone-400">Hình ảnh phụ trợ:</span>
               <div class="grid grid-cols-4 gap-2">
-                ${post.thumbnails.map((t, idx) => `<img src="${t}" alt="Ảnh phụ ${idx + 1}" class="w-full h-16 object-cover rounded-xl border border-stone-200 dark:border-stone-700">`).join('')}
+                ${post.thumbnails.map((t, idx) => `<img src="${escapeAdminHtml(getAdminImageSrc(t))}" alt="Ảnh phụ ${idx + 1}" class="w-full h-16 object-cover rounded-xl border border-stone-200 dark:border-stone-700">`).join('')}
               </div>
             </div>
           ` : ''}
@@ -2956,7 +3016,7 @@
 
           <div class="p-3 bg-stone-50 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700">
             <span class="font-bold text-[#1b1c1c] dark:text-white block mb-0.5">Mô tả bài đăng:</span>
-            <p class="text-[#4a4746] dark:text-stone-300 italic">${post.note || 'Không có mô tả chi tiết.'}</p>
+            <p class="text-[#4a4746] dark:text-stone-300 italic">${safeNote}</p>
           </div>
         `;
       }
@@ -2965,31 +3025,31 @@
       if (leftActions) {
         if (normStatus === "verifying" && post.reportReason) {
           leftActions.innerHTML = `
-            <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+            <button type="button" onclick="closePostDetailModal(); openHidePostModal(${postIdArg});" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
               Ẩn bài viết này
             </button>
-            <button type="button" onclick="dismissReport('${post.id}'); closePostDetailModal();" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+            <button type="button" onclick="dismissReport(${postIdArg}); closePostDetailModal();" class="px-3 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
               Bác bỏ báo cáo
             </button>
-            <button type="button" onclick="closePostDetailModal(); openDeletePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+            <button type="button" onclick="closePostDetailModal(); openDeletePostModal(${postIdArg});" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
               Xóa bài
             </button>
           `;
         } else if (normStatus === "hidden") {
           leftActions.innerHTML = `
-            <button type="button" onclick="unhidePost('${post.id}'); closePostDetailModal();" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
+            <button type="button" onclick="unhidePost(${postIdArg}); closePostDetailModal();" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#35483d] hover:bg-[#28372e] text-white transition-colors cursor-pointer">
               Bỏ ẩn / Khôi phục hiển thị
             </button>
-            <button type="button" onclick="closePostDetailModal(); openDeletePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+            <button type="button" onclick="closePostDetailModal(); openDeletePostModal(${postIdArg});" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
               Xóa bài đăng
             </button>
           `;
         } else {
           leftActions.innerHTML = `
-            <button type="button" onclick="closePostDetailModal(); openHidePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
+            <button type="button" onclick="closePostDetailModal(); openHidePostModal(${postIdArg});" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-[#1b1c1c] dark:text-white transition-colors cursor-pointer">
               Ẩn bài viết
             </button>
-            <button type="button" onclick="closePostDetailModal(); openDeletePostModal('${post.id}');" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
+            <button type="button" onclick="closePostDetailModal(); openDeletePostModal(${postIdArg});" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-colors cursor-pointer">
               Xóa bài đăng
             </button>
           `;
@@ -3024,9 +3084,14 @@
       if (emptyState) emptyState.classList.add("hidden");
 
       accountsToRender.forEach(acc => {
+        const name = escapeAdminHtml(acc.name);
+        const code = escapeAdminHtml(acc.code);
+        const dept = escapeAdminHtml(acc.dept);
+        const email = escapeAdminHtml(acc.email);
+        const phone = escapeAdminHtml(acc.phone);
         // Điểm hiển thị (Chỉ người dùng sinh viên có điểm theo bảng vinh danh, cán bộ hiển thị '-')
         const pointsDisplay = (acc.points !== null && acc.points !== undefined)
-          ? `<span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.points}</span>`
+          ? `<span class="font-mono font-bold text-sm text-[#1b1c1c] dark:text-white">${Number(acc.points) || 0}</span>`
           : `<span class="text-stone-400 font-normal">-</span>`;
 
         // Desktop Row (Không có chức năng khóa tài khoản)
@@ -3036,23 +3101,23 @@
           <td class="py-3 px-4">
             <div class="flex items-center gap-3">
               <div class="w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-bold flex items-center justify-center shrink-0 text-xs">
-                ${acc.name.charAt(0)}
+                ${name.charAt(0)}
               </div>
               <div>
-                <div class="font-bold text-[#1b1c1c] dark:text-white">${acc.name}</div>
-                <div class="text-[11px] font-mono text-[#797675] dark:text-stone-400">${acc.code}</div>
+                <div class="font-bold text-[#1b1c1c] dark:text-white">${name}</div>
+                <div class="text-[11px] font-mono text-[#797675] dark:text-stone-400">${code}</div>
               </div>
             </div>
           </td>
-          <td class="py-3 px-4 text-xs font-medium text-[#4a4746] dark:text-stone-300">${acc.dept}</td>
+          <td class="py-3 px-4 text-xs font-medium text-[#4a4746] dark:text-stone-300">${dept}</td>
           <td class="py-3 px-4">
-            <div class="text-xs text-[#1b1c1c] dark:text-stone-200">${acc.email}</div>
-            <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${acc.phone}</div>
+            <div class="text-xs text-[#1b1c1c] dark:text-stone-200">${email}</div>
+            <div class="text-[11px] text-[#797675] dark:text-stone-400 font-mono">${phone}</div>
           </td>
           <td class="py-3 px-4 text-center">
             ${pointsDisplay}
           </td>
-          <td class="py-3 px-4 text-center font-mono font-semibold">${acc.returnedCount || 0}</td>
+          <td class="py-3 px-4 text-center font-mono font-semibold">${Number(acc.returnedCount) || 0}</td>
         `;
         tbody.appendChild(tr);
 
@@ -3063,21 +3128,21 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <div class="w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-bold flex items-center justify-center text-xs">
-                ${acc.name.charAt(0)}
+                ${name.charAt(0)}
               </div>
               <div>
-                <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white">${acc.name}</h4>
-                <span class="font-mono text-[11px] text-[#797675]">${acc.code}</span>
+                <h4 class="font-bold text-sm text-[#1b1c1c] dark:text-white">${name}</h4>
+                <span class="font-mono text-[11px] text-[#797675]">${code}</span>
               </div>
             </div>
             <div class="text-right">
               <span class="text-[11px] text-[#797675] block">Điểm thưởng</span>
-              <span class="font-mono font-bold text-base text-[#1b1c1c] dark:text-white">${acc.points !== null && acc.points !== undefined ? acc.points : '-'}</span>
+              <span class="font-mono font-bold text-base text-[#1b1c1c] dark:text-white">${acc.points !== null && acc.points !== undefined ? Number(acc.points) || 0 : '-'}</span>
             </div>
           </div>
           <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs text-[#797675] dark:text-stone-400">
-            <span>${acc.dept}</span>
-            <span>Đã trao trả: <strong class="text-stone-900 dark:text-white">${acc.returnedCount || 0} món</strong></span>
+            <span>${dept}</span>
+            <span>Đã trao trả: <strong class="text-stone-900 dark:text-white">${Number(acc.returnedCount) || 0} món</strong></span>
           </div>
         `;
         mobileList.appendChild(mCard);
@@ -3135,34 +3200,28 @@
     function closeAddAccountModal() {
       document.getElementById("modal-add-account").classList.add("hidden");
     }
-    function submitNewAccount() {
+    async function submitNewAccount() {
       const name = document.getElementById("new-acc-name").value.trim();
       const code = document.getElementById("new-acc-id").value.trim();
       const scoreVal = document.getElementById("new-acc-score").value.trim();
       const points = scoreVal !== "" ? Math.max(0, parseInt(scoreVal) || 0) : null;
       const dept = document.getElementById("new-acc-dept").value.trim() || "Trường Đại học Cần Thơ";
       const email = document.getElementById("new-acc-email").value.trim() || `${code.toLowerCase()}@student.ctu.edu.vn`;
-      const phone = document.getElementById("new-acc-phone").value.trim() || "Chưa cập nhật";
+      const phone = document.getElementById("new-acc-phone").value.trim();
+      const password = document.getElementById("new-acc-password").value;
 
-      const newAcc = {
-        id: `ACC-${String(adminAccounts.length + 1).padStart(2, '0')}`,
-        code: code,
-        name: name,
-        role: "student",
-        dept: dept,
-        email: email,
-        phone: phone,
-        points: points,
-        returnedCount: points || 0
-      };
-
-      adminAccounts.unshift(newAcc);
-      saveAccounts();
-      updateMetrics();
-      filterAccounts();
-      closeAddAccountModal();
-      document.getElementById("add-account-form").reset();
-      showToast(`Đã thêm thành công tài khoản ${name} (${code})!`, "success");
+      try {
+        await adminRequest("/accounts", {
+          method: "POST",
+          body: JSON.stringify({ code, name, password, dept, email, phone, points })
+        });
+        closeAddAccountModal();
+        document.getElementById("add-account-form").reset();
+        const refreshed = await refreshAdminData(false);
+        showToast(refreshed ? `Đã thêm tài khoản ${name} (${code}).` : "Đã tạo tài khoản nhưng không tải lại được danh sách.", refreshed ? "success" : "warning");
+      } catch (error) {
+        showToast(error.message, "error");
+      }
     }
 
 
@@ -3187,10 +3246,10 @@
         const ptsDisplay = acc.points !== null && acc.points !== undefined ? acc.points : "-";
         tr.innerHTML = `
           <td class="border border-stone-300 py-1.5 px-2 text-center font-mono">${idx + 1}</td>
-          <td class="border border-stone-300 py-1.5 px-3 font-mono font-bold">${acc.code}</td>
-          <td class="border border-stone-300 py-1.5 px-3 font-semibold text-stone-900">${acc.name}</td>
-          <td class="border border-stone-300 py-1.5 px-3">${acc.dept}</td>
-          <td class="border border-stone-300 py-1.5 px-2 text-center font-mono">${acc.returnedCount || 0}</td>
+          <td class="border border-stone-300 py-1.5 px-3 font-mono font-bold">${escapeAdminHtml(acc.code)}</td>
+          <td class="border border-stone-300 py-1.5 px-3 font-semibold text-stone-900">${escapeAdminHtml(acc.name)}</td>
+          <td class="border border-stone-300 py-1.5 px-3">${escapeAdminHtml(acc.dept)}</td>
+          <td class="border border-stone-300 py-1.5 px-2 text-center font-mono">${Number(acc.returnedCount) || 0}</td>
           <td class="border border-stone-300 py-1.5 px-2 text-center font-mono font-bold">${ptsDisplay}</td>
         `;
         printTbody.appendChild(tr);
@@ -3230,10 +3289,23 @@
         return sortScore === "desc" ? scoreB - scoreA : scoreA - scoreB;
       });
 
+      const csvCell = value => {
+        const text = String(value ?? "");
+        const safeText = /^[=+\-@]/.test(text.trim()) ? `'${text}` : text;
+        return `"${safeText.replace(/"/g, '""')}"`;
+      };
       let csv = "\uFEFFSTT,Mã định danh,Họ và tên,Khoa/Đơn vị,Email,Đồ đã trao trả,Điểm\n";
       listToPrint.forEach((acc, idx) => {
         const ptsDisplay = acc.points !== null && acc.points !== undefined ? acc.points : "-";
-        csv += `"${idx + 1}","${acc.code}","${acc.name}","${acc.dept}","${acc.email}","${acc.returnedCount || 0}","${ptsDisplay}"\n`;
+        csv += [
+          idx + 1,
+          acc.code,
+          acc.name,
+          acc.dept,
+          acc.email,
+          Number(acc.returnedCount) || 0,
+          ptsDisplay
+        ].map(csvCell).join(",") + "\n";
       });
 
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -3248,11 +3320,47 @@
       showToast("Đã tải xuống file CSV Điểm người dùng (Bảng vinh danh)!", "success");
     }
 
-    function refreshAdminData() {
-      updateMetrics();
-      filterPosts();
-      filterAccounts();
-      showToast("Đã làm mới dữ liệu hệ thống!", "info");
+    async function refreshAdminData(notify = true) {
+      try {
+        const [posts, accounts] = await Promise.all([
+          adminRequest("/posts"),
+          adminRequest("/accounts")
+        ]);
+        adminPosts = posts.map(post => ({ ...post, status: normalizePostStatus(post.status) }));
+        adminAccounts = accounts;
+        updateMetrics();
+        filterPosts();
+        filterAccounts();
+        if (notify) showToast("Đã đồng bộ dữ liệu hệ thống.", "info");
+        return true;
+      } catch (error) {
+        showToast(error.message, "error");
+        return false;
+      }
+    }
+
+    async function loadAdminMetadata() {
+      const metadata = await adminRequest("/metadata");
+      adminMetadata = {
+        categories: Array.isArray(metadata.categories) ? metadata.categories : [],
+        buildings: Array.isArray(metadata.buildings) ? metadata.buildings : []
+      };
+
+      const categorySelect = document.getElementById("pctsv-category");
+      if (categorySelect) {
+        categorySelect.replaceChildren(new Option("-- Chọn loại đồ vật --", ""));
+        adminMetadata.categories.forEach(category => {
+          categorySelect.add(new Option(category.name, category.id));
+        });
+      }
+
+      const buildingSelect = document.getElementById("pctsv-loc-faculty");
+      if (buildingSelect) {
+        buildingSelect.replaceChildren(new Option("-- Chọn tòa nhà --", ""));
+        adminMetadata.buildings.forEach(building => {
+          buildingSelect.add(new Option(building.name, building.id));
+        });
+      }
     }
 
     // Đăng ký các hàm ra window để các inline handler (onclick, onchange, oninput, onsubmit) luôn khả dụng
@@ -3311,13 +3419,18 @@
     window.initAdminSearchLocationCascade = initAdminSearchLocationCascade;
     window.toggleAccountScoreSort = toggleAccountScoreSort;
 
-    function initAdminPage() {
-      // 1. Tự động cấp quyền admin khi duyệt trực tiếp trang quản trị
-      let userRole = localStorage.getItem("ctu_user_role");
-      if (!userRole || userRole !== "admin") {
-        localStorage.setItem("ctu_user_role", "admin");
-        localStorage.setItem("ctu_user_logged_in", "true");
-        userRole = "admin";
+    async function initAdminPage() {
+      let currentUser = null;
+      try {
+        currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+      } catch (error) {
+        currentUser = null;
+      }
+      if (localStorage.getItem("ctu_user_role") !== "admin"
+        || currentUser?.role !== "admin"
+        || !localStorage.getItem("ctu_admin_token")) {
+        window.location.replace("login.html");
+        return;
       }
 
       // Khởi tạo Dropbox Color Popover cho thanh tìm kiếm & form PCTSV
@@ -3325,10 +3438,12 @@
       initAdminSearchLocationCascade();
       initPctsvColorPicker();
 
-      // 2. Cập nhật chỉ số & Render dữ liệu
-      updateMetrics();
-      filterPosts();
-      filterAccounts();
+      try {
+        await loadAdminMetadata();
+      } catch (error) {
+        showToast(error.message, "error");
+      }
+      await refreshAdminData(false);
 
       // 3. Xử lý query param
       try {
@@ -3566,11 +3681,11 @@
                   <select id="pctsv-loc-floor" disabled onchange="onPctsvFloorChange()"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800/40 text-stone-400 dark:text-stone-500 font-medium text-xs cursor-not-allowed">
                     <option value="" selected>-- Chọn tầng --</option>
-                    <option value="Tầng trệt">Tầng trệt</option>
-                    <option value="Tầng 1">Tầng 1</option>
-                    <option value="Tầng 2">Tầng 2</option>
-                    <option value="Tầng 3">Tầng 3</option>
-                    <option value="Tầng 4">Tầng 4</option>
+                    <option value="0">Tầng trệt</option>
+                    <option value="1">Tầng 1</option>
+                    <option value="2">Tầng 2</option>
+                    <option value="3">Tầng 3</option>
+                    <option value="4">Tầng 4</option>
                   </select>
                 </div>
                 <div>

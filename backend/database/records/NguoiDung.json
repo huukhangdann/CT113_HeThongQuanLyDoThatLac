@@ -33,6 +33,16 @@
             "ND_MatKhau": "khang888229",
             "ND_SDT": "0394863566",
             "ND_DiemCong": 0
+        },
+        "admin991": {
+            "ND_id": "admin991",
+            "ND_HoTen": "Quản trị viên",
+            "ND_email": "admin@ctu.local",
+            "ND_MatKhau": "abcd",
+            "ND_SDT": "02923832663",
+            "ND_DiemCong": 0,
+            "VT_id": "VT02",
+            "ND_VaiTro": "admin"
         }
     }
 }

@@ -104,7 +104,7 @@ const saveOrThrow = (dataFolderPath, tableName, recordId, payload, db) => {
     }
 };
 
-exports.createFoundItemRecord = (db, reqBody, reqFiles) => {
+exports.createFoundItemRecord = (db, reqBody, reqFiles, options = {}) => {
     const dataFolderPath = path.join(__dirname, '../../database/records');
     const payload = readPayload(reqBody || {});
 
@@ -117,6 +117,8 @@ exports.createFoundItemRecord = (db, reqBody, reqFiles) => {
     const contactPhone = String(payload.contactPhone || '').replace(/\s+/g, '');
     const contactName = String(payload.contactName || '').trim();
     const contactEmail = String(payload.contactEmail || '').trim();
+    const externalImageUrl = options.allowExternalImageUrl ? String(payload.imageUrl || '').trim() : '';
+    const maxImages = options.allowExternalImageUrl ? 5 : 4;
     const timeNhat = typeof payload.timeNhat === 'number'
         ? payload.timeNhat
         : typeof payload.timeNhat === 'string' && payload.timeNhat.trim()
@@ -138,8 +140,11 @@ exports.createFoundItemRecord = (db, reqBody, reqFiles) => {
     if (!String(payload.cauHoiXacMinh || '').trim()) {
         throw createError('Thiếu câu hỏi xác minh quyền sở hữu.');
     }
-    if (!images.length || images.length > 4) {
-        throw createError('Bài đăng cần từ 1 đến 4 hình ảnh.');
+    if (externalImageUrl && !/^(https?:\/\/|\/uploads\/)[^\s]+$/i.test(externalImageUrl)) {
+        throw createError('Đường dẫn hình ảnh không hợp lệ.');
+    }
+    if ((!images.length && !externalImageUrl) || images.length + (externalImageUrl ? 1 : 0) > maxImages) {
+        throw createError(`Bài đăng cần từ 1 đến ${maxImages} hình ảnh.`);
     }
 
     const user = Object.values(db.NguoiDung || {}).find(
@@ -215,13 +220,21 @@ exports.createFoundItemRecord = (db, reqBody, reqFiles) => {
     saveOrThrow(dataFolderPath, 'Phong', phongId, roomRecord, db);
     saveOrThrow(dataFolderPath, 'DiaDiem', ddId, locationRecord, db);
 
+    const imageEntries = images.map(file => ({
+        url: `/uploads/${file.filename}`,
+        name: file.originalname
+    }));
+    if (externalImageUrl) {
+        imageEntries.push({ url: externalImageUrl, name: String(payload.imageName || 'Ảnh bài đăng') });
+    }
+
     const imageIds = [];
-    images.forEach((file, index) => {
+    imageEntries.forEach((image, index) => {
         const imageId = `HA_${bnId}_${index + 1}`;
         const imageRecord = {
             HA_id: imageId,
-            HA_URL: `/uploads/${file.filename}`,
-            HA_Ten: file.originalname,
+            HA_URL: image.url,
+            HA_Ten: image.name,
             BN_id: bnId
         };
         saveOrThrow(dataFolderPath, 'HinhAnh', imageId, imageRecord, db);

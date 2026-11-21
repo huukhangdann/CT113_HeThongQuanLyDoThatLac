@@ -54,4 +54,26 @@ function saveRecord(dataFolderPath, tableName, recordId, payload, globalDb = nul
     }
 }
 
-module.exports = {saveRecord};
+function deleteRecord(dataFolderPath, tableName, recordId, globalDb = null) {
+    const filePath = path.join(dataFolderPath, `${tableName}.json`);
+
+    try {
+        if (!fs.existsSync(filePath)) return false;
+        const tableData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        if (!tableData.records || !Object.prototype.hasOwnProperty.call(tableData.records, recordId)) {
+            return false;
+        }
+
+        delete tableData.records[recordId];
+        fs.writeFileSync(filePath, JSON.stringify(tableData, null, 4), 'utf-8');
+        if (globalDb?.[tableName]) delete globalDb[tableName][recordId];
+
+        console.log(`[Database File] Đã xóa record [${recordId}] khỏi bảng [${tableName}].`);
+        return true;
+    } catch (error) {
+        console.error(`[Database Error] Không thể xóa record khỏi bảng ${tableName}:`, error.message);
+        return false;
+    }
+}
+
+module.exports = { saveRecord, deleteRecord };

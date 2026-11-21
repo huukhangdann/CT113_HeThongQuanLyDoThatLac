@@ -1,3 +1,5 @@
+const { isAdmin } = require('../utils/adminToken');
+
 exports.authenticateUser = (db, account, password) => {
     // 1. Kiểm tra xem bảng NguoiDung có tồn tại trên RAM không
     if (!db || !db.NguoiDung) {
@@ -23,5 +25,9 @@ exports.authenticateUser = (db, account, password) => {
 
     // 4. Trả về thông tin user (loại bỏ mật khẩu ra cho an toàn)
     const { ND_MatKhau, ...userInfo } = foundUser;
-    return userInfo;
+    const admin = isAdmin(foundUser);
+    return {
+        ...userInfo,
+        role: admin ? 'admin' : 'user'
+    };
 };
